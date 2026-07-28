@@ -7,6 +7,20 @@ A Model Context Protocol (MCP) server for production-grade UI design — design 
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
+## Table of Contents
+
+- [Features](#features)
+- [Tools](#tools)
+- [Motion Design](#motion-design)
+- [Examples](#examples)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Anti-Slop Design Philosophy](#anti-slop-design-philosophy)
+- [Configuration](#configuration)
+- [Configuring with AI Assistants](#configuring-with-ai-assistants)
+- [License](#license)
+
 ## Features
 
 - **Anti-Slop Quality Gates** — 31-gate slop test + 6-axis self-critique (P-H-E-S-R-V). Rejects anything < 3.
