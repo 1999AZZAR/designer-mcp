@@ -1,7 +1,7 @@
 {
   "name": "the-designer-mcp",
   "version": "2.0.0",
-  "description": "MCP server — design system selection, theming, anti-slop quality gates, component 8-state generator, project pre-flight scan, brand references, color palettes",
+  "description": "Design-Theory-as-a-Service MCP server — anti-slop quality gates, WCAG audits, OKLCH token engine, and dual agent skills (ui-designer & color-palette-hunter).",
   "author": "Azzar Budiyanto",
   "license": "MIT",
   "type": "module",

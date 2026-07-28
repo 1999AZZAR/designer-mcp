@@ -3,7 +3,9 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
 
-A Model Context Protocol (MCP) server for production-grade UI design — design rules, anti-slop quality gates, OKLCH token generation, color palettes, 328+ brand references, **anime.js v4 motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
+A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `the-designer` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
+
+Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
@@ -169,7 +171,12 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 ## Architecture
 
-```
+`the-designer` operates on a dual-architecture. An MCP server on its own is just an API; by pairing the MCP with two companion agent skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
+
+- **`ui-designer` skill**: Provides the design intelligence, heuristics, and brand context so the AI knows *what* to ask the MCP to generate.
+- **`color-palette-hunter` skill**: Handles external palette sourcing and feeds them into the OKLCH token engine.
+
+```text
 src/
   index.ts              # MCP server entry, tool routing (27 tools)
   rules.ts              # 17 design systems, palettes, archetypes, hybrids
