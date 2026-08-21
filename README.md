@@ -143,6 +143,8 @@ All snippets respect `prefers-reduced-motion` — animations are skipped entirel
 
 ## Examples
 
+**[🔥 Live Demo: Ellis UI Collection](https://1999AZZAR.github.io/the-designer/)**
+
 **Ellis UI (`examples/ellis-ui`)**  
 A comprehensive, anti-slop component library demonstrating the extreme versatility of `the-designer`'s ruleset. The project takes a single romantic letter and renders it across **24 radically different, strictly enforced aesthetic systems** (e.g., Swiss Archival, Vintage Airmail, Brutalist, UNIX Phosphor, 8-Bit Game Boy).
 
