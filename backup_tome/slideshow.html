@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Tome / The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Playfair Display', serif; }
+    .slide { opacity: 0; pointer-events: none; transition: opacity 0.7s ease; position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+    .tome-image { filter: sepia(0.3) contrast(1.1) brightness(0.9); }
+  </style>
+</head>
+<body class="bg-[#0a0808] text-[#e5d9c5] min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-[#d4af37] selection:text-black">
+  
+  <div class="w-full max-w-5xl border-[2px] border-[#d4af37]/40 p-2 relative shadow-[0_0_80px_rgba(212,175,55,0.05)] bg-[#0a0808]">
+     
+     <!-- Inner Gold Border -->
+     <div class="border-[0.5px] border-[#d4af37]/30 p-4 md:p-12 relative h-[85vh] flex flex-col">
+        
+        <!-- Corner Ornaments -->
+        <div class="absolute top-4 left-4 text-[#d4af37]/50 text-2xl font-light">✧</div>
+        <div class="absolute top-4 right-4 text-[#d4af37]/50 text-2xl font-light">✧</div>
+        <div class="absolute bottom-4 left-4 text-[#d4af37]/50 text-2xl font-light">✧</div>
+        <div class="absolute bottom-4 right-4 text-[#d4af37]/50 text-2xl font-light">✧</div>
+
+        <!-- Header -->
+        <div class="flex justify-between items-center text-[#d4af37] tracking-[0.3em] uppercase text-[10px] md:text-xs font-semibold border-b border-[#d4af37]/20 pb-4 md:pb-6 relative z-20">
+           <a href="index.html" class="hover:text-white transition-colors duration-500">← Return</a>
+           <span>Chapter II</span>
+        </div>
+        
+        <!-- Slideshow Container -->
+        <div class="flex-grow relative mt-4 md:mt-8" data-slideshow>
+          
+          <figure class="slide is-active" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "The kind of face a day remembers."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "The camera was always going to love you."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "All that light, held still for a second."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "You make ordinary days look better."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "Unforgettable, every time."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "A portrait worth returning to."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "Soft light, steady warmth."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "Another frame that feels like you."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "January still carries your smile."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "Winter light, same familiar grace."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "Proof the small moments stay."
+             </figcaption>
+          </figure>
+
+          <figure class="slide" data-slide>
+             <div class="border-[4px] border-[#d4af37]/30 p-2 md:p-3 bg-[#110e0e] shadow-2xl relative w-full max-w-2xl h-[55vh] md:h-[60vh]">
+               <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover tome-image">
+             </div>
+             <figcaption class="mt-8 text-center italic text-[#e5d9c5]/70 text-lg md:text-xl font-light max-w-md">
+               "The year turns; you remain."
+             </figcaption>
+          </figure>
+
+        </div>
+        
+        <!-- Navigation -->
+        <div class="flex justify-between items-center text-[#d4af37] tracking-[0.3em] uppercase text-[10px] md:text-xs font-semibold border-t border-[#d4af37]/20 pt-4 md:pt-6 relative z-20">
+           <button data-prev class="hover:text-white transition-colors duration-500">← Prev Page</button>
+           <button data-next class="hover:text-white transition-colors duration-500">Next Page →</button>
+        </div>
+
+        <div class="hidden" role="tablist">
+           <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+           <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+           <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+           <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+        </div>
+
+     </div>
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Airmail / The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    .slide { opacity: 0; pointer-events: none; transition: opacity 0.4s ease; position: absolute; inset: 0; display: flex; flex-direction: column; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+  </style>
+</head>
+<body class="bg-[#dcd8cc] flex items-center justify-center min-h-screen p-4 md:p-12 font-sans selection:bg-red-200">
+  
+  <!-- Front of the Postcard (Full Bleed Image) -->
+  <div class="w-full max-w-4xl aspect-[4/5] md:aspect-[3/2] shadow-[0_30px_60px_rgba(0,0,0,0.4)] bg-[#fdfbf7] p-3 md:p-4 pb-16 md:pb-24 relative overflow-hidden" data-slideshow>
+    
+    <!-- Slides -->
+    <figure class="slide is-active" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        The kind of face a day remembers.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        The camera was always going to love you.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        All that light, held still for a second.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        You make ordinary days look better.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        Unforgettable, every time.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        A portrait worth returning to.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        Soft light, steady warmth.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        Another frame that feels like you.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        January still carries your smile.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        Winter light, same familiar grace.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        Proof the small moments stay.
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="w-full h-full border border-gray-300 relative overflow-hidden bg-gray-100">
+        <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="absolute bottom-4 md:bottom-8 left-0 right-0 text-center font-['Playfair_Display'] text-xl md:text-3xl italic text-gray-700">
+        The year turns; you remain.
+      </figcaption>
+    </figure>
+
+    <!-- Navigation Overlays -->
+    <nav class="absolute top-8 left-8 font-['Space_Mono'] font-bold text-xs md:text-sm bg-white/90 backdrop-blur-sm px-4 py-2 hover:bg-white shadow-md z-20 border border-gray-200">
+      <a href="index.html" class="flex items-center gap-2 text-gray-700 hover:text-[#e63946] transition-colors">
+        ↶ FLIP CARD
+      </a>
+    </nav>
+    
+    <nav class="absolute top-8 right-8 flex gap-2 font-['Space_Mono'] font-bold text-xs md:text-sm bg-white/90 backdrop-blur-sm px-4 py-2 hover:bg-white shadow-md z-20 border border-gray-200">
+      <button data-prev class="text-gray-700 hover:text-[#e63946] transition-colors">◀</button>
+      <span class="text-gray-300 mx-2">|</span>
+      <button data-next class="text-gray-700 hover:text-[#e63946] transition-colors">▶</button>
+    </nav>
+
+    <!-- Hidden tablist for script.js compatibility -->
+    <div class="hidden" role="tablist">
+      <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+      <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+      <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+      <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+    </div>
+
+  </div>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

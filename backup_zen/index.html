@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>For Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#faf8f5] text-[#1c1b1a] antialiased min-h-screen relative font-serif selection:bg-[#d9381e] selection:text-white">
+  
+  <!-- Subtle grain texture to emulate Washi paper -->
+  <div class="fixed inset-0 opacity-[0.4] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <!-- Architectural red line -->
+  <div class="fixed top-0 bottom-0 right-6 md:right-[20%] w-[1px] bg-[#d9381e] opacity-20 pointer-events-none z-0"></div>
+
+  <div class="w-full min-h-screen flex flex-col-reverse md:flex-row items-center justify-between p-8 md:p-24 max-w-6xl mx-auto relative z-10">
+    
+    <div class="flex-grow max-w-md w-full mt-16 md:mt-0">
+      
+      <!-- Red stamp/hanko motif -->
+      <div class="w-12 h-12 bg-[#d9381e] rounded-full mb-12 flex items-center justify-center text-white text-[10px] tracking-widest font-sans shadow-sm">16</div>
+      
+      <p class="text-2xl md:text-3xl leading-[2.2] tracking-wide font-light text-gray-800">
+        "Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget."
+      </p>
+      
+      <!-- Minimalist Navigation -->
+      <div class="mt-20 md:mt-32 flex flex-col md:flex-row gap-8 md:gap-16 font-sans text-[10px] uppercase tracking-[0.4em] text-gray-400">
+        <a href="letter.html" class="hover:text-[#d9381e] transition-colors relative group w-max">
+          01. Letter
+          <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#d9381e] group-hover:w-full transition-all duration-700"></span>
+        </a>
+        <a href="slideshow.html" class="hover:text-[#d9381e] transition-colors relative group w-max">
+          02. Archive
+          <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#d9381e] group-hover:w-full transition-all duration-700"></span>
+        </a>
+        <a href="note.html" class="hover:text-[#d9381e] transition-colors relative group w-max">
+          03. Note
+          <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-[#d9381e] group-hover:w-full transition-all duration-700"></span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Vertical Title -->
+    <div class="flex justify-end items-start h-[50vh] md:h-[70vh] mr-4 md:mr-0 mt-8 md:mt-0">
+      <h1 class="text-6xl md:text-[8rem] font-light tracking-[0.3em] uppercase text-[#1c1b1a]" style="writing-mode: vertical-rl; text-orientation: mixed;">
+        Ellis.
+      </h1>
+    </div>
+
+  </div>
+</body>
+</html>

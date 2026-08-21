@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Pantone / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    /* Hover color change effect */
+    .color-block { animation: colorShift 10s infinite alternate; }
+    @keyframes colorShift {
+      0% { background-color: #e63946; } /* Red */
+      33% { background-color: #f4a261; } /* Orange */
+      66% { background-color: #2a9d8f; } /* Teal */
+      100% { background-color: #457b9d; } /* Blue */
+    }
+  </style>
+</head>
+<body class="bg-[#e5e5e5] text-black antialiased min-h-screen flex items-center justify-center p-4 md:p-12 selection:bg-black selection:text-white">
+  
+  <div class="bg-white w-full max-w-[600px] h-[85vh] md:h-[90vh] shadow-[0_30px_60px_rgba(0,0,0,0.15)] flex flex-col relative overflow-hidden group">
+    
+    <!-- Color Block -->
+    <div class="h-[75%] color-block flex flex-col justify-between p-8 md:p-12 transition-colors duration-1000 relative">
+       
+       <p class="text-white text-2xl md:text-4xl font-bold leading-tight max-w-[90%] z-10 mix-blend-overlay">
+         Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget.
+       </p>
+
+       <h1 class="text-white text-[6rem] md:text-[9rem] font-black tracking-tighter absolute -bottom-6 md:-bottom-10 left-4 md:left-8 mix-blend-overlay">
+         ELLIS.
+       </h1>
+    </div>
+
+    <!-- White Info Block -->
+    <div class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between z-20">
+       <div>
+         <div class="h-[3px] w-full bg-black mb-4"></div>
+         <h2 class="text-3xl md:text-4xl font-black tracking-tighter">SWATCH<br>16-05-2026 C</h2>
+       </div>
+       <nav class="flex justify-between text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-gray-500">
+         <a href="letter.html" class="hover:text-black hover:border-b-2 border-black pb-1 transition-all">01_The Letter</a>
+         <a href="slideshow.html" class="hover:text-black hover:border-b-2 border-black pb-1 transition-all">02_The Archive</a>
+         <a href="note.html" class="hover:text-black hover:border-b-2 border-black pb-1 transition-all">03_The Note</a>
+       </nav>
+    </div>
+
+  </div>
+  
+</body>
+</html>

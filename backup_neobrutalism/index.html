@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Happy Birthday / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Space Grotesk", "sans-serif"], mono: ["DM Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#fffae8] text-black antialiased min-h-screen relative font-sans selection:bg-[#ff90e8] selection:text-black">
+  
+  <div class="fixed inset-0 pointer-events-none opacity-[0.15] z-0" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <div class="min-h-screen w-full flex flex-col items-center justify-center relative z-10 px-4 md:px-6 py-12 md:py-20">
+    <div class="bg-[#ffc900] border-4 border-black shadow-[8px_8px_0px_#000] md:shadow-[12px_12px_0px_#000] p-8 md:p-16 text-center mb-16 w-full max-w-4xl rotate-1 hover:rotate-0 transition-transform duration-300">
+      <p class="font-mono text-sm md:text-base uppercase font-bold tracking-widest border-b-[3px] border-black inline-block mb-8 pb-1">Archive // 16 May</p>
+      <h1 class="text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] mb-8">
+        Happy Birthday<br>Ellis!
+      </h1>
+      <p class="text-lg md:text-2xl font-semibold mt-6 bg-white border-[3px] border-black p-4 md:p-6 shadow-[6px_6px_0px_#000] mx-auto max-w-2xl -rotate-1 hover:rotate-1 transition-transform duration-300">
+        You make everything feel lighter. Deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 w-full max-w-5xl">
+      <a href="letter.html" class="flex-1 bg-[#ff90e8] border-4 border-black shadow-[8px_8px_0px_#000] p-8 hover:-translate-y-2 hover:shadow-[16px_16px_0px_#000] transition-all group relative overflow-hidden">
+        <span class="block font-mono font-bold text-4xl mb-6">01.</span>
+        <h2 class="text-4xl font-bold uppercase mb-4 tracking-tight">The Letter</h2>
+        <p class="font-mono text-sm font-bold bg-white border-2 border-black px-3 py-1 inline-block shadow-[4px_4px_0px_#000]">The words first.</p>
+      </a>
+      
+      <a href="slideshow.html" class="flex-1 bg-[#00e5ff] border-4 border-black shadow-[8px_8px_0px_#000] p-8 hover:-translate-y-2 hover:shadow-[16px_16px_0px_#000] transition-all group lg:translate-y-4">
+        <span class="block font-mono font-bold text-4xl mb-6">02.</span>
+        <h2 class="text-4xl font-bold uppercase mb-4 tracking-tight">The Archive</h2>
+        <p class="font-mono text-sm font-bold bg-white border-2 border-black px-3 py-1 inline-block shadow-[4px_4px_0px_#000]">Twelve frames.</p>
+      </a>
+      
+      <a href="note.html" class="flex-1 bg-[#b2f5ab] border-4 border-black shadow-[8px_8px_0px_#000] p-8 hover:-translate-y-2 hover:shadow-[16px_16px_0px_#000] transition-all group lg:-translate-y-4">
+        <span class="block font-mono font-bold text-4xl mb-6">03.</span>
+        <h2 class="text-4xl font-bold uppercase mb-4 tracking-tight">The Note</h2>
+        <p class="font-mono text-sm font-bold bg-white border-2 border-black px-3 py-1 inline-block shadow-[4px_4px_0px_#000]">Closing page.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

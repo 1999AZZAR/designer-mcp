@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>II. The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Playfair Display", "serif"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .slide { opacity: 0; pointer-events: none; transition: opacity 1200ms ease-in-out; }
+    .slide.is-active { opacity: 1; pointer-events: auto; }
+    .slide img { transform: scale(0.98); transition: transform 4s ease-out; }
+    .slide.is-active img { transform: scale(1); }
+    
+    .slide-dot { transition: all 400ms ease; }
+    .slide-dot.is-active { opacity: 1; background-color: #d4af37; transform: scaleX(2); }
+  </style>
+</head>
+<body class="bg-[#050505] text-[#e5e5e5] antialiased min-h-screen relative font-sans overflow-hidden selection:bg-[#404040]">
+  
+  <nav class="fixed top-8 w-full px-8 md:px-16 flex justify-between z-50">
+    <a href="index.html" class="text-[10px] tracking-[0.2em] text-[#737373] uppercase hover:text-white transition-colors">Return</a>
+    <span class="text-[10px] tracking-[0.2em] text-[#737373] uppercase">II. The Archive</span>
+  </nav>
+
+  <div class="absolute inset-0 flex items-center justify-center z-10 w-full h-full" data-slideshow>
+    <div class="w-full h-[70vh] relative flex items-center justify-center">
+      
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center is-active" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r1c1.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">The kind of face a day remembers.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r1c2.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">The camera was always going to love you.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r1c3.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">All that light, held still for a second.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r2c1.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">You make ordinary days look better.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r2c2.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">Unforgettable, every time.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r2c3.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">A portrait worth returning to.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r3c1.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">Soft light, steady warmth.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r3c2.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">Another frame that feels like you.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_01_r3c3.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">January still carries your smile.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_02_r1c1.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">Winter light, same familiar grace.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_02_r1c2.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">Proof the small moments stay.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="slide absolute inset-0 flex flex-col items-center justify-center" data-slide>
+        <div class="w-full max-w-4xl h-full px-6 flex items-center justify-center">
+          <img src="../images/cs_02_r1c3.png" alt="Ellis" class="w-auto max-w-full max-h-full object-contain shadow-2xl" />
+        </div>
+        <figcaption class="absolute bottom-[-3rem] md:bottom-[-4rem] w-full text-center px-4">
+          <p class="font-serif italic text-lg md:text-xl text-[#a3a3a3] font-light">The year turns; you remain.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+    
+    <div class="absolute bottom-8 w-full flex justify-center items-center gap-12 z-50 px-8">
+       <button data-prev class="text-[#737373] hover:text-white transition-colors p-4"><i class="fa-solid fa-arrow-left text-sm"></i></button>
+       
+       <div class="flex items-center gap-3" role="tablist">
+         <button data-dot="0" class="slide-dot w-4 h-[2px] bg-white opacity-20 is-active"></button>
+         <button data-dot="1" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="2" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="3" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="4" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="5" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="6" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="7" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="8" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="9" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="10" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+         <button data-dot="11" class="slide-dot w-4 h-[2px] bg-white opacity-20"></button>
+       </div>
+
+       <button data-next class="text-[#737373] hover:text-white transition-colors p-4"><i class="fa-solid fa-arrow-right text-sm"></i></button>
+    </div>
+  </div>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

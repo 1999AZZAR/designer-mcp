@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Library Card / Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+    body { background-color: #8b7967; }
+    .library-card {
+      background-color: #fcf8eb;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 0 40px rgba(139,121,103,0.1);
+    }
+    .library-lines {
+      background-image: 
+        linear-gradient(90deg, transparent 79px, #d97777 79px, #d97777 81px, transparent 81px),
+        linear-gradient(transparent 31px, #a3c2c2 31px);
+      background-size: 100% 100%, 100% 32px;
+      line-height: 32px;
+      font-family: 'Special Elite', monospace;
+    }
+    .stamp { font-family: 'Special Elite', monospace; color: #4a5568; transform: rotate(0deg); display: inline-block; }
+    .stamp-red { font-family: 'Special Elite', monospace; color: #c53030; transform: rotate(2deg); display: inline-block; opacity: 0.8; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-blue-200">
+  
+  <div class="library-card w-full max-w-lg rounded-sm relative overflow-hidden transform md:rotate-1">
+     <!-- Card Header -->
+     <div class="border-b-2 border-gray-800 p-6 flex justify-between items-end bg-[#fcf8eb]">
+        <div>
+           <p class="text-xs font-sans font-bold uppercase tracking-widest text-gray-500 mb-1">Author</p>
+           <p class="font-serif text-xl font-bold uppercase tracking-widest text-gray-800">Mas Azzar</p>
+        </div>
+        <div class="text-right">
+           <p class="text-xs font-sans font-bold uppercase tracking-widest text-gray-500 mb-1">Title</p>
+           <p class="font-serif text-xl font-bold uppercase tracking-widest text-gray-800">Ellis.</p>
+        </div>
+     </div>
+     
+     <div class="border-b-2 border-gray-800 p-2 grid grid-cols-2 text-center text-xs font-sans font-bold uppercase tracking-widest text-gray-500 bg-[#fcf8eb]">
+        <div class="border-r-2 border-gray-800 hover:text-gray-800 cursor-pointer" onclick="window.location.href='index.html'">← Return</div>
+        <div>03_NOTE</div>
+     </div>
+
+     <!-- Card Body with Lines -->
+     <div class="library-lines pt-0 pb-16 relative min-h-[600px]">
+        <div class="h-8"></div>
+        
+        <div class="pl-[95px] pr-8 pb-8 stamp text-gray-700 leading-[32px] text-sm md:text-base">
+           
+           <p class="mt-8">
+             Happy birthday, Ellis. I hope<br>
+             this year meets you with the<br>
+             same tenderness, beauty, and<br>
+             energy that you bring into the<br>
+             world, and gives it back to<br>
+             you in ways you can actually<br>
+             feel every day.
+           </p>
+           
+           <p class="mt-8">
+             You deserve to be celebrated<br>
+             properly, loved loudly, and<br>
+             held with real care. You have<br>
+             a way of making people feel<br>
+             lighter, softer, and more alive,<br>
+             and that kind of presence stays<br>
+             with people long after the<br>
+             moment passes.
+           </p>
+           
+           <p class="mt-8">
+             I hope May 16 feels full of<br>
+             the same warmth you give so<br>
+             naturally. More laughter that<br>
+             makes your face hurt, more<br>
+             photos worth keeping, more<br>
+             nights that turn into stories,<br>
+             and more days where you feel<br>
+             seen for exactly who you are.
+           </p>
+
+           <div class="mt-12 stamp-red font-bold text-lg md:text-xl text-center pr-8">
+             Most of all, I hope you never<br>
+             forget how easy it is to<br>
+             love you.
+           </div>
+
+        </div>
+     </div>
+  </div>
+
+</body>
+</html>

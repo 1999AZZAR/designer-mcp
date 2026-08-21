@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>III. The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Space Grotesk", "sans-serif"], mono: ["DM Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#fffae8] text-black antialiased min-h-screen relative font-sans selection:bg-[#b2f5ab] selection:text-black">
+  <div class="fixed inset-0 pointer-events-none opacity-[0.15] z-0" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 32px 32px;"></div>
+  
+  <nav class="fixed top-6 left-6 md:top-8 md:left-8 z-50">
+    <a href="index.html" class="bg-white border-[3px] border-black shadow-[4px_4px_0px_#000] font-mono font-bold px-4 py-2 hover:bg-[#b2f5ab] hover:translate-x-1 hover:translate-y-1 hover:shadow-[0px_0px_0px_#000] transition-all uppercase block">← Back</a>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 py-32 relative z-10">
+    <div class="bg-white border-[4px] border-black shadow-[12px_12px_0px_#000] p-8 md:p-16">
+      
+      <div class="bg-black text-white font-mono font-bold inline-block px-4 py-2 mb-10 text-xl uppercase -rotate-2 shadow-[4px_4px_0px_#00e5ff]">Part III / The Note</div>
+      
+      <div class="space-y-8 text-xl md:text-2xl font-semibold leading-[1.7]">
+        <p>Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.</p>
+        <p>You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.</p>
+        <p>I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.</p>
+        
+        <div class="bg-[#b2f5ab] border-[3px] border-black p-6 mt-12 shadow-[8px_8px_0px_#000] rotate-1">
+          <p class="font-bold text-center text-3xl uppercase tracking-tighter">Most of all, I hope you never forget how easy it is to love you.</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

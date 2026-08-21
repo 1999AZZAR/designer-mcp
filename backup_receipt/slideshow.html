@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ITEM 02 // THE ARCHIVE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { mono: ["Space Mono", "Courier New", "monospace"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .slide { display: none; flex-direction: column; }
+    .slide.is-active { display: flex; }
+    .slide-img-wrapper { 
+      background-image: repeating-linear-gradient(45deg, #e5e7eb 0, #e5e7eb 2px, transparent 2px, transparent 4px);
+    }
+  </style>
+</head>
+<body class="bg-[#c4c4c4] text-[#1a1a1a] font-mono min-h-screen py-12 md:py-20 flex flex-col items-center selection:bg-black selection:text-[#fbfbf9] overflow-x-hidden">
+  
+  <!-- Receipt Container -->
+  <div class="w-[92%] max-w-[550px] bg-[#fbfbf9] shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative pb-4">
+    
+    <!-- Jagged Top Edge -->
+    <div class="absolute -top-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 0, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+    
+    <div class="p-6 md:p-10 text-sm md:text-[15px]">
+      
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <a href="index.html" class="hover:bg-black hover:text-[#fbfbf9] px-2 py-1 -ml-2 transition-colors uppercase font-bold text-xs tracking-widest">
+          &lt; BACK
+        </a>
+        <div class="text-xs uppercase tracking-widest text-gray-500">Item 02</div>
+      </div>
+      
+      <div class="text-center font-bold text-xl md:text-2xl mb-6 tracking-widest uppercase">
+        THE ARCHIVE
+      </div>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Slideshow Area -->
+      <div class="w-full relative min-h-[50vh]" data-slideshow>
+        
+        <!-- Slide 1 -->
+        <figure class="slide is-active" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r1c1.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * The kind of face a day remembers. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 2 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r1c2.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * The camera was always going to love you. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 3 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r1c3.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * All that light, held still for a second. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 4 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r2c1.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * You make ordinary days look better. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 5 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r2c2.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * Unforgettable, every time. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 6 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r2c3.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * A portrait worth returning to. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 7 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r3c1.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * Soft light, steady warmth. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 8 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r3c2.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * Another frame that feels like you. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 9 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_01_r3c3.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * January still carries your smile. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 10 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_02_r1c1.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * Winter light, same familiar grace. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 11 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_02_r1c2.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * Proof the small moments stay. *
+          </figcaption>
+        </figure>
+
+        <!-- Slide 12 -->
+        <figure class="slide" data-slide>
+          <div class="slide-img-wrapper w-full p-2 border-2 border-black mb-4">
+            <img src="../images/cs_02_r1c3.png" class="w-full h-auto object-cover max-h-[60vh] border border-gray-300 filter grayscale contrast-125">
+          </div>
+          <figcaption class="uppercase font-bold tracking-widest text-xs md:text-sm text-center">
+            * The year turns; you remain. *
+          </figcaption>
+        </figure>
+
+      </div>
+      
+      <!-- Controls -->
+      <div class="flex justify-between items-center mt-8 border-t-2 border-black pt-4">
+        <button data-prev class="font-bold hover:bg-black hover:text-[#fbfbf9] px-2 py-1 transition-colors uppercase tracking-widest">
+          [ PREV ]
+        </button>
+        
+        <div class="hidden" role="tablist">
+          <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+          <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+          <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+          <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+        </div>
+        
+        <button data-next class="font-bold hover:bg-black hover:text-[#fbfbf9] px-2 py-1 transition-colors uppercase tracking-widest">
+          [ NEXT ]
+        </button>
+      </div>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Barcode -->
+      <div class="flex justify-center mt-8 px-4">
+        <div class="w-full h-10 bg-repeat-x opacity-90" style="background-image: repeating-linear-gradient(90deg, black 0, black 2px, transparent 2px, transparent 4px, black 4px, black 6px, transparent 6px, transparent 10px, black 10px, black 11px, transparent 11px, transparent 14px);"></div>
+      </div>
+      
+    </div>
+    
+    <!-- Jagged Bottom Edge -->
+    <div class="absolute -bottom-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 10px, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Birthday Letter / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#e8e0d0", ink: "#2a2520", muted: "#7a7068", rule: "#ddd5c5", accent: "#8b1a1a" },
+          fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"], mono: ["JetBrains Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #e8e0d0; color: #2a2520; overflow-x: hidden; }
+    .paper-grain { position: fixed; inset: 0; opacity: 0.06; filter: url(#grain); z-index: -2; pointer-events: none; }
+    .blueprint-grid { position: fixed; inset: 0; background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(8.333% - 1px), rgba(191, 182, 166, 0.2) calc(8.333% - 1px), rgba(191, 182, 166, 0.2) 8.333%); z-index: -1; pointer-events: none; }
+  </style>
+</head>
+<body class="antialiased min-h-screen p-6 md:p-12 max-w-5xl mx-auto">
+  <svg class="hidden" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" stitchTiles="stitch" /></filter></svg>
+  <div class="paper-grain"></div>
+  <div class="blueprint-grid"></div>
+
+  <header class="border-t border-rule pt-4 mb-16 md:mb-32">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <p class="font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase">16 may / ellis / letter</p>
+      <nav class="flex gap-6 font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase">
+        <a href="index.html" class="hover:text-ink transition-colors pb-1">Home</a>
+        <a href="letter.html" class="text-ink border-b border-accent pb-1">Letter</a>
+        <a href="slideshow.html" class="hover:text-ink transition-colors pb-1">Slideshow</a>
+        <a href="note.html" class="hover:text-ink transition-colors pb-1">Closing note</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="mb-24 relative">
+      <p class="font-mono text-xs font-semibold tracking-[0.12em] text-accent uppercase mb-4">For Ellis</p>
+      <h1 class="text-5xl md:text-7xl lg:text-[80px] font-extrabold leading-[0.9] tracking-tighter max-w-[15ch] mb-8">The birthday letter.</h1>
+      <p class="text-lg md:text-xl text-muted max-w-lg leading-relaxed">For the day that has your name on it.</p>
+    </section>
+
+    <section class="border-t border-rule pt-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div class="md:col-span-4">
+        <p class="font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase mb-2">16 may</p>
+        <h2 class="text-3xl font-bold tracking-tight">For Ellis</h2>
+      </div>
+      <div class="md:col-span-8">
+        <article class="border border-rule/50 bg-rule/10 backdrop-blur-sm p-8 md:p-12 relative">
+          <div class="absolute inset-2 border border-rule/30 rounded-sm pointer-events-none"></div>
+          <div class="space-y-6 text-lg text-ink/90 leading-relaxed max-w-2xl relative z-10">
+            <p>Ellis, happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+            <p>You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+            <p>I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

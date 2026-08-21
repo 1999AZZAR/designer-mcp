@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Happy Birthday, Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { caveat: ["Caveat", "cursive"], courier: ["Courier Prime", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#e6e2dd] text-[#2c2a29] antialiased min-h-screen relative overflow-x-hidden selection:bg-[#d6c5b3]">
+  
+  <!-- Subtle Paper Texture -->
+  <div class="fixed inset-0 opacity-[0.06] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+  <div class="min-h-screen w-full relative z-10 flex flex-col xl:flex-row items-center justify-center p-8 md:p-16 gap-16 xl:gap-24">
+    
+    <!-- Title Card -->
+    <div class="relative bg-[#f7f5f0] p-10 md:p-16 shadow-[0_15px_35px_-5px_rgba(0,0,0,0.1)] -rotate-1 max-w-xl w-full hover:rotate-0 transition-transform duration-500">
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#d1c8b8]/60 backdrop-blur-[2px] -rotate-2"></div>
+      
+      <p class="font-courier text-sm md:text-base tracking-[0.2em] text-[#8a8175] mb-8 font-bold">16 MAY ARCHIVE</p>
+      <h1 class="font-caveat text-7xl md:text-8xl leading-[0.85] text-[#1a1918] mb-10 -rotate-2">Happy Birthday,<br>Ellis.</h1>
+      <p class="font-courier text-lg md:text-xl leading-relaxed text-[#4a4744]">
+        You make everything feel lighter. Deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+    </div>
+
+    <!-- Scattered Navigation -->
+    <div class="relative w-full max-w-lg h-[500px] flex items-center justify-center">
+      
+      <!-- Polaroid 1 -->
+      <a href="letter.html" class="absolute top-0 left-0 md:top-10 md:left-4 bg-white p-4 pb-12 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] -rotate-6 hover:-translate-y-4 hover:rotate-[-2deg] hover:z-30 transition-all duration-300 group z-10">
+        <div class="absolute -top-3 left-10 w-16 h-5 bg-[#d1c8b8]/50 rotate-3"></div>
+        <div class="w-36 h-36 md:w-44 md:h-44 bg-[#e6e2dd] flex items-center justify-center mb-4">
+          <i class="fa-solid fa-envelope text-4xl text-[#a8a196] group-hover:text-[#2c2a29] transition-colors"></i>
+        </div>
+        <p class="font-caveat text-4xl text-center text-[#2c2a29] mt-2">1. The Letter</p>
+      </a>
+
+      <!-- Polaroid 2 -->
+      <a href="slideshow.html" class="absolute top-32 right-0 md:top-24 md:right-4 bg-white p-4 pb-12 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] rotate-6 hover:-translate-y-4 hover:rotate-[2deg] hover:z-30 transition-all duration-300 group z-20">
+        <div class="absolute -top-4 right-12 w-20 h-5 bg-[#d1c8b8]/60 -rotate-3 z-10"></div>
+        <div class="w-40 h-40 md:w-48 md:h-48 bg-[#d9d2c5] flex items-center justify-center mb-4 overflow-hidden relative">
+          <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover object-[center_24%] opacity-90 group-hover:opacity-100 transition-opacity sepia-[0.1]">
+        </div>
+        <p class="font-caveat text-4xl text-center text-[#2c2a29] mt-2">2. The Archive</p>
+      </a>
+
+      <!-- Sticky Note -->
+      <a href="note.html" class="absolute bottom-0 left-16 md:bottom-4 md:left-24 bg-[#fff3b0] p-6 md:p-8 shadow-[0_15px_30px_-5px_rgba(0,0,0,0.12)] rotate-2 hover:-translate-y-4 hover:-rotate-1 hover:z-30 transition-all duration-300 group w-48 md:w-56 z-0">
+        <p class="font-caveat text-4xl md:text-5xl text-center text-[#2c2a29] leading-none mb-4">3. The Note</p>
+        <p class="font-courier text-sm text-center text-[#8c825a] border-t border-[#e6da98] pt-4">Closing page</p>
+      </a>
+      
+    </div>
+  </div>
+</body>
+</html>

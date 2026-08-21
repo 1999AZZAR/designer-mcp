@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>tty1 / 01_letter.txt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'VT323', monospace; font-size: 24px; }
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 3px 100%;
+    }
+  </style>
+</head>
+<body class="bg-black text-[#33ff00] min-h-screen relative overflow-hidden selection:bg-[#33ff00] selection:text-black p-4 md:p-8">
+  
+  <div class="pointer-events-none fixed inset-0 crt-overlay z-50"></div>
+  <div class="pointer-events-none fixed inset-0 opacity-10 animate-pulse bg-white mix-blend-overlay z-40"></div>
+  
+  <div class="max-w-3xl mx-auto drop-shadow-[0_0_8px_rgba(51,255,0,0.8)] relative z-10 overflow-y-auto h-[90vh]">
+    <p class="mb-8"><span class="text-gray-400">root@ellis:~#</span> ./read_file.sh 01_letter.txt</p>
+    
+    <div class="mb-8 ml-4 border-l-2 border-[#33ff00] pl-6 py-2 max-w-2xl">
+      <p class="mb-6 font-bold text-3xl">Ellis,</p>
+      
+      <p class="mb-6">Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+      
+      <p class="mb-6">You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+      
+      <p class="mb-6">I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+    </div>
+
+    <p class="mb-4 flex items-center">
+      <span class="text-gray-400 mr-4">root@ellis:~#</span> 
+      <a href="index.html" class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4 decoration-1 mr-4">cd ..</a>
+      <span class="w-3 h-6 bg-[#33ff00] animate-pulse inline-block"></span>
+    </p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ellis / LP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#d4cfc5] text-[#1a1a1a] antialiased min-h-screen flex flex-col items-center justify-center p-4 md:p-8 selection:bg-[#ff3b30] selection:text-white">
+  
+  <!-- Record Sleeve -->
+  <div class="w-full max-w-[750px] aspect-square bg-[#1a1a1a] text-[#ece9e1] p-8 md:p-12 flex flex-col justify-between shadow-[0_30px_60px_rgba(0,0,0,0.25)] relative overflow-hidden group">
+    
+    <!-- Subtle record ring textures -->
+    <div class="absolute inset-0 border-[1px] border-white/5 rounded-full scale-[1.4] pointer-events-none"></div>
+    <div class="absolute inset-0 border-[1px] border-white/5 rounded-full scale-[1.1] pointer-events-none"></div>
+    <div class="absolute inset-0 border-[1px] border-white/5 rounded-full scale-[0.8] pointer-events-none"></div>
+    <div class="absolute inset-0 border-[1px] border-white/5 rounded-full scale-[0.5] pointer-events-none"></div>
+
+    <!-- Header -->
+    <header class="flex justify-between items-start font-bold text-xs md:text-sm tracking-[0.2em] uppercase z-10">
+      <div class="text-[#8a8a8a]">Catalog No.<br><span class="text-[#ece9e1]">MAY-16</span></div>
+      <div class="text-right text-[#8a8a8a]">Format<br><span class="text-[#ece9e1]">Long Play 33 ⅓ RPM</span></div>
+    </header>
+
+    <!-- Main Title -->
+    <main class="z-10 mt-auto mb-16 md:mb-24">
+      <h1 class="text-[6rem] md:text-[11rem] leading-[0.75] font-black tracking-tighter uppercase mb-8">Ellis.</h1>
+      <p class="max-w-sm text-sm md:text-base text-gray-400 font-medium leading-relaxed">
+        Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+    </main>
+
+    <!-- Footer / Tracklist -->
+    <footer class="flex justify-between items-end z-10">
+      <div class="flex flex-col gap-3 font-bold text-xl md:text-2xl uppercase tracking-widest">
+        <div class="text-[10px] text-gray-500 mb-2 tracking-[0.3em]">Tracklist / Side A</div>
+        
+        <a href="letter.html" class="hover:text-[#ff3b30] transition-colors flex items-center gap-6 group/link">
+          <span class="text-[10px] text-gray-600 w-4 font-black tracking-normal group-hover/link:text-[#ff3b30]">01</span> The Letter
+        </a>
+        
+        <a href="slideshow.html" class="hover:text-[#ff3b30] transition-colors flex items-center gap-6 group/link">
+          <span class="text-[10px] text-gray-600 w-4 font-black tracking-normal group-hover/link:text-[#ff3b30]">02</span> The Archive
+        </a>
+        
+        <a href="note.html" class="hover:text-[#ff3b30] transition-colors flex items-center gap-6 group/link">
+          <span class="text-[10px] text-gray-600 w-4 font-black tracking-normal group-hover/link:text-[#ff3b30]">03</span> The Note
+        </a>
+      </div>
+      
+      <!-- Record Center Label Motif -->
+      <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#ff3b30] flex items-center justify-center group-hover:rotate-180 transition-transform duration-[2000ms] ease-in-out">
+        <div class="w-4 h-4 rounded-full bg-[#1a1a1a]"></div>
+      </div>
+    </footer>
+    
+  </div>
+  
+  <p class="mt-8 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Vol 1. Issued May 2026</p>
+</body>
+</html>

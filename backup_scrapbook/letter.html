@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>I. The Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { caveat: ["Caveat", "cursive"], courier: ["Courier Prime", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#e6e2dd] text-[#2c2a29] antialiased min-h-screen relative font-courier selection:bg-[#d6c5b3]">
+  
+  <div class="fixed inset-0 opacity-[0.06] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <nav class="fixed top-8 left-8 md:top-12 md:left-12 z-50">
+    <a href="index.html" class="font-caveat text-3xl md:text-4xl text-[#7c7467] hover:text-[#2c2a29] transition-colors -rotate-2 inline-block">← Back to desk</a>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 py-24 md:py-32 relative z-10">
+    
+    <!-- Paper Sheet -->
+    <div class="bg-[#fdfbf7] p-10 md:p-20 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] rotate-1 relative">
+      <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-40 h-8 bg-[#d1c8b8]/50 backdrop-blur-[2px] -rotate-2"></div>
+      
+      <p class="text-sm tracking-[0.2em] text-[#8a8175] mb-12 font-bold uppercase text-right border-b border-[#e6e2dd] pb-4">Typewriter // Part I</p>
+      
+      <div class="space-y-8 text-lg md:text-xl leading-[2.2] text-[#3d3a38]">
+        <p>Ellis,</p>
+        <p>Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+        <p>You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+        <p>I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

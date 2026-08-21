@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>LOG 01 // ELLIS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { mono: ["Space Mono", "Courier New", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#c4c4c4] text-[#1a1a1a] font-mono min-h-screen py-12 md:py-20 flex flex-col items-center selection:bg-black selection:text-[#fbfbf9] overflow-x-hidden">
+  
+  <!-- Receipt Container -->
+  <div class="w-[92%] max-w-[420px] bg-[#fbfbf9] shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative pb-4">
+    
+    <!-- Jagged Top Edge -->
+    <div class="absolute -top-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 0, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+    
+    <div class="p-6 md:p-8 text-sm md:text-[15px] leading-relaxed">
+      
+      <!-- Header -->
+      <div class="text-center font-bold text-xl md:text-2xl mb-2 tracking-widest uppercase">
+        * ELLIS *
+      </div>
+      <p class="text-center text-xs uppercase tracking-widest text-gray-500 mb-6">Archive Log // 16.MAY</p>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Body Text -->
+      <p class="uppercase text-center font-bold mb-4 px-2">
+        "Happy birthday to the person who makes everything feel lighter."
+      </p>
+      <p class="text-center text-sm px-2 text-gray-700">
+        Deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Tracklist / Menu -->
+      <table class="w-full text-left uppercase mb-2">
+        <tr class="align-bottom text-xs text-gray-500 tracking-widest">
+          <th class="font-normal pb-4">Item</th>
+          <th class="font-normal pb-4 text-right">Status</th>
+        </tr>
+        <tr>
+          <td class="py-3">
+            <a href="letter.html" class="hover:bg-black hover:text-[#fbfbf9] transition-colors block w-max px-1 -mx-1">
+              [01] The Letter
+            </a>
+          </td>
+          <td class="py-3 text-right">OK</td>
+        </tr>
+        <tr>
+          <td class="py-3">
+            <a href="slideshow.html" class="hover:bg-black hover:text-[#fbfbf9] transition-colors block w-max px-1 -mx-1">
+              [02] The Archive
+            </a>
+          </td>
+          <td class="py-3 text-right">OK</td>
+        </tr>
+        <tr>
+          <td class="py-3">
+            <a href="note.html" class="hover:bg-black hover:text-[#fbfbf9] transition-colors block w-max px-1 -mx-1">
+              [03] The Note
+            </a>
+          </td>
+          <td class="py-3 text-right">OK</td>
+        </tr>
+      </table>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Footer Metadata -->
+      <div class="flex justify-between text-xs text-gray-500 uppercase tracking-widest mb-2">
+        <span>DATE</span>
+        <span>05/16/2026</span>
+      </div>
+      <div class="flex justify-between text-xs text-gray-500 uppercase tracking-widest mb-8">
+        <span>TERM</span>
+        <span>A24-001</span>
+      </div>
+      
+      <div class="text-center text-xs text-gray-600 space-y-1 uppercase tracking-widest font-bold">
+        <p>Keep out of direct sunlight.</p>
+        <p>Retain for your records.</p>
+      </div>
+
+      <!-- Barcode -->
+      <div class="flex justify-center mt-8 px-4">
+        <div class="w-full h-16 bg-repeat-x opacity-90" style="background-image: repeating-linear-gradient(90deg, black 0, black 2px, transparent 2px, transparent 4px, black 4px, black 8px, transparent 8px, transparent 10px, black 10px, black 11px, transparent 11px, transparent 14px);"></div>
+      </div>
+      <div class="text-center text-xs mt-2 tracking-[0.6em] font-bold">MAY16-ELLIS</div>
+      
+    </div>
+    
+    <!-- Jagged Bottom Edge -->
+    <div class="absolute -bottom-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 10px, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+
+  </div>
+
+</body>
+</html>

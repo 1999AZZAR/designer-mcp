@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ellis_OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&display=swap');
+    body { font-family: 'Tahoma', 'Segoe UI', Arial, sans-serif; }
+    .retro-border-outset {
+      border-top: 2px solid white;
+      border-left: 2px solid white;
+      border-bottom: 2px solid black;
+      border-right: 2px solid black;
+    }
+    .retro-border-inset {
+      border-top: 2px solid #808080;
+      border-left: 2px solid #808080;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+    }
+    .retro-button-active:active {
+      border-top: 2px solid black;
+      border-left: 2px solid black;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+    }
+  </style>
+</head>
+<body class="bg-[#008080] text-black h-screen overflow-hidden select-none relative">
+  
+  <!-- Desktop Icons -->
+  <div class="p-4 flex flex-col gap-6 items-start h-full flex-wrap">
+    
+    <a href="letter.html" class="flex flex-col items-center w-24 group">
+      <img src="https://win98icons.alexmeub.com/icons/png/notepad-1.png" class="w-10 h-10 mb-1 group-hover:brightness-75" style="image-rendering: pixelated;">
+      <span class="text-white text-xs text-center px-1 group-hover:bg-[#000080] group-hover:border-dotted border border-transparent group-hover:border-white">The_Letter.txt</span>
+    </a>
+    
+    <a href="slideshow.html" class="flex flex-col items-center w-24 group">
+      <img src="https://win98icons.alexmeub.com/icons/png/image_file-1.png" class="w-10 h-10 mb-1 group-hover:brightness-75" style="image-rendering: pixelated;">
+      <span class="text-white text-xs text-center px-1 group-hover:bg-[#000080] group-hover:border-dotted border border-transparent group-hover:border-white">Archive.exe</span>
+    </a>
+    
+    <a href="note.html" class="flex flex-col items-center w-24 group">
+      <img src="https://win98icons.alexmeub.com/icons/png/notepad_file-1.png" class="w-10 h-10 mb-1 group-hover:brightness-75" style="image-rendering: pixelated;">
+      <span class="text-white text-xs text-center px-1 group-hover:bg-[#000080] group-hover:border-dotted border border-transparent group-hover:border-white">Note.txt</span>
+    </a>
+
+  </div>
+
+  <!-- Welcome Window -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[450px] bg-[#c0c0c0] retro-border-outset shadow-md flex flex-col">
+    
+    <!-- Titlebar -->
+    <div class="bg-gradient-to-r from-[#000080] to-[#1084d0] text-white p-[3px] px-2 flex justify-between items-center font-bold text-sm tracking-wide">
+      <span>Welcome to Ellis_OS</span>
+      <div class="flex gap-1">
+        <button class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-xs pb-1">_</button>
+        <button class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-xs pb-1">□</button>
+        <button class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-xs pt-[1px] pl-[1px]">×</button>
+      </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="p-6 flex gap-4 md:gap-6 items-start">
+      <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" class="w-12 h-12 shrink-0" style="image-rendering: pixelated;">
+      <div class="text-sm">
+        <p class="font-bold mb-3 text-base">Happy Birthday, Ellis!</p>
+        <p class="mb-4">You make everything feel lighter. Deeply appreciated, endlessly lovable, and impossible to forget.</p>
+        <p class="text-gray-700">Please double-click (or tap) the files on the desktop to continue.</p>
+      </div>
+    </div>
+    
+    <!-- Buttons -->
+    <div class="p-3 flex justify-center border-t border-[#808080] border-b border-white bg-[#c0c0c0]">
+      <button class="bg-[#c0c0c0] retro-border-outset retro-button-active px-8 py-1 text-sm outline outline-1 outline-black focus:outline-dashed focus:outline-offset-[-4px]">OK</button>
+    </div>
+    
+  </div>
+
+  <!-- Taskbar -->
+  <div class="fixed bottom-0 w-full h-8 bg-[#c0c0c0] border-t-2 border-white flex items-center px-1 z-50">
+    <button class="h-6 px-2 flex items-center gap-1 bg-[#c0c0c0] retro-border-outset retro-button-active font-bold text-sm shadow-[1px_1px_0_#000]">
+      <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" class="w-4 h-4" style="image-rendering: pixelated;">
+      Start
+    </button>
+    
+    <div class="ml-2 w-[2px] h-6 border-l-2 border-white border-r-2 border-[#808080]"></div>
+    
+    <div class="ml-2 flex-grow h-6 flex items-center gap-1">
+      <button class="h-full px-2 flex items-center gap-1 bg-[#e0e0e0] border-t-2 border-l-2 border-black border-b-2 border-r-2 border-white font-bold text-sm text-gray-800 shadow-[inset_1px_1px_0_#808080]">
+        <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png" class="w-4 h-4">
+        Welcome to Ellis_OS
+      </button>
+    </div>
+    
+    <div class="h-6 px-2 retro-border-inset flex items-center gap-2 text-xs">
+      <img src="https://win98icons.alexmeub.com/icons/png/loudspeaker_rays-0.png" class="w-4 h-4">
+      <span>16:05</span>
+    </div>
+  </div>
+</body>
+</html>

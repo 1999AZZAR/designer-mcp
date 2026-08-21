@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>tty1 / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'VT323', monospace; font-size: 24px; }
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 3px 100%;
+    }
+  </style>
+</head>
+<body class="bg-black text-[#33ff00] min-h-screen relative overflow-hidden selection:bg-[#33ff00] selection:text-black p-4 md:p-8">
+  
+  <!-- CRT Effects -->
+  <div class="pointer-events-none fixed inset-0 crt-overlay z-50"></div>
+  <div class="pointer-events-none fixed inset-0 opacity-10 animate-pulse bg-white mix-blend-overlay z-40"></div>
+  
+  <div class="max-w-3xl mx-auto drop-shadow-[0_0_8px_rgba(51,255,0,0.8)] relative z-10">
+    <p class="mb-4 text-gray-500">EllisOS v1.0.4 (tty1)</p>
+    <p class="mb-8">Login: root<br>Password: ********<br>Access Granted.</p>
+    
+    <p class="mb-4"><span class="text-gray-400">root@ellis:~#</span> cat greeting.txt</p>
+    <p class="mb-8 ml-4">
+      Happy birthday to the person who makes everything feel lighter.<br>
+      You are deeply appreciated, endlessly lovable, and impossible to forget.
+    </p>
+
+    <p class="mb-4"><span class="text-gray-400">root@ellis:~#</span> ls -la /home/ellis/archive</p>
+    <ul class="mb-8 ml-4 space-y-2">
+      <li>drwxr-xr-x 2 root root 4096 May 16 00:00 .</li>
+      <li>drwxr-xr-x 3 root root 4096 May 16 00:00 ..</li>
+      <li>-rwxr-xr-x 1 root root 1024 May 16 00:00 <a href="letter.html" class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4 decoration-1">01_letter.txt</a></li>
+      <li>-rwxr-xr-x 1 root root 8192 May 16 00:00 <a href="slideshow.html" class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4 decoration-1">02_photo_archive.exe</a></li>
+      <li>-rwxr-xr-x 1 root root 2048 May 16 00:00 <a href="note.html" class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4 decoration-1">03_final_note.txt</a></li>
+    </ul>
+
+    <p class="mb-4 flex items-center">
+      <span class="text-gray-400 mr-2">root@ellis:~#</span> <span class="w-3 h-6 bg-[#33ff00] animate-pulse inline-block"></span>
+    </p>
+  </div>
+
+</body>
+</html>

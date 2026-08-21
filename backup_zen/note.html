@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>III. The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#faf8f5] text-[#1c1b1a] antialiased min-h-screen font-serif flex flex-col p-8 md:p-24 selection:bg-[#d9381e] selection:text-white relative">
+  
+  <div class="fixed inset-0 opacity-[0.4] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <nav class="mb-16 md:ml-[15%] relative z-10">
+    <a href="index.html" class="font-sans text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-[#d9381e] transition-colors">← Return</a>
+  </nav>
+
+  <main class="max-w-2xl mx-auto md:ml-[15%] w-full relative z-10 pb-20">
+    
+    <div class="flex items-center gap-6 mb-16 md:mb-24">
+      <div class="w-1 h-12 bg-[#d9381e]"></div>
+      <h1 class="text-4xl md:text-6xl tracking-[0.2em] uppercase font-light text-[#1c1b1a]">III. The Note</h1>
+    </div>
+    
+    <div class="space-y-12 text-xl md:text-2xl leading-[2.2] md:leading-[2.4] tracking-wide font-light text-gray-700">
+      <p>
+        Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.
+      </p>
+      <p>
+        You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.
+      </p>
+      <p>
+        I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.
+      </p>
+      
+      <div class="mt-24 w-full flex flex-col items-center text-center">
+        <div class="w-4 h-4 bg-[#d9381e] rounded-full mb-8"></div>
+        <p class="text-3xl md:text-5xl leading-[1.6] tracking-widest font-light uppercase text-[#1c1b1a]">
+          "Most of all, I hope you never forget how easy it is to love you."
+        </p>
+      </div>
+    </div>
+    
+  </main>
+  
+</body>
+</html>

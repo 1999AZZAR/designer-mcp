@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Pantone / The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .slide { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; position: absolute; inset: 0; display: flex; flex-direction: column; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+  </style>
+</head>
+<body class="bg-[#e5e5e5] text-black antialiased min-h-screen flex items-center justify-center p-4 md:p-12 selection:bg-black selection:text-white">
+  
+  <div class="bg-white w-full max-w-[600px] md:max-w-[800px] h-[90vh] shadow-[0_30px_60px_rgba(0,0,0,0.15)] flex flex-col relative overflow-hidden" data-slideshow>
+    
+    <!-- Slides -->
+    <figure class="slide is-active" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">The kind of face a day remembers.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 01</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">The camera was always going to love you.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 02</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">All that light, held still for a second.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 03</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">You make ordinary days look better.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 04</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">Unforgettable, every time.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 05</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">A portrait worth returning to.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 06</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">Soft light, steady warmth.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 07</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">Another frame that feels like you.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 08</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">January still carries your smile.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 09</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">Winter light, same familiar grace.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 10</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">Proof the small moments stay.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 11</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <figure class="slide" data-slide>
+      <div class="h-[75%] bg-black relative">
+        <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover">
+      </div>
+      <figcaption class="h-[25%] bg-white p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <div class="h-[3px] w-full bg-black mb-4"></div>
+          <h2 class="text-2xl md:text-3xl font-black tracking-tighter uppercase mb-1">The year turns; you remain.</h2>
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Image 12</div>
+        </div>
+      </figcaption>
+    </figure>
+
+    <!-- Global Navigation fixed to the bottom of the white block -->
+    <nav class="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 flex justify-between items-end text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 z-20 pointer-events-none">
+       <a href="index.html" class="hover:text-black hover:border-b-2 border-black pb-1 transition-all pointer-events-auto">← Return</a>
+       <div class="flex gap-4 pointer-events-auto">
+         <button data-prev class="hover:text-black hover:border-b-2 border-black pb-1 transition-all">Prev</button>
+         <div class="hidden" role="tablist">
+            <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+            <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+            <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+            <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+          </div>
+         <button data-next class="hover:text-black hover:border-b-2 border-black pb-1 transition-all">Next</button>
+       </div>
+    </nav>
+
+  </div>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

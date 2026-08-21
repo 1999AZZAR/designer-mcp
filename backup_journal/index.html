@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Journal / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Caveat', cursive; }
+    .journal-paper {
+      background-color: #fdfaf0;
+      background-image: linear-gradient(transparent 95%, #cbd5e1 95%);
+      background-size: 100% 3rem; /* 48px */
+      line-height: 3rem; /* 48px */
+    }
+  </style>
+</head>
+<body class="bg-[#2c2825] text-slate-800 p-2 md:p-8 min-h-screen selection:bg-yellow-200">
+  
+  <div class="max-w-[700px] mx-auto journal-paper min-h-[90vh] md:min-h-[85vh] relative rounded-r-xl shadow-[5px_5px_15px_rgba(0,0,0,0.5)]">
+    
+    <!-- Red Margin Lines -->
+    <div class="absolute top-0 bottom-0 left-10 md:left-16 w-[1px] bg-red-400"></div>
+    <div class="absolute top-0 bottom-0 left-12 md:left-[68px] w-[1px] bg-red-400"></div>
+
+    <div class="pl-16 md:pl-24 pr-6 md:pr-12 pt-8 md:pt-12 pb-12 relative z-10 text-2xl md:text-[2.2rem]">
+      
+      <div class="text-right text-xl md:text-2xl text-slate-500 mb-12 transform -rotate-2">
+        May 16, 2026
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold mb-12">For Ellis,</h1>
+
+      <p class="mb-12 leading-[3rem]">
+        Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+
+      <!-- Doodle / Divider -->
+      <div class="flex justify-center my-8 text-slate-400 text-3xl">~ * ~</div>
+
+      <div class="space-y-[3rem] mt-12 text-blue-700 font-semibold transform rotate-1">
+        <a href="letter.html" class="block hover:text-blue-900 hover:scale-105 transition-transform w-max origin-left leading-[3rem]">→ Read the letter</a>
+        <a href="slideshow.html" class="block hover:text-blue-900 hover:scale-105 transition-transform w-max origin-left leading-[3rem]">→ Open the photo archive</a>
+        <a href="note.html" class="block hover:text-blue-900 hover:scale-105 transition-transform w-max origin-left leading-[3rem]">→ One last note</a>
+      </div>
+      
+    </div>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Airmail / The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    .airmail-border {
+      padding: 12px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #e63946 0, #e63946 16px,
+        transparent 16px, transparent 32px,
+        #1d3557 32px, #1d3557 48px,
+        transparent 48px, transparent 64px
+      );
+      background-color: #fdfbf7;
+    }
+    .postcard-inner {
+      background-color: #fdfbf7;
+      width: 100%; 
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="bg-[#dcd8cc] flex items-center justify-center min-h-screen p-4 md:p-12 font-sans selection:bg-red-200">
+  
+  <div class="w-full max-w-4xl aspect-[4/5] md:aspect-[3/2] shadow-[0_20px_60px_rgba(0,0,0,0.25)] airmail-border transform md:rotate-1">
+    <div class="postcard-inner p-8 md:p-16 relative shadow-[inset_0_0_40px_rgba(0,0,0,0.03)] border border-gray-200 overflow-y-auto flex flex-col text-center">
+      
+      <!-- Header Navigation -->
+      <div class="flex justify-between items-center mb-8 font-['Space_Mono'] text-xs font-bold uppercase tracking-widest border-b-2 border-gray-300 pb-4">
+        <a href="index.html" class="text-gray-500 hover:text-[#e63946] transition-colors">← Flip Card</a>
+        <span class="text-gray-400">Postcard No. 03</span>
+      </div>
+
+      <!-- Letter Content -->
+      <article class="font-['Caveat'] text-2xl md:text-[2rem] text-blue-900 leading-[1.8] flex-grow space-y-8 max-w-2xl mx-auto flex flex-col justify-center">
+        
+        <p>Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.</p>
+        
+        <p>You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.</p>
+        
+        <p>I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.</p>
+        
+        <div class="pt-8 text-3xl md:text-[2.5rem] font-bold text-[#e63946] leading-tight transform -rotate-2">
+          "Most of all, I hope you never forget how easy it is to love you."
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+</body>
+</html>

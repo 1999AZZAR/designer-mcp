@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Blueprint / Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Space Mono', monospace; }
+    .blueprint-grid {
+      background-size: 40px 40px, 40px 40px, 10px 10px, 10px 10px;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    /* Magic CSS to turn normal photos into architectural blueprints (Cyanotypes) */
+    .cyanotype-image {
+      filter: grayscale(1) invert(1) contrast(1.5) brightness(1.2);
+      mix-blend-mode: screen;
+    }
+    .slide { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; position: absolute; inset: 0; display: flex; flex-direction: column; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+  </style>
+</head>
+<body class="bg-[#0b203d] text-[#e0eaf5] min-h-screen p-4 md:p-8 blueprint-grid selection:bg-[#e0eaf5] selection:text-[#0b203d]">
+  
+  <div class="max-w-5xl mx-auto border-[2px] border-[#e0eaf5] bg-[#0b203d]/90 backdrop-blur-[2px] min-h-[90vh] flex flex-col relative shadow-[0_0_50px_rgba(11,32,61,0.8)]">
+     
+     <!-- Header Panel -->
+     <div class="border-b-[2px] border-[#e0eaf5] grid grid-cols-2 md:grid-cols-4 text-[10px] md:text-xs font-bold uppercase tracking-widest divide-x-[2px] divide-[#e0eaf5] bg-[#0b203d] z-20">
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">PROJECT:</span>
+          Ellis Archive
+        </div>
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">DOC_TYPE:</span>
+          Image_Spec
+        </div>
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">REF:</span>
+          02_Archive
+        </div>
+        <div class="p-3 hover:bg-[#e0eaf5] hover:text-[#0b203d] transition-colors cursor-pointer" onclick="window.location.href='index.html'">
+          <span class="text-inherit opacity-50 block mb-1">ACTION:</span>
+          ← Return_Home
+        </div>
+     </div>
+
+     <!-- Main Canvas / Slideshow Area -->
+     <div class="flex-grow p-4 md:p-12 relative overflow-hidden" data-slideshow>
+        
+        <!-- Frame -->
+        <div class="absolute inset-4 md:inset-12 border-[0.5px] border-[#e0eaf5]/50 border-dashed pointer-events-none z-0"></div>
+
+        <!-- Slides -->
+        <figure class="slide is-active p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // The kind of face a day remembers.</span>
+             <span class="text-white/50">FIG_01</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // The camera was always going to love you.</span>
+             <span class="text-white/50">FIG_02</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // All that light, held still for a second.</span>
+             <span class="text-white/50">FIG_03</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // You make ordinary days look better.</span>
+             <span class="text-white/50">FIG_04</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // Unforgettable, every time.</span>
+             <span class="text-white/50">FIG_05</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // A portrait worth returning to.</span>
+             <span class="text-white/50">FIG_06</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // Soft light, steady warmth.</span>
+             <span class="text-white/50">FIG_07</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // Another frame that feels like you.</span>
+             <span class="text-white/50">FIG_08</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // January still carries your smile.</span>
+             <span class="text-white/50">FIG_09</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // Winter light, same familiar grace.</span>
+             <span class="text-white/50">FIG_10</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // Proof the small moments stay.</span>
+             <span class="text-white/50">FIG_11</span>
+           </figcaption>
+        </figure>
+
+        <figure class="slide p-4 md:p-8" data-slide>
+           <div class="w-full h-[65vh] bg-[#0b203d] border border-[#e0eaf5] p-2 relative">
+             <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover cyanotype-image">
+           </div>
+           <figcaption class="mt-6 border-t-2 border-[#e0eaf5] pt-4 font-bold uppercase tracking-widest text-xs flex justify-between">
+             <span>DESC // The year turns; you remain.</span>
+             <span class="text-white/50">FIG_12</span>
+           </figcaption>
+        </figure>
+
+        <!-- Controls overlay on bottom right -->
+        <div class="absolute bottom-16 right-16 flex gap-4 z-20">
+           <button data-prev class="border border-[#e0eaf5] bg-[#0b203d] hover:bg-[#e0eaf5] hover:text-[#0b203d] transition-colors p-2 text-xs font-bold uppercase tracking-widest">[← PREV_FIG]</button>
+           <button data-next class="border border-[#e0eaf5] bg-[#0b203d] hover:bg-[#e0eaf5] hover:text-[#0b203d] transition-colors p-2 text-xs font-bold uppercase tracking-widest">[NEXT_FIG →]</button>
+        </div>
+
+        <div class="hidden" role="tablist">
+           <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+           <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+           <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+           <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+        </div>
+
+     </div>
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

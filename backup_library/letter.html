@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Library Card / Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+    body { background-color: #8b7967; }
+    .library-card {
+      background-color: #fcf8eb;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 0 40px rgba(139,121,103,0.1);
+    }
+    .library-lines {
+      background-image: 
+        linear-gradient(90deg, transparent 79px, #d97777 79px, #d97777 81px, transparent 81px),
+        linear-gradient(transparent 31px, #a3c2c2 31px);
+      background-size: 100% 100%, 100% 32px;
+      line-height: 32px;
+      font-family: 'Special Elite', monospace;
+    }
+    .stamp { font-family: 'Special Elite', monospace; color: #4a5568; transform: rotate(0.5deg); display: inline-block; }
+    .stamp-red { font-family: 'Special Elite', monospace; color: #c53030; transform: rotate(-1deg); display: inline-block; opacity: 0.8; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-blue-200">
+  
+  <div class="library-card w-full max-w-lg rounded-sm relative overflow-hidden transform md:-rotate-1">
+     <!-- Card Header -->
+     <div class="border-b-2 border-gray-800 p-6 flex justify-between items-end bg-[#fcf8eb]">
+        <div>
+           <p class="text-xs font-sans font-bold uppercase tracking-widest text-gray-500 mb-1">Author</p>
+           <p class="font-serif text-xl font-bold uppercase tracking-widest text-gray-800">Mas Azzar</p>
+        </div>
+        <div class="text-right">
+           <p class="text-xs font-sans font-bold uppercase tracking-widest text-gray-500 mb-1">Title</p>
+           <p class="font-serif text-xl font-bold uppercase tracking-widest text-gray-800">Ellis.</p>
+        </div>
+     </div>
+     
+     <div class="border-b-2 border-gray-800 p-2 grid grid-cols-2 text-center text-xs font-sans font-bold uppercase tracking-widest text-gray-500 bg-[#fcf8eb]">
+        <div class="border-r-2 border-gray-800 hover:text-gray-800 cursor-pointer" onclick="window.location.href='index.html'">← Return</div>
+        <div>01_LETTER</div>
+     </div>
+
+     <!-- Card Body with Lines -->
+     <div class="library-lines pt-0 pb-16 relative min-h-[600px]">
+        <div class="h-8"></div>
+        
+        <div class="pl-[95px] pr-8 pb-8 stamp text-gray-700 leading-[32px] text-sm md:text-base">
+           <div class="flex justify-between items-end mb-4">
+              <span class="stamp-red text-xl font-bold">ELLIS,</span>
+           </div>
+           
+           <p class="mt-8">
+             Happy birthday. I hope this<br>
+             next year gives you the same<br>
+             kind of joy that you give so<br>
+             naturally to everyone around<br>
+             you.
+           </p>
+           
+           <p class="mt-8">
+             You have one of those<br>
+             presences that stays with<br>
+             people. You make things feel<br>
+             brighter, funnier, softer, and<br>
+             more alive just by being there,<br>
+             and that is a rare kind of gift.
+           </p>
+           
+           <p class="mt-8">
+             I want May 16 to feel like a<br>
+             real celebration of you: your<br>
+             heart, your energy, your beauty,<br>
+             your chaos, your softness, and<br>
+             all the little things that make<br>
+             you exactly Ellis. More laughter.<br>
+             More unforgettable memories. More<br>
+             days that love you back properly.
+           </p>
+
+        </div>
+     </div>
+  </div>
+
+</body>
+</html>

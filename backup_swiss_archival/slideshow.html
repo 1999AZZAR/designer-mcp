@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Birthday Slideshow / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: "#e8e0d0", ink: "#2a2520", muted: "#7a7068", rule: "#ddd5c5", accent: "#8b1a1a" },
+          fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"], mono: ["JetBrains Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #e8e0d0; color: #2a2520; overflow-x: hidden; }
+    .paper-grain { position: fixed; inset: 0; opacity: 0.06; filter: url(#grain); z-index: -2; pointer-events: none; }
+    .blueprint-grid { position: fixed; inset: 0; background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(8.333% - 1px), rgba(191, 182, 166, 0.2) calc(8.333% - 1px), rgba(191, 182, 166, 0.2) 8.333%); z-index: -1; pointer-events: none; }
+    
+    .slide { opacity: 0; pointer-events: none; transition: opacity 375ms cubic-bezier(0.22, 1, 0.36, 1); position: absolute; inset: 0; }
+    .slide.is-active { opacity: 1; pointer-events: auto; }
+    .slideshow-stage { position: relative; min-height: 520px; overflow: hidden; background: #efe9dc; border: 1px solid #ddd5c5; }
+    
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .crop-portrait-center { object-position: center 24%; }
+    .crop-portrait-top { object-position: center 14%; }
+    .crop-top-center { object-position: center 18%; }
+    .crop-upper-center { object-position: center 22%; }
+    .crop-upper-right { object-position: 68% 18%; }
+    .crop-center-left { object-position: 38% 42%; }
+    
+    .slide-dot.is-active { outline: 1px solid #8b1a1a; outline-offset: 4px; background: #8b1a1a; }
+  </style>
+</head>
+<body class="antialiased min-h-screen p-6 md:p-12 max-w-5xl mx-auto">
+  <svg class="hidden" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" stitchTiles="stitch" /></filter></svg>
+  <div class="paper-grain"></div>
+  <div class="blueprint-grid"></div>
+
+  <header class="border-t border-rule pt-4 mb-16 md:mb-32">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <p class="font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase">16 may / ellis / slideshow</p>
+      <nav class="flex gap-6 font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase">
+        <a href="index.html" class="hover:text-ink transition-colors pb-1">Home</a>
+        <a href="letter.html" class="hover:text-ink transition-colors pb-1">Letter</a>
+        <a href="slideshow.html" class="text-ink border-b border-accent pb-1">Slideshow</a>
+        <a href="note.html" class="hover:text-ink transition-colors pb-1">Closing note</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="mb-24 relative">
+      <p class="font-mono text-xs font-semibold tracking-[0.12em] text-accent uppercase mb-4">For Ellis</p>
+      <h1 class="text-5xl md:text-7xl lg:text-[80px] font-extrabold leading-[0.9] tracking-tighter max-w-[15ch] mb-8">The birthday slideshow.</h1>
+      <p class="text-lg md:text-xl text-muted max-w-lg leading-relaxed">Every frame from the archive, in one quiet sequence.</p>
+    </section>
+
+    <section class="border-t border-rule pt-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div class="md:col-span-4">
+        <p class="font-mono text-xs font-semibold tracking-[0.1em] text-muted uppercase mb-2">16 may</p>
+        <h2 class="text-3xl font-bold tracking-tight">Frames for Ellis</h2>
+      </div>
+      <div class="md:col-span-8">
+        <div class="border border-rule/50 bg-rule/10 backdrop-blur-sm p-6 relative" data-slideshow aria-label="Birthday slideshow for Ellis">
+          <div class="absolute inset-2 border border-rule/30 rounded-sm pointer-events-none z-10"></div>
+          
+          <div class="flex justify-between items-center mb-4 px-2">
+            <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase">Archive</span>
+            <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase">12 images</span>
+          </div>
+
+          <div class="slideshow-stage rounded-sm relative z-20">
+            <figure class="slide is-active" data-slide>
+              <img src="../images/cs_01_r1c1.png" alt="Ellis portrait" class="crop-portrait-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 01</span>
+                <p class="text-ink">The kind of face a day remembers.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r1c2.png" alt="Ellis memory" class="crop-top-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 02</span>
+                <p class="text-ink">The camera was always going to love you.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r1c3.png" alt="Ellis snapshot" class="crop-upper-right" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 03</span>
+                <p class="text-ink">All that light, held still for a second.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r2c1.png" alt="Ellis in the birthday slideshow" class="crop-center-left" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 04</span>
+                <p class="text-ink">You make ordinary days look better.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r2c2.png" alt="Ellis candid" class="crop-upper-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 05</span>
+                <p class="text-ink">Unforgettable, every time.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r2c3.png" alt="Ellis photo detail" class="crop-portrait-top" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 06</span>
+                <p class="text-ink">A portrait worth returning to.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r3c1.png" alt="Ellis memory" class="crop-center-left" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 07</span>
+                <p class="text-ink">Soft light, steady warmth.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r3c2.png" alt="Ellis memory" class="crop-upper-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 08</span>
+                <p class="text-ink">Another frame that feels like you.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_01_r3c3.png" alt="Ellis in January" class="crop-center-left" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 09</span>
+                <p class="text-ink">January still carries your smile.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_02_r1c1.png" alt="Ellis in December" class="crop-portrait-top" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 10</span>
+                <p class="text-ink">Winter light, same familiar grace.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_02_r1c2.png" alt="Ellis memory" class="crop-upper-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 11</span>
+                <p class="text-ink">Proof the small moments stay.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide" data-slide>
+              <img src="../images/cs_02_r1c3.png" alt="Ellis memory" class="crop-upper-center" />
+              <figcaption class="absolute bottom-4 left-4 right-4 bg-paper/80 backdrop-blur-md border border-rule p-4">
+                <span class="font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase block mb-1">Slide 12</span>
+                <p class="text-ink">The year turns; you remain.</p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="flex items-center justify-between mt-6 px-2 relative z-20">
+            <button type="button" class="font-mono text-xs font-semibold tracking-[0.1em] text-ink uppercase border border-rule bg-paper/50 hover:bg-rule/50 px-4 py-2 transition-colors" data-prev aria-label="Previous slide">Prev</button>
+            
+            <div class="flex flex-wrap justify-center gap-3" role="tablist">
+              <!-- Simplified dots representation, script.js adds active class -->
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors is-active" data-dot="0"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="1"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="2"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="3"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="4"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="5"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="6"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="7"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="8"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="9"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="10"></button>
+              <button type="button" class="slide-dot w-2 h-2 rounded-full border border-rule bg-transparent hover:bg-rule focus:bg-rule transition-colors" data-dot="11"></button>
+            </div>
+            
+            <button type="button" class="font-mono text-xs font-semibold tracking-[0.1em] text-ink uppercase border border-rule bg-paper/50 hover:bg-rule/50 px-4 py-2 transition-colors" data-next aria-label="Next slide">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <script src="./script.js?v=6" defer></script>
+</body>
+</html>

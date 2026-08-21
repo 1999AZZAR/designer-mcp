@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>I. The Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Space Grotesk", "sans-serif"], mono: ["DM Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#fffae8] text-black antialiased min-h-screen relative font-sans selection:bg-[#ff90e8] selection:text-black">
+  <div class="fixed inset-0 pointer-events-none opacity-[0.15] z-0" style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 32px 32px;"></div>
+  
+  <nav class="fixed top-6 left-6 md:top-8 md:left-8 z-50">
+    <a href="index.html" class="bg-white border-[3px] border-black shadow-[4px_4px_0px_#000] font-mono font-bold px-4 py-2 hover:bg-[#ff90e8] hover:translate-x-1 hover:translate-y-1 hover:shadow-[0px_0px_0px_#000] transition-all uppercase block">← Back</a>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-4 py-32 relative z-10">
+    <div class="bg-white border-[4px] border-black shadow-[12px_12px_0px_#000] p-8 md:p-16">
+      
+      <div class="bg-black text-white font-mono font-bold inline-block px-4 py-2 mb-10 text-xl uppercase rotate-2 shadow-[-4px_4px_0px_#ff90e8]">Part I / The Letter</div>
+      
+      <div class="space-y-8 text-xl md:text-2xl font-semibold leading-[1.7]">
+        <p>Ellis, happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+        <p>You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+        <div class="bg-[#ffc900] border-[3px] border-black p-6 md:p-8 -rotate-1 shadow-[8px_8px_0px_#000] my-12">
+          <p>I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis.</p>
+          <p class="mt-4">More laughter. More unforgettable memories. More days that love you back properly.</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

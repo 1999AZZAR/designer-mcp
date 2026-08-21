@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Game Boy / Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    body { background-color: #d1d5db; font-family: 'VT323', monospace; }
+    .gb-screen {
+      background-color: #9bbc0f;
+      color: #0f380f;
+      box-shadow: inset 0 0 20px rgba(15,56,15,0.4);
+    }
+    .gb-grid {
+      background-image: 
+        linear-gradient(rgba(15,56,15,0.1) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(15,56,15,0.1) 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: #8bac0f; border-left: 2px solid #0f380f; }
+    ::-webkit-scrollbar-thumb { background: #0f380f; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex flex-col items-center justify-center selection:bg-[#0f380f] selection:text-[#9bbc0f]">
+  
+  <div class="bg-[#5c5c5c] p-6 md:p-10 rounded-t-xl rounded-b-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-xl relative border-t-[8px] border-l-[8px] border-r-[8px] border-b-[20px] border-[#4a4a4a]">
+     
+     <div class="absolute left-4 top-24 md:top-32 flex flex-col items-center z-20">
+       <div class="w-2.5 h-2.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.9)] mb-1"></div>
+       <div class="text-[8px] text-gray-300 font-sans tracking-widest font-bold">BATTERY</div>
+     </div>
+     
+     <div class="gb-screen h-[600px] border-4 border-[#0f380f]/30 p-6 md:p-8 relative overflow-hidden rounded-sm flex flex-col">
+        
+        <div class="absolute inset-0 gb-grid pointer-events-none z-0"></div>
+        
+        <div class="relative z-10 flex flex-col h-full">
+           
+           <div class="flex justify-between items-end border-b-4 border-[#0f380f] pb-2 mb-4">
+              <h1 class="text-3xl font-bold uppercase">> Letter.txt</h1>
+              <a href="index.html" class="text-xl hover:bg-[#0f380f] hover:text-[#9bbc0f] px-1">[B] BACK</a>
+           </div>
+           
+           <div class="flex-grow overflow-y-auto pr-4 text-xl md:text-2xl leading-tight space-y-6">
+             <p>> Ellis,</p>
+             <p>> Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+             <p>> You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+             <p>> I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+           </div>
+
+        </div>
+     </div>
+     
+  </div>
+
+</body>
+</html>

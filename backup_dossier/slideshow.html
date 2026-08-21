@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Dossier / Exhibit A</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Courier Prime', monospace; background-color: #1a1a1a; }
+    .folder {
+      background-color: #e4c59a;
+      box-shadow: 10px 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(139,105,65,0.2);
+    }
+    .stamp { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    
+    .evidence-photo {
+      background: white;
+      padding: 12px 12px 40px 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      border: 1px solid #ccc;
+    }
+    
+    .tape {
+      background-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      backdrop-filter: blur(2px);
+    }
+
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    
+    .evidence-img { filter: grayscale(1) contrast(1.2) brightness(0.9); }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-red-700 selection:text-white">
+  
+  <div class="folder w-full max-w-4xl min-h-[90vh] relative border border-[#c19b6c] p-6 md:p-12 text-black rounded-r-lg flex flex-col">
+    
+    <!-- Header -->
+    <div class="mb-8 border-b-2 border-black pb-4 flex justify-between items-end relative z-20">
+       <div>
+         <p class="font-bold mb-1">REF: <span class="font-normal">02_ARCHIVE</span></p>
+         <p class="font-bold mb-1">TYPE: <span class="font-normal">PHOTOGRAPHIC EVIDENCE</span></p>
+       </div>
+       <a href="index.html" class="font-bold uppercase hover:text-red-700 hover:bg-black/5 p-1 border border-transparent hover:border-black transition-all text-sm">
+         ← Return to File
+       </a>
+    </div>
+
+    <!-- Slideshow Area -->
+    <div class="flex-grow relative z-10 flex flex-col items-center justify-center" data-slideshow>
+       
+       <figure class="slide is-active w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-2">
+            <!-- Tape -->
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-3 z-10"></div>
+            
+            <img src="../images/cs_01_r1c1.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-1</div>
+            <div class="absolute bottom-4 right-4 text-xs">"The kind of face a day remembers."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-2 z-10"></div>
+            <img src="../images/cs_01_r1c2.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-2</div>
+            <div class="absolute bottom-4 right-4 text-xs">"The camera was always going to love you."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-1 z-10"></div>
+            <img src="../images/cs_01_r1c3.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-3</div>
+            <div class="absolute bottom-4 right-4 text-xs">"All that light, held still for a second."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-2">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-3 z-10"></div>
+            <img src="../images/cs_01_r2c1.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-4</div>
+            <div class="absolute bottom-4 right-4 text-xs">"You make ordinary days look better."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-2">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-4 z-10"></div>
+            <img src="../images/cs_01_r2c2.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-5</div>
+            <div class="absolute bottom-4 right-4 text-xs">"Unforgettable, every time."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-1 z-10"></div>
+            <img src="../images/cs_01_r2c3.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-6</div>
+            <div class="absolute bottom-4 right-4 text-xs">"A portrait worth returning to."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-2 z-10"></div>
+            <img src="../images/cs_01_r3c1.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-7</div>
+            <div class="absolute bottom-4 right-4 text-xs">"Soft light, steady warmth."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-2">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-2 z-10"></div>
+            <img src="../images/cs_01_r3c2.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-8</div>
+            <div class="absolute bottom-4 right-4 text-xs">"Another frame that feels like you."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-2">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-3 z-10"></div>
+            <img src="../images/cs_01_r3c3.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-9</div>
+            <div class="absolute bottom-4 right-4 text-xs">"January still carries your smile."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-1 z-10"></div>
+            <img src="../images/cs_02_r1c1.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-10</div>
+            <div class="absolute bottom-4 right-4 text-xs">"Winter light, same familiar grace."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform -rotate-1">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform rotate-2 z-10"></div>
+            <img src="../images/cs_02_r1c2.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-11</div>
+            <div class="absolute bottom-4 right-4 text-xs">"Proof the small moments stay."</div>
+          </div>
+       </figure>
+
+       <figure class="slide w-full" data-slide>
+          <div class="evidence-photo w-full max-w-md mx-auto relative transform rotate-2">
+            <div class="tape absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 transform -rotate-3 z-10"></div>
+            <img src="../images/cs_02_r1c3.png" class="w-full h-[50vh] object-cover evidence-img border border-gray-300">
+            <div class="absolute bottom-4 left-4 font-bold text-red-700 stamp text-sm tracking-wider">EXHIBIT A-12</div>
+            <div class="absolute bottom-4 right-4 text-xs">"The year turns; you remain."</div>
+          </div>
+       </figure>
+
+       <!-- Controls -->
+       <div class="w-full max-w-md mx-auto mt-8 flex justify-between">
+          <button data-prev class="border border-black bg-transparent hover:bg-black hover:text-[#e4c59a] px-4 py-1 font-bold uppercase transition-colors text-sm">← Prev Exhibit</button>
+          <button data-next class="border border-black bg-transparent hover:bg-black hover:text-[#e4c59a] px-4 py-1 font-bold uppercase transition-colors text-sm">Next Exhibit →</button>
+       </div>
+
+       <div class="hidden" role="tablist">
+          <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+          <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+          <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+          <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+       </div>
+    </div>
+
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

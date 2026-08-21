@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>III. The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { caveat: ["Caveat", "cursive"], courier: ["Courier Prime", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#e6e2dd] text-[#2c2a29] antialiased min-h-screen relative font-courier selection:bg-[#d6c5b3]">
+  
+  <div class="fixed inset-0 opacity-[0.06] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <nav class="fixed top-8 left-8 md:top-12 md:left-12 z-50">
+    <a href="index.html" class="font-caveat text-3xl md:text-4xl text-[#7c7467] hover:text-[#2c2a29] transition-colors -rotate-2 inline-block">← Back to desk</a>
+  </nav>
+
+  <div class="max-w-2xl mx-auto px-4 py-24 md:py-32 relative z-10 flex justify-center">
+    
+    <!-- Notepad -->
+    <div class="bg-[#fff3b0] p-10 md:p-16 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] -rotate-1 relative w-full border-t-8 border-[#e6da98]">
+      
+      <div class="font-caveat space-y-8 text-3xl md:text-4xl leading-[1.6] text-[#2c2a29] font-bold">
+        <p>Happy birthday, Ellis.</p>
+        <p>I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.</p>
+        <p>You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.</p>
+        <p>I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.</p>
+        <p class="pt-6 text-center text-[#d94a38] text-4xl md:text-5xl rotate-2">Most of all, I hope you never forget how easy it is to love you.</p>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Dossier / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Courier Prime', monospace; background-color: #1a1a1a; }
+    .folder {
+      background-color: #e4c59a;
+      box-shadow: 10px 10px 30px rgba(0,0,0,0.5), inset 0 0 50px rgba(139,105,65,0.2);
+    }
+    .redacted {
+      background-color: black;
+      color: black;
+      transition: color 0.3s ease;
+      cursor: help;
+      padding: 0 4px;
+    }
+    .redacted:hover {
+      color: white;
+    }
+    .stamp {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-red-700 selection:text-white">
+  
+  <div class="folder w-full max-w-2xl min-h-[70vh] relative overflow-hidden border border-[#c19b6c] p-6 md:p-16 text-black rounded-r-lg">
+    
+    <!-- Top Secret Stamp -->
+    <div class="stamp absolute top-8 right-4 md:right-8 border-4 border-red-700 text-red-700 font-bold text-3xl md:text-5xl p-2 transform rotate-12 opacity-80 uppercase tracking-tighter mix-blend-multiply pointer-events-none">
+      Top Secret
+    </div>
+    
+    <!-- Eyes Only Stamp -->
+    <div class="stamp absolute bottom-12 left-12 border-2 border-red-700 text-red-700 font-bold text-xl p-1 transform -rotate-6 opacity-60 uppercase tracking-widest mix-blend-multiply pointer-events-none">
+      Eyes Only
+    </div>
+
+    <!-- Folder Header -->
+    <div class="mb-12 border-b-2 border-black pb-6 pt-16 md:pt-0">
+       <p class="font-bold mb-2">AGENCY: <span class="font-normal">DEPT OF ARCHIVES</span></p>
+       <p class="font-bold mb-2">CASE NO: <span class="font-normal">16-05-2026</span></p>
+       <p class="font-bold mb-2">SUBJECT: <span class="font-normal">ELLIS</span></p>
+       <p class="font-bold">STATUS: <span class="redacted">ACTIVE</span></p>
+    </div>
+
+    <!-- Briefing -->
+    <div class="space-y-6 mb-16 text-sm md:text-base leading-relaxed">
+       <p>This dossier contains highly classified emotional intelligence regarding the subject.</p>
+       <p>OBSERVATION: Subject has been identified as a <span class="redacted">rare presence</span> that makes things feel brighter, funnier, and more alive.</p>
+       <p>THREAT LEVEL: <span class="redacted">IMPOSSIBLE TO FORGET</span></p>
+    </div>
+
+    <!-- Links / Sub-files -->
+    <div class="border-t-2 border-black pt-6">
+       <p class="font-bold mb-6 uppercase border-b border-black/20 pb-2 inline-block">Attached Documents:</p>
+       <ul class="space-y-4 font-bold text-sm md:text-base">
+          <li><a href="letter.html" class="hover:text-red-700 hover:bg-black/5 transition-all p-1 -ml-1">[DOCUMENT 01] - FIELD REPORT</a></li>
+          <li><a href="slideshow.html" class="hover:text-red-700 hover:bg-black/5 transition-all p-1 -ml-1">[EXHIBIT A] - PHOTOGRAPHIC EVIDENCE</a></li>
+          <li><a href="note.html" class="hover:text-red-700 hover:bg-black/5 transition-all p-1 -ml-1">[DOCUMENT 02] - FINAL BRIEFING</a></li>
+       </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>

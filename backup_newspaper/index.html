@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The Ellis Chronicle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 
+            serif: ["Merriweather", "serif"], 
+            display: ["Playfair Display", "serif"],
+            mono: ["Space Mono", "monospace"] 
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f4f2ec] text-[#1a1a1a] antialiased min-h-screen p-4 md:p-12 selection:bg-black selection:text-[#f4f2ec]">
+  
+  <!-- Subtle Paper Texture -->
+  <div class="fixed inset-0 opacity-[0.4] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+  <div class="max-w-[1200px] mx-auto border-x-[1px] border-black px-4 md:px-12 pb-12 relative z-10 min-h-[90vh]">
+    
+    <!-- Masthead -->
+    <header class="text-center pt-8 border-b-[6px] border-black pb-8 mb-2">
+      <div class="text-xs font-mono uppercase tracking-[0.3em] mb-4 text-gray-600">The Daily Publication of Record</div>
+      <h1 class="text-7xl md:text-[9rem] font-display uppercase tracking-tighter leading-none mb-6 font-black">Ellis.</h1>
+      <div class="flex justify-between items-center border-t border-b border-black py-2 font-mono text-[10px] md:text-xs uppercase tracking-widest px-2">
+        <span>Vol. I — No. 1</span>
+        <span>Saturday, May 16, 2026</span>
+        <span>Priceless</span>
+      </div>
+    </header>
+
+    <div class="border-b-[3px] border-black pb-3 mb-10 mt-1">
+      <div class="text-center font-display italic text-xl md:text-2xl tracking-wide font-bold">
+        "A celebration of the person who makes everything feel lighter."
+      </div>
+    </div>
+
+    <!-- Front Page Content -->
+    <main class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+      
+      <!-- Left Column: Navigation / Index -->
+      <aside class="col-span-1 md:col-span-3 border-b-2 md:border-b-0 md:border-r-2 border-black pr-0 md:pr-8 pb-8 md:pb-0">
+        <h3 class="font-mono font-bold uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-6">Contents</h3>
+        <ul class="space-y-6 text-sm md:text-base font-display font-bold">
+          <li>
+            <a href="letter.html" class="flex justify-between items-center hover:underline group">
+              <span class="text-xl">The Letter</span> <span class="font-mono text-xs border border-black px-2 py-1 rounded-sm">A1</span>
+            </a>
+          </li>
+          <li>
+            <a href="slideshow.html" class="flex justify-between items-center hover:underline group">
+              <span class="text-xl">The Archive</span> <span class="font-mono text-xs border border-black px-2 py-1 rounded-sm">B1</span>
+            </a>
+          </li>
+          <li>
+            <a href="note.html" class="flex justify-between items-center hover:underline group">
+              <span class="text-xl">The Note</span> <span class="font-mono text-xs border border-black px-2 py-1 rounded-sm">C1</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Center Article -->
+      <article class="col-span-1 md:col-span-9">
+        <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-tight mb-8 text-center md:text-left leading-tight">
+          An Undeniable Presence: The May 16th Retrospective
+        </h2>
+        
+        <div class="columns-1 md:columns-2 gap-10 text-base md:text-[17px] leading-[1.8] text-gray-800 text-justify font-serif">
+          <p class="mb-6">
+            <span class="float-left text-7xl font-display font-black mr-4 mt-2 leading-[0.7] uppercase">Y</span>ou make everything feel lighter. This publication serves as a formal acknowledgment of a presence that is deeply appreciated, endlessly lovable, and impossible to forget.
+          </p>
+          <p class="mb-6">
+            It is a rare kind of gift to make things feel brighter, funnier, and softer just by being in the room. As another year turns, this archive has been established to preserve those exact moments—the quiet grace, the chaos, and the undeniable warmth that you bring to the world.
+          </p>
+          <p class="mb-6">
+            The following sections of this issue are dedicated entirely to celebrating you. The Editorial (A1) outlines a hope for the coming year. The Photography Supplement (B1) offers a visual record of a face the camera cannot help but love. And the Final Remarks (C1) stand as a reminder of a simple truth.
+          </p>
+          <p class="mb-6 italic text-center font-bold">
+            Please proceed to Section A1.
+          </p>
+        </div>
+      </article>
+
+    </main>
+  </div>
+</body>
+</html>

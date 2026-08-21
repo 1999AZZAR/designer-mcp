@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The Ellis Edition</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white text-black antialiased min-h-screen relative font-sans selection:bg-black selection:text-white overflow-x-hidden">
+  
+  <div class="min-h-screen flex flex-col justify-between p-6 md:p-12 lg:p-20">
+    
+    <!-- Header -->
+    <header class="flex justify-between items-start border-b border-black pb-6">
+      <div class="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-medium leading-loose">
+        Vol. 01<br>The Archive
+      </div>
+      <div class="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-medium leading-loose text-right">
+        Published<br>16.05.26
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col justify-center items-start w-full py-20 lg:py-32">
+      <p class="font-sans text-[10px] uppercase tracking-[0.4em] mb-12 font-medium">The Birthday Edition</p>
+      
+      <h1 class="font-serif text-7xl md:text-9xl lg:text-[12rem] leading-[0.8] tracking-tighter italic pr-4 relative">
+        For Ellis.
+      </h1>
+      
+      <div class="mt-20 md:mt-32 ml-auto max-w-md lg:max-w-lg border-l border-black pl-8 lg:pl-12">
+        <p class="font-serif text-2xl md:text-3xl lg:text-4xl italic leading-snug font-light text-gray-800">
+          "Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget."
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer Nav -->
+    <footer class="flex flex-col md:flex-row justify-between items-start md:items-end border-t border-black pt-6 gap-12">
+      <nav class="flex flex-col md:flex-row gap-6 md:gap-16 font-sans text-[10px] uppercase tracking-[0.3em] font-medium">
+        <a href="letter.html" class="hover:italic hover:text-gray-500 transition-all flex gap-3 items-center group">
+          <span>I.</span> <span>The Letter</span>
+          <span class="w-8 h-[1px] bg-black hidden md:block group-hover:w-12 transition-all"></span>
+        </a>
+        <a href="slideshow.html" class="hover:italic hover:text-gray-500 transition-all flex gap-3 items-center group">
+          <span>II.</span> <span>The Archive</span>
+          <span class="w-8 h-[1px] bg-black hidden md:block group-hover:w-12 transition-all"></span>
+        </a>
+        <a href="note.html" class="hover:italic hover:text-gray-500 transition-all flex gap-3 items-center group">
+          <span>III.</span> <span>The Note</span>
+          <span class="w-8 h-[1px] bg-black hidden md:block group-hover:w-12 transition-all"></span>
+        </a>
+      </nav>
+      
+      <div class="font-sans text-[9px] uppercase tracking-[0.3em] text-gray-400">
+        End of Issue.
+      </div>
+    </footer>
+    
+  </div>
+</body>
+</html>

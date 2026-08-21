@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>For Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Playfair Display", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#050505] text-[#f2f2f2] antialiased min-h-screen relative overflow-x-hidden selection:bg-[#404040]">
+  
+  <div class="fixed inset-0 opacity-10 pointer-events-none z-0 mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] pointer-events-none z-0"></div>
+
+  <div class="min-h-screen w-full flex flex-col items-center justify-center relative z-10 px-6 py-20">
+    <div class="text-center mb-24 space-y-8 relative">
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-[#d4af37] opacity-[0.02] rounded-full blur-[100px] pointer-events-none"></div>
+      
+      <p class="font-sans text-[10px] tracking-[0.4em] uppercase text-[#737373]">16 May Archive</p>
+      <h1 class="font-serif text-5xl md:text-7xl italic font-light tracking-wide text-[#e5e5e5] drop-shadow-sm">For Ellis</h1>
+      <p class="text-sm text-[#a3a3a3] max-w-md mx-auto font-sans font-light leading-relaxed">
+        Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget.
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-16 md:gap-24 text-center mt-8">
+      <a href="letter.html" class="group flex flex-col items-center gap-6">
+        <span class="block w-[1px] h-12 bg-[#333] group-hover:h-20 group-hover:bg-[#d4af37] transition-all duration-700 ease-out"></span>
+        <span class="font-serif text-xl text-[#737373] group-hover:text-[#f2f2f2] transition-colors duration-500 italic">I. The Letter</span>
+      </a>
+      <a href="slideshow.html" class="group flex flex-col items-center gap-6">
+        <span class="block w-[1px] h-12 bg-[#333] group-hover:h-20 group-hover:bg-[#d4af37] transition-all duration-700 ease-out"></span>
+        <span class="font-serif text-xl text-[#737373] group-hover:text-[#f2f2f2] transition-colors duration-500 italic">II. The Archive</span>
+      </a>
+      <a href="note.html" class="group flex flex-col items-center gap-6">
+        <span class="block w-[1px] h-12 bg-[#333] group-hover:h-20 group-hover:bg-[#d4af37] transition-all duration-700 ease-out"></span>
+        <span class="font-serif text-xl text-[#737373] group-hover:text-[#f2f2f2] transition-colors duration-500 italic">III. The Note</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

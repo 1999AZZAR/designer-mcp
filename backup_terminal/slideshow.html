@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>tty1 / 02_photo_archive.exe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'VT323', monospace; font-size: 24px; }
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 3px 100%;
+    }
+    .phosphor-image {
+      /* Magic combination to turn normal images into glowing green phosphor */
+      filter: grayscale(1) sepia(1) hue-rotate(65deg) saturate(4) contrast(1.5) brightness(0.9);
+    }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+  </style>
+</head>
+<body class="bg-black text-[#33ff00] min-h-screen relative overflow-hidden selection:bg-[#33ff00] selection:text-black p-4 md:p-8">
+  
+  <div class="pointer-events-none fixed inset-0 crt-overlay z-50"></div>
+  <div class="pointer-events-none fixed inset-0 opacity-10 animate-pulse bg-white mix-blend-overlay z-40"></div>
+  
+  <div class="max-w-4xl mx-auto drop-shadow-[0_0_8px_rgba(51,255,0,0.8)] relative z-10">
+    <p class="mb-4"><span class="text-gray-400">root@ellis:~#</span> ./02_photo_archive.exe --render</p>
+    <p class="mb-6 text-gray-400">Initializing framebuffer... OK.<br>Loading asset bundle... OK.</p>
+    
+    <div class="border border-[#33ff00] p-1 mb-6 bg-black" data-slideshow>
+      
+      <!-- Slides -->
+      <figure class="slide is-active" data-slide>
+        <img src="../images/cs_01_r1c1.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_01: The kind of face a day remembers.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r1c2.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_02: The camera was always going to love you.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r1c3.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_03: All that light, held still for a second.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r2c1.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_04: You make ordinary days look better.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r2c2.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_05: Unforgettable, every time.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r2c3.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_06: A portrait worth returning to.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r3c1.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_07: Soft light, steady warmth.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r3c2.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_08: Another frame that feels like you.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_01_r3c3.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_09: January still carries your smile.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_02_r1c1.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_10: Winter light, same familiar grace.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_02_r1c2.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_11: Proof the small moments stay.</figcaption>
+      </figure>
+
+      <figure class="slide" data-slide>
+        <img src="../images/cs_02_r1c3.png" class="w-full h-[55vh] md:h-[65vh] object-cover phosphor-image">
+        <figcaption class="p-2 border-t border-[#33ff00]">> FRAME_12: The year turns; you remain.</figcaption>
+      </figure>
+
+    </div>
+
+    <!-- Commands & Navigation -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <p class="flex items-center mb-4 md:mb-0">
+        <span class="text-gray-400 mr-4">root@ellis:~#</span> 
+        <span class="w-3 h-6 bg-[#33ff00] animate-pulse inline-block"></span>
+      </p>
+
+      <div class="flex gap-6">
+        <a href="index.html" class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4">[CD ..]</a>
+        <button data-prev class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4">[PREV]</button>
+        <button data-next class="hover:bg-[#33ff00] hover:text-black underline underline-offset-4">[NEXT]</button>
+      </div>
+    </div>
+
+    <!-- Hidden tablist for script.js compatibility -->
+    <div class="hidden" role="tablist">
+      <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+      <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+      <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+      <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+    </div>
+
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

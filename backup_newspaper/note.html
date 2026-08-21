@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Section C1 — The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 
+            serif: ["Merriweather", "serif"], 
+            display: ["Playfair Display", "serif"],
+            mono: ["Space Mono", "monospace"] 
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f4f2ec] text-[#1a1a1a] antialiased min-h-screen p-4 md:p-12 selection:bg-black selection:text-[#f4f2ec]">
+  
+  <div class="fixed inset-0 opacity-[0.4] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+  <div class="max-w-[1000px] mx-auto border-x-[1px] border-black px-4 md:px-12 pb-12 relative z-10 min-h-[90vh] flex flex-col">
+    
+    <!-- Section Header -->
+    <header class="pt-8 border-b-[4px] border-black pb-4 mb-12 flex justify-between items-end">
+      <div>
+        <div class="font-mono text-[10px] uppercase tracking-widest text-gray-500 mb-2">Final Remarks</div>
+        <h1 class="text-4xl md:text-6xl font-display font-black uppercase tracking-tight leading-none">The Note.</h1>
+      </div>
+      <div class="text-right">
+        <a href="index.html" class="font-mono text-[10px] uppercase tracking-widest hover:underline">&lt; Return to Front Page</a>
+        <div class="font-display font-bold text-2xl mt-2">SEC. C1</div>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto flex-grow flex flex-col justify-center">
+      <article class="text-lg md:text-xl leading-[2] text-gray-800 text-center font-serif space-y-8">
+        
+        <p>
+          Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.
+        </p>
+        
+        <p>
+          You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.
+        </p>
+        
+        <p>
+          I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.
+        </p>
+        
+        <div class="mt-16 pt-12 border-t-2 border-black">
+          <p class="font-display font-black text-3xl md:text-5xl uppercase tracking-tight leading-tight">
+            "Most of all, I hope you never forget how easy it is to love you."
+          </p>
+        </div>
+        
+      </article>
+    </main>
+
+  </div>
+</body>
+</html>

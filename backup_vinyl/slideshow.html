@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Track 02 / The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .slide { opacity: 0; pointer-events: none; transition: opacity 400ms ease-in-out; z-index: 0; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+    
+    .crop-portrait-center { object-position: center 24%; }
+    .crop-portrait-top { object-position: center 14%; }
+    .crop-top-center { object-position: center 18%; }
+    .crop-upper-center { object-position: center 22%; }
+    .crop-upper-right { object-position: 68% 18%; }
+    .crop-center-left { object-position: 38% 42%; }
+    
+    .slide-dot { transition: all 300ms ease; }
+    .slide-dot.is-active { background-color: #ff3b30; transform: scaleX(1.5); }
+  </style>
+</head>
+<body class="bg-[#1a1a1a] text-[#ece9e1] antialiased min-h-screen flex flex-col items-center justify-center p-4 md:p-8 selection:bg-[#ff3b30] selection:text-white">
+  
+  <!-- Photo Insert / Booklet -->
+  <div class="w-full max-w-[750px] aspect-square bg-[#ece9e1] text-[#1a1a1a] p-6 md:p-10 flex flex-col shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
+    
+    <header class="flex justify-between items-start font-bold text-[10px] uppercase tracking-[0.3em] border-b-[3px] border-[#1a1a1a] pb-4 mb-6">
+      <a href="index.html" class="hover:text-[#ff3b30] transition-colors flex items-center gap-2">
+        <span class="text-xl leading-none -mt-[2px]">←</span> Flip Sleeve
+      </a>
+      <div class="text-[#ff3b30]">Track 02</div>
+    </header>
+    
+    <!-- Slideshow Area -->
+    <div class="flex-grow relative w-full flex flex-col" data-slideshow>
+      
+      <div class="flex-grow relative w-full overflow-hidden bg-[#1a1a1a]">
+        
+        <!-- Slide 1 -->
+        <figure class="slide absolute inset-0 flex flex-col is-active" data-slide>
+          <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover crop-portrait-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            The kind of face a day remembers.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 2 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover crop-top-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            The camera was always going to love you.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 3 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover crop-upper-right filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            All that light, held still for a second.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 4 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover crop-center-left filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            You make ordinary days look better.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 5 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover crop-upper-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            Unforgettable, every time.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 6 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover crop-portrait-top filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            A portrait worth returning to.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 7 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover crop-center-left filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            Soft light, steady warmth.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 8 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover crop-upper-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            Another frame that feels like you.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 9 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover crop-center-left filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            January still carries your smile.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 10 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover crop-portrait-top filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            Winter light, same familiar grace.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 11 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover crop-upper-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            Proof the small moments stay.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 12 -->
+        <figure class="slide absolute inset-0 flex flex-col" data-slide>
+          <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover crop-upper-center filter grayscale hover:grayscale-0 transition-all duration-700">
+          <figcaption class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 font-bold text-[10px] uppercase tracking-widest text-[#1a1a1a]">
+            The year turns; you remain.
+          </figcaption>
+        </figure>
+
+      </div>
+      
+      <!-- Controls -->
+      <div class="flex justify-between items-center mt-6 border-t-[3px] border-[#1a1a1a] pt-4">
+        
+        <button data-prev class="font-bold text-[10px] uppercase tracking-[0.2em] hover:text-[#ff3b30] transition-colors">Prev Track</button>
+        
+        <div class="flex gap-2" role="tablist">
+          <button data-dot="0" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm is-active"></button>
+          <button data-dot="1" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="2" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="3" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="4" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="5" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="6" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="7" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="8" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="9" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="10" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+          <button data-dot="11" class="slide-dot w-3 h-2 bg-gray-400 rounded-sm"></button>
+        </div>
+        
+        <button data-next class="font-bold text-[10px] uppercase tracking-[0.2em] hover:text-[#ff3b30] transition-colors">Next Track</button>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

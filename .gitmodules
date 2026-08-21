@@ -1,0 +1,7 @@
+[submodule "skills/ui-designer"]
+	path = skills/ui-designer
+	url = https://github.com/1999AZZAR/ui-designer-skill.git
+
+[submodule "skills/color-palette-hunter"]
+	path = skills/color-palette-hunter
+	url = https://github.com/1999AZZAR/color-palette-hunter.git

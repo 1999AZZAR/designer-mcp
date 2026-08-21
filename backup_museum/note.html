@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Exhibition / The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gallery-dot {
+      width: 12px; height: 12px; border-radius: 50%; background-color: #e63946;
+      box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#fdfdfd] text-[#111] antialiased min-h-screen p-8 md:p-16 flex flex-col selection:bg-black selection:text-white">
+  
+  <!-- Header -->
+  <header class="flex justify-between items-start text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-gray-400 mb-16 md:mb-32">
+    <a href="index.html" class="flex items-center gap-4 hover:text-black transition-colors">
+      <div class="gallery-dot"></div>
+      <span>← Return to Lobby</span>
+    </a>
+    <div class="text-right">
+      Room 03<br>The Note
+    </div>
+  </header>
+  
+  <!-- Main -->
+  <main class="flex-grow flex items-center justify-center w-full">
+    
+    <div class="w-full max-w-4xl flex flex-col items-center text-center">
+      
+      <!-- Museum Placard (Title) -->
+      <aside class="mb-16">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-2">03 // Final Remarks</h2>
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-none">The Note.</h1>
+      </aside>
+
+      <!-- Content -->
+      <article class="text-xl md:text-3xl font-medium text-gray-700 leading-[1.6] md:leading-[1.8] space-y-12 max-w-3xl">
+        <p>Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.</p>
+        
+        <p>You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.</p>
+        
+        <p>I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.</p>
+        
+        <div class="pt-12 border-t-2 border-black w-32 mx-auto"></div>
+
+        <p class="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter">
+          Most of all, I hope you never forget how easy it is to love you.
+        </p>
+      </article>
+      
+    </div>
+
+  </main>
+
+</body>
+</html>

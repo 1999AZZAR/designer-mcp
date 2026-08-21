@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nutrition Facts / Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #e5e7eb; }
+    .label-container {
+      background-color: white;
+      color: black;
+      border: 12px solid black;
+      padding: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-black selection:text-white">
+  
+  <div class="label-container w-full max-w-md mx-auto relative transform md:-rotate-1 flex flex-col h-[80vh] md:h-auto">
+     
+     <div class="flex justify-between items-center border-b-[6px] border-black pb-2 mb-4">
+        <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none">
+          01 / Ingredients
+        </h1>
+        <a href="index.html" class="text-sm font-bold uppercase hover:underline">← Return</a>
+     </div>
+     
+     <div class="flex-grow overflow-y-auto pr-2">
+        <p class="font-black text-sm uppercase mb-1">Contains:</p>
+        <p class="text-sm md:text-base leading-tight font-medium uppercase text-justify" style="text-align-last: left;">
+          <span class="font-black">Ellis,</span> Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you. You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift. I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.
+        </p>
+     </div>
+     
+     <div class="border-t-[6px] border-black pt-2 mt-4 text-xs font-bold uppercase">
+       Manufactured in 2026. Processed in a facility that also processes pure joy.
+     </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Airmail / Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    .airmail-border {
+      padding: 12px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #e63946 0, #e63946 16px,
+        transparent 16px, transparent 32px,
+        #1d3557 32px, #1d3557 48px,
+        transparent 48px, transparent 64px
+      );
+      background-color: #fdfbf7;
+    }
+    .postcard-inner {
+      background-color: #fdfbf7;
+      width: 100%; 
+      height: 100%;
+    }
+    .postmark {
+      border: 3px solid rgba(0,0,0,0.5);
+      border-radius: 50%;
+      color: rgba(0,0,0,0.6);
+    }
+    .postmark-lines {
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.4) 0, rgba(0,0,0,0.4) 2px, transparent 2px, transparent 8px);
+    }
+  </style>
+</head>
+<body class="bg-[#dcd8cc] flex items-center justify-center min-h-screen p-4 md:p-12 font-sans selection:bg-red-200">
+  
+  <!-- The Postcard -->
+  <div class="w-full max-w-4xl aspect-[4/5] md:aspect-[3/2] shadow-[0_20px_60px_rgba(0,0,0,0.25)] airmail-border transform md:rotate-1">
+    <div class="postcard-inner flex flex-col md:flex-row p-8 md:p-12 relative shadow-[inset_0_0_40px_rgba(0,0,0,0.03)] border border-gray-200">
+      
+      <!-- Vertical Divider -->
+      <div class="hidden md:block absolute top-12 bottom-12 left-1/2 w-[2px] bg-gray-300"></div>
+
+      <!-- Left Side (Message) -->
+      <div class="w-full md:w-1/2 pr-0 md:pr-12 flex flex-col h-full">
+         <h1 class="font-['Playfair_Display'] text-5xl md:text-6xl font-bold mb-6 text-gray-800">For Ellis,</h1>
+         
+         <p class="font-['Caveat'] text-2xl md:text-3xl text-blue-900 leading-relaxed flex-grow pt-4">
+           Happy birthday to the person who makes everything feel lighter. You are deeply appreciated, endlessly lovable, and impossible to forget.
+         </p>
+         
+         <div class="font-['Caveat'] text-2xl md:text-3xl text-blue-900 mt-8 text-right font-bold transform -rotate-2">
+           May 16, 2026
+         </div>
+      </div>
+
+      <!-- Right Side (Address & Stamp) -->
+      <div class="w-full md:w-1/2 pl-0 pt-16 md:pt-0 md:pl-12 flex flex-col relative h-full">
+         
+         <!-- Stamp -->
+         <div class="absolute top-0 right-0 w-20 h-24 md:w-24 md:h-28 bg-[#f4f1e1] border-[2px] border-dashed border-gray-400 flex items-center justify-center transform rotate-3 p-1 z-10 shadow-sm">
+            <div class="bg-[#1d3557] w-full h-full flex flex-col items-center justify-center text-white text-[9px] md:text-[11px] font-bold text-center leading-tight font-['Space_Mono'] uppercase">
+               <div class="text-2xl mb-1">✉</div>
+               AIRMAIL<br>POSTAGE
+            </div>
+         </div>
+         
+         <!-- Postmark Overlay -->
+         <div class="absolute top-6 md:top-10 right-10 w-24 h-24 md:w-28 md:h-28 postmark flex items-center justify-center transform -rotate-12 pointer-events-none z-20">
+            <div class="text-center font-['Space_Mono'] font-bold text-[10px] md:text-xs">
+              ELLIS<br>16 MAY<br>2026
+            </div>
+         </div>
+         <div class="absolute top-12 md:top-16 right-0 w-40 md:w-48 h-8 postmark-lines transform -rotate-12 pointer-events-none z-20"></div>
+
+         <!-- Address Lines (Navigation) -->
+         <div class="mt-auto flex flex-col gap-8 md:gap-12 pt-16 md:pt-0">
+            <div class="border-b-2 border-gray-400 relative h-10">
+               <a href="letter.html" class="absolute bottom-1 left-2 font-['Space_Mono'] font-bold text-base md:text-xl text-gray-800 hover:text-[#e63946] transition-colors uppercase flex items-end gap-2 group">
+                 <span class="text-xs text-gray-500 mb-[2px]">TO:</span> The Letter
+               </a>
+            </div>
+            <div class="border-b-2 border-gray-400 relative h-10">
+               <a href="slideshow.html" class="absolute bottom-1 left-2 font-['Space_Mono'] font-bold text-base md:text-xl text-gray-800 hover:text-[#e63946] transition-colors uppercase flex items-end gap-2 group">
+                 <span class="text-xs text-gray-500 mb-[2px]">VIA:</span> The Archive
+               </a>
+            </div>
+            <div class="border-b-2 border-gray-400 relative h-10">
+               <a href="note.html" class="absolute bottom-1 left-2 font-['Space_Mono'] font-bold text-base md:text-xl text-gray-800 hover:text-[#e63946] transition-colors uppercase flex items-end gap-2 group">
+                 <span class="text-xs text-gray-500 mb-[2px]">ATTN:</span> Final Note
+               </a>
+            </div>
+         </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

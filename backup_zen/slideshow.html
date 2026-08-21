@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>II. The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .slide { opacity: 0; pointer-events: none; transition: opacity 1500ms ease-in-out; z-index: 0; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+    
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    
+    .slide-dot { transition: all 500ms ease; }
+    .slide-dot.is-active { background-color: #d9381e; transform: scaleY(2); }
+  </style>
+</head>
+<body class="bg-[#faf8f5] text-[#1c1b1a] antialiased min-h-screen flex flex-col font-serif selection:bg-[#d9381e] selection:text-white relative overflow-hidden">
+  
+  <div class="fixed inset-0 opacity-[0.4] pointer-events-none z-0 mix-blend-multiply" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <!-- Architectural line -->
+  <div class="fixed top-0 bottom-0 left-[8%] w-[1px] bg-gray-300 pointer-events-none z-0"></div>
+
+  <nav class="absolute top-8 left-8 md:top-12 md:left-12 z-50">
+    <a href="index.html" class="font-sans text-[10px] uppercase tracking-[0.3em] text-gray-500 hover:text-[#d9381e] transition-colors">← Return</a>
+  </nav>
+
+  <div class="flex-grow flex items-center justify-center relative w-full h-[80vh] mt-12" data-slideshow>
+    
+    <div class="w-full max-w-5xl h-full md:h-[75vh] relative flex items-center justify-center z-10 px-8">
+      
+      <!-- Slide 1 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16 is-active" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r1c1.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">The kind of face a day remembers.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 2 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r1c2.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">The camera was always going to love you.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 3 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r1c3.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">All that light, held still for a second.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 4 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r2c1.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">You make ordinary days look better.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 5 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r2c2.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">Unforgettable, every time.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 6 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r2c3.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">A portrait worth returning to.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 7 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r3c1.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">Soft light, steady warmth.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 8 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r3c2.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">Another frame that feels like you.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 9 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_01_r3c3.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">January still carries your smile.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 10 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_02_r1c1.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">Winter light, same familiar grace.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 11 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_02_r1c2.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">Proof the small moments stay.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 12 -->
+      <figure class="slide absolute inset-0 flex flex-col md:flex-row items-center justify-center md:gap-16" data-slide>
+        <div class="w-full md:w-auto h-[50vh] md:h-full max-w-2xl bg-white p-2 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100">
+          <img src="../images/cs_02_r1c3.png" alt="Ellis" class="w-full h-full object-cover" />
+        </div>
+        <figcaption class="h-[20vh] md:h-full flex items-center justify-center md:justify-start mt-8 md:mt-0">
+          <p class="vertical-text text-2xl md:text-4xl tracking-[0.3em] font-light text-gray-600">The year turns; you remain.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+
+  <footer class="absolute bottom-8 w-full flex flex-col items-center gap-6 z-50">
+    <div class="flex gap-4" role="tablist">
+      <button data-dot="0" class="slide-dot w-[1px] h-3 bg-gray-400 is-active hover:bg-[#d9381e]"></button>
+      <button data-dot="1" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="2" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="3" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="4" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="5" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="6" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="7" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="8" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="9" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="10" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+      <button data-dot="11" class="slide-dot w-[1px] h-3 bg-gray-400 hover:bg-[#d9381e]"></button>
+    </div>
+
+    <div class="flex gap-12">
+      <button data-prev class="font-sans text-[9px] uppercase tracking-[0.3em] hover:text-[#d9381e] transition-colors">Previous</button>
+      <button data-next class="font-sans text-[9px] uppercase tracking-[0.3em] hover:text-[#d9381e] transition-colors">Next</button>
+    </div>
+  </footer>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>III. The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Playfair Display", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#050505] text-[#e5e5e5] antialiased min-h-screen relative font-serif flex flex-col selection:bg-[#404040]">
+  
+  <div class="fixed inset-0 opacity-10 pointer-events-none z-0 mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <nav class="fixed top-8 left-8 md:top-12 md:left-12 z-50">
+    <a href="index.html" class="font-sans text-[10px] tracking-[0.2em] text-[#737373] hover:text-[#e5e5e5] uppercase transition-colors">Return</a>
+  </nav>
+
+  <div class="max-w-2xl mx-auto px-8 py-32 md:py-48 relative z-10 flex-grow flex flex-col justify-center">
+    <div class="mb-20 text-center">
+      <p class="font-sans text-[10px] tracking-[0.3em] text-[#737373] uppercase mb-8">Part III</p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl italic font-light leading-[1.1] text-[#e5e5e5] tracking-wide">The Note</h1>
+    </div>
+    
+    <div class="space-y-12 text-lg md:text-xl leading-[2.2] text-[#a3a3a3] font-light">
+      <p>
+        Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world, and gives it back to you in ways you can actually feel every day.
+      </p>
+      <p>
+        You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter, softer, and more alive, and that kind of presence stays with people long after the moment passes.
+      </p>
+      <p>
+        I hope May 16 feels full of the same warmth you give so naturally. More laughter that makes your face hurt, more photos worth keeping, more nights that turn into stories, and more days where you feel seen for exactly who you are.
+      </p>
+      <p class="pt-12 text-center text-[#d4af37] text-2xl italic">
+        Most of all, I hope you never forget how easy it is to love you.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

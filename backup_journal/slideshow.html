@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Journal / The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Caveat', cursive; }
+    .journal-paper {
+      background-color: #fdfaf0;
+      background-image: linear-gradient(transparent 95%, #cbd5e1 95%);
+      background-size: 100% 3rem; /* 48px */
+      line-height: 3rem; /* 48px */
+    }
+    
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    
+    .tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 100px;
+      height: 25px;
+      background-color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      backdrop-filter: blur(2px);
+      z-index: 20;
+    }
+  </style>
+</head>
+<body class="bg-[#2c2825] text-slate-800 p-2 md:p-8 min-h-screen selection:bg-yellow-200">
+  
+  <div class="max-w-[700px] mx-auto journal-paper min-h-[90vh] md:min-h-[85vh] relative rounded-r-xl shadow-[5px_5px_15px_rgba(0,0,0,0.5)] flex flex-col">
+    
+    <!-- Red Margin Lines -->
+    <div class="absolute top-0 bottom-0 left-10 md:left-16 w-[1px] bg-red-400 z-0"></div>
+    <div class="absolute top-0 bottom-0 left-12 md:left-[68px] w-[1px] bg-red-400 z-0"></div>
+
+    <div class="pl-16 md:pl-24 pr-6 md:pr-12 pt-8 md:pt-12 pb-12 relative z-10 flex flex-col h-full flex-grow">
+      
+      <div class="flex justify-between items-center mb-6">
+        <a href="index.html" class="text-xl md:text-2xl text-blue-600 hover:text-blue-800 font-bold leading-[3rem]">← Back</a>
+        <div class="text-xl md:text-2xl text-slate-500 transform rotate-3 leading-[3rem]">Page 2</div>
+      </div>
+      
+      <!-- Slideshow Area -->
+      <div class="flex-grow w-full relative mb-8" data-slideshow>
+        
+        <!-- Slide 1 -->
+        <figure class="slide is-active" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-2">
+            <div class="tape"></div>
+            <img src="../images/cs_01_r1c1.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            The kind of face a day remembers.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 2 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform -rotate-1">
+            <div class="tape transform -rotate-1"></div>
+            <img src="../images/cs_01_r1c2.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            The camera was always going to love you.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 3 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-3">
+            <div class="tape transform rotate-4"></div>
+            <img src="../images/cs_01_r1c3.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            All that light, held still for a second.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 4 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform -rotate-2">
+            <div class="tape transform -rotate-3"></div>
+            <img src="../images/cs_01_r2c1.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            You make ordinary days look better.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 5 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-1">
+            <div class="tape"></div>
+            <img src="../images/cs_01_r2c2.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            Unforgettable, every time.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 6 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform -rotate-1">
+            <div class="tape transform rotate-2"></div>
+            <img src="../images/cs_01_r2c3.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            A portrait worth returning to.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 7 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-2">
+            <div class="tape transform -rotate-1"></div>
+            <img src="../images/cs_01_r3c1.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            Soft light, steady warmth.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 8 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform -rotate-3">
+            <div class="tape transform rotate-1"></div>
+            <img src="../images/cs_01_r3c2.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            Another frame that feels like you.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 9 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-1">
+            <div class="tape"></div>
+            <img src="../images/cs_01_r3c3.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            January still carries your smile.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 10 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-2">
+            <div class="tape transform -rotate-2"></div>
+            <img src="../images/cs_02_r1c1.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            Winter light, same familiar grace.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 11 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform -rotate-2">
+            <div class="tape transform rotate-2"></div>
+            <img src="../images/cs_02_r1c2.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            Proof the small moments stay.
+          </figcaption>
+        </figure>
+
+        <!-- Slide 12 -->
+        <figure class="slide" data-slide>
+          <div class="relative w-full max-w-[400px] mx-auto transform rotate-1">
+            <div class="tape"></div>
+            <img src="../images/cs_02_r1c3.png" class="w-full h-auto max-h-[50vh] object-cover bg-white p-3 shadow-md pb-8">
+          </div>
+          <figcaption class="text-center text-2xl md:text-3xl mt-[3rem] leading-[3rem] text-slate-700">
+            The year turns; you remain.
+          </figcaption>
+        </figure>
+
+      </div>
+      
+      <!-- Controls -->
+      <div class="flex justify-between items-center text-xl md:text-2xl text-blue-600 font-bold leading-[3rem] px-4 mt-auto">
+        
+        <button data-prev class="hover:text-blue-800 transition-colors">
+          &lt; prev
+        </button>
+        
+        <div class="hidden" role="tablist">
+          <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+          <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+          <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+          <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+        </div>
+        
+        <button data-next class="hover:text-blue-800 transition-colors">
+          next &gt;
+        </button>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

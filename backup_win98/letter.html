@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The_Letter.txt - Notepad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Tahoma', 'Segoe UI', Arial, sans-serif; }
+    .retro-border-outset {
+      border-top: 2px solid white;
+      border-left: 2px solid white;
+      border-bottom: 2px solid black;
+      border-right: 2px solid black;
+    }
+    .retro-border-inset {
+      border-top: 2px solid #808080;
+      border-left: 2px solid #808080;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+    }
+    .retro-button-active:active {
+      border-top: 2px solid black;
+      border-left: 2px solid black;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+    }
+  </style>
+</head>
+<body class="bg-[#008080] text-black h-screen overflow-hidden relative select-none">
+  
+  <div class="w-full h-full md:p-8 flex items-center justify-center">
+    
+    <div class="w-full md:w-3/4 max-w-3xl h-full md:h-[80vh] bg-[#c0c0c0] retro-border-outset shadow-md flex flex-col">
+      
+      <!-- Titlebar -->
+      <div class="bg-gradient-to-r from-[#000080] to-[#1084d0] text-white p-[3px] px-2 flex justify-between items-center font-bold text-sm">
+        <div class="flex items-center gap-1">
+          <img src="https://win98icons.alexmeub.com/icons/png/notepad-1.png" class="w-4 h-4" style="image-rendering: pixelated;">
+          <span>The_Letter.txt - Notepad</span>
+        </div>
+        <div class="flex gap-1">
+          <button class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-xs pb-1">_</button>
+          <button class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-xs pb-1">□</button>
+          <a href="index.html" class="bg-[#c0c0c0] w-4 h-4 retro-border-outset retro-button-active text-black font-bold flex items-center justify-center text-[11px] pt-[1px] pl-[1px] decoration-none hover:text-black">×</a>
+        </div>
+      </div>
+      
+      <!-- Menu -->
+      <div class="flex gap-4 p-1 px-2 text-xs border-b border-[#808080] shadow-[0_1px_0_#fff]">
+        <span><u class="no-underline border-b border-black pb-[0.5px]">F</u>ile</span>
+        <span><u class="no-underline border-b border-black pb-[0.5px]">E</u>dit</span>
+        <span><u class="no-underline border-b border-black pb-[0.5px]">S</u>earch</span>
+        <span><u class="no-underline border-b border-black pb-[0.5px]">H</u>elp</span>
+      </div>
+      
+      <!-- Editor -->
+      <div class="flex-grow p-1">
+        <div class="bg-white w-full h-full retro-border-inset p-3 overflow-y-auto font-['Courier_New',monospace] text-[15px] leading-relaxed whitespace-pre-wrap select-text selection:bg-[#000080] selection:text-white">Ellis,
+
+Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.
+
+You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.
+
+I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.
+
+_</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

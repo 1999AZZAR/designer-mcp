@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>III. The Note</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white text-black antialiased min-h-screen font-serif flex flex-col p-6 md:p-12 lg:p-20 selection:bg-black selection:text-white">
+  
+  <header class="flex justify-between items-center border-b border-black pb-6 mb-16 md:mb-24">
+    <a href="index.html" class="font-sans text-[10px] uppercase tracking-[0.3em] hover:text-gray-400 transition-colors">← Back</a>
+    <span class="font-sans text-[10px] uppercase tracking-[0.3em]">Chapter III</span>
+  </header>
+  
+  <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center items-center text-center pb-20">
+    
+    <p class="font-sans text-[10px] uppercase tracking-[0.4em] mb-16 text-gray-400 border-b border-gray-200 pb-4">The Note.</p>
+    
+    <div class="space-y-12 text-2xl md:text-4xl leading-[1.6] font-light text-gray-800">
+      <p>
+        Happy birthday, Ellis. I hope this year meets you with the same tenderness, beauty, and energy that you bring into the world.
+      </p>
+      <p>
+        You deserve to be celebrated properly, loved loudly, and held with real care. You have a way of making people feel lighter and softer.
+      </p>
+      <p>
+        I hope May 16 feels full of the same warmth you give so naturally. More photos worth keeping, more nights that turn into stories.
+      </p>
+    </div>
+    
+    <div class="mt-24 md:mt-32 w-full pt-16 border-t border-black">
+      <p class="text-4xl md:text-6xl italic tracking-tighter text-black leading-snug">
+        "Most of all, I hope you never forget how easy it is to love you."
+      </p>
+    </div>
+    
+  </main>
+  
+</body>
+</html>

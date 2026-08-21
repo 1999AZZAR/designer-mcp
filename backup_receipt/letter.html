@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ITEM 01 // THE LETTER</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { mono: ["Space Mono", "Courier New", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#c4c4c4] text-[#1a1a1a] font-mono min-h-screen py-12 md:py-20 flex flex-col items-center selection:bg-black selection:text-[#fbfbf9] overflow-x-hidden">
+  
+  <!-- Receipt Container -->
+  <div class="w-[92%] max-w-[500px] bg-[#fbfbf9] shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative pb-4">
+    
+    <!-- Jagged Top Edge -->
+    <div class="absolute -top-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 0, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+    
+    <div class="p-6 md:p-10 text-sm md:text-[15px] leading-[1.8]">
+      
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <a href="index.html" class="hover:bg-black hover:text-[#fbfbf9] px-2 py-1 -ml-2 transition-colors uppercase font-bold text-xs tracking-widest">
+          &lt; BACK
+        </a>
+        <div class="text-xs uppercase tracking-widest text-gray-500">Item 01</div>
+      </div>
+      
+      <div class="text-center font-bold text-xl md:text-2xl mb-6 tracking-widest uppercase">
+        THE LETTER
+      </div>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Body Text -->
+      <div class="space-y-6">
+        <p class="font-bold uppercase tracking-widest">Ellis,</p>
+        <p>Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+        <p>You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+        <p>I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+      </div>
+      
+      <div class="border-t-2 border-dashed border-gray-400 my-6"></div>
+      
+      <!-- Barcode -->
+      <div class="flex justify-center mt-8 px-4">
+        <div class="w-full h-10 bg-repeat-x opacity-90" style="background-image: repeating-linear-gradient(90deg, black 0, black 2px, transparent 2px, transparent 4px, black 4px, black 6px, transparent 6px, transparent 10px, black 10px, black 11px, transparent 11px, transparent 14px);"></div>
+      </div>
+      
+    </div>
+    
+    <!-- Jagged Bottom Edge -->
+    <div class="absolute -bottom-[10px] left-0 right-0 h-[10px] bg-repeat-x w-full" style="background-image: radial-gradient(circle at 50% 10px, transparent 4px, #fbfbf9 5px); background-size: 10px 10px;"></div>
+
+  </div>
+
+</body>
+</html>

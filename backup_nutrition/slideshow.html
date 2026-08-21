@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Nutrition Facts / Serving Suggestion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #e5e7eb; }
+    .label-container {
+      background-color: white;
+      color: black;
+      border: 12px solid black;
+      padding: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .slide { display: none; }
+    .slide.is-active { display: flex; }
+    .serving-img { filter: grayscale(100%) contrast(1.2); }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-12 flex items-center justify-center selection:bg-black selection:text-white">
+  
+  <div class="label-container w-full max-w-md mx-auto relative flex flex-col h-[85vh] md:h-auto">
+     
+     <div class="flex justify-between items-center border-b-[6px] border-black pb-2 mb-4">
+        <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none">
+          Serving Suggestion
+        </h1>
+        <a href="index.html" class="text-sm font-bold uppercase hover:underline">← Return</a>
+     </div>
+     
+     <div class="flex-grow flex flex-col relative" data-slideshow>
+        
+        <figure class="slide is-active h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r1c1.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 01 // The kind of face a day remembers.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r1c2.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 02 // The camera was always going to love you.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r1c3.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 03 // All that light, held still for a second.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r2c1.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 04 // You make ordinary days look better.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r2c2.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 05 // Unforgettable, every time.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r2c3.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 06 // A portrait worth returning to.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r3c1.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 07 // Soft light, steady warmth.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r3c2.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 08 // Another frame that feels like you.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_01_r3c3.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 09 // January still carries your smile.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_02_r1c1.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 10 // Winter light, same familiar grace.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_02_r1c2.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 11 // Proof the small moments stay.
+           </figcaption>
+        </figure>
+
+        <figure class="slide h-full flex flex-col" data-slide>
+           <div class="border-[4px] border-black flex-grow relative overflow-hidden bg-black">
+             <img src="../images/cs_02_r1c3.png" class="w-full h-full object-cover absolute inset-0 serving-img">
+           </div>
+           <figcaption class="font-bold text-xs uppercase mt-2 border-b border-black pb-1">
+             FIG 12 // The year turns; you remain.
+           </figcaption>
+        </figure>
+
+        <!-- Controls -->
+        <div class="flex justify-between mt-4">
+           <button data-prev class="border-2 border-black px-4 py-1 font-black uppercase hover:bg-black hover:text-white transition-colors">← Prev</button>
+           <button data-next class="border-2 border-black px-4 py-1 font-black uppercase hover:bg-black hover:text-white transition-colors">Next →</button>
+        </div>
+
+        <div class="hidden" role="tablist">
+           <button data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button>
+           <button data-dot="3"></button><button data-dot="4"></button><button data-dot="5"></button>
+           <button data-dot="6"></button><button data-dot="7"></button><button data-dot="8"></button>
+           <button data-dot="9"></button><button data-dot="10"></button><button data-dot="11"></button>
+        </div>
+
+     </div>
+
+  </div>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

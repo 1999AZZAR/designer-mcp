@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Blueprint / Letter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Space Mono', monospace; }
+    .blueprint-grid {
+      background-size: 40px 40px, 40px 40px, 10px 10px, 10px 10px;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-[#0b203d] text-[#e0eaf5] min-h-screen p-4 md:p-8 blueprint-grid selection:bg-[#e0eaf5] selection:text-[#0b203d]">
+  
+  <div class="max-w-4xl mx-auto border-[2px] border-[#e0eaf5] bg-[#0b203d]/90 backdrop-blur-[2px] min-h-[90vh] flex flex-col relative shadow-[0_0_50px_rgba(11,32,61,0.8)]">
+     
+     <!-- Header Panel -->
+     <div class="border-b-[2px] border-[#e0eaf5] grid grid-cols-2 md:grid-cols-4 text-[10px] md:text-xs font-bold uppercase tracking-widest divide-x-[2px] divide-[#e0eaf5] bg-[#0b203d]">
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">PROJECT:</span>
+          Ellis Archive
+        </div>
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">DOC_TYPE:</span>
+          Text_Spec
+        </div>
+        <div class="p-3">
+          <span class="text-white/50 block mb-1">REF:</span>
+          01_Letter
+        </div>
+        <div class="p-3 hover:bg-[#e0eaf5] hover:text-[#0b203d] transition-colors cursor-pointer" onclick="window.location.href='index.html'">
+          <span class="text-inherit opacity-50 block mb-1">ACTION:</span>
+          ← Return_Home
+        </div>
+     </div>
+
+     <!-- Main Canvas -->
+     <div class="flex-grow p-6 md:p-16 relative overflow-y-auto">
+        
+        <!-- Document Frame -->
+        <div class="border-[0.5px] border-[#e0eaf5]/50 p-6 md:p-12 h-full relative">
+           
+           <!-- Corner Markers -->
+           <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#e0eaf5]"></div>
+           <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#e0eaf5]"></div>
+           <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#e0eaf5]"></div>
+           <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#e0eaf5]"></div>
+
+           <article class="text-sm md:text-base leading-[2] text-[#e0eaf5]/90 space-y-8 max-w-2xl mx-auto">
+             <h1 class="text-3xl md:text-5xl font-bold uppercase tracking-widest border-b-[2px] border-[#e0eaf5] pb-4 mb-12">
+               Ellis,
+             </h1>
+             
+             <p>Happy birthday. I hope this next year gives you the same kind of joy that you give so naturally to everyone around you.</p>
+             
+             <p>You have one of those presences that stays with people. You make things feel brighter, funnier, softer, and more alive just by being there, and that is a rare kind of gift.</p>
+             
+             <p>I want May 16 to feel like a real celebration of you: your heart, your energy, your beauty, your chaos, your softness, and all the little things that make you exactly Ellis. More laughter. More unforgettable memories. More days that love you back properly.</p>
+           </article>
+
+        </div>
+     </div>
+  </div>
+
+</body>
+</html>

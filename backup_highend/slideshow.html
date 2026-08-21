@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>II. The Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Cormorant Garamond", "serif"] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .slide { opacity: 0; pointer-events: none; transition: opacity 1200ms ease-in-out; z-index: 0; }
+    .slide.is-active { opacity: 1; pointer-events: auto; z-index: 10; }
+    
+    .slide img { filter: grayscale(100%); transition: all 1200ms ease; transform: scale(1.02); }
+    .slide.is-active img { transform: scale(1); }
+    .slide.is-active img:hover { filter: grayscale(0%); transform: scale(1.02); }
+    
+    .crop-portrait-center { object-position: center 24%; }
+    .crop-portrait-top { object-position: center 14%; }
+    .crop-top-center { object-position: center 18%; }
+    .crop-upper-center { object-position: center 22%; }
+    .crop-upper-right { object-position: 68% 18%; }
+    .crop-center-left { object-position: 38% 42%; }
+    
+    .slide-dot { transition: all 400ms ease; }
+    .slide-dot.is-active { background-color: #000; transform: scale(1.5); }
+  </style>
+</head>
+<body class="bg-white text-black antialiased min-h-screen flex flex-col p-6 md:p-12 lg:p-20 font-serif selection:bg-black selection:text-white">
+  
+  <header class="flex justify-between items-center border-b border-black pb-6 z-50">
+    <a href="index.html" class="font-sans text-[10px] uppercase tracking-[0.3em] hover:text-gray-400 transition-colors">← Back</a>
+    <span class="font-sans text-[10px] uppercase tracking-[0.3em]">Gallery Archive</span>
+  </header>
+
+  <div class="flex-grow w-full flex items-center justify-center relative py-12" data-slideshow>
+    
+    <div class="w-full max-w-7xl h-[65vh] md:h-[70vh] relative">
+      
+      <!-- Slide 1 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20 is-active" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r1c1.png" alt="Ellis" class="w-full h-full object-cover crop-portrait-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 01</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">The kind of face a day remembers.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 2 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r1c2.png" alt="Ellis" class="w-full h-full object-cover crop-top-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 02</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">The camera was always going to love you.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 3 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r1c3.png" alt="Ellis" class="w-full h-full object-cover crop-upper-right" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 03</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">All that light, held still for a second.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 4 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r2c1.png" alt="Ellis" class="w-full h-full object-cover crop-center-left" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 04</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">You make ordinary days look better.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 5 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r2c2.png" alt="Ellis" class="w-full h-full object-cover crop-upper-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 05</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">Unforgettable, every time.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 6 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r2c3.png" alt="Ellis" class="w-full h-full object-cover crop-portrait-top" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 06</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">A portrait worth returning to.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 7 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r3c1.png" alt="Ellis" class="w-full h-full object-cover crop-center-left" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 07</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">Soft light, steady warmth.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 8 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r3c2.png" alt="Ellis" class="w-full h-full object-cover crop-upper-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 08</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">Another frame that feels like you.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 9 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_01_r3c3.png" alt="Ellis" class="w-full h-full object-cover crop-center-left" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 09</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">January still carries your smile.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 10 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_02_r1c1.png" alt="Ellis" class="w-full h-full object-cover crop-portrait-top" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 10</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">Winter light, same familiar grace.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 11 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_02_r1c2.png" alt="Ellis" class="w-full h-full object-cover crop-upper-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 11</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">Proof the small moments stay.</p>
+        </figcaption>
+      </figure>
+
+      <!-- Slide 12 -->
+      <figure class="slide absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20" data-slide>
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-full overflow-hidden border border-gray-100 bg-gray-50">
+          <img src="../images/cs_02_r1c3.png" alt="Ellis" class="w-full h-full object-cover crop-upper-center" />
+        </div>
+        <figcaption class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+          <span class="font-sans text-[9px] uppercase tracking-[0.3em] border-b border-black pb-2 mb-8 inline-block text-gray-500">Plate 12</span>
+          <p class="text-4xl md:text-5xl lg:text-6xl italic leading-[1.1] tracking-tighter">The year turns; you remain.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+  </div>
+
+  <footer class="flex justify-between items-center border-t border-black pt-6 z-50 mt-4">
+    <button data-prev class="font-sans text-[9px] uppercase tracking-[0.3em] hover:text-gray-400 transition-colors">Previous</button>
+    
+    <div class="flex gap-4" role="tablist">
+      <button data-dot="0" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300 is-active"></button>
+      <button data-dot="1" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="2" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="3" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="4" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="5" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="6" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="7" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="8" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="9" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="10" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+      <button data-dot="11" class="slide-dot w-[3px] h-[3px] rounded-full bg-gray-300"></button>
+    </div>
+
+    <button data-next class="font-sans text-[9px] uppercase tracking-[0.3em] hover:text-gray-400 transition-colors">Next</button>
+  </footer>
+  
+  <script src="../script.js" defer></script>
+</body>
+</html>

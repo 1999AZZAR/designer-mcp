@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>For Ellis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"], mono: ["JetBrains Mono", "monospace"] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#fcf9f8] text-[#3d3935] antialiased min-h-screen relative font-sans overflow-x-hidden selection:bg-[#ebdcd8] selection:text-[#2b2826]">
+  
+  <div class="fixed inset-0 opacity-[0.035] pointer-events-none z-0" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+  
+  <div class="fixed top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-[#fbeae8] mix-blend-multiply blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-[#edf1f6] mix-blend-multiply blur-[120px] pointer-events-none -z-10"></div>
+
+  <div class="max-w-7xl mx-auto px-8 md:px-16 py-20 md:py-32 relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24 min-h-screen">
+    
+    <div class="w-full lg:w-1/2 flex flex-col justify-center">
+      <div class="mb-12">
+        <p class="font-mono text-xs tracking-[0.25em] text-[#a99e96] uppercase mb-8">Archive 16.05</p>
+        <h1 class="text-4xl md:text-5xl lg:text-7xl font-light leading-[1.05] tracking-tight text-[#2b2826] mb-8 lg:-ml-1">
+          Happy birthday to the person who makes everything feel lighter.
+        </h1>
+        <p class="text-lg text-[#7c756f] leading-relaxed max-w-sm font-light">
+          You are deeply appreciated, endlessly lovable, and impossible to forget.
+        </p>
+      </div>
+    </div>
+    
+    <div class="w-full lg:w-1/2 flex flex-col justify-center gap-12 mt-12 lg:mt-0">
+      <a href="letter.html" class="group flex items-start gap-8 border-b border-[#ebdcd8] pb-8 hover:border-[#b39b94] transition-colors md:ml-0">
+        <span class="font-mono text-xs text-[#b39b94] mt-2 group-hover:text-[#2b2826] transition-colors">01</span>
+        <div>
+          <h2 class="text-2xl md:text-4xl font-light text-[#2b2826] mb-3 group-hover:italic transition-all origin-left">The Letter</h2>
+          <p class="text-[#7c756f] text-sm">The words first.</p>
+        </div>
+      </a>
+      
+      <a href="slideshow.html" class="group flex items-start gap-8 border-b border-[#ebdcd8] pb-8 hover:border-[#b39b94] transition-colors lg:ml-16">
+        <span class="font-mono text-xs text-[#b39b94] mt-2 group-hover:text-[#2b2826] transition-colors">02</span>
+        <div>
+          <h2 class="text-2xl md:text-4xl font-light text-[#2b2826] mb-3 group-hover:italic transition-all origin-left">The Slideshow</h2>
+          <p class="text-[#7c756f] text-sm">Twelve frames from the archive.</p>
+        </div>
+      </a>
+      
+      <a href="note.html" class="group flex items-start gap-8 border-b border-[#ebdcd8] pb-8 hover:border-[#b39b94] transition-colors lg:ml-32">
+        <span class="font-mono text-xs text-[#b39b94] mt-2 group-hover:text-[#2b2826] transition-colors">03</span>
+        <div>
+          <h2 class="text-2xl md:text-4xl font-light text-[#2b2826] mb-3 group-hover:italic transition-all origin-left">Closing Note</h2>
+          <p class="text-[#7c756f] text-sm">The final page.</p>
+        </div>
+      </a>
+    </div>
+    
+  </div>
+</body>
+</html>
