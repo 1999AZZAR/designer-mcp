@@ -8,13 +8,15 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "deploy-demo": "gh-pages -d examples/ellis-ui"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.13.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "gh-pages": "^6.3.0",
     "typescript": "^5.0.0"
   }
 }
