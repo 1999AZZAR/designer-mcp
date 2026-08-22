@@ -1,16 +1,16 @@
 /**
  * anime-motion.ts
- * anime.js v4 integration for the-designer MCP.
+ * anime.js v3 integration for the-designer MCP.
  * Provides style-aware animation presets, CDN helpers, and the
  * generate_motion_snippet tool implementation.
  *
- * CDN: https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js
+ * CDN: https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js
  */
 
 // ─── CDN ────────────────────────────────────────────────────────────────────
 
 export const ANIME_CDN =
-  `<script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>`;
+  `<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>`;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -86,7 +86,7 @@ function entranceSnippet(style: string): string {
   const dur  = duration(style);
   const delay = style === "neo-brutalism" ? 0 : 60;
 
-  return `<!-- anime.js v4 — Entrance Animation (${style}) -->
+  return `<!-- anime.js v3 — Entrance Animation (${style}) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   // Respect prefers-reduced-motion
@@ -124,7 +124,7 @@ function microSnippet(style: string): string {
   const scale = style === "claymorphism" || style === "m3-pastel" ? "1.06" : "1.03";
   const push   = style === "neo-brutalism" ? "translateY(2px) translateX(2px)" : "scale(0.97)";
 
-  return `<!-- anime.js v4 — Micro-Interactions (${style}) -->
+  return `<!-- anime.js v3 — Micro-Interactions (${style}) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -164,7 +164,7 @@ function staggerSnippet(style: string): string {
   const ease = easing(style);
   const dur  = duration(style);
 
-  return `<!-- anime.js v4 — Stagger List/Grid Reveal (${style}) -->
+  return `<!-- anime.js v3 — Stagger List/Grid Reveal (${style}) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -197,7 +197,7 @@ function scrollSnippet(style: string): string {
   const ease = easing(style);
   const dur  = duration(style);
 
-  return `<!-- anime.js v4 — Scroll-Triggered Reveal (${style}) -->
+  return `<!-- anime.js v3 — Scroll-Triggered Reveal (${style}) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function loaderSnippet(style: string): string {
   const ease = easing(style);
 
-  return `<!-- anime.js v4 — Spinner / Loader (${style}) -->
+  return `<!-- anime.js v3 — Spinner / Loader (${style}) -->
 <style>
   .anime-spinner { width: 36px; height: 36px; position: relative; }
   .anime-spinner-dot {
@@ -281,7 +281,7 @@ function transitionSnippet(style: string): string {
   const ease = easing(style);
   const dur  = duration(style);
 
-  return `<!-- anime.js v4 — Page / Route Transition (${style}) -->
+  return `<!-- anime.js v3 — Page / Route Transition (${style}) -->
 <style>
   #page-transition-overlay {
     position: fixed; inset: 0; z-index: 9999;
@@ -332,7 +332,7 @@ function transitionSnippet(style: string): string {
 }
 
 function counterSnippet(_style: string): string {
-  return `<!-- anime.js v4 — Animated Number Counter -->
+  return `<!-- anime.js v3 — Animated Number Counter -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 function typewriterSnippet(_style: string): string {
-  return `<!-- anime.js v4 — Typewriter Text Effect -->
+  return `<!-- anime.js v3 — Typewriter Text Effect -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -423,7 +423,7 @@ const USAGE_HINTS: Record<MotionCategory, string> = {
 };
 
 /**
- * Generate a ready-to-paste anime.js v4 snippet for a given category + style.
+ * Generate a ready-to-paste anime.js v3 snippet for a given category + style.
  */
 export function generateMotionSnippet(
   category: MotionCategory,

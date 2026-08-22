@@ -67,7 +67,7 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 ### Component & Template
 | Tool | Description |
 |------|-------------|
-| `generate_template` | Full HTML starter page — **ships with anime.js v4 animations** |
+| `generate_template` | Full HTML starter page — **ships with anime.js v3 animations** |
 | **`get_component`** | Production-ready component. **`framework` param**: `html` (default) \| `react` (TypeScript FC with `motion/react` physics) \| `vue` (SFC with script setup) |
 | `generate_8state_component` | Standalone HTML preview with all 8 interactive states — animated via anime.js spring physics |
 | `generate_palette_variants` | Light/dark/high-contrast variants from hex colors |
@@ -105,7 +105,7 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 
 ## Motion Design
 
-The MCP provides a dual-engine motion system: **motion.dev** (modern, physics-based, React-native) and **anime.js v4** (lightweight vanilla JS).
+The MCP provides a dual-engine motion system: **motion.dev** (modern, physics-based, React-native) and **anime.js v3** (lightweight vanilla JS).
 
 When calling `generate_motion_snippet` or `get_component` (for React), the output is automatically calibrated to the design system's character:
 
@@ -183,7 +183,7 @@ src/
   a11y-audit.ts         # 25-check WCAG 2.1 accessibility auditor (no deps, regex-only)
   tokens.ts             # 16 curated themes, OKLCH token generation, dark mode derivation
   css-output.ts         # vanilla CSS / CSS Modules / SCSS / css-variables-only generator
-  anime-motion.ts       # anime.js v4 integration — style-aware presets, CDN helper, snippet generator
+  anime-motion.ts       # anime.js v3 integration — style-aware presets, CDN helper, snippet generator
   components.ts         # Component library — HTML/React TSX/Vue 3 SFC output
   components-8state.ts  # 8-state component demo generator (anime.js micro-interactions)
   preflight.ts          # Project context scanner (framework, fonts, palette, motion)

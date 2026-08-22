@@ -153,7 +153,7 @@ export function generate8StateWrapperHtml(kind: ComponentKind): string {
     This is a development preview. Delete this file before shipping.
   </p>
 
-  <!-- anime.js v4 micro-interactions -->
+  <!-- anime.js v3 micro-interactions -->
   <script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
   <script>
   (function () {
