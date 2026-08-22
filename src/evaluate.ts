@@ -14,6 +14,7 @@ interface EvaluationResult {
   recommended: string;
   recommended_palette: string;
   recommended_archetype: string;
+  recommended_brand: string;
   workflow: string[];
 }
 
@@ -107,6 +108,18 @@ function buildWorkflow(recommended: string, palette: string, archetype: string):
   ];
 }
 
+function scoreBrand(contexts: string[], archetype: string): string {
+  if (contexts.includes("developer")) return "vercel";
+  if (contexts.includes("enterprise")) return "linear.app";
+  if (contexts.includes("ai-ml") || contexts.includes("creative")) return "claude";
+  if (contexts.includes("automotive") || contexts.includes("luxury")) return "tesla";
+  if (contexts.includes("finance")) return "stripe";
+  if (contexts.includes("ecommerce")) return "shopify";
+  if (contexts.includes("editorial")) return "theverge";
+  if (archetype === "dashboard") return "raycast";
+  return "apple"; // Fallback premium brand
+}
+
 export function evaluateStyle(description: string): EvaluationResult {
   let contexts = detectContext(description);
   if (contexts.length === 0) {
@@ -150,6 +163,7 @@ export function evaluateStyle(description: string): EvaluationResult {
   const recommended = ranked[0].style;
   const palette = scorePalette(contexts);
   const archetype = scoreArchetype(description, contexts);
+  const recommended_brand = scoreBrand(contexts, archetype);
 
   return {
     product_context: description,
@@ -157,6 +171,7 @@ export function evaluateStyle(description: string): EvaluationResult {
     recommended,
     recommended_palette: palette,
     recommended_archetype: archetype,
+    recommended_brand,
     workflow: buildWorkflow(recommended, palette, archetype),
   };
 }
