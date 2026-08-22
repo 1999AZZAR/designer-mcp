@@ -24,6 +24,7 @@ import { runSlopTest, selfCritique, type SlopTestResult, type QualityScore } fro
 import { generateTokens, buildCustomTokens, listThemes, listGenres, detectGenre, type GenerateTokensResult } from "./tokens.js";
 import { generate8StateWrapperHtml, type ComponentKind } from "./components-8state.js";
 import { generateMotionSnippet, MOTION_CATEGORIES, type MotionCategory } from "./anime-motion.js";
+import { generateMotionDevSnippet, type MotionFramework } from "./motion-dev.js";
 import { auditA11y } from "./a11y-audit.js";
 import { generateCSSOutput, type CSSOutputFormat } from "./css-output.js";
 
@@ -46,7 +47,7 @@ function detectInstalledSkills(): Array<{ name: string; path: string; descriptio
   if (existsSync(uiDesignerMd)) {
     const refDir = join(SKILL_PATH, "references");
     const refCount = existsSync(refDir)
-      ? require("fs").readdirSync(refDir).filter((f: string) => f.endsWith(".md")).length
+      ? readdirSync(refDir).filter((f: string) => f.endsWith(".md")).length
       : 0;
     skills.push({
       name: "ui-designer",
@@ -72,6 +73,18 @@ function detectInstalledSkills(): Array<{ name: string; path: string; descriptio
         "palette_convert",
         "scripts/fetch-palette.sh (standalone CLI)",
         "scripts/palette-to-design.py (standalone CLI)",
+      ],
+    });
+  }
+
+  const motionMd = join(MCP_ROOT, "skills/motion-designer/SKILL.md");
+  if (existsSync(motionMd)) {
+    skills.push({
+      name: "motion-designer",
+      path: join(MCP_ROOT, "skills/motion-designer"),
+      description: "SOTA animation and physics heuristic guide using motion.dev",
+      tools: [
+        "generate_motion_snippet (with engine='motion.dev')",
       ],
     });
   }
@@ -440,6 +453,16 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
             type: "string",
             description: "Design system (e.g. glass, neo-brutalism, claymorphism, material, minimal, etc.). Adjusts easing and duration to match the system's motion character.",
           },
+          engine: {
+            type: "string",
+            enum: ["animejs", "motion.dev"],
+            description: "Animation engine to use. Defaults to motion.dev."
+          },
+          framework: {
+            type: "string",
+            enum: ["html", "react", "vue"],
+            description: "Target framework (used by motion.dev engine). Defaults to react."
+          }
         },
         required: ["category", "style"],
       },
@@ -740,11 +763,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case "generate_motion_snippet": {
-        const { category, style } = args as { category: string; style: string };
+        const { category, style, engine = "motion.dev", framework = "react" } = args as { category: string; style: string; engine?: string; framework?: string };
         if (!MOTION_CATEGORIES.includes(category as MotionCategory)) {
           throw new Error(`Unknown category: ${category}. Available: ${MOTION_CATEGORIES.join(", ")}`);
         }
-        const result = generateMotionSnippet(category as MotionCategory, style);
+        let result;
+        if (engine === "animejs") {
+          result = generateMotionSnippet(category as MotionCategory, style);
+        } else {
+          result = generateMotionDevSnippet(category as MotionCategory, style, framework as MotionFramework);
+        }
         return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
       }
 

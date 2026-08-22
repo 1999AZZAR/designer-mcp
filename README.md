@@ -5,7 +5,7 @@
 
 A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `the-designer` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
 
-Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
+Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
@@ -32,7 +32,7 @@ Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integra
 - **Framework-Native Components** — Every component (`button`, `card`, `navbar`, `hero`, etc.) outputs HTML/Tailwind, React TSX (typed FC with prop interface), or Vue 3 SFC (script setup) via the `framework` param.
 - **CSS Output Engine** — Generate vanilla CSS, CSS Modules (Button/Card/Input with all 8 states), SCSS (variables + mixins + BEM), or a single `tokens.css` with auto dark-mode overrides.
 - **WCAG 2.1 Accessibility Audit** — 25-check static auditor: alt text, unlabeled inputs, empty buttons/links, heading order, focus-visible removal, skip links, landmark regions, viewport scale lock, and more. Returns 0-100 score + A–F grade + actionable fixes.
-- **anime.js v4 Motion System** — Style-aware animation presets baked into every template. `generate_motion_snippet` for on-demand snippets (8 categories, all reduced-motion guarded).
+- **SOTA Motion System (motion.dev & anime.js)** — Style-aware animation presets baked into components. `generate_motion_snippet` for on-demand snippets with React `<motion.div>` and vanilla physics support (8 categories, all reduced-motion guarded).
 - **Color Palette Hunter** — Live palettes from Color Hunt with format conversion.
 - **Brand Design References** — 328+ real-world brands (Stripe, Vercel, Notion, Claude, Tesla, etc.).
 
@@ -68,7 +68,7 @@ Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integra
 | Tool | Description |
 |------|-------------|
 | `generate_template` | Full HTML starter page — **ships with anime.js v4 animations** |
-| **`get_component`** | Production-ready component (button, card, navbar, hero, form-input, badge, modal, sidebar, table, footer, chart). **New `framework` param**: `html` (default) \| `react` (TypeScript FC + typed props) \| `vue` (SFC with script setup) |
+| **`get_component`** | Production-ready component. **`framework` param**: `html` (default) \| `react` (TypeScript FC with `motion/react` physics) \| `vue` (SFC with script setup) |
 | `generate_8state_component` | Standalone HTML preview with all 8 interactive states — animated via anime.js spring physics |
 | `generate_palette_variants` | Light/dark/high-contrast variants from hex colors |
 | `export_project` | Full project scaffold (config + HTML + components) |
@@ -78,10 +78,10 @@ Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integra
 |------|-------------|
 | **`generate_css_output`** | **Framework-agnostic CSS generation** from style + palette. Formats: `vanilla` (tokens.css + base.css + components.css) \| `css-modules` (Button/Card/Input .module.css with all 8 states) \| `scss` (_tokens + _mixins + _components + main.scss) \| `css-variables-only` (tokens.css with auto dark mode). Returns named files array ready to save. |
 
-### Motion (anime.js v4)
+### Motion (motion.dev & anime.js)
 | Tool | Description |
 |------|-------------|
-| `generate_motion_snippet` | Generate a ready-to-paste **anime.js v4** snippet matched to the current design style's easing and duration character. Supports 8 categories: `entrance`, `micro`, `stagger`, `scroll`, `loader`, `transition`, `counter`, `typewriter`. Every snippet includes a `prefers-reduced-motion` guard. |
+| `generate_motion_snippet` | Generate a ready-to-paste **motion.dev** or **anime.js** snippet matched to the current design style's physics and easing. Supports 8 categories: `entrance`, `micro`, `stagger`, `scroll`, `loader`, `transition`, `counter`, `typewriter`. Every snippet includes a `prefers-reduced-motion` guard. |
 
 ### Color & Palette
 | Tool | Description |
@@ -105,34 +105,30 @@ Featuring 17 design systems, 328+ brand references, **anime.js v4 motion integra
 
 ## Motion Design
 
-Every template produced by `generate_template` ships with **anime.js v4** loaded from CDN and a style-aware inline script that handles:
+The MCP provides a dual-engine motion system: **motion.dev** (modern, physics-based, React-native) and **anime.js v4** (lightweight vanilla JS).
 
-- Hero section entrance (staggered children, `translateY` + `opacity`)
-- KPI card stagger reveal
-- Sidebar nav link reveal (`translateX`)
-- Button/chip press micro-interactions (spring physics)
-- Table row stagger (`translateX`)
+When calling `generate_motion_snippet` or `get_component` (for React), the output is automatically calibrated to the design system's character:
 
-Easing and duration are calibrated per design system:
-
-| System | Easing | Duration |
+| System | Easing / Physics | Duration |
 |--------|--------|----------|
-| `glass` | `easeOutQuart` | 700ms |
-| `claymorphism` | `spring(1, 80, 10, 0)` | 600ms |
-| `neo-brutalism` | `easeInOutExpo` | 400ms |
+| `glass` | `easeOutQuart` / `[0.16, 1, 0.3, 1]` | 700ms |
+| `claymorphism` | `spring(1, 80, 10, 0)` / `bounce: 0.4` | 600ms |
+| `neo-brutalism` | `easeInOutExpo` / `[0.87, 0, 0.13, 1]` | 400ms |
 | `material` | `cubicBezier(0.4, 0, 0.2, 1)` | 300ms |
-| `apple-hig` | `spring(1, 100, 18, 0)` | 550ms |
+| `apple-hig` | `spring(1, 100, 18, 0)` / `bounce: 0.2` | 550ms |
 | `swiss` | `linear` | 200ms |
-| `m3-pastel` | `spring(1, 80, 12, 0)` | 450ms |
+| `m3-pastel` | `spring(1, 80, 12, 0)` / `bounce: 0.3` | 450ms |
 
-Use `generate_motion_snippet` for standalone snippets targeting specific use cases:
+Use `generate_motion_snippet` for standalone snippets targeting specific use cases across React, Vue, and HTML:
 
 ```json
 {
   "tool": "generate_motion_snippet",
   "arguments": {
-    "category": "scroll",
-    "style": "glass"
+    "category": "entrance",
+    "style": "glass",
+    "engine": "motion.dev",
+    "framework": "react"
   }
 }
 ```
@@ -173,10 +169,11 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 ## Architecture
 
-`the-designer` operates on a dual-architecture. An MCP server on its own is just an API; by pairing the MCP with two companion agent skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
+`the-designer` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with three companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
 
 - **`ui-designer` skill**: Provides the design intelligence, heuristics, and brand context so the AI knows *what* to ask the MCP to generate.
 - **`color-palette-hunter` skill**: Handles external palette sourcing and feeds them into the OKLCH token engine.
+- **`motion-designer` skill**: Defines SOTA animation heuristics, spring physics logic, and `motion.dev` best practices.
 
 ```text
 src/

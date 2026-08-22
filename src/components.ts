@@ -524,18 +524,38 @@ const VUE_PROP_DEFS: Record<string, { props: string; defaults: string }> = {
 
 /**
  * Wrap JSX markup in a full React functional component with typed props.
+ * Injects motion.dev if applicable.
  */
-export function wrapReact(componentName: string, jsx: string, _props?: string): string {
+export function wrapReact(componentName: string, jsx: string, style?: string): string {
   const propsBody = REACT_PROP_INTERFACES[componentName] ??
     `  className?: string;`;
 
+  // Inject motion.dev physics if style is provided
+  let finalJsx = jsx;
+  let imports = `import React from 'react';\nimport { motion } from 'motion/react';`;
+  
+  if (style) {
+    const scaleHover = style === "claymorphism" || style === "m3-pastel" ? 1.06 : 1.03;
+    const pushTap = style === "neo-brutalism" ? "y: 2, x: 2" : "scale: 0.97";
+    
+    // Replace <button with <motion.button
+    finalJsx = finalJsx.replace(/<button\b/g, `<motion.button whileHover={{ scale: ${scaleHover} }} whileTap={{ ${pushTap} }}`);
+    finalJsx = finalJsx.replace(/<\/button>/g, `</motion.button>`);
+    
+    // For Card, replace the outer div with motion.div
+    if (componentName === "Card") {
+      finalJsx = finalJsx.replace(/<div\b/, `<motion.div whileHover={{ y: -4 }}`);
+      finalJsx = finalJsx.replace(/<\/div>$/, `</motion.div>`);
+    }
+  }
+
   // Indent every line of the JSX by 6 spaces (inside the return fragment)
-  const indentedJsx = jsx
+  const indentedJsx = finalJsx
     .split('\n')
     .map((line) => `      ${line}`)
     .join('\n');
 
-  return `import React from 'react';
+  return `${imports}
 
 interface ${componentName}Props {
 ${propsBody}
@@ -556,11 +576,14 @@ export default ${componentName};
 /**
  * Wrap HTML markup in a Vue 3 SFC with typed props and Tailwind style note.
  */
-export function wrapVue(componentName: string, html: string, _props?: string): string {
+export function wrapVue(componentName: string, html: string, style?: string): string {
   const vueDef = VUE_PROP_DEFS[componentName] ?? {
     props: `  className?: string;`,
     defaults: `className: ''`,
   };
+
+  // For Vue, we could inject @vueuse/motion or vanilla motion. 
+  // We'll leave the HTML mostly as is but you could add v-motion directives here.
 
   return `<template>
 ${html}
@@ -615,8 +638,8 @@ export function getComponent(
     .map(capitalize)
     .join('');
 
-  if (framework === 'react') return wrapReact(name, htmlToJSX(html));
-  if (framework === 'vue')   return wrapVue(name, html);
+  if (framework === 'react') return wrapReact(name, htmlToJSX(html), style);
+  if (framework === 'vue')   return wrapVue(name, html, style);
 
   return html;
 }
