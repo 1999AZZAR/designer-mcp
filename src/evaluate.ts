@@ -18,8 +18,8 @@ interface EvaluationResult {
 }
 
 const PRODUCT_KEYWORDS: Record<string, string[]> = {
-  enterprise: ["admin", "dashboard", "cms", "internal", "workflow", "crm", "erp", "data", "analytics", "b2b", "saas", "tool"],
-  consumer: ["app", "mobile", "social", "chat", "music", "game", "fitness", "wellness", "lifestyle", "consumer"],
+  enterprise: ["admin", "dashboard", "cms", "internal", "workflow", "crm", "erp", "analytics", "b2b", "saas"],
+  consumer: ["mobile", "social", "chat", "music", "game", "fitness", "wellness", "lifestyle", "consumer"],
   ecommerce: ["shop", "store", "commerce", "product", "checkout", "cart", "merchant", "inventory", "order"],
   creative: ["portfolio", "agency", "creative", "design", "art", "photo", "video", "brand", "marketing"],
   editorial: ["blog", "magazine", "news", "editorial", "publish", "content", "story", "article"],
@@ -30,23 +30,23 @@ const PRODUCT_KEYWORDS: Record<string, string[]> = {
 };
 
 const STYLE_SCORING: Record<string, Record<string, number>> = {
-  fluent: { enterprise: 9, developer: 5, consumer: 3, ecommerce: 4, creative: 2, editorial: 2, automotive: 2, luxury: 1, finance: 6 },
-  ant: { enterprise: 10, developer: 6, ecommerce: 5, finance: 7, consumer: 3, creative: 2, editorial: 2, automotive: 2, luxury: 1 },
-  carbon: { enterprise: 9, developer: 7, finance: 6, consumer: 2, creative: 2, editorial: 3, automotive: 4, luxury: 1, ecommerce: 4 },
-  atlassian: { enterprise: 8, developer: 6, consumer: 3, creative: 3, editorial: 2, automotive: 2, luxury: 1, ecommerce: 3, finance: 4 },
-  "apple-hig": { consumer: 9, luxury: 7, creative: 6, ecommerce: 5, enterprise: 3, developer: 4, editorial: 4, automotive: 5, finance: 4 },
-  polaris: { ecommerce: 10, consumer: 5, enterprise: 4, creative: 3, editorial: 3, automotive: 2, luxury: 4, developer: 2, finance: 5 },
-  material: { consumer: 8, mobile: 9, creative: 5, ecommerce: 5, enterprise: 4, developer: 4, editorial: 3, automotive: 3, luxury: 2 },
-  minimal: { editorial: 9, creative: 8, luxury: 7, consumer: 6, automotive: 6, developer: 5, enterprise: 3, ecommerce: 5, finance: 4 },
-  glass: { creative: 8, luxury: 7, consumer: 6, automotive: 5, editorial: 5, ecommerce: 4, enterprise: 2, developer: 3, finance: 2 },
-  neumorphism: { consumer: 5, creative: 4, wellness: 7, luxury: 4, automotive: 3, enterprise: 1, developer: 1, editorial: 2, ecommerce: 3 },
-  "neo-brutalism": { creative: 9, consumer: 6, automotive: 5, luxury: 3, editorial: 5, enterprise: 1, developer: 3, ecommerce: 4, finance: 1 },
-  claymorphism: { consumer: 7, creative: 5, wellness: 6, luxury: 3, automotive: 1, enterprise: 1, developer: 1, editorial: 3, ecommerce: 4 },
-  skeuomorphism: { luxury: 7, automotive: 6, creative: 4, consumer: 4, editorial: 3, enterprise: 2, developer: 1, ecommerce: 3, finance: 3 },
-  swiss: { editorial: 9, luxury: 7, automotive: 8, creative: 7, developer: 5, enterprise: 4, consumer: 4, ecommerce: 4, finance: 5 },
-  "swiss-archival": { editorial: 8, luxury: 6, creative: 5, automotive: 4, enterprise: 3, developer: 3, consumer: 3, ecommerce: 2, finance: 3 },
-  "m3-pastel": { consumer: 7, creative: 6, wellness: 5, luxury: 4, automotive: 2, enterprise: 2, developer: 2, editorial: 3, ecommerce: 5 },
-  "neo-m3": { automotive: 8, creative: 7, luxury: 6, editorial: 7, consumer: 5, enterprise: 3, developer: 4, ecommerce: 4, finance: 3 },
+  fluent: { enterprise: 8, developer: 5, consumer: 4, ecommerce: 4, creative: 3, editorial: 2, automotive: 2, luxury: 2, finance: 6 },
+  ant: { enterprise: 9, developer: 5, ecommerce: 6, finance: 7, consumer: 3, creative: 2, editorial: 2, automotive: 2, luxury: 1 },
+  carbon: { enterprise: 9, developer: 8, finance: 7, consumer: 2, creative: 2, editorial: 3, automotive: 4, luxury: 2, ecommerce: 4 },
+  atlassian: { enterprise: 8, developer: 7, consumer: 3, creative: 3, editorial: 2, automotive: 2, luxury: 1, ecommerce: 3, finance: 4 },
+  "apple-hig": { consumer: 9, luxury: 7, creative: 6, ecommerce: 5, enterprise: 4, developer: 4, editorial: 4, automotive: 5, finance: 5 },
+  polaris: { ecommerce: 9, consumer: 5, enterprise: 5, creative: 3, editorial: 3, automotive: 2, luxury: 4, developer: 2, finance: 5 },
+  material: { consumer: 8, mobile: 9, creative: 5, ecommerce: 5, enterprise: 5, developer: 4, editorial: 3, automotive: 3, luxury: 2 },
+  minimal: { editorial: 9, creative: 8, luxury: 7, consumer: 6, automotive: 6, developer: 5, enterprise: 4, ecommerce: 5, finance: 4 },
+  glass: { creative: 8, luxury: 7, consumer: 6, automotive: 5, editorial: 5, ecommerce: 4, enterprise: 3, developer: 3, finance: 2 },
+  neumorphism: { consumer: 6, creative: 4, wellness: 7, luxury: 4, automotive: 3, enterprise: 1, developer: 1, editorial: 2, ecommerce: 3 },
+  "neo-brutalism": { creative: 9, consumer: 6, automotive: 5, luxury: 3, editorial: 5, enterprise: 2, developer: 4, ecommerce: 4, finance: 2 },
+  claymorphism: { consumer: 7, creative: 5, wellness: 6, luxury: 3, automotive: 2, enterprise: 2, developer: 2, editorial: 3, ecommerce: 4 },
+  skeuomorphism: { luxury: 8, automotive: 7, creative: 5, consumer: 4, editorial: 3, enterprise: 2, developer: 2, ecommerce: 3, finance: 3 },
+  swiss: { editorial: 9, luxury: 8, automotive: 8, creative: 8, developer: 5, enterprise: 4, consumer: 4, ecommerce: 4, finance: 5 },
+  "swiss-archival": { editorial: 9, luxury: 7, creative: 6, automotive: 5, enterprise: 3, developer: 4, consumer: 3, ecommerce: 2, finance: 3 },
+  "m3-pastel": { consumer: 8, creative: 6, wellness: 5, luxury: 4, automotive: 2, enterprise: 2, developer: 2, editorial: 3, ecommerce: 5 },
+  "neo-m3": { automotive: 8, creative: 7, luxury: 6, editorial: 7, consumer: 5, enterprise: 4, developer: 4, ecommerce: 4, finance: 4 },
 };
 
 const PALETTE_CONTEXT: Record<string, string[]> = {
@@ -108,8 +108,12 @@ function buildWorkflow(recommended: string, palette: string, archetype: string):
 }
 
 export function evaluateStyle(description: string): EvaluationResult {
-  const contexts = detectContext(description);
-  const primaryContext = contexts[0] ?? "consumer";
+  let contexts = detectContext(description);
+  if (contexts.length === 0) {
+    // Fallback if no keywords matched to prevent a 0-score tie where 'ant' wins by alphabetical order
+    contexts = ["consumer", "creative"]; 
+  }
+  const primaryContext = contexts[0];
 
   const ranked: StyleScore[] = Object.entries(STYLES).map(([key, def]) => {
     const scoreTable = STYLE_SCORING[key] ?? {};
@@ -135,6 +139,9 @@ export function evaluateStyle(description: string): EvaluationResult {
         reasons.push("Fits luxury/premium positioning");
       }
     }
+    
+    // Add a tiny random jitter (0.01 - 0.09) to break ties so 'fluent'/'ant' don't always win exact ties
+    score += Math.random() * 0.1;
 
     return { style: key, score, label: def.label, use_for: def.use_for, reasons };
   });
