@@ -1,12 +1,12 @@
 # The Designer MCP
 
 
-> **Part of the [HeLa MCP Ecosystem](https://github.com/1999AZZAR/hela-mcp-ecosystem)** — This server is **HeLa Phenotype (`hela-phenotype`)** — the *Design* component of the HeLa cellular architecture. See the [ecosystem docs](https://github.com/1999AZZAR/hela-mcp-ecosystem) for profiles, workflows, and multi-client setup.
+> **Part of the [HeLa MCP Ecosystem](https://github.com/1999AZZAR/hela-hela-mcp-ecosystem)** — This server is **HeLa Phenotype (`hela-phenotype`)** — the *Design* component of the HeLa cellular architecture. See the [ecosystem docs](https://github.com/1999AZZAR/hela-hela-mcp-ecosystem) for profiles, workflows, and multi-client setup.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
 
-A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `the-designer` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
+A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `designer-mcp` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
 
 Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
 
@@ -142,18 +142,18 @@ All snippets respect `prefers-reduced-motion` — animations are skipped entirel
 
 ## Examples
 
-**[🔥 Live Demo: Ellis UI Collection](https://1999AZZAR.github.io/the-designer/)**
+**[🔥 Live Demo: Ellis UI Collection](https://1999AZZAR.github.io/designer-mcp/)**
 
 **Ellis UI (`examples/ellis-ui`)**  
-A comprehensive, anti-slop component library demonstrating the extreme versatility of `the-designer`'s ruleset. The project takes a single romantic letter and renders it across **24 radically different, strictly enforced aesthetic systems** (e.g., Swiss Archival, Vintage Airmail, Brutalist, UNIX Phosphor, 8-Bit Game Boy).
+A comprehensive, anti-slop component library demonstrating the extreme versatility of `designer-mcp`'s ruleset. The project takes a single romantic letter and renders it across **24 radically different, strictly enforced aesthetic systems** (e.g., Swiss Archival, Vintage Airmail, Brutalist, UNIX Phosphor, 8-Bit Game Boy).
 
-Each design acts as a fully standalone, reusable UI kit utilizing zero JS dependencies—relying entirely on strict structural typography, CSS geometry, and advanced CSS rendering techniques (clip-paths, custom filters, OKLCH gradients). Each of the 24 folders includes a `design.md` detailing the tokens and layout strategy, acting as an advanced template reference for `the-designer`.
+Each design acts as a fully standalone, reusable UI kit utilizing zero JS dependencies—relying entirely on strict structural typography, CSS geometry, and advanced CSS rendering techniques (clip-paths, custom filters, OKLCH gradients). Each of the 24 folders includes a `design.md` detailing the tokens and layout strategy, acting as an advanced template reference for `designer-mcp`.
 
 ## Installation
 
 ```bash
-git clone https://github.com/1999AZZAR/the-designer.git
-cd the-designer
+git clone https://github.com/1999AZZAR/designer-mcp.git
+cd designer-mcp
 npm install
 npm run build
 ```
@@ -172,7 +172,7 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 ## Architecture
 
-`the-designer` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with three companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
+`designer-mcp` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with three companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
 
 - **`ui-designer` skill**: Provides the design intelligence, heuristics, and brand context so the AI knows *what* to ask the MCP to generate.
 - **`color-palette-hunter` skill**: Handles external palette sourcing and feeds them into the OKLCH token engine.
@@ -227,9 +227,9 @@ skills/
 ```json
 {
   "mcpServers": {
-    "the-designer": {
+    "designer-mcp": {
       "command": "node",
-      "args": ["/path/to/the-designer/dist/index.js"],
+      "args": ["/path/to/designer-mcp/dist/index.js"],
       "env": {}
     }
   }
