@@ -21,6 +21,7 @@ import { exportProject } from "./export.js";
 import { evaluateStyle } from "./evaluate.js";
 import { scanProject } from "./preflight.js";
 import { runSlopTest, selfCritique, type SlopTestResult, type QualityScore } from "./anti-patterns.js";
+import { textResult, errorResult } from "./envelope.js";
 import { generateTokens, buildCustomTokens, listThemes, listGenres, detectGenre, type GenerateTokensResult } from "./tokens.js";
 import { generate8StateWrapperHtml, type ComponentKind } from "./components-8state.js";
 import { generateMotionSnippet, MOTION_CATEGORIES, type MotionCategory } from "./anime-motion.js";
@@ -487,12 +488,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           hybrid: hybrid ? `${style}+${hybrid}` : undefined,
           content,
         });
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "list_options": {
         const result = buildRulesJson({});
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "validate_combo": {
@@ -503,17 +504,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const paletteOk = palette in PALETTES;
         const hybridOk = hybrid ? `${style}+${hybrid}` in HYBRIDS : true;
         const valid = styleOk && paletteOk && hybridOk;
-        return {
-          content: [{
-            type: "text",
-            text: JSON.stringify({
-              valid,
-              style: styleOk ? style : `unknown: ${style}`,
-              palette: paletteOk ? palette : `unknown: ${palette}`,
-              hybrid: hybrid ? (hybridOk ? `${style}+${hybrid}` : `unknown combo: ${style}+${hybrid}`) : null,
-            }),
-          }],
-        };
+        return textResult(name, JSON.stringify({
+          valid,
+          style: styleOk ? style : `unknown: ${style}`,
+          palette: paletteOk ? palette : `unknown: ${palette}`,
+          hybrid: hybrid ? (hybridOk ? `${style}+${hybrid}` : `unknown combo: ${style}+${hybrid}`) : null,
+        }));
       }
 
       case "list_ellis_ui_designs": {
@@ -537,7 +533,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             output += `- ${d}\\n`;
           }
         }
-        return { content: [{ type: "text", text: output }] };
+        return textResult(name, output );
       }
 
       case "get_ellis_ui_template": {
@@ -555,7 +551,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (existsSync(htmlPath)) {
           output += `--- HTML TEMPLATE ---\\n${readFileSync(htmlPath, "utf-8")}\\n`;
         }
-        return { content: [{ type: "text", text: output }] };
+        return textResult(name, output );
       }
 
       case "get_reference": {
@@ -565,7 +561,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           throw new Error(`Reference not found: ${refName}. Available references are in ${SKILL_PATH}/references/`);
         }
         const content = readFileSync(refPath, "utf8");
-        return { content: [{ type: "text", text: content }] };
+        return textResult(name, content );
       }
 
       case "palette_fetch": {
@@ -580,14 +576,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         } else {
           output = convertPalette(data, format as ConvertTarget);
         }
-        return { content: [{ type: "text", text: output }] };
+        return textResult(name, output );
       }
 
       case "palette_convert": {
         const { palettes, target } = args as { palettes: unknown[]; target: string };
         const data = { palettes } as import("./palette.js").PaletteData;
         const output = convertPalette(data, target as ConvertTarget);
-        return { content: [{ type: "text", text: output }] };
+        return textResult(name, output );
       }
 
       case "brand_fetch_design_md": {
@@ -601,7 +597,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             throw new Error(`DESIGN.md not found after fetch. Brand '${brand}' may not exist in the catalog.`);
           }
           const content = readFileSync(designPath, "utf8");
-          return { content: [{ type: "text", text: `# DESIGN.md for ${brand}\n\n${content}` }] };
+          return textResult(name, `# DESIGN.md for ${brand}\n\n${content}` );
         } finally {
           rmSync(tmp, { recursive: true, force: true });
         }
@@ -610,23 +606,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case "evaluate_style": {
         const { description } = args as { description: string };
         const result = evaluateStyle(description);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "list_installed_skills": {
         const skills = detectInstalledSkills();
-        return {
-          content: [{
-            type: "text",
-            text: skills.length
-              ? JSON.stringify({
-                  message: `${skills.length} skill(s) detected alongside this MCP`,
-                  skills,
-                  note: "Skills work standalone via their own CLIs. When this MCP is installed, both systems coexist — use MCP tools for programmatic access, skill scripts for standalone CLI usage.",
-                }, null, 2)
-              : JSON.stringify({ message: "No skills detected. Install skills as git submodules in skills/ directory.", skills: [] }, null, 2),
-          }],
-        };
+        return textResult(name, skills.length
+          ? JSON.stringify({
+              message: `${skills.length} skill(s) detected alongside this MCP`,
+              skills,
+              note: "Skills work standalone via their own CLIs. When this MCP is installed, both systems coexist — use MCP tools for programmatic access, skill scripts for standalone CLI usage.",
+            }, null, 2)
+          : JSON.stringify({ message: "No skills detected. Install skills as git submodules in skills/ directory.", skills: [] }, null, 2));
       }
 
       case "export_project": {
@@ -637,14 +628,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!(palette in PALETTES)) throw new Error(`Unknown palette: ${palette}. Available: ${Object.keys(PALETTES).join(", ")}`);
         if (!(archetype in ARCHETYPES)) throw new Error(`Unknown archetype: ${archetype}. Available: ${Object.keys(ARCHETYPES).join(", ")}`);
         const result = exportProject(style, palette, archetype, projectName);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "generate_palette_variants": {
         const { colors } = args as { colors: string[] };
         if (!Array.isArray(colors) || colors.length === 0) throw new Error("colors must be a non-empty array of hex strings");
         const variants = generatePaletteVariants(colors);
-        return { content: [{ type: "text", text: JSON.stringify(variants, null, 2) }] };
+        return textResult(name, JSON.stringify(variants, null, 2) );
       }
 
       case "get_cross_cutting_rules": {
@@ -652,7 +643,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!(category in CROSS_CUTTING)) throw new Error(`Unknown category: ${category}. Available: ${Object.keys(CROSS_CUTTING).join(", ")}`);
         const section = CROSS_CUTTING[category as keyof typeof CROSS_CUTTING];
         const text = `## ${section.label}\n\n${section.rules.map((r) => `- ${r}`).join("\n")}\n`;
-        return { content: [{ type: "text", text }] };
+        return textResult(name, text);
       }
 
       case "get_component": {
@@ -661,14 +652,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!(style in STYLES)) throw new Error(`Unknown style: ${style}. Available: ${Object.keys(STYLES).join(", ")}`);
         if (!OUTPUT_FRAMEWORKS.includes(framework as OutputFramework)) throw new Error(`Unknown framework: ${framework}. Available: ${OUTPUT_FRAMEWORKS.join(", ")}`);
         const output = _getComponent(component as any, style, framework as OutputFramework);
-        return { content: [{ type: "text", text: output }] };
+        return textResult(name, output );
       }
 
       case "audit_accessibility": {
         const { html } = args as { html: string };
         if (!html || typeof html !== "string") throw new Error("html is required and must be a string");
         const result = auditA11y(html);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "generate_css_output": {
@@ -676,7 +667,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { style, palette, format } = args as { style: string; palette: string; format: string };
         if (!CSS_FORMATS.includes(format as CSSOutputFormat)) throw new Error(`Unknown format: ${format}. Available: ${CSS_FORMATS.join(", ")}`);
         const result = generateCSSOutput(style, palette, format as CSSOutputFormat);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "generate_template": {
@@ -685,7 +676,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!(palette in PALETTES)) throw new Error(`Unknown palette: ${palette}. Available: ${Object.keys(PALETTES).join(", ")}`);
         if (!(archetype in ARCHETYPES)) throw new Error(`Unknown archetype: ${archetype}. Available: ${Object.keys(ARCHETYPES).join(", ")}`);
         const html = generateTemplate(style, palette, archetype);
-        return { content: [{ type: "text", text: html }] };
+        return textResult(name, html );
       }
 
       case "generate_tailwind_config": {
@@ -693,13 +684,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!(style in STYLES)) throw new Error(`Unknown style: ${style}. Available: ${Object.keys(STYLES).join(", ")}`);
         if (!(palette in PALETTES)) throw new Error(`Unknown palette: ${palette}. Available: ${Object.keys(PALETTES).join(", ")}`);
         const result = generateTailwindConfig(style, palette);
-        return { content: [{ type: "text", text: result.code }] };
+        return textResult(name, result.code );
       }
 
       case "brand_list": {
         const { category } = args as { category?: string };
         const catalog = category ? { [category]: BRAND_CATALOG[category] ?? [] } : BRAND_CATALOG;
-        return { content: [{ type: "text", text: JSON.stringify(catalog, null, 2) }] };
+        return textResult(name, JSON.stringify(catalog, null, 2) );
       }
 
       // === New tools ===
@@ -707,19 +698,19 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case "pre_flight_scan": {
         const { project_path } = args as { project_path?: string };
         const result = scanProject(project_path);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "anti_pattern_check": {
         const { content, genre = "editorial" } = args as { content: string; genre?: string };
         const result = runSlopTest(content, genre);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "self_critique": {
         const { content } = args as { content: string };
         const result = selfCritique(content);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "generate_tokens": {
@@ -727,25 +718,25 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           theme_name?: string; genre?: string; last_theme?: string; last_accent?: string;
         };
         const result = generateTokens(theme_name, genre, last_theme, last_accent);
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "list_themes": {
         const { genre } = args as { genre?: string };
         const themes = listThemes(genre);
-        return { content: [{ type: "text", text: JSON.stringify(themes, null, 2) }] };
+        return textResult(name, JSON.stringify(themes, null, 2) );
       }
 
       case "detect_genre": {
         const { brief } = args as { brief: string };
         const genre = detectGenre(brief);
-        return { content: [{ type: "text", text: JSON.stringify({ brief, detected_genre: genre }, null, 2) }] };
+        return textResult(name, JSON.stringify({ brief, detected_genre: genre }, null, 2) );
       }
 
       case "generate_8state_component": {
         const { kind } = args as { kind: string };
         const html = generate8StateWrapperHtml(kind as ComponentKind);
-        return { content: [{ type: "text", text: html }] };
+        return textResult(name, html );
       }
 
       case "build_custom_tokens": {
@@ -759,7 +750,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           { l: accent_l, c: accent_c, h: accent_h },
           font_display, font_body, font_mono
         );
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       case "generate_motion_snippet": {
@@ -773,7 +764,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         } else {
           result = generateMotionDevSnippet(category as MotionCategory, style, framework as MotionFramework);
         }
-        return { content: [{ type: "text", text: JSON.stringify(result, null, 2) }] };
+        return textResult(name, JSON.stringify(result, null, 2) );
       }
 
       default:
@@ -781,7 +772,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    return { content: [{ type: "text", text: `Error: ${message}` }], isError: true };
+    return errorResult(name, message);
   }
 });
 
