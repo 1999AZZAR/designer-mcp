@@ -61,6 +61,19 @@ Use for standalone motion graphics, animated UI components, or short visual loop
 
 ---
 
+---
+
+### 4. Custom Video, Decks & Production Routing
+
+Use for custom narratives, Remotion ports, interactive pitch decks, music-synced videos, or complex multi-scene productions.
+
+#### Workflow:
+1. **Intake & Routing** (`references/general/intent-interview.md`): Capture intent, select route (`references/general/routes/`), and produce `BRIEF.md`.
+2. **Timeline Layout & Studio Compliance** (`references/studio/studio-conventions.md`): Ensure every scene is a sub-composition, isolate one caption track, group elements by kind, and respect safe zones.
+3. **Execution Loop** (`references/general/production-loop.md`): Compose DOM elements, link assets via `media-use`, and review via `references/general/review-loop.md`.
+
+---
+
 ## Composition Contracts (`references/core/`)
 
 Hyperframes compositions follow a strict HTML contract:
@@ -73,7 +86,24 @@ Hyperframes compositions follow a strict HTML contract:
    ```
 2. **Deterministic Time**: Animation runtimes must be seekable and driven by the composition clock; never use unpaused `setInterval` or real-time `Date.now()` loops.
 3. **Track Separation**: Group distinct elements (video, background, text, captions, audio) into isolated tracks.
-4. **Media Ownership**: Audio and video playback is managed by the framework runner.
+4. **Sub-Compositions**: Nest modular scenes in separate HTML files loaded via `data-composition-src`.
+5. **Media Ownership**: Audio and video playback is managed by the framework runner.
+
+---
+
+## Reference Map
+
+| Domain | Path | Contents |
+| :--- | :--- | :--- |
+| **Core Contracts** | `references/core/` | Timing attributes, determinism, track models, sub-compositions, editing recipes |
+| **Animation** | `references/animation/` | GSAP, Three.js, Lottie, Anime.js, CSS adapters, blueprints, motion blur |
+| **Keyframes** | `references/keyframes/` | 2D/3D camera transitions, Ken Burns pans, zooms, SVG morphs |
+| **Audio** | `references/audio/` | Voiceover EQ, ducking, sound effects, audio mixing envelopes, beat sync |
+| **Creative** | `references/creative/` | Art direction, typography, palettes, frame presets, story-spine, narration |
+| **Registry** | `references/registry/` | Visual effect blocks, shaders, UI components, wiring recipes |
+| **Studio** | `references/studio/` | Studio timeline layout, caption placement, and safe-zone compliance |
+| **Launch / Brag** | `references/brag/` | Step-by-step launch video production, project analysis, tone presets |
+| **General & Routes**| `references/general/` | Intent interview, brief contracts, production loops, route contracts |
 
 ---
 
@@ -85,9 +115,15 @@ Before rendering, always execute the validation gate:
 # Check composition validity, layout safe-zones, and missing assets
 npx hyperframes check
 
+# Inspect timeline tracks and clips
+npx hyperframes timeline [--json]
+
 # Preview in interactive player
 npx hyperframes preview
 
 # Render to MP4
 npx hyperframes render --output output.mp4
+
+# Check CLI version pin
+npx hyperframes@latest upgrade --project . --check
 ```
