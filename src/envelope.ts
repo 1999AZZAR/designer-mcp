@@ -55,8 +55,10 @@ export interface HelaResult<T = unknown> {
 export const SERVER_NAME = 'the-designer';
 
 /**
- * All designer tools are pure generation / read-only lookups (no mutation),
- * so every tool declares no side effects.
+ * Design tools are pure generation / read-only lookups and declare no side
+ * effects. The `logo_*` wrappers are the exception: they shell out to the
+ * logo-design skill's Python scripts, which write SVG/PNG/HTML output files,
+ * so those declare `file:write` and `process:exec` explicitly.
  */
 export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
   generate_rules: [],
@@ -88,6 +90,14 @@ export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
   generate_8state_component: [],
   build_custom_tokens: [],
   generate_motion_snippet: [],
+  logo_audit: ["process:exec"],
+  logo_search_library: ["process:exec"],
+  logo_renderers: ["process:exec"],
+  logo_render: ["process:exec", "file:write"],
+  logo_export_variants: ["process:exec", "file:write"],
+  logo_concept_sheet: ["process:exec", "file:write"],
+  logo_preview_sheet: ["process:exec", "file:write"],
+  logo_presentation_board: ["process:exec", "file:write"],
 };
 
 export function isEnvelopeEnabled(): boolean {

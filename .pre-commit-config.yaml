@@ -1,3 +1,8 @@
+# skills/logo-design is vendored verbatim from kaankiziltug/logo-design-skill (MIT).
+# Reformatting or whitespace-fixing it would break the pin against upstream
+# commit 78511495c3f8388905141f0634c16472d9e5f30f, so no hook touches it.
+exclude: '^skills/logo-design/'
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0

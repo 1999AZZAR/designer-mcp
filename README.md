@@ -98,6 +98,18 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 | `brand_fetch_design_md` | Download DESIGN.md for a real brand |
 | `brand_list` | List all 328+ brands by category |
 
+### Logo Design (see "Logo design" below)
+| Tool | Description |
+|------|-------------|
+| `logo_audit` | Audit logo SVGs — live text, rasters, filters, colours, gradients, tiny details, centring |
+| `logo_search_library` | Search 1,400+ real-world logo SVGs by type, technique, geometry, industry, colour, mood |
+| `logo_render` | Render SVG → transparent PNG, screenshot HTML sheets, build favicon.ico |
+| `logo_renderers` | Report which rendering backends are installed |
+| `logo_export_variants` | Produce the delivery set: mono, black/white, square, favicon, app-icon, web icons |
+| `logo_concept_sheet` | One-image concept overview with true 64/32/16 px renderings and a recommendation |
+| `logo_preview_sheet` | HTML test sheet: size ladder, 16 px test, one-colour, contexts, shelf test vs. competitors |
+| `logo_presentation_board` | Client presentation with industry-specific mockups from a JSON spec |
+
 ### Utility
 | Tool | Description |
 |------|-------------|
@@ -172,15 +184,16 @@ npx @modelcontextprotocol/inspector node dist/index.js
 
 ## Architecture
 
-`designer-mcp` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with three companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
+`designer-mcp` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with four companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
 
 - **`ui-designer` skill**: Provides the design intelligence, heuristics, and brand context so the AI knows *what* to ask the MCP to generate.
 - **`color-palette-hunter` skill**: Handles external palette sourcing and feeds them into the OKLCH token engine.
 - **`motion-designer` skill**: Defines SOTA animation heuristics, spring physics logic, and `motion.dev` best practices.
+- **`logo-design` skill**: Professional logo and brand-mark design, brief to production files, plus a searchable library of 1,400+ real-world SVG logos for category research.
 
 ```text
 src/
-  index.ts              # MCP server entry, tool routing (27 tools)
+  index.ts              # MCP server entry, tool routing (37 tools)
   rules.ts              # 17 design systems, palettes, archetypes, hybrids
   anti-patterns.ts      # 31-gate slop test + 6-axis self-critique
   a11y-audit.ts         # 25-check WCAG 2.1 accessibility auditor (no deps, regex-only)
@@ -197,10 +210,49 @@ src/
   templates.ts          # HTML template generator (anime.js baked in)
   tailwind-config.ts    # Tailwind config generator
   export.ts             # Project scaffold exporter
+  logoTools.ts          # logo-design wrappers: validate, exec, envelope
 skills/
   ui-designer/          # Reference docs + genre files (git submodule)
   color-palette-hunter/ # Palette CLI scripts (git submodule)
+  logo-design/          # Vendored logo/brand-mark skill (MIT, kaankiziltug)
 ```
+
+## Logo design (logo_* tools)
+
+The `logo-design` skill is vendored under `skills/logo-design/` from
+[kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill) (MIT, pinned in
+`skills/logo-design/UPSTREAM.md`). It ships the design workflow (brief → concepts → mark type →
+SVG construction → optical refinement → testing → presentation → delivery), eleven dependency-free
+Python scripts, thirteen reference docs, and a 1,400-mark SVG library. `skills/logo-design/HELA.md`
+is the HeLa overlay: palettes must come from the token engine, logotypes ship as outlines, gradients
+and filters are rejected, and rendering before presenting is mandatory.
+
+Eight tools expose the scripts to an agent. All of them are read-only with respect to your source
+artwork; the writers create new output files in the directory you name.
+
+| Tool | What it does |
+|------|--------------|
+| `logo_audit` | Audit SVGs: live text, rasters, filters, colour count, gradients, strokes, near-miss angles, tiny details, centring, complexity. JSON report. |
+| `logo_search_library` | Query the 1,400-mark library by type, technique, geometry, subject, industry, colour, mood, type style, aspect. `summary` for category conventions, `format=paths` for files to open. |
+| `logo_render` | SVG → transparent PNG at exact sizes, HTML sheet → screenshot, and favicon.ico. This is how the agent looks at its own work. |
+| `logo_renderers` | Report which backends are installed (cairosvg, rsvg-convert, Inkscape, headless Chrome, Quick Look) before promising a PNG. |
+| `logo_export_variants` | Delivery set from a master SVG: black, white, one-colour, square, favicon, app-icon, plus `--web-icons` (favicon.ico + PNG set + webmanifest + `<head>` snippet). |
+| `logo_concept_sheet` | One-image concept overview with true 64/32/16 px renderings and a recommendation. Show this at the concept checkpoint, before building the kit. |
+| `logo_preview_sheet` | HTML test sheet: size ladder, 16/32 px pixel test, backgrounds, one-colour, squint test, mirror/rotate, real contexts, and a shelf test against category competitors. |
+| `logo_presentation_board` | Client-facing presentation from a JSON spec, with industry-specific mockups per concept; optional PNG export per slide. |
+
+The design conversation itself still belongs to the skill. A typical run: `logo_search_library` to
+study the category, then the skill's concept phase, then `logo_concept_sheet` to show three
+directions, then — only after the user picks one — `logo_export_variants` for the delivery set,
+gated on `logo_audit` and a rendered `logo_preview_sheet`.
+
+```json
+{ "name": "acme", "arguments": { "files": ["/tmp/concepts/acme-a.svg"], "bg": "#ffffff" } }
+```
+
+Renderer notes: on a machine with only headless Chrome, `logo_render` still works for PNG output
+and HTML screenshots, but favicon assembly and multi-size batches are slower. Run
+`logo_renderers` first when a deliverable depends on it.
 
 ## Anti-Slop Design Philosophy
 
@@ -221,7 +273,9 @@ skills/
 |----------|---------|-------------|
 | `UI_DESIGNER_SKILL_PATH` | `skills/ui-designer` | Path to the ui-designer skill references |
 | `COLOR_PALETTE_HUNTER_PATH` | `skills/color-palette-hunter` | Path to the color palette hunter skill |
-| `HELA_ENVELOPE` | *unset = off* | Set to `true` to wrap tool results in the canonical HeLaResult envelope (`ok/summary/data/artifacts/provenance/warnings/sideEffects/execution`; all tools are pure reads so `sideEffects` is always empty). Off = byte-identical legacy output. Run/step ids propagate from `HELA_RUN_ID`/`HELA_STEP_ID`. |
+| `LOGO_DESIGN_SKILL_PATH` | `skills/logo-design` | Path to the vendored logo-design skill (its `scripts/` and `assets/library/` are required for the `logo_*` tools) |
+| `PYTHON_BIN` | `python3` | Interpreter used to run the logo-design scripts |
+| `HELA_ENVELOPE` | *unset = off* | Set to `true` to wrap tool results in the canonical HeLaResult envelope (`ok/summary/data/artifacts/provenance/warnings/sideEffects/execution`). The 29 design tools are pure reads so their `sideEffects` is empty; the `logo_*` wrappers declare `process:exec`, plus `file:write` for the five that emit deliverables. Off = byte-identical legacy output. Run/step ids propagate from `HELA_RUN_ID`/`HELA_STEP_ID`. |
 
 ## Configuring with AI Assistants
 

@@ -36,9 +36,25 @@ t('on-mode error envelope', () => {
   assert.equal(env.ok, false);
   assert.equal(env.error, 'boom');
 });
-t('all 29 tools declare empty side effects (pure generation)', () => {
-  assert.equal(Object.keys(TOOL_SIDE_EFFECTS).length, 29);
-  for (const [tool, se] of Object.entries(TOOL_SIDE_EFFECTS)) assert.deepEqual(se, [], tool);
+const LOGO_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(([t]) => t.startsWith('logo_'));
+const PURE_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(([t]) => !t.startsWith('logo_'));
+t('design tools declare no side effects (pure generation)', () => {
+  assert.equal(PURE_TOOLS.length, 29);
+  for (const [tool, se] of PURE_TOOLS) assert.deepEqual(se, [], tool);
+});
+t('all 8 logo_* wrappers declare process:exec', () => {
+  assert.equal(LOGO_TOOLS.length, 8);
+  for (const [tool, se] of LOGO_TOOLS) assert.ok(se.includes('process:exec'), tool);
+});
+t('logo_* tools that write deliverables declare file:write', () => {
+  const writers = ['logo_render', 'logo_export_variants', 'logo_concept_sheet',
+    'logo_preview_sheet', 'logo_presentation_board'];
+  for (const tool of writers) {
+    assert.ok(TOOL_SIDE_EFFECTS[tool].includes('file:write'), tool);
+  }
+  for (const tool of ['logo_audit', 'logo_search_library', 'logo_renderers']) {
+    assert.equal(TOOL_SIDE_EFFECTS[tool].includes('file:write'), false, tool);
+  }
 });
 t('run/step ids propagate', () => {
   process.env['HELA_RUN_ID'] = 'r1';

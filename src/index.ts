@@ -28,6 +28,12 @@ import { generateMotionSnippet, MOTION_CATEGORIES, type MotionCategory } from ".
 import { generateMotionDevSnippet, type MotionFramework } from "./motion-dev.js";
 import { auditA11y } from "./a11y-audit.js";
 import { generateCSSOutput, type CSSOutputFormat } from "./css-output.js";
+import {
+  logoSkillAvailable, logoSkillRoot, logoToolSchemas, auditLogo, searchLogoLibrary,
+  renderLogo, availableRenderers, exportLogoVariants, buildConceptSheet,
+  buildPreviewSheet,   buildPresentationBoard, type LogoRunResult, type LogoRenderInput,
+  type LogoExportInput, type LogoConceptSheetInput, type LogoPreviewSheetInput,
+} from "./logoTools.js";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -86,6 +92,26 @@ function detectInstalledSkills(): Array<{ name: string; path: string; descriptio
       description: "SOTA animation and physics heuristic guide using motion.dev",
       tools: [
         "generate_motion_snippet (with engine='motion.dev')",
+      ],
+    });
+  }
+
+  if (logoSkillAvailable()) {
+    const root = logoSkillRoot();
+    const refCount = existsSync(join(root, "references"))
+      ? readdirSync(join(root, "references")).filter((f: string) => f.endsWith(".md")).length
+      : 0;
+    const svgCount = existsSync(join(root, "assets", "library", "svg"))
+      ? readdirSync(join(root, "assets", "library", "svg")).filter((f: string) => f.endsWith(".svg")).length
+      : 0;
+    skills.push({
+      name: "logo-design",
+      path: root,
+      description: `Professional logo and brand-mark design, brief to production files (${refCount} reference docs, ${svgCount}-mark SVG library). Vendored from kaankiziltug/logo-design-skill (MIT).`,
+      tools: [
+        "logo_audit", "logo_search_library", "logo_render", "logo_renderers",
+        "logo_export_variants", "logo_concept_sheet", "logo_preview_sheet",
+        "logo_presentation_board",
       ],
     });
   }
@@ -439,6 +465,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["design_name"],
       },
     },
+    ...logoToolSchemas(),
+
     {
       name: "generate_motion_snippet",
       description: "Generate a ready-to-paste anime.js v3 animation snippet for a given motion category and design style. Returns CDN link, code snippet, usage hint, and reduced-motion note. Categories: entrance, micro, stagger, scroll, loader, transition, counter, typewriter. All snippets include prefers-reduced-motion guards.",
@@ -765,6 +793,48 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           result = generateMotionDevSnippet(category as MotionCategory, style, framework as MotionFramework);
         }
         return textResult(name, JSON.stringify(result, null, 2) );
+      }
+
+      // === logo-design skill wrappers ===
+
+      case "logo_audit": {
+        const { files, bg } = args as { files: string[]; bg?: string };
+        return textResult(name, JSON.stringify(auditLogo({ files, bg }), null, 2));
+      }
+
+      case "logo_search_library": {
+        const run: LogoRunResult = searchLogoLibrary(args as Parameters<typeof searchLogoLibrary>[0]);
+        return textResult(name, run.stdout);
+      }
+
+      case "logo_renderers": {
+        const run = availableRenderers();
+        return textResult(name, run.stdout);
+      }
+
+      case "logo_render": {
+        const run = renderLogo(args as unknown as LogoRenderInput);
+        return textResult(name, JSON.stringify(run, null, 2));
+      }
+
+      case "logo_export_variants": {
+        const run = exportLogoVariants(args as unknown as LogoExportInput);
+        return textResult(name, JSON.stringify(run, null, 2));
+      }
+
+      case "logo_concept_sheet": {
+        const run = buildConceptSheet(args as unknown as LogoConceptSheetInput);
+        return textResult(name, JSON.stringify(run, null, 2));
+      }
+
+      case "logo_preview_sheet": {
+        const run = buildPreviewSheet(args as unknown as LogoPreviewSheetInput);
+        return textResult(name, JSON.stringify(run, null, 2));
+      }
+
+      case "logo_presentation_board": {
+        const run = buildPresentationBoard(args as Parameters<typeof buildPresentationBoard>[0]);
+        return textResult(name, JSON.stringify(run, null, 2));
       }
 
       default:
