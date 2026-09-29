@@ -645,7 +645,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: "brand_list",
-      description: "List all 328+ supported brands grouped by category.",
+      description:
+        "List the curated local brand catalog (62 brands across 7 categories) grouped by category. For DESIGN.md retrieval beyond this list, use brand_fetch_design_md, which resolves the full 328+ brand getdesign catalog.",
       inputSchema: {
         type: "object",
         properties: {

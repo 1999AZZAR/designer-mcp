@@ -7,7 +7,7 @@
 
 A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `designer-mcp` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
 
-Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js motion integration**, **WCAG 2.1 accessibility auditing**, **React/Vue component output**, and **framework-agnostic CSS generation**.
+37 tools across 17 design systems: **anti-slop quality gates**, **motion.dev & anime.js integration**, **WCAG 2.1 auditing**, **React/Vue component output**, **framework-agnostic CSS**, and **logo & brand-mark design** backed by a 1,432-mark reference library.
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
@@ -20,6 +20,8 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 - [Installation](#installation)
 - [Usage](#usage)
 - [Architecture](#architecture)
+- [Logo design](#logo-design-logo_-tools)
+- [Development](#development)
 - [Anti-Slop Design Philosophy](#anti-slop-design-philosophy)
 - [Configuration](#configuration)
 - [Configuring with AI Assistants](#configuring-with-ai-assistants)
@@ -27,7 +29,7 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 
 ## Features
 
-- **Anti-Slop Quality Gates** — 31-gate slop test + 6-axis self-critique (P-H-E-S-R-V). Rejects anything < 3.
+- **Anti-Slop Quality Gates** — 35-gate slop test + 6-axis self-critique (P-H-E-S-R-V). Rejects anything < 3.
 - **OKLCH Token System** — 16 curated themes with auto dark-mode derivation (`full_css` field ships both `:root` and `@media (prefers-color-scheme: dark)` + `[data-theme="dark"]` overrides).
 - **Design Rules Generator** — 17 design systems + 4 palettes + 5 archetypes + hybrid combos.
 - **Pre-Flight Scan** — Detect existing project context: framework, font stack, palette tokens, motion libraries.
@@ -36,7 +38,8 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 - **WCAG 2.1 Accessibility Audit** — 25-check static auditor: alt text, unlabeled inputs, empty buttons/links, heading order, focus-visible removal, skip links, landmark regions, viewport scale lock, and more. Returns 0-100 score + A–F grade + actionable fixes.
 - **SOTA Motion System (motion.dev & anime.js)** — Style-aware animation presets baked into components. `generate_motion_snippet` for on-demand snippets with React `<motion.div>` and vanilla physics support (8 categories, all reduced-motion guarded).
 - **Color Palette Hunter** — Live palettes from Color Hunt with format conversion.
-- **Brand Design References** — 328+ real-world brands (Stripe, Vercel, Notion, Claude, Tesla, etc.).
+- **Brand Design References** — `brand_fetch_design_md` resolves DESIGN.md from the full 328+ brand getdesign catalog (Stripe, Vercel, Notion, Claude, Tesla, etc.); `brand_list` returns the 62-brand curated subset shipped locally.
+- **Logo & Brand-Mark Design** — the in-tree `logo-design` skill plus 8 `logo_*` tools: SVG audit, a searchable 1,432-mark reference library, PNG/favicon rendering, mono/square/app-icon delivery variants, concept sheets, test sheets, and client presentation boards.
 
 ## Tools
 
@@ -65,7 +68,7 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 
 | Tool                      | Description                                                                                                                                                                                                                                                                                               |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `anti_pattern_check`      | Run 31-gate slop test on HTML/CSS                                                                                                                                                                                                                                                                         |
+| `anti_pattern_check`      | Run 35-gate slop test on HTML/CSS                                                                                                                                                                                                                                                                         |
 | `self_critique`           | Score output on 6 quality axes (P-H-E-S-R-V) — anything < 3 triggers revision                                                                                                                                                                                                                             |
 | **`audit_accessibility`** | **25-check WCAG 2.1 static auditor** — alt text, unlabeled inputs/selects/textareas, empty buttons/links, heading order, focus-visible removal, skip links, landmark regions, viewport scale lock, and more. Returns 0–100 score, A–F grade, per-severity counts, fix instructions, and passed-check list |
 
@@ -100,17 +103,17 @@ Featuring 17 design systems, 328+ brand references, **motion.dev & anime.js moti
 
 ### Brand References
 
-| Tool                    | Description                         |
-| ----------------------- | ----------------------------------- |
-| `brand_fetch_design_md` | Download DESIGN.md for a real brand |
-| `brand_list`            | List all 328+ brands by category    |
+| Tool                    | Description                                  |
+| ----------------------- | -------------------------------------------- |
+| `brand_fetch_design_md` | Download DESIGN.md for a real brand          |
+| `brand_list`            | List the 62 curated local brands by category |
 
 ### Logo Design (see "Logo design" below)
 
 | Tool                      | Description                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------ |
 | `logo_audit`              | Audit logo SVGs — live text, rasters, filters, colours, gradients, tiny details, centring  |
-| `logo_search_library`     | Search 1,400+ real-world logo SVGs by type, technique, geometry, industry, colour, mood    |
+| `logo_search_library`     | Search 1,432 real-world logo SVGs by type, technique, geometry, industry, colour, mood     |
 | `logo_render`             | Render SVG → transparent PNG, screenshot HTML sheets, build favicon.ico                    |
 | `logo_renderers`          | Report which rendering backends are installed                                              |
 | `logo_export_variants`    | Produce the delivery set: mono, black/white, square, favicon, app-icon, web icons          |
@@ -179,7 +182,10 @@ npm install
 npm run build
 ```
 
-**Requirements**: Node.js >= 18
+**Requirements**: Node.js >= 18. The `logo_*` tools additionally need **Python 3** (no
+third-party packages) and at least one SVG renderer — cairosvg, rsvg-convert, Inkscape, or
+headless Chrome. Check what is available with the `logo_renderers` tool. The other 29 tools have
+no runtime dependency beyond Node.
 
 ## Usage
 
@@ -191,6 +197,46 @@ npm start
 npx @modelcontextprotocol/inspector node dist/index.js
 ```
 
+## Development
+
+```bash
+npm run build   # tsc
+npm test        # 39 checks across two suites
+```
+
+Tests are plain `node` scripts that import the TypeScript sources directly through
+`--experimental-strip-types`; there is no test framework dependency. `logo-tools.test.mjs`
+runs the real Python scripts in a temp directory rather than mocking them, so a change to a
+script's CLI surface fails the suite instead of silently drifting from `src/logoTools.ts`.
+
+### pre-commit
+
+Hooks are configured in `.pre-commit-config.yaml` and cover this repo:
+
+| Hook                                                       | Scope                                                           |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| `trailing-whitespace`, `end-of-file-fixer`                 | first-party files                                               |
+| `check-added-large-files` (500 KB)                         | first-party files; the two generated library indexes are exempt |
+| `check-yaml`, `check-merge-conflict`, `detect-private-key` | all files                                                       |
+| `prettier`                                                 | JS/TS/CSS/HTML/JSON/Markdown, first-party files                 |
+
+Three trees are kept **byte-stable** and excluded from the reformatting hooks, each for a
+stated reason rather than by convenience: `examples/` (demo artifacts must match what was
+designed), `skills/video/` (canonical upstream HyperFrames packages), and
+`skills/logo-design/assets/library/` (generated indexes plus third-party reference marks).
+The list is repeated per hook because pre-commit has no shared exclude — keep the three in sync
+when you add a fourth.
+
+`prettier` runs as a **system command** via `scripts/prettier-hook.sh`, not through pre-commit's
+nodeenv installer: pre-commit 4.6.x installs node hooks with `npm install --allow-git=root`, which
+npm >= 11 rejects for non-root users, so the stock `mirrors-prettier` hook cannot install at all
+on this machine. The wrapper prefers `node_modules/.bin/prettier`, falls back to `prettier` on
+PATH, and warns instead of blocking when neither exists.
+
+> **Heads-up:** this machine sets a global `core.hooksPath` whose hook is scoped to
+> `chaining-mcp`, so these hooks do **not** fire automatically on `git commit` here. Run
+> `pre-commit run --all-files` before pushing, or add the repo to that global hook's allowlist.
+
 ## Architecture
 
 `designer-mcp` operates on a multi-tier architecture. An MCP server on its own is just an API; by pairing the MCP with four companion AI skills, the AI gets both the tools (the MCP) and the instruction manual (the skills).
@@ -198,13 +244,13 @@ npx @modelcontextprotocol/inspector node dist/index.js
 - **`ui-designer` skill**: Provides the design intelligence, heuristics, and brand context so the AI knows _what_ to ask the MCP to generate.
 - **`color-palette-hunter` skill**: Handles external palette sourcing and feeds them into the OKLCH token engine.
 - **`motion-designer` skill**: Defines SOTA animation heuristics, spring physics logic, and `motion.dev` best practices.
-- **`logo-design` skill**: Professional logo and brand-mark design, brief to production files, plus a searchable library of 1,400+ real-world SVG logos for category research.
+- **`logo-design` skill**: Professional logo and brand-mark design, brief to production files, plus a searchable library of 1,432 real-world SVG logos for category research.
 
 ```text
 src/
   index.ts              # MCP server entry, tool routing (37 tools)
   rules.ts              # 17 design systems, palettes, archetypes, hybrids
-  anti-patterns.ts      # 31-gate slop test + 6-axis self-critique
+  anti-patterns.ts      # 35-gate slop test + 6-axis self-critique
   a11y-audit.ts         # 25-check WCAG 2.1 accessibility auditor (no deps, regex-only)
   tokens.ts             # 16 curated themes, OKLCH token generation, dark mode derivation
   css-output.ts         # vanilla CSS / CSS Modules / SCSS / css-variables-only generator
@@ -223,8 +269,21 @@ src/
 skills/
   ui-designer/          # Reference docs + genre files (git submodule)
   color-palette-hunter/ # Palette CLI scripts (git submodule)
-  logo-design/          # Logo/brand-mark design skill (in-tree; origin credited in ATTRIBUTION.md)
+  motion-designer/      # Motion/physics heuristics (in-tree)
+  logo-design/          # Logo/brand-mark design skill (in-tree, origin in ATTRIBUTION.md)
+  video/                # Canonical upstream HyperFrames v0.8.77 packages (byte-stable)
+test/
+  designer-envelope.test.mjs  # envelope shape, side-effect contract
+  logo-tools.test.mjs         # 30 checks: validation + real script subprocesses
+scripts/
+  prettier-hook.sh      # pre-commit formatter entry point
+examples/
+  ellis-ui/             # 24 design systems showcase (byte-stable, deployed as the demo)
 ```
+
+Skills live here in two forms. `ui-designer` and `color-palette-hunter` are git submodules
+pointing at standalone repos; `motion-designer` and `logo-design` are in-tree because they are
+tied to this server's tools. See [Development](#development) for the rules that follow from that.
 
 ## Logo design (logo\_\* tools)
 
@@ -233,8 +292,9 @@ other source. It began as a copy of
 [kaankiziltug/logo-design-skill](https://github.com/kaankiziltug/logo-design-skill) (MIT; upstream
 copyright and licence retained, origin and maintenance rules in
 `skills/logo-design/ATTRIBUTION.md`). It ships the design workflow (brief → concepts → mark type →
-SVG construction → optical refinement → testing → presentation → delivery), eleven dependency-free
-Python scripts, thirteen reference docs, and a 1,400-mark SVG library. `skills/logo-design/HELA.md`
+SVG construction → optical refinement → testing → presentation → delivery), nine dependency-free
+Python scripts (seven wrapped as tools, plus a shared `svglib` and a maintainer catalog builder),
+fourteen reference docs, two templates, and a 1,432-mark SVG library. `skills/logo-design/HELA.md`
 is the HeLa overlay: palettes must come from the token engine, logotypes ship as outlines, gradients
 and filters are rejected, and rendering before presenting is mandatory.
 
@@ -244,7 +304,7 @@ artwork; the writers create new output files in the directory you name.
 | Tool                      | What it does                                                                                                                                                                          |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `logo_audit`              | Audit SVGs: live text, rasters, filters, colour count, gradients, strokes, near-miss angles, tiny details, centring, complexity. JSON report.                                         |
-| `logo_search_library`     | Query the 1,400-mark library by type, technique, geometry, subject, industry, colour, mood, type style, aspect. `summary` for category conventions, `format=paths` for files to open. |
+| `logo_search_library`     | Query the 1,432-mark library by type, technique, geometry, subject, industry, colour, mood, type style, aspect. `summary` for category conventions, `format=paths` for files to open. |
 | `logo_render`             | SVG → transparent PNG at exact sizes, HTML sheet → screenshot, and favicon.ico. This is how the agent looks at its own work.                                                          |
 | `logo_renderers`          | Report which backends are installed (cairosvg, rsvg-convert, Inkscape, headless Chrome, Quick Look) before promising a PNG.                                                           |
 | `logo_export_variants`    | Delivery set from a master SVG: black, white, one-colour, square, favicon, app-icon, plus `--web-icons` (favicon.ico + PNG set + webmanifest + `<head>` snippet).                     |
@@ -259,7 +319,7 @@ gated on `logo_audit` and a rendered `logo_preview_sheet`.
 
 ```json
 {
-  "name": "acme",
+  "name": "logo_audit",
   "arguments": { "files": ["/tmp/concepts/acme-a.svg"], "bg": "#ffffff" }
 }
 ```
@@ -270,7 +330,7 @@ and HTML screenshots, but favicon assembly and multi-size batches are slower. Ru
 
 ## Anti-Slop Design Philosophy
 
-![Blotcat stamping the 31-gate checklist — HTML/CSS queued left, rejected crumpled right, score < 3 → revise](assets/blotcat-antislop.jpg)
+![Blotcat stamping the 35-gate checklist — HTML/CSS queued left, rejected crumpled right, score < 3 → revise](assets/blotcat-antislop.jpg)
 
 - **Locked tokens** — every color/font references a named CSS variable, never inline values
 - **No fabricated content** — real metrics or labeled placeholders only
