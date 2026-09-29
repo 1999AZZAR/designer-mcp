@@ -205,9 +205,25 @@ npm test        # 39 checks across two suites
 ```
 
 Tests are plain `node` scripts that import the TypeScript sources directly through
-`--experimental-strip-types`; there is no test framework dependency. `logo-tools.test.mjs`
+`--experimental-strip-types`; there is no test framework dependency. `path-containment.test.mjs`
+drives the real server over stdio to keep the CWE-22 regression honest (see below). `logo-tools.test.mjs`
 runs the real Python scripts in a temp directory rather than mocking them, so a change to a
 script's CLI surface fails the suite instead of silently drifting from `src/logoTools.ts`.
+
+### Path handling and the security boundary
+
+Two different rules, and the difference is deliberate:
+
+- **Names that address a bundled file** — `get_reference` (a reference doc) and
+  `get_ellis_ui_template` (a design folder) — go through `resolveWithinRoot()` in
+  `src/envelope.ts`. It refuses separators, `..`, absolute paths and NUL bytes, resolves against
+  the _real_ path of the trusted root, and verifies the result is still inside it, so neither a
+  crafted argument nor a symlink can read outside the skill. This closes CWE-22 in `get_reference`
+  (issue #14), which concatenated the argument straight into a path.
+- **Paths the caller deliberately supplies** — `pre_flight_scan` on a project directory, and the
+  `logo_*` tools on artwork files — are allowed anywhere, because supplying your own project path
+  is the feature. They validate that the path exists and is the right kind of thing, and are the
+  one place an MCP client can still read a file of its choosing.
 
 ### pre-commit
 

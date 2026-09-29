@@ -40,7 +40,7 @@ import {
   type SlopTestResult,
   type QualityScore,
 } from "./anti-patterns.js";
-import { textResult, errorResult } from "./envelope.js";
+import { textResult, errorResult, resolveWithinRoot } from "./envelope.js";
 import {
   generateTokens,
   buildCustomTokens,
@@ -985,12 +985,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case "get_ellis_ui_template": {
         const { design_name } = args as { design_name: string };
-        const designPath = join(
-          dirname(fileURLToPath(import.meta.url)),
-          "..",
-          "examples",
-          "ellis-ui",
+        // Same CWE-22 rule as get_reference: a design folder name, not a path.
+        const designPath = resolveWithinRoot(
+          join(
+            dirname(fileURLToPath(import.meta.url)),
+            "..",
+            "examples",
+            "ellis-ui",
+          ),
           design_name,
+          { label: "design_name", kind: "dir" },
         );
         if (!existsSync(designPath)) {
           throw new Error(
@@ -1011,7 +1015,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case "get_reference": {
         const { name: refName } = args as { name: string };
-        const refPath = join(SKILL_PATH, "references", `${refName}.md`);
+        // CWE-22: the argument is a bare reference name, never a path.
+        const refPath = resolveWithinRoot(
+          join(SKILL_PATH, "references"),
+          refName,
+          {
+            label: "name",
+            extension: ".md",
+          },
+        );
         if (!existsSync(refPath)) {
           throw new Error(
             `Reference not found: ${refName}. Available references are in ${SKILL_PATH}/references/`,

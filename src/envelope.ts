@@ -160,6 +160,86 @@ function textBlock(text: string): {
  * MCP tool-result responder. Envelope off (default): legacy raw text,
  * byte-identical to the pre-C1 call sites.
  */
+import { existsSync, realpathSync, statSync } from "fs";
+import { isAbsolute, relative, resolve } from "path";
+
+export class PathContainmentError extends Error {
+  readonly code = "PATH_NOT_CONTAINED";
+}
+
+/**
+ * Resolve a caller-supplied name inside a trusted directory, refusing anything
+ * that could escape it.
+ *
+ * Tool arguments that name a file inside a bundled skill (a reference doc, a
+ * template) must never be able to walk out of that skill. Three independent
+ * checks, because one is not enough:
+ *   1. lexical   - no separators, no `..`, not absolute, no NUL
+ *   2. realpath  - the root's real path is the base, so a symlinked root
+ *                  cannot silently widen the boundary
+ *   3. relative  - the resolved path must still sit under that base
+ *
+ * Tools whose whole purpose is to read a path the caller chose
+ * (`pre_flight_scan`, the `logo_*` wrappers) intentionally do not use this: a
+ * supplied project directory or artwork file is the feature, not a leak.
+ */
+export function resolveWithinRoot(
+  rootDir: string,
+  userInput: string,
+  opts: { label: string; extension?: string; kind?: "file" | "dir" } = {
+    label: "path",
+  },
+): string {
+  const { label, extension, kind = "file" } = opts;
+  if (typeof userInput !== "string" || userInput.trim() === "") {
+    throw new PathContainmentError(`${label} must be a non-empty string`);
+  }
+  const name = userInput.trim();
+  if (name.includes("/") || name.includes("\\") || name.includes("\0")) {
+    throw new PathContainmentError(
+      `${label} must be a bare file name, not a path: ${JSON.stringify(name)}`,
+    );
+  }
+  if (
+    isAbsolute(name) ||
+    name === "." ||
+    name === ".." ||
+    name.startsWith("..")
+  ) {
+    throw new PathContainmentError(
+      `${label} must not be an absolute or traversing path: ${JSON.stringify(name)}`,
+    );
+  }
+  if (!existsSync(rootDir)) {
+    throw new PathContainmentError(`trusted root is missing: ${rootDir}`);
+  }
+  const base = realpathSync(rootDir);
+  const target = resolve(base, extension ? `${name}${extension}` : name);
+  const rel = relative(base, target);
+  if (rel === "" || rel.startsWith("..") || isAbsolute(rel)) {
+    throw new PathContainmentError(`${label} escapes the allowed directory`);
+  }
+  // Final target must not be a symlink pointing outside the root either.
+  if (existsSync(target)) {
+    const real = realpathSync(target);
+    const realRel = relative(base, real);
+    if (realRel === "" || realRel.startsWith("..") || isAbsolute(realRel)) {
+      throw new PathContainmentError(
+        `${label} resolves outside the allowed directory`,
+      );
+    }
+    if (kind === "file" && !statSync(real).isFile()) {
+      throw new PathContainmentError(`${label} is not a file: ${userInput}`);
+    }
+    if (kind === "dir" && !statSync(real).isDirectory()) {
+      throw new PathContainmentError(
+        `${label} is not a directory: ${userInput}`,
+      );
+    }
+  }
+  return target;
+}
+
 export function textResult(toolName: string, text: string, summary?: string) {
   if (!isEnvelopeEnabled()) return textBlock(text);
   return textBlock(

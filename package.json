@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "node --experimental-strip-types test/designer-envelope.test.mjs && node --experimental-strip-types test/logo-tools.test.mjs",
+    "test": "node --experimental-strip-types test/designer-envelope.test.mjs && node --experimental-strip-types test/path-containment.test.mjs && node --experimental-strip-types test/logo-tools.test.mjs",
     "deploy-demo": "gh-pages -d examples/ellis-ui"
   },
   "dependencies": {
