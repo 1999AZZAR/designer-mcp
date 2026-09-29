@@ -2,19 +2,10 @@
   "brand": "Harbor",
   "tagline": "Savings that stay put",
   "brief": "A savings app for first-time savers who find finance intimidating. It should feel calm, safe and patient — the opposite of flashy trading apps.",
-  "adjectives": [
-    "calm",
-    "safe",
-    "patient",
-    "warm"
-  ],
+  "adjectives": ["calm", "safe", "patient", "warm"],
   "criteria": "Success: distinct from blue fintech marks, recognisable at 16 px, works in one colour, feels calm and safe.",
   "industry": "consumer-app",
-  "nav": [
-    "How it works",
-    "Security",
-    "Download"
-  ],
+  "nav": ["How it works", "Security", "Download"],
   "brand_color": "#0F7C80",
   "greyscale": true,
   "designer": "Your studio",

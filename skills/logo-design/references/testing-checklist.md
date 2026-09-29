@@ -5,6 +5,7 @@ A logo is only finished when it has survived these tests. Most can be run with
 judgement. Run them on every concept before presenting and again on the final artwork.
 
 ## 1. Scale
+
 - [ ] **16 px favicon**: the core idea survives; no mush. If not, design a simplified small-size version
       (fewer elements, thicker strokes, bigger gaps) — detailed marks may keep a reduced companion.
 - [ ] **24–32 px** (app lists, social avatars): recognisable at a glance.
@@ -14,6 +15,7 @@ judgement. Run them on every concept before presenting and again on the final ar
       documented minimum (in px for screen and mm for print).
 
 ## 2. Colour and value
+
 - [ ] Works in **one-colour black** on white.
 - [ ] Works in **one-colour white** on black — and doesn't look heavier than the black version (irradiation). If it
       does, provide a slightly thinned reversed file.
@@ -23,6 +25,7 @@ judgement. Run them on every concept before presenting and again on the final ar
 - [ ] Colours reproduce in **CMYK** and have spot/Pantone equivalents if vivid.
 
 ## 3. Form
+
 - [ ] **Squint/blur test**: the silhouette alone is distinctive.
 - [ ] **Mirror test**: flipping reveals no proportion errors you'd adapted to.
 - [ ] **Rotation / unintended readings**: view rotated 90° and 180°, tiny, and at a distance; show it to someone who
@@ -40,6 +43,7 @@ judgement. Run them on every concept before presenting and again on the final ar
 - [ ] **Peer test**: next to 3–4 exemplary library marks at the same size, yours looks equally resolved.
 
 ## 4. Distinctiveness and originality
+
 - [ ] **Shelf test**: placed among competitors (`preview_sheet.py --refs-industry <industry>`), it stands out
       rather than blending in.
 - [ ] **Familiarity test**: it doesn't remind you (or anyone you ask) of an existing mark. If it feels familiar and
@@ -50,6 +54,7 @@ judgement. Run them on every concept before presenting and again on the final ar
       search before launch. You cannot give legal clearance — say so.
 
 ## 5. Meaning and fit
+
 - [ ] The idea can be explained in **one sentence**.
 - [ ] Tone matches the brand adjectives (sharp/round, heavy/light, warm/cool, classic/modern).
 - [ ] It identifies rather than explains; it will still fit if the business expands.
@@ -57,6 +62,7 @@ judgement. Run them on every concept before presenting and again on the final ar
 - [ ] It works without the tagline and, for symbols, eventually without the name.
 
 ## 6. Media and production
+
 - [ ] One-colour printing, embroidery (no hairlines, gaps ≥ ~1 mm at chest-logo size), laser engraving, vinyl
       cutting, signage, dark mode, animation.
 - [ ] App icon: optically sized inside the platform's rounded tile; no fine text.
@@ -65,11 +71,13 @@ judgement. Run them on every concept before presenting and again on the final ar
       (`svg_audit.py` score ≥ ~90 with no FAIL).
 
 ## 7. Context
+
 - [ ] Shown in 5–6 **realistic mockups relevant to the business** (a café's cup, not a gym bag), in a consistent
       style. Never judge a logo only in isolation on a white artboard.
 - [ ] Lockups (horizontal, stacked, symbol-only) all tested at their intended sizes.
 
 ## Recording results
+
 Summarise test outcomes when presenting: what passed, what was adjusted (e.g. "thinned the reversed version by 3 %;
 opened the counter gap from 6 to 10 units so it survives 16 px"), and what the user must still do (trademark search,
 Pantone proofing).

@@ -1,10 +1,11 @@
 # Colour
 
 Colour is the second memory hook after shape, the most basic form of non-verbal communication, and one of
-the few things a brand can truly *own*. But it is secondary to form: design in black first, add colour after
+the few things a brand can truly _own_. But it is secondary to form: design in black first, add colour after
 the concept is chosen.
 
 ## Contents
+
 1. Order of operations
 2. Associations (and their limits)
 3. Owning a colour
@@ -30,18 +31,18 @@ the concept is chosen.
 
 Common Western associations — useful as a starting vocabulary, never as a rule:
 
-| Colour | Frequently associated with | Watch out for |
-|---|---|---|
-| Red | energy, passion, boldness, urgency, appetite, leadership | danger, debt/loss (finance), aggression |
-| Orange | friendliness, enthusiasm, playfulness, affordability, confidence | cheapness if overused; low contrast on white |
-| Yellow | optimism, warmth, attention, originality, cheer | illegible on white; caution/warning |
-| Green | growth, health, nature, balance, renewal, money (US) | "eco" cliché; hard in process print when vivid |
-| Blue | trust, stability, calm, integrity, technology, loyalty | the default of tech, finance and healthcare — hard to stand out |
-| Purple | creativity, imagination, wisdom, luxury, individuality | can feel immature or mystical |
-| Pink | care, playfulness, youth, sweetness, boldness (hot pinks) | gender stereotypes |
-| Black / grey | authority, sophistication, neutrality, strength, mystery | can feel cold, heavy or generic |
-| White | purity, simplicity, space | mourning in parts of East Asia |
-| Brown / earth | craft, reliability, warmth, organic | dullness; "you can't build equity in beige" |
+| Colour        | Frequently associated with                                       | Watch out for                                                   |
+| ------------- | ---------------------------------------------------------------- | --------------------------------------------------------------- |
+| Red           | energy, passion, boldness, urgency, appetite, leadership         | danger, debt/loss (finance), aggression                         |
+| Orange        | friendliness, enthusiasm, playfulness, affordability, confidence | cheapness if overused; low contrast on white                    |
+| Yellow        | optimism, warmth, attention, originality, cheer                  | illegible on white; caution/warning                             |
+| Green         | growth, health, nature, balance, renewal, money (US)             | "eco" cliché; hard in process print when vivid                  |
+| Blue          | trust, stability, calm, integrity, technology, loyalty           | the default of tech, finance and healthcare — hard to stand out |
+| Purple        | creativity, imagination, wisdom, luxury, individuality           | can feel immature or mystical                                   |
+| Pink          | care, playfulness, youth, sweetness, boldness (hot pinks)        | gender stereotypes                                              |
+| Black / grey  | authority, sophistication, neutrality, strength, mystery         | can feel cold, heavy or generic                                 |
+| White         | purity, simplicity, space                                        | mourning in parts of East Asia                                  |
+| Brown / earth | craft, reliability, warmth, organic                              | dullness; "you can't build equity in beige"                     |
 
 - **Culture changes meaning.** White is purity in much of Europe and mourning in parts of East Asia; red is luck and
   celebration in China, danger in signage, and taboo for losses in financial reporting; green has religious
@@ -66,6 +67,7 @@ Common Western associations — useful as a starting vocabulary, never as a rule
 ## 4. Harmony systems
 
 Use the colour wheel as a generator, then refine by eye:
+
 - **Complementary** — opposites (red/green, blue/orange, yellow/purple). High contrast, energetic; familiar, can feel
   obvious. Shift hues slightly off the exact complement for sophistication.
 - **Split-complementary** — a base plus the two neighbours of its complement. Contrast with less tension.
@@ -107,7 +109,7 @@ Use the colour wheel as a generator, then refine by eye:
 
 ## 8. Library data (1,400+ real-world logos)
 
-The bundled library skews heavily to technology brands, so treat these as *category conventions to be aware of*,
+The bundled library skews heavily to technology brands, so treat these as _category conventions to be aware of_,
 not recommendations:
 
 - **Colour count** (counting black/white when used): 1 colour ≈ 33 %, 2 colours ≈ 25 %, 3 colours ≈ 17 % —
@@ -127,16 +129,20 @@ Explore by colour: `python3 scripts/search_library.py --color orange --type pict
 
 ```markdown
 ### Primary
-| Name | HEX | RGB | CMYK | Pantone (approx.) | Use |
-|---|---|---|---|---|---|
-| Harbor Teal | #0F7C80 | 15 124 128 | 88 23 44 5 | 7714 C | Logo, key UI, headings |
-| Ink | #14212B | 20 33 43 | 83 67 49 64 | Black 7 C | Type, one-colour logo |
+
+| Name        | HEX     | RGB        | CMYK        | Pantone (approx.) | Use                    |
+| ----------- | ------- | ---------- | ----------- | ----------------- | ---------------------- |
+| Harbor Teal | #0F7C80 | 15 124 128 | 88 23 44 5  | 7714 C            | Logo, key UI, headings |
+| Ink         | #14212B | 20 33 43   | 83 67 49 64 | Black 7 C         | Type, one-colour logo  |
 
 ### Secondary (≈ 10–20 % of any layout)
+
 | Sand | #F2E6D0 | … | Backgrounds |
 | Signal Coral | #FF6B4A | … | Accents, calls to action (sparingly) |
 
 ### Logo colour versions
+
 Full colour on white · Reversed (white) on Harbor Teal / Ink · One-colour Ink · One-colour white
 ```
+
 (Pantone matches are approximations — verify against a physical guide before print production.)

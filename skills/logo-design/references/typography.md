@@ -5,6 +5,7 @@ history and culture before a single word is read. Read this when designing wordm
 choosing brand typefaces.
 
 ## Contents
+
 1. Choosing a direction: type study
 2. Classification and what each voice says
 3. Custom vs. existing type
@@ -20,7 +21,7 @@ choosing brand typefaces.
 
 1. Set the name in 20–40 candidate typefaces across categories, in lowercase, uppercase and title case.
    Starting with type is a legitimate way to begin a logo — once the type is right, the rest can flow from it.
-2. Judge by: the shape of the letters *in combination* (not individually), legibility, the rhythm of the word,
+2. Judge by: the shape of the letters _in combination_ (not individually), legibility, the rhythm of the word,
    how the letters echo the way the word sounds, and how it reads at small size.
 3. Shortlist 3–5 and look for **opportunities**: interesting letter pairs, shared strokes, counters that can hold a
    shape, a letter that can become a sign, repeated letters that can create rhythm, a natural ligature.
@@ -30,22 +31,23 @@ Legibility varies with case: some typefaces read better in upper and lower case,
 
 ## 2. Classification and what each voice says
 
-| Class | Character | Typical voice |
-|---|---|---|
-| Humanist / Venetian serif | calligraphic stress, low contrast | literary, traditional, warm |
-| Old-style serif | moderate contrast, diagonal stress | classic, trustworthy, bookish |
-| Transitional serif | sharper, more vertical stress | refined, institutional |
-| Modern / Didone | extreme thick–thin contrast, hairlines | fashion, luxury, drama (fragile when small) |
-| Slab serif | heavy, block serifs | sturdy, industrial, confident, retro |
-| Grotesque / neo-grotesque sans | even, rational | neutral, corporate, modern, "Swiss" |
-| Geometric sans | built on circles/squares | modern, clean, tech, optimistic |
-| Humanist sans | calligraphic proportions | friendly, readable, approachable |
-| Rounded sans | soft terminals | playful, gentle, youthful |
-| Script / handwritten | cursive, personal | personal, crafted, elegant or casual |
-| Display / custom | idiosyncratic shapes | highly specific personality (dates fastest) |
-| Monospace | fixed widths | technical, code, systematic |
+| Class                          | Character                              | Typical voice                               |
+| ------------------------------ | -------------------------------------- | ------------------------------------------- |
+| Humanist / Venetian serif      | calligraphic stress, low contrast      | literary, traditional, warm                 |
+| Old-style serif                | moderate contrast, diagonal stress     | classic, trustworthy, bookish               |
+| Transitional serif             | sharper, more vertical stress          | refined, institutional                      |
+| Modern / Didone                | extreme thick–thin contrast, hairlines | fashion, luxury, drama (fragile when small) |
+| Slab serif                     | heavy, block serifs                    | sturdy, industrial, confident, retro        |
+| Grotesque / neo-grotesque sans | even, rational                         | neutral, corporate, modern, "Swiss"         |
+| Geometric sans                 | built on circles/squares               | modern, clean, tech, optimistic             |
+| Humanist sans                  | calligraphic proportions               | friendly, readable, approachable            |
+| Rounded sans                   | soft terminals                         | playful, gentle, youthful                   |
+| Script / handwritten           | cursive, personal                      | personal, crafted, elegant or casual        |
+| Display / custom               | idiosyncratic shapes                   | highly specific personality (dates fastest) |
+| Monospace                      | fixed widths                           | technical, code, systematic                 |
 
 Tone rules of thumb:
+
 - Heavier weights read strong/confident; lighter weights read elegant/quiet (but fragile at small sizes).
 - Wide proportions feel stable and expansive; condensed feel efficient, urgent, editorial.
 - Lowercase feels approachable; uppercase feels monumental. Title case is the neutral default.
@@ -69,7 +71,7 @@ Tone rules of thumb:
 
 ## 4. Letterform craft
 
-- **Spacing is optical, not metric.** Equalise the *area* of space between letters, not the distance. Round letters
+- **Spacing is optical, not metric.** Equalise the _area_ of space between letters, not the distance. Round letters
   (`O`, `C`) sit closer to neighbours than straight ones (`H`, `I`); diagonals (`A`, `V`, `W`) need kerning.
 - **Kern for the size of use.** Spacing that works in a book heading may look loose at logo scale or on a building.
   Check key pairs (`AV`, `To`, `LT`, `r.`, `ye`).

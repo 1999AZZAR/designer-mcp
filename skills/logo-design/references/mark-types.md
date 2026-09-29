@@ -5,6 +5,7 @@ strengths, costs and failure modes. Library examples can be pulled with
 `python3 scripts/search_library.py --type <type> --exemplary --format paths`.
 
 ## Contents
+
 1. Overview table
 2. Wordmark (logotype)
 3. Lettermark / monogram
@@ -22,21 +23,21 @@ strengths, costs and failure modes. Library examples can be pulled with
 
 ## 1. Overview table
 
-| Type | What it is | Best when | Watch out for |
-|---|---|---|---|
-| Wordmark | Name set in distinctive type only | Name is short, distinctive, new (needs to be learned); limited media budget | Generic if type is stock; long names shrink badly |
-| Lettermark / monogram | 2+ initials combined | Long or hard-to-say names; heritage/fashion/institutions | Woven initials carry little meaning; needs lots of exposure |
-| Letterform | One initial as a symbol | App icons, tech, finance; need a compact avatar | Many brands share the same letter; needs a twist |
-| Pictorial | Recognisable object/animal | Name or story has a vivid image; global/wordless recognition | Literalness; clichés; too much detail |
-| Abstract | Non-representational form | Conceptual positioning (speed, connection); diversified companies | Meaningless without exposure/story |
-| Negative space | Two silhouettes sharing an edge | A clever, conceptually linked pair exists | Hardest to do; forced results; ambiguity |
-| Mascot | Character with personality | Family, food, games, community brands | Complexity, dating, poor small-size performance |
-| Emblem | Type locked inside a badge/seal | Institutions, clubs, craft, heritage, sports | Illegible when small; inflexible |
-| Combination | Symbol + wordmark lockup | Most new brands (symbol can later stand alone) | Two weak halves ≠ one strong mark |
+| Type                  | What it is                        | Best when                                                                   | Watch out for                                               |
+| --------------------- | --------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Wordmark              | Name set in distinctive type only | Name is short, distinctive, new (needs to be learned); limited media budget | Generic if type is stock; long names shrink badly           |
+| Lettermark / monogram | 2+ initials combined              | Long or hard-to-say names; heritage/fashion/institutions                    | Woven initials carry little meaning; needs lots of exposure |
+| Letterform            | One initial as a symbol           | App icons, tech, finance; need a compact avatar                             | Many brands share the same letter; needs a twist            |
+| Pictorial             | Recognisable object/animal        | Name or story has a vivid image; global/wordless recognition                | Literalness; clichés; too much detail                       |
+| Abstract              | Non-representational form         | Conceptual positioning (speed, connection); diversified companies           | Meaningless without exposure/story                          |
+| Negative space        | Two silhouettes sharing an edge   | A clever, conceptually linked pair exists                                   | Hardest to do; forced results; ambiguity                    |
+| Mascot                | Character with personality        | Family, food, games, community brands                                       | Complexity, dating, poor small-size performance             |
+| Emblem                | Type locked inside a badge/seal   | Institutions, clubs, craft, heritage, sports                                | Illegible when small; inflexible                            |
+| Combination           | Symbol + wordmark lockup          | Most new brands (symbol can later stand alone)                              | Two weak halves ≠ one strong mark                           |
 
 Library data point: of the 233 brands in the bundled library that ship both a full logo and a standalone
 icon, about **9 in 10** full logos are wide horizontal lockups (aspect ratio above 2.5 : 1), while about
-**3 in 4** icons are near-square (0.8–1.25 : 1). Designing the symbol and the lockup as a *pair* from day one
+**3 in 4** icons are near-square (0.8–1.25 : 1). Designing the symbol and the lockup as a _pair_ from day one
 is the norm, not the exception.
 
 ---
@@ -79,7 +80,7 @@ One initial treated as a symbol that conceptually, stylistically or metaphorical
 
 - Carries less information than pictorial marks, so it's more neutral and often more timeless. Favoured by
   finance and technology.
-- Many brands share the same initial — the concept must live in the *treatment*: a letter that is also an arrow,
+- Many brands share the same initial — the concept must live in the _treatment_: a letter that is also an arrow,
   a path, a fold, a spark, a bracket, a container, a person.
 - Excellent as app icon / favicon / avatar; pair with a wordmark for the full lockup.
 

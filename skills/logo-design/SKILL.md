@@ -13,13 +13,13 @@ Reply in the user's language. Keep the process visible but light: short explanat
 
 ## Pick the mode
 
-| The user wants… | Mode | Start with |
-|---|---|---|
-| A new logo | **Design** (full or fast track below) | Phase 1 |
-| Feedback on a logo | **Critique** | `references/critique.md` |
-| To modernise/replace a logo | **Redesign** | `references/redesign.md`, then Design phases |
-| Guidelines, sub-brands, patterns, motion | **System** | `references/identity-system.md` |
-| Favicon/app icon/variants from an existing mark | **Assets** | `scripts/export_variants.py` |
+| The user wants…                                 | Mode                                  | Start with                                   |
+| ----------------------------------------------- | ------------------------------------- | -------------------------------------------- |
+| A new logo                                      | **Design** (full or fast track below) | Phase 1                                      |
+| Feedback on a logo                              | **Critique**                          | `references/critique.md`                     |
+| To modernise/replace a logo                     | **Redesign**                          | `references/redesign.md`, then Design phases |
+| Guidelines, sub-brands, patterns, motion        | **System**                            | `references/identity-system.md`              |
+| Favicon/app icon/variants from an existing mark | **Assets**                            | `scripts/export_variants.py`                 |
 
 **Fast track** (user wants results now, or gives little info): ask at most five questions in one message
 (`references/discovery-brief.md` §2), or skip questions entirely, state your assumptions, and go straight to three
@@ -27,7 +27,7 @@ concepts. You can always iterate after they react.
 
 **Concept checkpoint — show the logos before building anything else.** Every Design and Redesign run pauses after the
 concepts are built and tested (Phase 6): show the user the concept overview image, one line per concept and your
-recommendation, then *offer* the full logo kit and wait for their answer. Build the kit (Phase 7) only after they pick a
+recommendation, then _offer_ the full logo kit and wait for their answer. Build the kit (Phase 7) only after they pick a
 direction and say yes. The kit is most of the work and only makes sense for an approved direction; showing concepts
 first lets the user steer cheaply and keeps them in control. Skip the pause only when the user explicitly says not to
 check in (e.g. "don't ask, just deliver everything"). If the user can't reply at all, stop at the checkpoint anyway and
@@ -41,16 +41,16 @@ that is `${CLAUDE_SKILL_DIR}/scripts/`; in other agents, use the folder this ski
 `python3 <skill-dir>/scripts/svg_audit.py logo.svg` (examples below write `scripts/…` for brevity).
 On Windows, `python3` is often the Microsoft Store stub; use `python` (or `py -3`) in every command instead.
 
-| Script | Use it to |
-|---|---|
-| `concept_sheet.py` | One-image concept overview (large mark, lockup, true 64/32/16 px sizes, name, one-line idea, recommendation) — what you show at the checkpoint |
-| `search_library.py` | Find reference logos by `--type`, `--technique`, `--geometry`, `--subject`, `--industry`, `--color`, `--mood`…; `--summary` shows a category's conventions; `--format paths` gives files to read |
-| `svg_audit.py` | Check an SVG: live text, rasters, filters, colour count, gradients, strokes, near-miss angles, tiny details, centring, complexity vs. the library |
-| `preview_sheet.py` | HTML test sheet: size ladder, 16/32 px pixel test, backgrounds, one-colour, squint blur, mirror/rotate, favicon/app-icon/header/card contexts, side-by-side, shelf test vs. competitors |
+| Script                  | Use it to                                                                                                                                                                                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `concept_sheet.py`      | One-image concept overview (large mark, lockup, true 64/32/16 px sizes, name, one-line idea, recommendation) — what you show at the checkpoint                                                                                                                                                            |
+| `search_library.py`     | Find reference logos by `--type`, `--technique`, `--geometry`, `--subject`, `--industry`, `--color`, `--mood`…; `--summary` shows a category's conventions; `--format paths` gives files to read                                                                                                          |
+| `svg_audit.py`          | Check an SVG: live text, rasters, filters, colour count, gradients, strokes, near-miss angles, tiny details, centring, complexity vs. the library                                                                                                                                                         |
+| `preview_sheet.py`      | HTML test sheet: size ladder, 16/32 px pixel test, backgrounds, one-colour, squint blur, mirror/rotate, favicon/app-icon/header/card contexts, side-by-side, shelf test vs. competitors                                                                                                                   |
 | `presentation_board.py` | Client presentation (brief, each concept with rationale + 6 **industry-specific** mockups — cup, packaging, payment card, README, terminal, signage…; comparison, recommendation) from a JSON spec (`templates/presentation-spec.example.json`); `--png-dir` exports every slide as PNG; `--list-mockups` |
-| `render_png.py` | Render SVG → transparent PNG at exact sizes (for looking at your work and for deliverables); screenshots HTML sheets/boards (Chrome); builds `favicon.ico`; `--which` lists renderers |
-| `export_variants.py` | Black, white, brand-mono, square, favicon and app-icon SVGs; `--png` sizes; `--web-icons` = favicon.ico + PNG icon set + webmanifest + `<head>` snippet; `--favicon-source` for a simplified small-size drawing |
-| `build_catalog.py` | Maintainers only: rebuild the library catalog |
+| `render_png.py`         | Render SVG → transparent PNG at exact sizes (for looking at your work and for deliverables); screenshots HTML sheets/boards (Chrome); builds `favicon.ico`; `--which` lists renderers                                                                                                                     |
+| `export_variants.py`    | Black, white, brand-mono, square, favicon and app-icon SVGs; `--png` sizes; `--web-icons` = favicon.ico + PNG icon set + webmanifest + `<head>` snippet; `--favicon-source` for a simplified small-size drawing                                                                                           |
+| `build_catalog.py`      | Maintainers only: rebuild the library catalog                                                                                                                                                                                                                                                             |
 
 **Look at your work.** Drawing in SVG code is drawing blind. After writing or changing a logo, render it and look:
 `python3 scripts/render_png.py concept-a.svg concept-b.svg --out-dir renders --size 512`, then open the PNGs with
@@ -63,11 +63,13 @@ geometry extra simple and explicit.
 ## Design workflow
 
 ### Phase 1 — Discovery → brief
+
 Learn: name (exact spelling), what they do, audience, 3–5 brand adjectives, competitors, constraints (colours, equity,
 where it must work), decision-maker. Write a short brief (template in `references/discovery-brief.md` §5) and list your
 assumptions. Adjectives are the most valuable input — they become visual cues.
 
 ### Phase 2 — Research & strategy
+
 1. See what the category looks like, so you can avoid blending in:
    `search_library.py --industry <closest> --summary` (and look at a few files). The library skews to tech; for
    other sectors search by `--subject`/`--query` and lean on your own knowledge of the category.
@@ -78,6 +80,7 @@ assumptions. Adjectives are the most valuable input — they become visual cues.
 4. Choose candidate **mark types** with `references/mark-types.md` §12. Explore at least two different types.
 
 ### Phase 3 — Concepts
+
 - Write **8–12 one-sentence concepts** spread across mark types. Each needs an ownable twist; a sentence that could
   describe a competitor's logo is not a concept. (If you can't say it in one sentence, it won't read in a glance.)
 - Score them quickly (idea clarity, distinction, simplicity, relevance, small-size strength) and pick the **three
@@ -88,6 +91,7 @@ assumptions. Adjectives are the most valuable input — they become visual cues.
 - Keep it lean: one-liners are cheap, builds are expensive. Build only the three; don't polish ideas you'll drop.
 
 ### Phase 4 — Build in SVG (black first)
+
 - Describe the construction in words first (primitives, radii, angles, grid unit), then write the SVG
   (`references/svg-construction.md`). Canvas `viewBox="0 0 256 256"` for symbols; lockups keep height 256.
 - Solid black on white; no colour yet. Few anchors, arcs for circular geometry, exact angles (0/15/30/45/60/90°),
@@ -96,11 +100,14 @@ assumptions. Adjectives are the most valuable input — they become visual cues.
 - Save every meaningful iteration (`concept-a-v1.svg`, `-v2.svg`…) instead of overwriting — you'll want to compare.
 
 ### Phase 5 — Test & refine (loop at least twice)
+
 ```bash
 python3 scripts/svg_audit.py concept-a.svg concept-b.svg concept-c.svg
 python3 scripts/preview_sheet.py concept-a.svg concept-b.svg concept-c.svg --refs-industry <industry> -o preview.html
 ```
+
 Open and look. Fix what fails, then re-run. Key refinements (details in `references/visual-techniques.md`):
+
 - **Scale**: the idea survives 16–24 px; gaps and strokes big enough; otherwise simplify or add a small-size version.
 - **Optical corrections**: overshoot round/pointed forms (~1–3 %), fix the bone effect on rounded shapes, thin
   horizontals slightly, centre optically (slightly above geometric centre), thin the reversed version.
@@ -108,19 +115,21 @@ Open and look. Fix what fails, then re-run. Key refinements (details in `referen
 - **Readings**: mirror, rotate 180°, view tiny — check for unintended shapes or meanings.
 - **Distinction**: shelf test against competitors; the familiarity test (if it feels familiar and isn't yours, it's
   someone else's).
-- **Craft pass** (where AI-drawn marks usually fall short): (1) *Letter test* — does every modified letter still read
-  as the intended letter at first glance? If a K reads as an h, revise. (2) *Junctions* — inspect every place strokes
-  meet: no accidental notches, slivers, lumps or ink traps. (3) *Peer test* — put your mark next to 3–4 exemplary
+- **Craft pass** (where AI-drawn marks usually fall short): (1) _Letter test_ — does every modified letter still read
+  as the intended letter at first glance? If a K reads as an h, revise. (2) _Junctions_ — inspect every place strokes
+  meet: no accidental notches, slivers, lumps or ink traps. (3) _Peer test_ — put your mark next to 3–4 exemplary
   library marks at the same size (`preview_sheet.py yours.svg --refs <files from search_library.py --exemplary --format paths>`);
-  it should look equally resolved. (4) *Literalness* — if a concept is simply the product drawn (a cup for coffee),
+  it should look equally resolved. (4) _Literalness_ — if a concept is simply the product drawn (a cup for coffee),
   push it further or drop it.
-Full list: `references/testing-checklist.md`.
+  Full list: `references/testing-checklist.md`.
 
 ### Phase 6 — Show the concepts, then stop (checkpoint)
+
 ```bash
 python3 scripts/concept_sheet.py a-symbol.svg b-symbol.svg c-symbol.svg --lockups a-lockup.svg b-lockup.svg c-lockup.svg \
     --names "Name A" "Name B" "Name C" --notes "One-line idea A" "…" "…" --recommend 1 --greyscale -o concepts.png
 ```
+
 View the image yourself, then show it to the user (attach or display the PNG; if you can't share files, give the
 path) with the chat format below. Greyscale first — colour triggers taste debates; you may add a small colour hint
 for your recommendation. End with the kit offer and **wait for the answer**:
@@ -132,6 +141,7 @@ for your recommendation. End with the kit offer and **wait for the answer**:
 If they want changes instead, iterate on the concepts (back to Phase 4–5) and show the sheet again.
 
 ### Phase 7 — Build the kit (only after the user says yes)
+
 1. **Refine the chosen direction**: final geometry, optical corrections, small-size cut, thinned reversed version.
 2. **Colour**: 1–2 colours ideally, ownable in the category, reproducible (HEX/RGB/CMYK/Pantone), accessible; the
    one-colour and greyscale versions must still work (`references/color.md`).
@@ -166,7 +176,7 @@ If they want changes instead, iterate on the concepts (back to Phase 4–5) and 
 10. **Foundation of a system** — never judge a logo in a void; it must seed patterns, icons, motion.
 11. **Craft matters** — geometry, optical corrections, spacing; the invisible details separate good from great.
 12. **Be strong, not stubborn** — defend the strategy, stay open on details, and value feedback.
-Deeper reasoning: `references/principles.md`.
+    Deeper reasoning: `references/principles.md`.
 
 ## Red flags — fix before showing anything
 
@@ -184,16 +194,18 @@ Deeper reasoning: `references/principles.md`.
 ```markdown
 <concept overview image>
 
-### A — <Name>  ·  <mark type>   ← recommended
+### A — <Name> · <mark type> ← recommended
+
 **Idea:** <one sentence>
 **Why it fits:** <2–3 bullets linked to the brief's adjectives/audience/competition>
 
-### B — … / ### C — …  (same shape)
+### B — … / ### C — … (same shape)
 
 **My recommendation:** <one or two sentences, including one honest risk per concept if relevant>
 **Next:** pick a direction (or tell me what you like in each). Want me to prepare the full logo kit for it?
 <one-line list of what the kit contains>
 ```
+
 Keep it short: the image does the work. Don't attach variants, boards or icon sets yet.
 
 ## Honesty and limits
@@ -205,19 +217,19 @@ Keep it short: the image does the work. Don't attach variants, boards or icon se
 
 ## Reference map
 
-| Read | When |
-|---|---|
-| `references/principles.md` | Justifying decisions, resolving debates, deep critique |
-| `references/discovery-brief.md` | Questions, brief template, word mapping |
-| `references/mark-types.md` | Choosing the type of mark; pros/cons; decision guide |
-| `references/visual-techniques.md` | Geometry, grids, balance, optical corrections, negative space, gradients, paradoxes |
-| `references/color.md` | Palette strategy, harmony, reproduction, accessibility, library colour data |
-| `references/typography.md` | Type study, custom letterforms, spacing, lockups, licensing |
-| `references/process.md` | Stage-by-stage process, exploration, vector development, final checklist |
-| `references/svg-construction.md` | Writing clean SVG logos, recipes, what to avoid |
-| `references/testing-checklist.md` | Everything to test before presenting or delivering |
-| `references/presentation-delivery.md` | Presenting, feedback, committees, deliverables, working relationship |
-| `references/identity-system.md` | Kit of parts, sub-brands, dynamic identities, patterns, motion, guidelines, rollout |
-| `references/redesign.md` | Refresh vs. rebrand, equity audit, refresh techniques |
-| `references/critique.md` | Structured logo critique with scorecard and fixes |
-| `references/library-guide.md` | What's in the 1,400+ logo library, insights, curated examples by technique |
+| Read                                  | When                                                                                |
+| ------------------------------------- | ----------------------------------------------------------------------------------- |
+| `references/principles.md`            | Justifying decisions, resolving debates, deep critique                              |
+| `references/discovery-brief.md`       | Questions, brief template, word mapping                                             |
+| `references/mark-types.md`            | Choosing the type of mark; pros/cons; decision guide                                |
+| `references/visual-techniques.md`     | Geometry, grids, balance, optical corrections, negative space, gradients, paradoxes |
+| `references/color.md`                 | Palette strategy, harmony, reproduction, accessibility, library colour data         |
+| `references/typography.md`            | Type study, custom letterforms, spacing, lockups, licensing                         |
+| `references/process.md`               | Stage-by-stage process, exploration, vector development, final checklist            |
+| `references/svg-construction.md`      | Writing clean SVG logos, recipes, what to avoid                                     |
+| `references/testing-checklist.md`     | Everything to test before presenting or delivering                                  |
+| `references/presentation-delivery.md` | Presenting, feedback, committees, deliverables, working relationship                |
+| `references/identity-system.md`       | Kit of parts, sub-brands, dynamic identities, patterns, motion, guidelines, rollout |
+| `references/redesign.md`              | Refresh vs. rebrand, equity audit, refresh techniques                               |
+| `references/critique.md`              | Structured logo critique with scorecard and fixes                                   |
+| `references/library-guide.md`         | What's in the 1,400+ logo library, insights, curated examples by technique          |

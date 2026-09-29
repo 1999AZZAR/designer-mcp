@@ -5,6 +5,7 @@ void — always on a card, a van, a screen, a building, next to photography and 
 more than a mark: a kit of parts, sub-brands, patterns, a dynamic identity, motion, or guidelines.
 
 ## Contents
+
 1. Principles of a system
 2. The kit of parts (checklist)
 3. Logo systems and sub-brands
@@ -22,7 +23,7 @@ more than a mark: a kit of parts, sub-brands, patterns, a dynamic identity, moti
   Consistency is central to branding; it doesn't preclude creativity. A predictable, lifeless system fails; power,
   clarity and freshness must accompany consistency.
 - **Clarity of message** — every element supports the logo and the intended perception; nothing competes with it.
-- **Derived, not duplicated** — the system grows *from* the mark (its angles, radii, colours, a fragment) but
+- **Derived, not duplicated** — the system grows _from_ the mark (its angles, radii, colours, a fragment) but
   complements rather than copies it.
 - **Accommodate the user** — understand who will use the system (in-house designers, agencies, printers, franchisees,
   developers) and how; make it customisable within constraints.
@@ -32,35 +33,44 @@ more than a mark: a kit of parts, sub-brands, patterns, a dynamic identity, moti
 ## 2. The kit of parts (checklist)
 
 **Logo & variations**
+
 - Primary mark/signature (symbol + wordmark) and variations: horizontal, stacked, symbol-only, wordmark-only.
 - Size variants: a simplified small-size version; redrawn details for very large use if needed.
 - Media variants: e.g. heavier line weights for broadcast/screen, single-colour for embroidery.
 - Brand extensions and product logos; relationship with partner or trademark symbols.
 
 **Colour palettes**
+
 - Primary colour(s) and acceptable alternatives; black/white usage; can it be reversed, or reversed only out of a
   containing shape? Exact Pantone, CMYK, RGB, HEX values. Secondary/accent palette.
 
 **Typography**
+
 - Primary and secondary families, weights, italics; web/app fallbacks; rules for headlines vs body.
 
 **Taglines and modifying copy**
+
 - Primary and alternative taglines, typeface, size ratio to the logo, legal lines, ™/® usage.
 
 **Imagery**
+
 - Photography/illustration style, when and how used, ratio and proximity to the logo, image library access.
 
 **Containing shapes / graphic devices**
+
 - Is the logo ever placed in a shape? Always or only in some contexts? Does the shape change? Can it hold other
   content?
 
 **Patterns, icons, textures**
+
 - Brand pattern(s), icon set built on the logo's geometry, supporting graphic elements.
 
 **Motion and sound** (screen, broadcast, product)
+
 - How the logo moves and resolves; how it interacts with other elements; sonic signature if relevant.
 
 **Voice**
+
 - Editorial tone — part of the identity even though it isn't visual.
 
 ## 3. Logo systems and sub-brands
@@ -73,7 +83,7 @@ more than a mark: a kit of parts, sub-brands, patterns, a dynamic identity, moti
 - Decide on hierarchy deliberately: is association with the parent an advantage or a liability for the product?
   If association would position the product badly, that's a strategy problem to solve before any design.
 - Keep repeated elements truly consistent (same typeface, same symbol proportions, same spacing rules); vary one
-  dimension at a time (colour *or* icon *or* descriptor).
+  dimension at a time (colour _or_ icon _or_ descriptor).
 
 ## 4. Static vs. changeable (dynamic) identities
 
@@ -117,6 +127,7 @@ packaging, vehicle and uniform suppliers, purchasing). Written in plain language
 rules and more "do"s than "don't"s.
 
 **Suggested anatomy** (scale down for a start-up; a one-page sheet can be enough):
+
 1. **Introduction** — a short letter from leadership (drives buy-in), the brand idea, how to use the manual.
 2. **Logo** — the mark and its rationale; versions and lockups; construction; **clear space** (defined by an element
    of the logo, e.g. the height of the symbol's dot or the cap height, so it scales — never a fixed distance);

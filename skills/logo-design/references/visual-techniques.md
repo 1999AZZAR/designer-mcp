@@ -4,6 +4,7 @@ The craft layer: how forms are perceived, and the small corrections that separat
 perfect one. Read during development and refinement (phases 4–5), and when critiquing.
 
 ## Contents
+
 1. Geometry, grids and the golden ratio
 2. Balance (stability, proportion, composition, consistency, scalability)
 3. Optical corrections: overshoot, bone effect, irradiation, same-size look
@@ -61,6 +62,7 @@ perfect one. Read during development and refinement (phases 4–5), and when cri
 ## 3. Optical corrections
 
 ### Overshoot
+
 Round and pointed shapes look smaller than flat-edged shapes of the same measured height. A circle placed
 between squares of equal height looks too small; an `O` beside an `H` looks short. Let curves and apexes extend
 slightly past the baseline/cap line/edge — typically **1–3 % of the height** for curves and more for sharp points
@@ -68,20 +70,24 @@ slightly past the baseline/cap line/edge — typically **1–3 % of the height**
 difference between great and perfect.
 
 ### Bone effect
+
 Where a curve meets a straight line tangentially (a capsule: two semicircles joined by straight sides; rounded
 rectangles; rounded triangles), the straight segment appears to pinch inward like a bone. Fixes, from quick to best:
+
 1. Stretch the end curves into ellipses (softens but doesn't remove it).
 2. Pull the curve handles so curvature ramps up gradually instead of jumping from zero to the full circle.
 3. Use a smooth curvature transition (a "squircle"/superellipse-like corner): extra anchors that ease from straight
    to curved; copy the tuned curve to the symmetrical corners.
-Not every instance needs fixing — sometimes the bone effect is expressive (bulkiness in a figure). Fixing it often
-frees up interior space and makes rounded marks crisper at small sizes. In SVG, prefer continuous-curvature
-corners (cubic Béziers with handles ≈ 0.55–0.65 of the corner size, extended past the tangent point) over plain
-`rx` arcs when the corner is prominent.
+   Not every instance needs fixing — sometimes the bone effect is expressive (bulkiness in a figure). Fixing it often
+   frees up interior space and makes rounded marks crisper at small sizes. In SVG, prefer continuous-curvature
+   corners (cubic Béziers with handles ≈ 0.55–0.65 of the corner size, extended past the tangent point) over plain
+   `rx` arcs when the corner is prominent.
 
 ### Irradiation: white on black looks bigger
+
 A light shape on a dark background appears larger and bolder than the identical dark shape on a light background.
 Consequences:
+
 - A reversed (white-on-dark) logo looks heavier. Provide a **reversed version with slightly thinned strokes**
   (roughly 2–5 % of stroke weight), or scale the reversed version down slightly. Achieve it by offsetting the path
   inward (expand a thin stroke and subtract it from the shape).
@@ -89,15 +95,18 @@ Consequences:
 - Thin white lines on dark grounds can visually "bloom" and fill in when printed; keep counters open.
 
 ### Same-size look for mixed shapes
+
 Circles, squares and triangles of the same bounding box do not look the same size. Equalise by eye: circles
 slightly larger than squares; triangles larger still. Same for icons in a set.
 
 ### Horizontal vs. vertical strokes
+
 Horizontal strokes look heavier than vertical strokes of equal thickness. In lettering and geometric marks, make
 horizontals slightly thinner (often 5–10 %) to look equal. Where strokes meet at acute angles, thin them near the
 junction to avoid dark ink traps and blobs at small sizes.
 
 ### Optical centre
+
 The optical centre of an area sits slightly above the geometric centre. A mark centred mathematically in a
 container often looks low; nudge it up a little. Asymmetric shapes (a triangle pointing right, a play button) need
 to be shifted toward their visual mass, not their bounding box.
@@ -106,6 +115,7 @@ to be shifted toward their visual mass, not their bounding box.
 
 Shapes interacting create feelings. First define the goal — harmony, tension, dynamism, balance, dissonance,
 entropy — then arrange.
+
 - Circle resting on a square of the same width → harmony, stability.
 - Square balanced on a circle → tension, instability.
 - Circle beside the apex of a triangle → motion.
@@ -157,11 +167,12 @@ Years of playing with forms build the intuition; in the meantime, test variation
 
 When something appears to be one thing and becomes another on closer inspection, the mind solves a small problem and
 enjoys the solution. Three families:
+
 1. **Impossible figures** — shapes that can't exist in 3D (reversed perspective, manipulated line connections,
    misaligned layers). Study the concept, don't copy famous figures; transpose the principle (e.g. a letter whose
    perspective switches direction halfway).
 2. **Ambiguous forms** — one image that reads as two. Rare to succeed intentionally. The bigger risk is the
-   *unintended* reading: after hours of work a designer stops seeing what is obvious to others (including sexual or
+   _unintended_ reading: after hours of work a designer stops seeing what is obvious to others (including sexual or
    offensive readings). Always ask fresh eyes, rotate the mark 90/180°, view it tiny and mirrored.
 3. **Motion illusions** — tapering sweeps, speed lines, progressive repetition. For speed, run the form from thin to
    thick in the reading direction (left to right in Latin-script cultures); consider right-to-left audiences.
@@ -198,6 +209,7 @@ transparency, juxtaposing flat and dimensional, and playing with colour at inter
 
 A logo designed for light backgrounds may not invert well (a white swan inverted becomes a black swan — maybe desired,
 maybe not). For busy, photographic or multicoloured backgrounds use a **graphic device**:
+
 - An outline (a sufficiently thick light stroke around the silhouette), or
 - A containing shape: circle for circular marks; square or rounded square for most others (the safest for rectangular
   formats and app icons). A basic container may not be the most beautiful, but it is functional.

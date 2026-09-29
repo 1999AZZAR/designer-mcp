@@ -4,6 +4,7 @@ How to present concepts so they are judged on the right criteria, how to handle 
 to deliver at the end. Also covers the working relationship (fees, spec work, rights) for users who are designers.
 
 ## Contents
+
 1. Presentation rounds
 2. Structure of a concept presentation
 3. Talking about concepts
@@ -16,6 +17,7 @@ to deliver at the end. Also covers the working relationship (fees, spec work, ri
 ## 1. Presentation rounds
 
 A typical project has three presentations:
+
 1. **Concepts (the checkpoint)** — three distinct directions at ~80 % finish, **in greyscale**, each with a one-sentence
    idea and a short rationale tied to the brief, shown as one overview image (`scripts/concept_sheet.py`). End by
    offering the full kit and wait. Goal: choose a direction. Nothing else is produced before this answer.
@@ -46,7 +48,7 @@ client presentation (round 2, or when the user asks for one), use `scripts/prese
 3. **Per concept** (one at a time, not all at once):
    - Name the concept and give the **one-sentence idea**.
    - Show the mark large, alone, in black on white.
-   - Explain *how it answers the brief* (2–4 bullets). Mention the craft decisions briefly (geometry, custom letters).
+   - Explain _how it answers the brief_ (2–4 bullets). Mention the craft decisions briefly (geometry, custom letters).
    - Show it small (favicon/app icon) and reversed.
    - Show 5–6 **mockups relevant to the business**, in a consistent style (a coffee brand on cups and a storefront,
      a SaaS on an app icon, website header and a conference badge).
@@ -77,7 +79,7 @@ the brand quickly and simply; the rest is the job of the identity system and the
 - **Value all feedback** — even irritating feedback contains information. Clients usually know their business better
   than the designer. Don't fall in love with your own work, and never demonise the client.
 - **Translate feedback into problems**: "Make it bigger" may mean "it lacks presence"; "I don't like the colour" may mean
-  "it feels cold". Ask *why* before changing anything.
+  "it feels cold". Ask _why_ before changing anything.
 - **Underpromise and overdeliver**; meet deadlines — reliability builds the trust that lets bolder ideas through.
 - **Be strong, not stubborn**: hold the strategic line, concede on details, and remember the designer is the catalyst
   for change — some discomfort is normal. The job is an effective logo, not making everyone feel good.
@@ -88,6 +90,7 @@ the brand quickly and simply; the rest is the job of the identity system and the
 agencies. **Raster** — PNG with transparency (e.g. 512, 1024, 2048 px) and JPG on white for office use.
 
 **Variants** (generate with `scripts/export_variants.py`):
+
 - Full colour, one-colour black, one-colour white (reversed), one-colour brand colour.
 - Lockups: horizontal, stacked, symbol-only, wordmark-only (+ with tagline if any).
 - Favicon (SVG + 32/48 PNG; ICO if requested), app icon (1024 px square, platform tile), social avatar (circle-safe).

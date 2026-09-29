@@ -52,7 +52,7 @@ export interface HelaResult<T = unknown> {
   error?: string;
 }
 
-export const SERVER_NAME = 'the-designer';
+export const SERVER_NAME = "the-designer";
 
 /**
  * Design tools are pure generation / read-only lookups and declare no side
@@ -101,12 +101,12 @@ export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
 };
 
 export function isEnvelopeEnabled(): boolean {
-  return process.env['HELA_ENVELOPE'] === 'true';
+  return process.env["HELA_ENVELOPE"] === "true";
 }
 
 function baseExecution(toolName: string): HelaExecutionMeta {
-  const runId = process.env['HELA_RUN_ID'];
-  const stepId = process.env['HELA_STEP_ID'];
+  const runId = process.env["HELA_RUN_ID"];
+  const stepId = process.env["HELA_STEP_ID"];
   const meta: HelaExecutionMeta = {
     serverName: SERVER_NAME,
     toolName,
@@ -117,7 +117,11 @@ function baseExecution(toolName: string): HelaExecutionMeta {
   return meta;
 }
 
-export function wrapResult<T>(toolName: string, data: T, summary?: string): HelaResult<T> {
+export function wrapResult<T>(
+  toolName: string,
+  data: T,
+  summary?: string,
+): HelaResult<T> {
   return {
     ok: true,
     summary: summary || `${toolName} ok`,
@@ -146,8 +150,10 @@ export function wrapError(toolName: string, message: string): HelaResult<null> {
   };
 }
 
-function textBlock(text: string): { content: Array<{ type: string; text: string }> } {
-  return { content: [{ type: 'text', text }] };
+function textBlock(text: string): {
+  content: Array<{ type: string; text: string }>;
+} {
+  return { content: [{ type: "text", text }] };
 }
 
 /**
@@ -156,7 +162,9 @@ function textBlock(text: string): { content: Array<{ type: string; text: string 
  */
 export function textResult(toolName: string, text: string, summary?: string) {
   if (!isEnvelopeEnabled()) return textBlock(text);
-  return textBlock(JSON.stringify(wrapResult(toolName, text, summary), null, 2));
+  return textBlock(
+    JSON.stringify(wrapResult(toolName, text, summary), null, 2),
+  );
 }
 
 /**
@@ -165,7 +173,10 @@ export function textResult(toolName: string, text: string, summary?: string) {
  */
 export function errorResult(toolName: string, message: string) {
   if (!isEnvelopeEnabled()) {
-    return { content: [{ type: 'text', text: `Error: ${message}` }], isError: true };
+    return {
+      content: [{ type: "text", text: `Error: ${message}` }],
+      isError: true,
+    };
   }
   return {
     ...textBlock(JSON.stringify(wrapError(toolName, message), null, 2)),

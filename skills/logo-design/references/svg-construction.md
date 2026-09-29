@@ -4,6 +4,7 @@ How to turn a concept into clean, production-grade SVG code by hand (as an AI wr
 minimal, and easy for printers, developers and vector editors to use.
 
 ## Contents
+
 1. File conventions
 2. Construction strategy: think in primitives
 3. Paths: writing clean geometry
@@ -27,6 +28,7 @@ minimal, and easy for printers, developers and vector editors to use.
   <path fill="#0F7C80" d="…"/>
 </svg>
 ```
+
 - **viewBox first**: work on a clean integer canvas. 256 × 256 (or 512 × 512) for symbols; for lockups keep the
   height 256 and let the width follow (e.g. `0 0 960 256`). The bundled library uses the same convention (width
   256 or 512 in ~99 % of files).
@@ -40,12 +42,14 @@ minimal, and easy for printers, developers and vector editors to use.
 ## 2. Construction strategy: think in primitives
 
 Before writing path data, describe the construction in words:
-- *"Circle r=96 centred at (128,128); remove a 45° wedge from the upper right; a smaller circle r=28 sits in the
-  gap as a 'dot'."*
-- *"Letter M from three 40-unit-wide bars on a 256 grid; the middle vertex rises to y=96; outer stems are extended
-  4 units below the baseline for overshoot of the pointed vertex."*
+
+- _"Circle r=96 centred at (128,128); remove a 45° wedge from the upper right; a smaller circle r=28 sits in the
+  gap as a 'dot'."_
+- _"Letter M from three 40-unit-wide bars on a 256 grid; the middle vertex rises to y=96; outer stems are extended
+  4 units below the baseline for overshoot of the pointed vertex."_
 
 Then choose the simplest element that expresses each part:
+
 - `<circle>`, `<ellipse>`, `<rect rx>` for primitives (easy to read and adjust).
 - `<path>` for everything else, and for the final merged silhouette.
 - `<polygon>` for straight-edged shapes.
@@ -124,30 +128,35 @@ systematic and gridding later is trivial. Keep a list of the radii and angles yo
 ## 8. Common construction recipes
 
 **Perfect circle with a notch (open ring)**
+
 ```svg
 <path fill="none" stroke="#111" stroke-width="32" stroke-linecap="round"
       d="M 201.5 54.5 A 104 104 0 1 0 232 128"/>   <!-- exploration; expand for master -->
 ```
 
 **Rounded square container (app icon), 22 % radius**
+
 ```svg
 <rect x="0" y="0" width="256" height="256" rx="56" fill="#0F7C80"/>
 ```
 
 **Equilateral triangle (side 203.2, height 176), centred on its bounding box** — its visual mass (centroid)
 sits low, so nudge it up a few units if it looks bottom-heavy inside a container.
+
 ```svg
 <polygon points="128,40 229.6,216 26.4,216" fill="#111"/>
 ```
 
 **Letter "A" as a letterform symbol** — flat apex, every edge on the same 1 : 2 slope, and a constant
 48-unit stroke (legs, crossbar and apex all measure 48)
+
 ```svg
 <path fill="#111" fill-rule="evenodd"
       d="M104 32 H152 L248 224 H200 L184 192 H72 L56 224 H8 Z  M96 144 H160 L128 80 Z"/>
 ```
 
 **Speech bubble from a circle + tail (merged)**
+
 ```svg
 <path fill="#111" d="M128 24 A104 104 0 1 1 61.6 208 L28 236 L37.9 180 A104 104 0 0 1 128 24 Z"/>
 ```
@@ -156,21 +165,22 @@ These are starting points; refine proportions and add the concept's twist.
 
 ## 9. What to avoid in a master file
 
-| Avoid | Why | Instead |
-|---|---|---|
-| `<text>` | font dependence | outlined paths |
-| `<image>` / embedded PNG | not vector, blurry | vector paths |
-| `filter` (blur, shadow, glow) | inconsistent rendering, not printable | flat shapes; simulate shadow with a darker shape |
-| many `<mask>`/`clipPath` | tool compatibility | bake into paths |
-| transforms nested deeply | hard to edit, rounding errors | apply transforms to coordinates (one wrapper `translate/scale`, as `export_variants.py` writes, is fine) |
-| 20+ colours / many gradients | poor reproduction, weak recall | ≤ 3 flat colours; stepped gradients |
-| micro-details < 1/64 of size | vanish when small | merge or remove |
-| off-by-a-degree angles | look accidental | exact angles |
-| editor metadata, huge precision | bloat | clean markup |
+| Avoid                           | Why                                   | Instead                                                                                                  |
+| ------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `<text>`                        | font dependence                       | outlined paths                                                                                           |
+| `<image>` / embedded PNG        | not vector, blurry                    | vector paths                                                                                             |
+| `filter` (blur, shadow, glow)   | inconsistent rendering, not printable | flat shapes; simulate shadow with a darker shape                                                         |
+| many `<mask>`/`clipPath`        | tool compatibility                    | bake into paths                                                                                          |
+| transforms nested deeply        | hard to edit, rounding errors         | apply transforms to coordinates (one wrapper `translate/scale`, as `export_variants.py` writes, is fine) |
+| 20+ colours / many gradients    | poor reproduction, weak recall        | ≤ 3 flat colours; stepped gradients                                                                      |
+| micro-details < 1/64 of size    | vanish when small                     | merge or remove                                                                                          |
+| off-by-a-degree angles          | look accidental                       | exact angles                                                                                             |
+| editor metadata, huge precision | bloat                                 | clean markup                                                                                             |
 
 ## 10. Outlines and boolean unions (production)
 
 Without a vector editor you can't boolean-unite shapes, but you can get close:
+
 - Overlapping sub-paths inside **one** `<path>` with the default `nonzero` rule (all wound the same way) render as a
   seamless union on screen and in print — acceptable for web and most print masters.
 - Cutters, vinyl plotters and embroidery software prefer truly merged outlines. If Inkscape is installed, it can
@@ -178,16 +188,18 @@ Without a vector editor you can't boolean-unite shapes, but you can get close:
   ```bash
   inkscape logo.svg --actions="select-all:all;object-stroke-to-path;path-union;export-plain-svg;export-filename:logo-outlined.svg;export-do"
   ```
-  Otherwise note in the handover that a designer should run *Outline Stroke* + *Unite* in a vector editor.
+  Otherwise note in the handover that a designer should run _Outline Stroke_ + _Unite_ in a vector editor.
 
 ## 11. Validation
 
 Run after every significant iteration:
+
 ```bash
 python3 scripts/svg_audit.py path/to/logo.svg          # structure, colours, complexity, angles, text/raster checks
 python3 scripts/preview_sheet.py path/to/logo.svg -o preview.html   # sizes, backgrounds, mono, blur, mirror, favicon
 python3 scripts/render_png.py path/to/logo.svg --size 512 -o look.png # quick render to view
 ```
+
 Open the preview in a browser and look at it (use the available browser/screenshot tool if you are an agent). The
 audit compares the file's complexity with the reference library's distribution so you can see if a mark is unusually
 complex for a logo.

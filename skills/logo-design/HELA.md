@@ -1,9 +1,9 @@
 # HeLa overlay — logo-design
 
-Upstream: https://github.com/kaankiziltug/logo-design-skill (MIT, © 2026 kaankiziltug),
-vendored at upstream commit `78511495c3f8388905141f0634c16472d9e5f30f`. See `LICENSE` and
-`UPSTREAM.md`. This overlay is what HeLa changes; the upstream workflow stays authoritative
-unless a rule below overrides it.
+This skill is ours: it began as a copy of kaankiziltug/logo-design-skill (MIT, © 2026
+kaankiziltug — see `LICENSE` and `ATTRIBUTION.md`) and is now maintained in-tree. This overlay is
+what HeLa changes; the rest of the workflow is the design manual and stays authoritative unless a
+rule below overrides it.
 
 ## Provenance and licensing
 

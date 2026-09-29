@@ -5,6 +5,7 @@ lacks direction no matter how beautiful it is. This file covers how to gather th
 into a brief that anchors every later decision.
 
 ## Contents
+
 1. Why discovery first
 2. The fast path (when the user wants speed)
 3. The full question bank
@@ -19,7 +20,7 @@ into a brief that anchors every later decision.
 
 - Uncover and define the problem before attempting to solve it visually. Rushing into drawing raises the odds
   of missing the mark, and a missed mark is expensive for everyone.
-- The brief is a *contract of clarity*: a shared, written record of what success looks like. When
+- The brief is a _contract of clarity_: a shared, written record of what success looks like. When
   disagreements come (they will), return to the brief instead of arguing taste. That doesn't mean never
   adjusting — it means adjustments are purposeful, not arbitrary.
 - A strong brief doesn't constrain creativity; it channels it.
@@ -41,7 +42,7 @@ answers, **state your assumptions explicitly**, and continue — you can revise 
 5. **Constraints** — colours to keep/avoid, existing equity to preserve, where it must work (app icon,
    embroidery, signage, favicon), deadline for decisions.
 
-Optional sixth when relevant: *Who makes the final decision?* (Always know who signs off.)
+Optional sixth when relevant: _Who makes the final decision?_ (Always know who signs off.)
 
 ---
 
@@ -51,12 +52,14 @@ Use for substantial projects. Every business is different — adapt, don't recit
 off-topic remarks often open new avenues, but keep the conversation focused on outcomes.
 
 ### The essential four
+
 - Who are you?
 - Who needs to know?
 - How will they find out?
 - Why should they care?
 
 ### The business
+
 - **Positioning** — compared with alternatives, where do you sit? What is your price point? How big is the
   business and where is it heading (projected scale gives context for positioning)?
 - **Purpose & mission** — beyond the economics, why is this worth doing?
@@ -68,6 +71,7 @@ off-topic remarks often open new avenues, but keep the conversation focused on o
 - **Promises** — what does the organisation promise its audiences? (Promises synthesise what it stands for.)
 
 ### The audience
+
 - **Current audience** — who, where, when, why?
 - **Desired audience** — a different or wider group? Demographics (age, gender, nationality, profession)
   and psychographics (values, lifestyle).
@@ -76,10 +80,12 @@ off-topic remarks often open new avenues, but keep the conversation focused on o
 - **Desired response** — what should they feel, think or do after encountering the brand?
 
 ### The competition
+
 - Who are the main competitors? How are you different? What visual cues, colours and typefaces dominate the
   category? What marketing is gaining traction?
 
 ### The project
+
 - What are the goals for the new identity? What specific deliverables are needed?
 - Why now? What's motivating the project and driving the timeline?
 - Who is involved, with what roles? Any outside agencies or partners?
@@ -94,9 +100,10 @@ off-topic remarks often open new avenues, but keep the conversation focused on o
   uses can be a stronger communicative name than the legal one.)
 
 ### After gathering answers, ask yourself
+
 - What are the client's real concerns?
 - What does the organisation want to emphasise?
-- What is it *really* selling? (A tap sells convenience and kitchen pride; a gym sells confidence.)
+- What is it _really_ selling? (A tap sells convenience and kitchen pride; a gym sells confidence.)
 - How does it want to be perceived in the market? Stylish identities win awards; relevant ones win market share.
 
 ---
@@ -106,7 +113,7 @@ off-topic remarks often open new avenues, but keep the conversation focused on o
 - **The organisation's history**, its current identity, past identity efforts and how they shaped perception.
   Previous logos often reveal useful patterns or pitfalls.
 - **The competitive landscape**: collect competitor marks, note colours, shapes, type, and what they all share.
-  Map them (e.g. on axes like *traditional ↔ modern*, *playful ↔ serious*) to find open territory.
+  Map them (e.g. on axes like _traditional ↔ modern_, _playful ↔ serious_) to find open territory.
 - **Category conventions** via the bundled library. Examples:
   ```bash
   python3 scripts/search_library.py --industry payments-fintech --format table
@@ -132,14 +139,14 @@ must be editors too.
 
 **Summary**: <one sentence: who they are, for whom, and why they're different>
 **Audience**: <primary / secondary; where they will meet the mark>
-**Brand adjectives**: <3–5 words>   **Avoid feeling**: <2–3 words>
+**Brand adjectives**: <3–5 words> **Avoid feeling**: <2–3 words>
 **Promise / big idea**: <one line>
 **Competitive landscape**: <what the category looks like; what to avoid; open territory>
 **Mark type hypothesis**: <wordmark / combination / letterform ... and why> (see mark-types.md)
 **Must work on**: <favicon/app icon, social avatar, print, signage, embroidery, dark mode, motion ...>
 **Constraints**: <colours, equity to keep, legal, production>
 **Success criteria**: <e.g. recognisable at 16 px; distinct from X and Y; reads as "precise but warm">
-**Decision-maker**: <name/role>   **Deliverables**: <files, lockups, mini-guidelines>
+**Decision-maker**: <name/role> **Deliverables**: <files, lockups, mini-guidelines>
 **Assumptions I made**: <list — invite correction>
 ```
 
@@ -157,6 +164,7 @@ Good designers translate language into symbols. A word map bridges strategy and 
 4. Turn the best 6–10 intersections into one-sentence concept statements before drawing anything.
 
 Example (abridged):
+
 ```
 Brand: "Harbor" — a savings app. Adjectives: safe, calm, patient.
   harbor → boat, anchor, lighthouse, breakwater, shelter, bay-shape, tide
@@ -170,7 +178,7 @@ Intersections:
 ```
 
 If neither the name nor the activity offers visual clues, use abstract keywords that do translate to form:
-*connection, speed, unity, network, care, stability, balance, growth, openness, precision*.
+_connection, speed, unity, network, care, stability, balance, growth, openness, precision_.
 
 ---
 
@@ -178,7 +186,7 @@ If neither the name nor the activity offers visual clues, use abstract keywords 
 
 - **"Total creative freedom."** Usually means the client has no vision and expects the designer to supply one
   — which takes many more rounds. Ask for stylistic references (marks they like/dislike and why) to calibrate.
-- **"It should show everything we do."** Explain *identify, don't explain*; offer a system (icons, imagery,
+- **"It should show everything we do."** Explain _identify, don't explain_; offer a system (icons, imagery,
   copy) to carry the detail instead of the mark.
 - **"Make it pop / modern / clean."** Ask what those words mean to them; show references.
 - **No decision-maker identified.** Presentations to the wrong person get re-litigated later.

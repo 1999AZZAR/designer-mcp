@@ -4,6 +4,7 @@ The stages from brief to final artwork, adapted for an AI designer that works in
 human designer with a sketchbook. SKILL.md gives the short version; read this for the details of each stage.
 
 ## Contents
+
 1. Stage map
 2. Concepting
 3. Mood boards and reference gathering
@@ -17,16 +18,16 @@ human designer with a sketchbook. SKILL.md gives the short version; read this fo
 
 ## 1. Stage map
 
-| Stage | Output | Gate |
-|---|---|---|
-| Collaboration / discovery | Brief, criteria, schedule, decision-maker | Brief agreed |
-| Concepting | Word map, 6–10 one-sentence concepts | Concepts are distinct and on-brief |
-| Exploration | Many rough forms per concept | 2–4 directions worth developing |
-| Development | Clean black vector versions of 3 concepts | Presentable at ~80 % finish |
+| Stage                       | Output                                                    | Gate                                        |
+| --------------------------- | --------------------------------------------------------- | ------------------------------------------- |
+| Collaboration / discovery   | Brief, criteria, schedule, decision-maker                 | Brief agreed                                |
+| Concepting                  | Word map, 6–10 one-sentence concepts                      | Concepts are distinct and on-brief          |
+| Exploration                 | Many rough forms per concept                              | 2–4 directions worth developing             |
+| Development                 | Clean black vector versions of 3 concepts                 | Presentable at ~80 % finish                 |
 | Presentation 1 (checkpoint) | 3 concepts in greyscale as one overview image + kit offer | User picks a direction and asks for the kit |
-| Refinement | Optical corrections, gridding, colour, type, lockups | Approved final mark |
-| System & applications | Palette, typefaces, variants, patterns, key applications | System approved |
-| Production | Final files, specifications, guidelines | Delivered; audit plan |
+| Refinement                  | Optical corrections, gridding, colour, type, lockups      | Approved final mark                         |
+| System & applications       | Palette, typefaces, variants, patterns, key applications  | System approved                             |
+| Production                  | Final files, specifications, guidelines                   | Delivered; audit plan                       |
 
 Integrate existing equity (colours, shapes, heritage details) during exploration if it's a redesign.
 
@@ -40,7 +41,7 @@ Integrate existing equity (colours, shapes, heritage details) during exploration
   hiding in plain sight.
 - Write each concept as **one sentence** ("A 'T' whose crossbar is a shield's top edge, for a logistics firm whose
   promise is protection"). If it can't be said in a sentence, it won't be understood in a glance.
-- Aim for concepts that are clever *and* visually pleasing — marks with a clever idea and sound visual appeal make the
+- Aim for concepts that are clever _and_ visually pleasing — marks with a clever idea and sound visual appeal make the
   strongest first impression.
 - Consider the audience's demographics and culture (colourful/rounded for children; bold for some audiences;
   cultural symbols where relevant) — but the brand strategy decides; a children's product can have an adult identity.
@@ -51,7 +52,7 @@ Integrate existing equity (colours, shapes, heritage details) during exploration
 - Compartmentalise by direction — classic, futuristic/high-tech, colourful, monochrome — and by mark type
   (pictorial, letterform, monogram), each with relevant imagery. Clear boundaries make choices easier.
 - Use the library for logo references by technique and subject (`scripts/search_library.py --technique
-  negative-space --exemplary`). References are for learning construction and tone — never to be traced.
+negative-space --exemplary`). References are for learning construction and tone — never to be traced.
 - Mood boards can be shared with the client to align on style, or kept private; clients can't always foresee how a
   direction will develop, so don't let an early mood preference lock the outcome.
 
@@ -61,6 +62,7 @@ A human designer does this with pencil and tracing paper; as an AI, do the equiv
 rough SVG thumbnails. The logic is the same.
 
 ### Stage A — Initial (quantity over quality)
+
 - Pour out ideas with no judgement about clarity, spacing, form or silhouette. Rough strokes, imperfect shapes,
   careless curves. The page should look like a battlefield of half-formed ideas.
 - Quantity matters because it lets unexpected accidents happen. For an AI: list 15–30 micro-variations across
@@ -68,12 +70,14 @@ rough SVG thumbnails. The logic is the same.
 - Rough SVG thumbnails at 64–128 px are ideal: small size forces silhouette thinking.
 
 ### Stage B — Refinement (from ~30 % to ~60 %)
+
 - Pick the most promising concept by gut feel; it may be only ~30 % of the final. The goal is to reach 50–60 %.
 - Redraw it as a reference, then make many similar versions, each trying one new improvement: how elements
   interact, balanced flow, outline, proportion. Compare each version with the previous; keep what works, cut what
   doesn't.
 
 ### Stage C — Fine-tuning (clean and precise)
+
 - Trace over the best version repeatedly with small improvements until the form is clean and precise. At the end,
   few formal changes should remain for the vector stage.
 
@@ -95,6 +99,7 @@ Designers who stop at the first acceptable result leave quality on the table. Ke
 ## 6. Refinement and gridding
 
 After a direction is approved:
+
 1. **Alignment**: check that all horizontals and verticals are true (not 1–2° off). Snap near-standard angles to
    standard ones (43° → 45°).
 2. **Primitives**: circles perfectly circular, squares square, consistent radii where intended.

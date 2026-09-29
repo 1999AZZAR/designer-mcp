@@ -4,6 +4,7 @@ The foundational thinking behind every decision in this skill. Read this when yo
 direction, resolve a disagreement, critique a mark, or when a design "feels off" and you need a lens.
 
 ## Contents
+
 1. What a logo is (and is not)
 2. The twelve principles
 3. The mnemonic model — how marks get remembered
@@ -25,9 +26,9 @@ direction, resolve a disagreement, critique a mark, or when a design "feels off"
 - **A logo is not an illustration.** An illustration explains text. A logo is a shortcut that must be
   recognised in a glance and remembered afterwards.
 - **Logo ≠ identity ≠ brand.**
-  - *Logo*: the mark itself (symbol, wordmark, or both).
-  - *Identity*: the logo plus its visual system — typefaces, colours, imagery, patterns, tone of voice.
-  - *Brand*: the perception people hold about the organisation. It is formed by the audience from every
+  - _Logo_: the mark itself (symbol, wordmark, or both).
+  - _Identity_: the logo plus its visual system — typefaces, colours, imagery, patterns, tone of voice.
+  - _Brand_: the perception people hold about the organisation. It is formed by the audience from every
     touchpoint — products, service, behaviour, communication. A designer cannot "make" a brand; a designer
     builds the foundation the brand is perceived through.
 - **A logo is not a magic lantern.** It cannot rescue a bad product or a poorly run organisation. A well-
@@ -48,60 +49,72 @@ These are synthesised from the whole body of logo-design practice. Treat them as
 not as rigid laws — great marks sometimes break one principle deliberately to serve a stronger one.
 
 ### 1. Start with who, what, why
-Before any form: *Who is the client (values, attitude, goals)? Who is the audience (demographic and
+
+Before any form: _Who is the client (values, attitude, goals)? Who is the audience (demographic and
 psychographic)? What is actually needed — is a logo even the answer, or is the problem a bad product,
-message, or team?* Let the problem dictate the solution rather than imposing a favourite idea onto it. This
+message, or team?_ Let the problem dictate the solution rather than imposing a favourite idea onto it. This
 does not mean obeying every client whim, nor suppressing the designer's vision — it means gathering enough
 information to set criteria, then creating through the designer's filter. Also ask what the organisation
 wants to be in one, five and ten years; design for where it is going, not only where it is.
 
 ### 2. Identify, don't explain
+
 Resist the urge to depict every facet of the business. Describing too much produces a cluttered mark and a
 restraining identity that breaks the moment the business expands. The clearest, most direct voice wins.
 
 ### 3. Keep it simple
+
 A simple form is recognised faster, remembered longer, reproduced more reliably, and survives abuse —
 bad printing, embroidery, tiny favicons, careless in-house designers. Many logos fail from their own
 cleverness or overproduction. Let something be what it is. (See §4: simple is not the same as plain.)
 
 ### 4. Make it relevant
+
 The mark must fit the organisation, its industry, its audience and its personality. A florist's mark should
-not look at home on a car dealership. Relevance is about *tone and fit*, not literal depiction (see §5).
+not look at home on a car dealership. Relevance is about _tone and fit_, not literal depiction (see §5).
 
 ### 5. Aim for distinction
+
 Study what competitors look like. If every mark in the category runs together (all blue, all globes, all
 swooshes), that is an opportunity. Bucking category conventions makes a brand stand out — but keep the
 general perception in mind so the mark still reads as belonging to the right world.
 
 ### 6. Build memorability (mnemonic value)
+
 Memory is built from shape and colour first, then context, then learned associations, then emotion (see §3).
 A strong, singular silhouette and an ownable colour are the most reliable memory hooks.
 
 ### 7. Focus on one thing
+
 One clear idea, executed well, beats three ideas fighting for attention. A mark with a single defining
 feature is easier to recall and describe. If you cannot explain the idea in one sentence, it will not work.
 
 ### 8. Think small (and large)
+
 Design for an inch, or 16 px. Intricate, layered forms that look superb at 400 % on screen become a
 jumbled mess on a favicon or embroidered chest logo. Conversely, bad curves and sloppy kerning are
 exaggerated on a building-sized sign. Test both extremes (see `testing-checklist.md`).
 
 ### 9. Design for longevity
-Marks that date quickly come from concentrating on *formal* ideas (a trendy effect, the typeface of the
-moment) rather than *conceptual* ones. Style and trend rarely carry lasting emotional resonance. Aim for a
+
+Marks that date quickly come from concentrating on _formal_ ideas (a trendy effect, the typeface of the
+moment) rather than _conceptual_ ones. Style and trend rarely carry lasting emotional resonance. Aim for a
 mark that can convey its message for decades and adapt to cultural change.
 
 ### 10. Make the logo the foundation of a system
+
 The audience never sees a logo in a void. It lives on cards, screens, vehicles, buildings, packaging,
 next to photography and copy. Design the mark with its visual system in mind; the system should complement
 the mark, not copy it. Guidelines protect the mark from party hats, wrong colours and floor decals.
 
 ### 11. Design for every medium
+
 Assume the logo must work in one-colour print, on screen, as a 3D sign, embroidered, animated, and in media
 not yet invented. Most clients only picture their current use; the designer's job is to plan for the
 unplanned.
 
 ### 12. Be seductive — and be strong
+
 Aesthetics matter. People would rather be drawn in by a mark than repelled by one; the message is primary but
 the form must invite the viewer in. Simple, dynamic, well-crafted forms seduce. And "strong" applies to the
 designer too: understand your role and the client's, keep a clear vision tied to the agreed goals, and
@@ -109,6 +122,7 @@ distinguish confidence from stubbornness. The designer is a catalyst for change;
 and that is not a failure.
 
 **Two supporting principles worth naming separately:**
+
 - **Pose a question (lightly).** A mark that lets the viewer complete a small puzzle — a hidden arrow, a
   letter doubling as an object, a figure/ground reversal — is looked at longer and remembered better. But
   there is a fine line: a mark that needs hours to decode or accompanying text will fail.
@@ -203,16 +217,16 @@ Design implication: get the silhouette and the colour decision right first; ever
 
 ## 8. Tensions to manage
 
-| Tension | Guidance |
-|---|---|
-| Simple ↔ interesting | Reduce until the idea is clear, then make sure one detail is ownable. |
-| Relevant ↔ literal | Evoke the attitude; don't depict the product. |
-| Distinct ↔ appropriate | Break category conventions where they blur together, keep the cues that signal the right world. |
-| Clever ↔ clear | A small puzzle helps; a riddle hurts. One-sentence test. |
-| Symmetry ↔ energy | Perfect symmetry is stable but can bore; a subtle asymmetry keeps the eye moving. |
+| Tension                    | Guidance                                                                                                    |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Simple ↔ interesting      | Reduce until the idea is clear, then make sure one detail is ownable.                                       |
+| Relevant ↔ literal        | Evoke the attitude; don't depict the product.                                                               |
+| Distinct ↔ appropriate    | Break category conventions where they blur together, keep the cues that signal the right world.             |
+| Clever ↔ clear            | A small puzzle helps; a riddle hurts. One-sentence test.                                                    |
+| Symmetry ↔ energy         | Perfect symmetry is stable but can bore; a subtle asymmetry keeps the eye moving.                           |
 | Consistency ↔ flexibility | A fixed core (shape, colour, type) with rules for variation keeps systems fresh without losing recognition. |
-| Client taste ↔ strategy | Return to the brief and the agreed criteria, not to personal preference — yours or theirs. |
-| Perfection ↔ progress | Keep refining details, but know that no logo pleases everyone; even a mark loved by 99 % will have critics. |
+| Client taste ↔ strategy   | Return to the brief and the agreed criteria, not to personal preference — yours or theirs.                  |
+| Perfection ↔ progress     | Keep refining details, but know that no logo pleases everyone; even a mark loved by 99 % will have critics. |
 
 ---
 
