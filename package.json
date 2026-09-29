@@ -1,7 +1,7 @@
 {
   "name": "the-designer-mcp",
-  "version": "2.1.0",
-  "description": "Design-Theory-as-a-Service MCP server — anti-slop quality gates, WCAG audits, OKLCH token engine, motion.dev integration, and tri-agent skills.",
+  "version": "2.2.0",
+  "description": "Design-Theory-as-a-Service MCP server — anti-slop quality gates, WCAG 2.1 audits, OKLCH token engine, motion.dev & anime.js integration, logo/brand-mark design, and four in-tree design skills.",
   "author": "Azzar Budiyanto",
   "license": "MIT",
   "type": "module",
