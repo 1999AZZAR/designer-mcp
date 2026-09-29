@@ -2,22 +2,64 @@ import { STYLES, PALETTES, CROSS_CUTTING } from "./rules.js";
 
 const STYLE_FONTS: Record<string, { sans: string[]; mono?: string[] }> = {
   fluent: { sans: ['"Segoe UI"', "system-ui", "-apple-system", "sans-serif"] },
-  ant: { sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', "Roboto", "sans-serif"] },
-  carbon: { sans: ['"IBM Plex Sans"', "system-ui", "sans-serif"], mono: ['"IBM Plex Mono"', "monospace"] },
-  atlassian: { sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', "Roboto", "sans-serif"] },
-  "apple-hig": { sans: ['"SF Pro Display"', '"SF Pro Text"', "-apple-system", "BlinkMacSystemFont", "sans-serif"] },
-  polaris: { sans: ['-apple-system', 'BlinkMacSystemFont', '"Inter"', "sans-serif"] },
+  ant: {
+    sans: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      "sans-serif",
+    ],
+  },
+  carbon: {
+    sans: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+    mono: ['"IBM Plex Mono"', "monospace"],
+  },
+  atlassian: {
+    sans: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      "sans-serif",
+    ],
+  },
+  "apple-hig": {
+    sans: [
+      '"SF Pro Display"',
+      '"SF Pro Text"',
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "sans-serif",
+    ],
+  },
+  polaris: {
+    sans: ["-apple-system", "BlinkMacSystemFont", '"Inter"', "sans-serif"],
+  },
   material: { sans: ['"Roboto"', '"Google Sans"', "system-ui", "sans-serif"] },
   minimal: { sans: ['"Inter"', '"SF Pro Display"', "system-ui", "sans-serif"] },
   glass: { sans: ['"Inter"', '"SF Pro Display"', "system-ui", "sans-serif"] },
-  neumorphism: { sans: ['"Inter"', '"SF Pro Display"', "system-ui", "sans-serif"] },
-  "neo-brutalism": { sans: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"], mono: ['"JetBrains Mono"', "monospace"] },
+  neumorphism: {
+    sans: ['"Inter"', '"SF Pro Display"', "system-ui", "sans-serif"],
+  },
+  "neo-brutalism": {
+    sans: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"],
+    mono: ['"JetBrains Mono"', "monospace"],
+  },
   claymorphism: { sans: ['"Nunito"', '"Inter"', "system-ui", "sans-serif"] },
   skeuomorphism: { sans: ['"Georgia"', '"Times New Roman"', "serif"] },
   swiss: { sans: ['"Helvetica Neue"', '"Helvetica"', '"Arial"', "sans-serif"] },
-  "swiss-archival": { sans: ['"IBM Plex Sans"', '"Helvetica Neue"', "sans-serif"], mono: ['"IBM Plex Mono"', "monospace"] },
-  "m3-pastel": { sans: ['"Google Sans"', '"Roboto"', "system-ui", "sans-serif"] },
-  "neo-m3": { sans: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"], mono: ['"JetBrains Mono"', "monospace"] },
+  "swiss-archival": {
+    sans: ['"IBM Plex Sans"', '"Helvetica Neue"', "sans-serif"],
+    mono: ['"IBM Plex Mono"', "monospace"],
+  },
+  "m3-pastel": {
+    sans: ['"Google Sans"', '"Roboto"', "system-ui", "sans-serif"],
+  },
+  "neo-m3": {
+    sans: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"],
+    mono: ['"JetBrains Mono"', "monospace"],
+  },
 };
 
 const STYLE_RADIUS: Record<string, Record<string, string>> = {
@@ -113,33 +155,81 @@ function generateColorRamp(paletteType: string): Record<string, string> {
   switch (paletteType) {
     case "dark":
       return {
-        50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8",
-        500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a", 950: "#020617",
+        50: "#f8fafc",
+        100: "#f1f5f9",
+        200: "#e2e8f0",
+        300: "#cbd5e1",
+        400: "#94a3b8",
+        500: "#64748b",
+        600: "#475569",
+        700: "#334155",
+        800: "#1e293b",
+        900: "#0f172a",
+        950: "#020617",
       };
     case "pastel":
       return {
-        50: "#fefce8", 100: "#fef9c3", 200: "#fef08a", 300: "#fde047", 400: "#facc15",
-        500: "#eab308", 600: "#ca8a04", 700: "#a16207", 800: "#854d0e", 900: "#713f12", 950: "#422006",
+        50: "#fefce8",
+        100: "#fef9c3",
+        200: "#fef08a",
+        300: "#fde047",
+        400: "#facc15",
+        500: "#eab308",
+        600: "#ca8a04",
+        700: "#a16207",
+        800: "#854d0e",
+        900: "#713f12",
+        950: "#422006",
       };
     case "vibrant":
       return {
-        50: "#fdf4ff", 100: "#fae8ff", 200: "#f5d0fe", 300: "#f0abfc", 400: "#e879f9",
-        500: "#d946ef", 600: "#c026d3", 700: "#a21caf", 800: "#86198f", 900: "#701a75", 950: "#4a044e",
+        50: "#fdf4ff",
+        100: "#fae8ff",
+        200: "#f5d0fe",
+        300: "#f0abfc",
+        400: "#e879f9",
+        500: "#d946ef",
+        600: "#c026d3",
+        700: "#a21caf",
+        800: "#86198f",
+        900: "#701a75",
+        950: "#4a044e",
       };
     case "mono":
       return {
-        50: "#fafafa", 100: "#f5f5f5", 200: "#e5e5e5", 300: "#d4d4d4", 400: "#a3a3a3",
-        500: "#737373", 600: "#525252", 700: "#404040", 800: "#262626", 900: "#171717", 950: "#0a0a0a",
+        50: "#fafafa",
+        100: "#f5f5f5",
+        200: "#e5e5e5",
+        300: "#d4d4d4",
+        400: "#a3a3a3",
+        500: "#737373",
+        600: "#525252",
+        700: "#404040",
+        800: "#262626",
+        900: "#171717",
+        950: "#0a0a0a",
       };
     default:
       return {
-        50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8",
-        500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a", 950: "#020617",
+        50: "#f8fafc",
+        100: "#f1f5f9",
+        200: "#e2e8f0",
+        300: "#cbd5e1",
+        400: "#94a3b8",
+        500: "#64748b",
+        600: "#475569",
+        700: "#334155",
+        800: "#1e293b",
+        900: "#0f172a",
+        950: "#020617",
       };
   }
 }
 
-function getAccentColors(style: string, paletteType: string): Record<string, string> {
+function getAccentColors(
+  style: string,
+  paletteType: string,
+): Record<string, string> {
   if (paletteType === "dark") {
     return { primary: "#3b82f6", secondary: "#8b5cf6", accent: "#06b6d4" };
   }
@@ -170,7 +260,7 @@ export interface TailwindConfig {
 
 export function generateTailwindConfig(
   style: string,
-  paletteType: string
+  paletteType: string,
 ): { config: TailwindConfig; code: string } {
   const fonts = STYLE_FONTS[style] ?? STYLE_FONTS.minimal;
   const radius = STYLE_RADIUS[style] ?? STYLE_RADIUS.minimal;
@@ -179,7 +269,11 @@ export function generateTailwindConfig(
   const accents = getAccentColors(style, paletteType);
 
   const config: TailwindConfig = {
-    content: ["./src/**/*.{html,js,ts,jsx,tsx}", "./pages/**/*.{html,js,ts,jsx,tsx}", "./components/**/*.{html,js,ts,jsx,tsx}"],
+    content: [
+      "./src/**/*.{html,js,ts,jsx,tsx}",
+      "./pages/**/*.{html,js,ts,jsx,tsx}",
+      "./components/**/*.{html,js,ts,jsx,tsx}",
+    ],
     theme: {
       extend: {
         colors: {

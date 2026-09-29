@@ -42,28 +42,40 @@ function isCacheValid(p: string): boolean {
 
 function fetchUrl(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { "User-Agent": USER_AGENT }, timeout: 15000 }, (res) => {
-      if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchUrl(res.headers.location).then(resolve, reject);
-      }
-      if (res.statusCode !== 200) {
-        reject(new Error(`HTTP ${res.statusCode}`));
-        return;
-      }
-      const chunks: Buffer[] = [];
-      res.on("data", (c: Buffer) => chunks.push(c));
-      res.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
-      res.on("error", reject);
-    });
+    const req = https.get(
+      url,
+      { headers: { "User-Agent": USER_AGENT }, timeout: 15000 },
+      (res) => {
+        if (
+          res.statusCode &&
+          res.statusCode >= 300 &&
+          res.statusCode < 400 &&
+          res.headers.location
+        ) {
+          return fetchUrl(res.headers.location).then(resolve, reject);
+        }
+        if (res.statusCode !== 200) {
+          reject(new Error(`HTTP ${res.statusCode}`));
+          return;
+        }
+        const chunks: Buffer[] = [];
+        res.on("data", (c: Buffer) => chunks.push(c));
+        res.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+        res.on("error", reject);
+      },
+    );
     req.on("error", reject);
-    req.on("timeout", () => { req.destroy(); reject(new Error("timeout")); });
+    req.on("timeout", () => {
+      req.destroy();
+      reject(new Error("timeout"));
+    });
   });
 }
 
 function normalizePalette(raw: any): Palette | null {
   if (raw && Array.isArray(raw.colors) && raw.colors.length >= 3) {
     return {
-      colors: raw.colors.map((c: string) => c.startsWith("#") ? c : `#${c}`),
+      colors: raw.colors.map((c: string) => (c.startsWith("#") ? c : `#${c}`)),
       name: raw.name ?? raw.title ?? "Untitled",
       tags: raw.tags,
       likes: raw.likes,
@@ -71,7 +83,7 @@ function normalizePalette(raw: any): Palette | null {
   }
   if (raw && Array.isArray(raw) && raw.length >= 3) {
     return {
-      colors: raw.map((c: string) => c.startsWith("#") ? c : `#${c}`),
+      colors: raw.map((c: string) => (c.startsWith("#") ? c : `#${c}`)),
       name: "Untitled",
     };
   }
@@ -101,7 +113,7 @@ function parseHtmlPalettes(html: string, limit: number): Palette[] {
 
 export async function fetchPalettes(
   mode: string,
-  opts: { theme?: string; query?: string; limit?: number } = {}
+  opts: { theme?: string; query?: string; limit?: number } = {},
 ): Promise<PaletteData> {
   const limit = opts.limit ?? 5;
   const baseUrl = "https://www.colorhunt.co/api/palettes";
@@ -153,7 +165,9 @@ export async function fetchPalettes(
     if (Array.isArray(parsed)) {
       palettes = parsed.map(normalizePalette).filter(Boolean) as Palette[];
     } else if (parsed && Array.isArray(parsed.palettes)) {
-      palettes = parsed.palettes.map(normalizePalette).filter(Boolean) as Palette[];
+      palettes = parsed.palettes
+        .map(normalizePalette)
+        .filter(Boolean) as Palette[];
     } else if (parsed && typeof parsed === "object") {
       const n = normalizePalette(parsed);
       if (n) palettes = [n];
@@ -162,11 +176,12 @@ export async function fetchPalettes(
   } catch {
     // API failed, try HTML scraping fallback
     try {
-      const fallbackUrl = mode === "trending"
-        ? "https://www.colorhunt.co/palettes/trending"
-        : mode === "popular"
-        ? "https://www.colorhunt.co/palettes/popular"
-        : `https://www.colorhunt.co/search?q=${encodeURIComponent(opts.query ?? opts.theme ?? "")}`;
+      const fallbackUrl =
+        mode === "trending"
+          ? "https://www.colorhunt.co/palettes/trending"
+          : mode === "popular"
+            ? "https://www.colorhunt.co/palettes/popular"
+            : `https://www.colorhunt.co/search?q=${encodeURIComponent(opts.query ?? opts.theme ?? "")}`;
       const html = await fetchUrl(fallbackUrl);
       palettes = parseHtmlPalettes(html, limit);
     } catch {
@@ -175,26 +190,38 @@ export async function fetchPalettes(
     }
   }
 
-  const data: PaletteData = { palettes: palettes.length ? palettes : fallbackPalettes() };
+  const data: PaletteData = {
+    palettes: palettes.length ? palettes : fallbackPalettes(),
+  };
   fs.writeFileSync(cp, JSON.stringify(data), "utf8");
   return data;
 }
 
 function fallbackPalettes(): Palette[] {
   return [
-    { name: "Modern Minimalist", colors: ["#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F"] },
-    { name: "Pastel Dreams", colors: ["#FFB3BA", "#FFCCCB", "#FFFFBA", "#BAE1FF"] },
-    { name: "Dark & Bold", colors: ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB"] },
+    {
+      name: "Modern Minimalist",
+      colors: ["#FF6B6B", "#4ECDC4", "#45B7D1", "#F7DC6F"],
+    },
+    {
+      name: "Pastel Dreams",
+      colors: ["#FFB3BA", "#FFCCCB", "#FFFFBA", "#BAE1FF"],
+    },
+    {
+      name: "Dark & Bold",
+      colors: ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB"],
+    },
   ];
 }
 
 function trySkillShellScript(
   mode: string,
   opts: { theme?: string; query?: string; limit?: number },
-  limit: number
+  limit: number,
 ): Palette[] {
-  const skillPath = process.env.COLOR_PALETTE_HUNTER_PATH
-    ?? path.join(__dirname, "..", "skills", "color-palette-hunter");
+  const skillPath =
+    process.env.COLOR_PALETTE_HUNTER_PATH ??
+    path.join(__dirname, "..", "skills", "color-palette-hunter");
   const script = path.join(skillPath, "scripts", "fetch-palette.sh");
 
   if (!fs.existsSync(script)) return [];
@@ -215,7 +242,9 @@ function trySkillShellScript(
     if (result.status === 0 && result.stdout) {
       const parsed = JSON.parse(result.stdout);
       if (Array.isArray(parsed.palettes)) {
-        return parsed.palettes.map(normalizePalette).filter(Boolean) as Palette[];
+        return parsed.palettes
+          .map(normalizePalette)
+          .filter(Boolean) as Palette[];
       }
     }
   } catch {

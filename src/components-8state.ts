@@ -6,14 +6,54 @@ export interface ComponentState {
 }
 
 export const ALL_8_STATES: ComponentState[] = [
-  { name: "default", attr: "", label: "Default", description: "Normal resting state" },
-  { name: "hover", attr: 'class="is-hover"', label: "Hover", description: "Mouse hover" },
-  { name: "focus", attr: 'class="is-focus"', label: "Focus", description: "Keyboard focus (:focus-visible)" },
-  { name: "active", attr: 'class="is-active"', label: "Active", description: "Pressed state (:active)" },
-  { name: "disabled", attr: "disabled", label: "Disabled", description: "Disabled state" },
-  { name: "loading", attr: 'data-state="loading"', label: "Loading", description: "Processing / loading" },
-  { name: "error", attr: 'data-state="error"', label: "Error", description: "Error state" },
-  { name: "success", attr: 'data-state="success"', label: "Success", description: "Success state" },
+  {
+    name: "default",
+    attr: "",
+    label: "Default",
+    description: "Normal resting state",
+  },
+  {
+    name: "hover",
+    attr: 'class="is-hover"',
+    label: "Hover",
+    description: "Mouse hover",
+  },
+  {
+    name: "focus",
+    attr: 'class="is-focus"',
+    label: "Focus",
+    description: "Keyboard focus (:focus-visible)",
+  },
+  {
+    name: "active",
+    attr: 'class="is-active"',
+    label: "Active",
+    description: "Pressed state (:active)",
+  },
+  {
+    name: "disabled",
+    attr: "disabled",
+    label: "Disabled",
+    description: "Disabled state",
+  },
+  {
+    name: "loading",
+    attr: 'data-state="loading"',
+    label: "Loading",
+    description: "Processing / loading",
+  },
+  {
+    name: "error",
+    attr: 'data-state="error"',
+    label: "Error",
+    description: "Error state",
+  },
+  {
+    name: "success",
+    attr: 'data-state="success"',
+    label: "Success",
+    description: "Success state",
+  },
 ];
 
 export type ComponentKind = "button" | "input" | "toggle" | "chip" | "select";
@@ -37,15 +77,23 @@ function stateLabel(kind: ComponentKind, state: ComponentState): string {
     chip: "Tag",
     select: "",
   };
-  return state.name === "default" || state.name === "hover" || state.name === "focus" || state.name === "active"
+  return state.name === "default" ||
+    state.name === "hover" ||
+    state.name === "focus" ||
+    state.name === "active"
     ? (labels[kind] ?? "Label")
-    : state.name === "loading" ? `${kind === "toggle" ? "Saving..." : "Working\u2026"}` :
-      state.name === "error" ? `Error${kind === "input" ? "" : " — Retry"}` :
-      state.name === "success" ? "Saved" :
-      labels[kind] ?? "Label";
+    : state.name === "loading"
+      ? `${kind === "toggle" ? "Saving..." : "Working\u2026"}`
+      : state.name === "error"
+        ? `Error${kind === "input" ? "" : " — Retry"}`
+        : state.name === "success"
+          ? "Saved"
+          : (labels[kind] ?? "Label");
 }
 
-function generate8StatesComponent(kind: ComponentKind): Component8StateTemplate {
+function generate8StatesComponent(
+  kind: ComponentKind,
+): Component8StateTemplate {
   const baseHTML = {
     button: BUTTON_HTML,
     input: INPUT_HTML,
@@ -57,9 +105,7 @@ function generate8StatesComponent(kind: ComponentKind): Component8StateTemplate 
   const stateRows = ALL_8_STATES.map((state) => {
     const label = stateLabel(kind, state);
     const attr = state.attr.replace("{label}", label);
-    let html = baseHTML
-      .replace("{attr}", attr)
-      .replace("{label}", label);
+    let html = baseHTML.replace("{attr}", attr).replace("{label}", label);
     return `    <div class="demo-row">
       <span class="demo-label">${state.label}</span>
       <div class="demo-component">${html}</div>
@@ -102,7 +148,9 @@ ${stateRows.join("\n")}
   return { html, statesCSS };
 }
 
-export function generate8StateComponent(kind: ComponentKind): Component8StateTemplate {
+export function generate8StateComponent(
+  kind: ComponentKind,
+): Component8StateTemplate {
   return generate8StatesComponent(kind);
 }
 

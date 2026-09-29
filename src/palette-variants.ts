@@ -4,7 +4,8 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
   const l = parseInt(hex.slice(5, 7), 16) / 255;
   const max = Math.max(h, s, l);
   const min = Math.min(h, s, l);
-  let hh = 0, ss = 0;
+  let hh = 0,
+    ss = 0;
   const ll = (max + min) / 2;
   if (max !== min) {
     const d = max - min;
@@ -13,7 +14,11 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
     else if (max === s) hh = ((l - h) / d + 2) / 6;
     else hh = ((h - s) / d + 4) / 6;
   }
-  return { h: Math.round(hh * 360), s: Math.round(ss * 100), l: Math.round(ll * 100) };
+  return {
+    h: Math.round(hh * 360),
+    s: Math.round(ss * 100),
+    l: Math.round(ll * 100),
+  };
 }
 
 function hslToHex(h: number, s: number, l: number): string {
@@ -22,14 +27,32 @@ function hslToHex(h: number, s: number, l: number): string {
   const c = (1 - Math.abs(2 * lN - 1)) * sN;
   const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
   const m = lN - c / 2;
-  let r = 0, g = 0, b = 0;
-  if (h < 60) { r = c; g = x; }
-  else if (h < 120) { r = x; g = c; }
-  else if (h < 180) { g = c; b = x; }
-  else if (h < 240) { g = x; b = c; }
-  else if (h < 300) { r = x; b = c; }
-  else { r = c; b = x; }
-  const toHex = (v: number) => Math.round((v + m) * 255).toString(16).padStart(2, "0");
+  let r = 0,
+    g = 0,
+    b = 0;
+  if (h < 60) {
+    r = c;
+    g = x;
+  } else if (h < 120) {
+    r = x;
+    g = c;
+  } else if (h < 180) {
+    g = c;
+    b = x;
+  } else if (h < 240) {
+    g = x;
+    b = c;
+  } else if (h < 300) {
+    r = x;
+    b = c;
+  } else {
+    r = c;
+    b = x;
+  }
+  const toHex = (v: number) =>
+    Math.round((v + m) * 255)
+      .toString(16)
+      .padStart(2, "0");
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 

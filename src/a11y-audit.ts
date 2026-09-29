@@ -8,7 +8,7 @@
 // Types
 // ---------------------------------------------------------------------------
 
-export type Severity = 'critical' | 'serious' | 'moderate' | 'minor';
+export type Severity = "critical" | "serious" | "moderate" | "minor";
 
 export interface A11yIssue {
   id: string;
@@ -48,15 +48,15 @@ export interface A11yAuditResult {
 
 /** Truncate a string to max `len` chars, appending '…' if cut. */
 function trunc(s: string, len = 120): string {
-  const clean = s.replace(/\s+/g, ' ').trim();
-  return clean.length <= len ? clean : clean.slice(0, len - 1) + '…';
+  const clean = s.replace(/\s+/g, " ").trim();
+  return clean.length <= len ? clean : clean.slice(0, len - 1) + "…";
 }
 
 /** Return all regex matches as an array of full-match strings. */
 function allMatches(html: string, re: RegExp): string[] {
   const results: string[] = [];
   // Ensure global flag
-  const flags = re.flags.includes('g') ? re.flags : re.flags + 'g';
+  const flags = re.flags.includes("g") ? re.flags : re.flags + "g";
   const globalRe = new RegExp(re.source, flags);
   let m: RegExpExecArray | null;
   while ((m = globalRe.exec(html)) !== null) {
@@ -70,7 +70,7 @@ function allMatches(html: string, re: RegExp): string[] {
 /** Return all regex match *groups* (index 1) as strings. */
 function allGroups(html: string, re: RegExp, groupIdx = 1): string[] {
   const results: string[] = [];
-  const flags = re.flags.includes('g') ? re.flags : re.flags + 'g';
+  const flags = re.flags.includes("g") ? re.flags : re.flags + "g";
   const globalRe = new RegExp(re.source, flags);
   let m: RegExpExecArray | null;
   while ((m = globalRe.exec(html)) !== null) {
@@ -85,13 +85,13 @@ function getAttr(tag: string, attr: string): string | null {
   // Matches: attr="value", attr='value', attr=value, or bare attr
   const re = new RegExp(
     `${attr}\\s*=\\s*(?:"([^"]*?)"|'([^']*?)'|([^\\s>]*))`,
-    'i'
+    "i",
   );
   const m = re.exec(tag);
-  if (m) return m[1] ?? m[2] ?? m[3] ?? '';
+  if (m) return m[1] ?? m[2] ?? m[3] ?? "";
   // Bare attribute (no value)
-  const bareRe = new RegExp(`(?:^|\\s)${attr}(?:\\s|>|$)`, 'i');
-  if (bareRe.test(tag)) return '';
+  const bareRe = new RegExp(`(?:^|\\s)${attr}(?:\\s|>|$)`, "i");
+  if (bareRe.test(tag)) return "";
   return null;
 }
 
@@ -102,13 +102,13 @@ function hasAttr(tag: string, attr: string): boolean {
 
 /** Get visible inner text from a simple element (strips nested tags). */
 function innerText(element: string): string {
-  return element.replace(/<[^>]+>/g, '').trim();
+  return element.replace(/<[^>]+>/g, "").trim();
 }
 
 /** Collect all opening tags for a given element name. */
 function getOpenTags(html: string, tagName: string): string[] {
   // Captures the full opening tag including attributes
-  const re = new RegExp(`<${tagName}(\\s[^>]*)?>`, 'gi');
+  const re = new RegExp(`<${tagName}(\\s[^>]*)?>`, "gi");
   return allMatches(html, re);
 }
 
@@ -117,7 +117,7 @@ function getOpenTags(html: string, tagName: string): string[] {
  * Handles single-level nesting only; sufficient for heading, button, a, etc.
  */
 function getElements(html: string, tagName: string): string[] {
-  const re = new RegExp(`<${tagName}(?:\\s[^>]*)?>.*?<\\/${tagName}>`, 'gis');
+  const re = new RegExp(`<${tagName}(?:\\s[^>]*)?>.*?<\\/${tagName}>`, "gis");
   return allMatches(html, re);
 }
 
@@ -125,18 +125,21 @@ function getElements(html: string, tagName: string): string[] {
 // Individual check implementations
 // ---------------------------------------------------------------------------
 
-type CheckResult = Pick<A11yIssue, 'id' | 'severity' | 'rule' | 'wcag' | 'description' | 'element' | 'fix'>[];
+type CheckResult = Pick<
+  A11yIssue,
+  "id" | "severity" | "rule" | "wcag" | "description" | "element" | "fix"
+>[];
 
 // 1. img-alt — <img> without alt attribute
 function checkImgAlt(html: string): CheckResult {
-  return getOpenTags(html, 'img')
-    .filter(tag => getAttr(tag, 'alt') === null)
-    .map(tag => ({
+  return getOpenTags(html, "img")
+    .filter((tag) => getAttr(tag, "alt") === null)
+    .map((tag) => ({
       id: `img-alt`,
-      severity: 'critical' as Severity,
-      rule: 'img-alt',
-      wcag: '1.1.1',
-      description: '<img> element is missing an alt attribute.',
+      severity: "critical" as Severity,
+      rule: "img-alt",
+      wcag: "1.1.1",
+      description: "<img> element is missing an alt attribute.",
       element: trunc(tag),
       fix: 'Add alt="descriptive text" for meaningful images, or alt="" for decorative ones.',
     }));
@@ -144,23 +147,25 @@ function checkImgAlt(html: string): CheckResult {
 
 // 2. img-alt-empty — <img alt=""> on non-decorative images
 function checkImgAltEmpty(html: string): CheckResult {
-  return getOpenTags(html, 'img')
-    .filter(tag => {
-      const alt = getAttr(tag, 'alt');
-      if (alt === null || alt.trim() !== '') return false;
-      const src = getAttr(tag, 'src') ?? '';
+  return getOpenTags(html, "img")
+    .filter((tag) => {
+      const alt = getAttr(tag, "alt");
+      if (alt === null || alt.trim() !== "") return false;
+      const src = getAttr(tag, "src") ?? "";
       // Skip obvious spacers/1x1 images
-      const spacerRe = /spacer|1x1|blank|pixel|transparent|shim|dot\.gif|dot\.png/i;
+      const spacerRe =
+        /spacer|1x1|blank|pixel|transparent|shim|dot\.gif|dot\.png/i;
       return !spacerRe.test(src);
     })
-    .map(tag => ({
+    .map((tag) => ({
       id: `img-alt-empty`,
-      severity: 'serious' as Severity,
-      rule: 'img-alt-empty',
-      wcag: '1.1.1',
-      description: '<img> has an empty alt attribute but does not appear decorative.',
+      severity: "serious" as Severity,
+      rule: "img-alt-empty",
+      wcag: "1.1.1",
+      description:
+        "<img> has an empty alt attribute but does not appear decorative.",
       element: trunc(tag),
-      fix: 'Provide a descriptive alt text for meaningful images, or confirm the image is purely decorative.',
+      fix: "Provide a descriptive alt text for meaningful images, or confirm the image is purely decorative.",
     }));
 }
 
@@ -168,29 +173,31 @@ function checkImgAltEmpty(html: string): CheckResult {
 function checkInputLabel(html: string): CheckResult {
   // Collect all label for="" values
   const labelForValues = new Set(
-    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi)
-      .map(v => v.toLowerCase())
+    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi).map((v) =>
+      v.toLowerCase(),
+    ),
   );
 
-  return getOpenTags(html, 'input')
-    .filter(tag => {
-      const type = (getAttr(tag, 'type') ?? '').toLowerCase();
+  return getOpenTags(html, "input")
+    .filter((tag) => {
+      const type = (getAttr(tag, "type") ?? "").toLowerCase();
       // Hidden inputs don't need labels
-      if (type === 'hidden') return false;
+      if (type === "hidden") return false;
       // Submit/reset/button inputs use value as label
-      if (['submit', 'reset', 'button', 'image'].includes(type)) return false;
-      const id = (getAttr(tag, 'id') ?? '').toLowerCase();
+      if (["submit", "reset", "button", "image"].includes(type)) return false;
+      const id = (getAttr(tag, "id") ?? "").toLowerCase();
       if (id && labelForValues.has(id)) return false;
-      if (hasAttr(tag, 'aria-label') || hasAttr(tag, 'aria-labelledby')) return false;
-      if (hasAttr(tag, 'title')) return false;
+      if (hasAttr(tag, "aria-label") || hasAttr(tag, "aria-labelledby"))
+        return false;
+      if (hasAttr(tag, "title")) return false;
       return true;
     })
-    .map(tag => ({
+    .map((tag) => ({
       id: `input-label`,
-      severity: 'critical' as Severity,
-      rule: 'input-label',
-      wcag: '1.3.1',
-      description: '<input> element has no associated label.',
+      severity: "critical" as Severity,
+      rule: "input-label",
+      wcag: "1.3.1",
+      description: "<input> element has no associated label.",
       element: trunc(tag),
       fix: 'Associate a <label for="inputId"> or add aria-label / aria-labelledby to the input.',
     }));
@@ -198,20 +205,23 @@ function checkInputLabel(html: string): CheckResult {
 
 // 4. button-name — <button> with no accessible name
 function checkButtonName(html: string): CheckResult {
-  return getElements(html, 'button')
-    .filter(el => {
-      if (hasAttr(el, 'aria-label') || hasAttr(el, 'aria-labelledby')) return false;
-      if (hasAttr(el, 'title')) return false;
+  return getElements(html, "button")
+    .filter((el) => {
+      if (hasAttr(el, "aria-label") || hasAttr(el, "aria-labelledby"))
+        return false;
+      if (hasAttr(el, "title")) return false;
       // Check for value attribute on button type
-      if (hasAttr(el, 'value') && (getAttr(el, 'value') ?? '').trim()) return false;
+      if (hasAttr(el, "value") && (getAttr(el, "value") ?? "").trim())
+        return false;
       return innerText(el).length === 0;
     })
-    .map(el => ({
+    .map((el) => ({
       id: `button-name`,
-      severity: 'critical' as Severity,
-      rule: 'button-name',
-      wcag: '4.1.2',
-      description: '<button> has no accessible name (empty text and no aria-label).',
+      severity: "critical" as Severity,
+      rule: "button-name",
+      wcag: "4.1.2",
+      description:
+        "<button> has no accessible name (empty text and no aria-label).",
       element: trunc(el),
       fix: 'Add visible text content or aria-label="description" to the button.',
     }));
@@ -219,23 +229,25 @@ function checkButtonName(html: string): CheckResult {
 
 // 5. link-name — <a href> with empty text and no aria-label
 function checkLinkName(html: string): CheckResult {
-  return getElements(html, 'a')
-    .filter(el => {
-      if (!hasAttr(el, 'href')) return false; // anchors without href are not interactive
-      if (hasAttr(el, 'aria-label') || hasAttr(el, 'aria-labelledby')) return false;
-      if (hasAttr(el, 'title') && (getAttr(el, 'title') ?? '').trim()) return false;
+  return getElements(html, "a")
+    .filter((el) => {
+      if (!hasAttr(el, "href")) return false; // anchors without href are not interactive
+      if (hasAttr(el, "aria-label") || hasAttr(el, "aria-labelledby"))
+        return false;
+      if (hasAttr(el, "title") && (getAttr(el, "title") ?? "").trim())
+        return false;
       // Allow if contains an img with alt
       if (/<img[^>]+alt\s*=\s*["'][^"']+["']/i.test(el)) return false;
       return innerText(el).length === 0;
     })
-    .map(el => ({
+    .map((el) => ({
       id: `link-name`,
-      severity: 'serious' as Severity,
-      rule: 'link-name',
-      wcag: '4.1.2',
-      description: '<a href> element has no accessible name.',
+      severity: "serious" as Severity,
+      rule: "link-name",
+      wcag: "4.1.2",
+      description: "<a href> element has no accessible name.",
       element: trunc(el),
-      fix: 'Provide visible link text, or add aria-label describing the link destination.',
+      fix: "Provide visible link text, or add aria-label describing the link destination.",
     }));
 }
 
@@ -243,32 +255,39 @@ function checkLinkName(html: string): CheckResult {
 function checkLangMissing(html: string): CheckResult {
   const htmlTag = /<html(\s[^>]*)?>/.exec(html)?.[0];
   if (!htmlTag) return [];
-  if (hasAttr(htmlTag, 'lang') && (getAttr(htmlTag, 'lang') ?? '').trim()) return [];
-  return [{
-    id: `lang-missing`,
-    severity: 'serious',
-    rule: 'lang-missing',
-    wcag: '3.1.1',
-    description: '<html> element is missing a lang attribute.',
-    element: trunc(htmlTag),
-    fix: 'Add lang="en" (or the appropriate BCP 47 language tag) to the <html> element.',
-  }];
+  if (hasAttr(htmlTag, "lang") && (getAttr(htmlTag, "lang") ?? "").trim())
+    return [];
+  return [
+    {
+      id: `lang-missing`,
+      severity: "serious",
+      rule: "lang-missing",
+      wcag: "3.1.1",
+      description: "<html> element is missing a lang attribute.",
+      element: trunc(htmlTag),
+      fix: 'Add lang="en" (or the appropriate BCP 47 language tag) to the <html> element.',
+    },
+  ];
 }
 
 // 7. page-title — no <title> or empty title
 function checkPageTitle(html: string): CheckResult {
   const titleMatch = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html);
   if (titleMatch && titleMatch[1].trim().length > 0) return [];
-  const element = titleMatch ? titleMatch[0] : '<title> (missing)';
-  return [{
-    id: `page-title`,
-    severity: 'serious',
-    rule: 'page-title',
-    wcag: '2.4.2',
-    description: titleMatch ? 'Page <title> is empty.' : 'Page is missing a <title> element.',
-    element: trunc(element),
-    fix: 'Add a descriptive <title> inside <head> that identifies the page purpose.',
-  }];
+  const element = titleMatch ? titleMatch[0] : "<title> (missing)";
+  return [
+    {
+      id: `page-title`,
+      severity: "serious",
+      rule: "page-title",
+      wcag: "2.4.2",
+      description: titleMatch
+        ? "Page <title> is empty."
+        : "Page is missing a <title> element.",
+      element: trunc(element),
+      fix: "Add a descriptive <title> inside <head> that identifies the page purpose.",
+    },
+  ];
 }
 
 // 8. heading-order — heading levels skip (e.g. h1 → h3)
@@ -283,9 +302,9 @@ function checkHeadingOrder(html: string): CheckResult {
     if (prevLevel > 0 && level > prevLevel + 1) {
       issues.push({
         id: `heading-order`,
-        severity: 'moderate',
-        rule: 'heading-order',
-        wcag: '1.3.1',
+        severity: "moderate",
+        rule: "heading-order",
+        wcag: "1.3.1",
         description: `Heading level skipped: h${prevLevel} followed by h${level}.`,
         element: trunc(h),
         fix: `Use sequential heading levels. Replace h${level} with h${prevLevel + 1} or restructure the content hierarchy.`,
@@ -299,29 +318,31 @@ function checkHeadingOrder(html: string): CheckResult {
 // 9. heading-h1-missing — no <h1> on page
 function checkHeadingH1Missing(html: string): CheckResult {
   if (/<h1[\s>]/i.test(html)) return [];
-  return [{
-    id: `heading-h1-missing`,
-    severity: 'moderate',
-    rule: 'heading-h1-missing',
-    wcag: '2.4.6',
-    description: 'Page has no <h1> heading.',
-    element: '<h1> (missing)',
-    fix: 'Add a single <h1> that describes the main content of the page.',
-  }];
+  return [
+    {
+      id: `heading-h1-missing`,
+      severity: "moderate",
+      rule: "heading-h1-missing",
+      wcag: "2.4.6",
+      description: "Page has no <h1> heading.",
+      element: "<h1> (missing)",
+      fix: "Add a single <h1> that describes the main content of the page.",
+    },
+  ];
 }
 
 // 10. heading-h1-multiple — more than one <h1>
 function checkHeadingH1Multiple(html: string): CheckResult {
-  const h1s = getElements(html, 'h1');
+  const h1s = getElements(html, "h1");
   if (h1s.length <= 1) return [];
-  return h1s.slice(1).map(el => ({
+  return h1s.slice(1).map((el) => ({
     id: `heading-h1-multiple`,
-    severity: 'minor' as Severity,
-    rule: 'heading-h1-multiple',
-    wcag: '2.4.6',
+    severity: "minor" as Severity,
+    rule: "heading-h1-multiple",
+    wcag: "2.4.6",
     description: `Multiple <h1> elements found (${h1s.length} total). Only one is recommended per page.`,
     element: trunc(el),
-    fix: 'Use only one <h1> per page. Demote additional top-level headings to <h2>.',
+    fix: "Use only one <h1> per page. Demote additional top-level headings to <h2>.",
   }));
 }
 
@@ -333,7 +354,7 @@ function checkFocusVisible(html: string): CheckResult {
   // Also check inline style attributes
   const inlineStyles = allGroups(html, /\bstyle\s*=\s*["']([^"']*)["']/gi);
 
-  const allCss = [...styleBlocks, ...inlineStyles].join('\n');
+  const allCss = [...styleBlocks, ...inlineStyles].join("\n");
 
   // Look for outline: none / outline: 0 not followed by a :focus-visible rule
   // Simple heuristic: flag if pattern found and :focus-visible doesn't appear nearby
@@ -347,12 +368,12 @@ function checkFocusVisible(html: string): CheckResult {
     if (!hasFocusVisible && !/:focus-visible/.test(windowStr)) {
       issues.push({
         id: `focus-visible`,
-        severity: 'serious',
-        rule: 'focus-visible',
-        wcag: '2.4.7',
+        severity: "serious",
+        rule: "focus-visible",
+        wcag: "2.4.7",
         description: `CSS uses "${m[0]}" which may remove focus indicators without a :focus-visible replacement.`,
         element: trunc(m[0]),
-        fix: 'Remove outline:none, or replace it with a custom :focus-visible style that provides a clear focus ring.',
+        fix: "Remove outline:none, or replace it with a custom :focus-visible style that provides a clear focus ring.",
       });
       break; // Report once per audit
     }
@@ -369,14 +390,17 @@ function checkTabindexPositive(html: string): CheckResult {
     const val = parseInt(m[1], 10);
     if (val > 0) {
       // Find surrounding tag for context
-      const tagStart = html.lastIndexOf('<', m.index);
-      const tagEnd = html.indexOf('>', m.index);
-      const tag = tagStart !== -1 && tagEnd !== -1 ? html.slice(tagStart, tagEnd + 1) : m[0];
+      const tagStart = html.lastIndexOf("<", m.index);
+      const tagEnd = html.indexOf(">", m.index);
+      const tag =
+        tagStart !== -1 && tagEnd !== -1
+          ? html.slice(tagStart, tagEnd + 1)
+          : m[0];
       issues.push({
         id: `tabindex-positive`,
-        severity: 'moderate',
-        rule: 'tabindex-positive',
-        wcag: '2.4.3',
+        severity: "moderate",
+        rule: "tabindex-positive",
+        wcag: "2.4.3",
         description: `tabindex="${val}" disrupts the natural tab order.`,
         element: trunc(tag),
         fix: 'Use tabindex="0" to include elements in natural order, or tabindex="-1" for programmatic focus only.',
@@ -389,38 +413,42 @@ function checkTabindexPositive(html: string): CheckResult {
 // 13. autofocus — autofocus attribute present
 function checkAutofocus(html: string): CheckResult {
   const re = /<[a-z][^>]*\bautofocus\b[^>]*>/gi;
-  return allMatches(html, re).map(tag => ({
+  return allMatches(html, re).map((tag) => ({
     id: `autofocus`,
-    severity: 'minor' as Severity,
-    rule: 'autofocus',
-    wcag: '3.2.2',
-    description: 'Element uses autofocus, which can disorient keyboard and screen-reader users.',
+    severity: "minor" as Severity,
+    rule: "autofocus",
+    wcag: "3.2.2",
+    description:
+      "Element uses autofocus, which can disorient keyboard and screen-reader users.",
     element: trunc(tag),
-    fix: 'Remove autofocus, or ensure it is only used on the primary action of the page with user awareness.',
+    fix: "Remove autofocus, or ensure it is only used on the primary action of the page with user awareness.",
   }));
 }
 
 // 14. select-label — <select> without label or aria-label
 function checkSelectLabel(html: string): CheckResult {
   const labelForValues = new Set(
-    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi)
-      .map(v => v.toLowerCase())
+    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi).map((v) =>
+      v.toLowerCase(),
+    ),
   );
-  return getElements(html, 'select')
-    .filter(el => {
+  return getElements(html, "select")
+    .filter((el) => {
       const openTag = /^<select[^>]*>/i.exec(el)?.[0] ?? el;
-      const id = (getAttr(openTag, 'id') ?? '').toLowerCase();
+      const id = (getAttr(openTag, "id") ?? "").toLowerCase();
       if (id && labelForValues.has(id)) return false;
-      if (hasAttr(openTag, 'aria-label') || hasAttr(openTag, 'aria-labelledby')) return false;
-      if (hasAttr(openTag, 'title') && (getAttr(openTag, 'title') ?? '').trim()) return false;
+      if (hasAttr(openTag, "aria-label") || hasAttr(openTag, "aria-labelledby"))
+        return false;
+      if (hasAttr(openTag, "title") && (getAttr(openTag, "title") ?? "").trim())
+        return false;
       return true;
     })
-    .map(el => ({
+    .map((el) => ({
       id: `select-label`,
-      severity: 'critical' as Severity,
-      rule: 'select-label',
-      wcag: '1.3.1',
-      description: '<select> element has no associated label.',
+      severity: "critical" as Severity,
+      rule: "select-label",
+      wcag: "1.3.1",
+      description: "<select> element has no associated label.",
       element: trunc(el),
       fix: 'Add a <label for="selectId"> or aria-label attribute to the <select> element.',
     }));
@@ -429,24 +457,27 @@ function checkSelectLabel(html: string): CheckResult {
 // 15. textarea-label — <textarea> without label or aria-label
 function checkTextareaLabel(html: string): CheckResult {
   const labelForValues = new Set(
-    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi)
-      .map(v => v.toLowerCase())
+    allGroups(html, /\blabel\b[^>]*?\bfor\s*=\s*["']?([^"'\s>]+)/gi).map((v) =>
+      v.toLowerCase(),
+    ),
   );
-  return getElements(html, 'textarea')
-    .filter(el => {
+  return getElements(html, "textarea")
+    .filter((el) => {
       const openTag = /^<textarea[^>]*>/i.exec(el)?.[0] ?? el;
-      const id = (getAttr(openTag, 'id') ?? '').toLowerCase();
+      const id = (getAttr(openTag, "id") ?? "").toLowerCase();
       if (id && labelForValues.has(id)) return false;
-      if (hasAttr(openTag, 'aria-label') || hasAttr(openTag, 'aria-labelledby')) return false;
-      if (hasAttr(openTag, 'title') && (getAttr(openTag, 'title') ?? '').trim()) return false;
+      if (hasAttr(openTag, "aria-label") || hasAttr(openTag, "aria-labelledby"))
+        return false;
+      if (hasAttr(openTag, "title") && (getAttr(openTag, "title") ?? "").trim())
+        return false;
       return true;
     })
-    .map(el => ({
+    .map((el) => ({
       id: `textarea-label`,
-      severity: 'critical' as Severity,
-      rule: 'textarea-label',
-      wcag: '1.3.1',
-      description: '<textarea> element has no associated label.',
+      severity: "critical" as Severity,
+      rule: "textarea-label",
+      wcag: "1.3.1",
+      description: "<textarea> element has no associated label.",
       element: trunc(el),
       fix: 'Add a <label for="textareaId"> or aria-label attribute to the <textarea> element.',
     }));
@@ -454,20 +485,26 @@ function checkTextareaLabel(html: string): CheckResult {
 
 // 16. table-caption — <table> without <caption> or aria-label
 function checkTableCaption(html: string): CheckResult {
-  return getElements(html, 'table')
-    .filter(el => {
+  return getElements(html, "table")
+    .filter((el) => {
       const openTag = /^<table[^>]*>/i.exec(el)?.[0] ?? el;
-      if (hasAttr(openTag, 'aria-label') || hasAttr(openTag, 'aria-labelledby')) return false;
-      if (hasAttr(openTag, 'summary') && (getAttr(openTag, 'summary') ?? '').trim()) return false;
+      if (hasAttr(openTag, "aria-label") || hasAttr(openTag, "aria-labelledby"))
+        return false;
+      if (
+        hasAttr(openTag, "summary") &&
+        (getAttr(openTag, "summary") ?? "").trim()
+      )
+        return false;
       if (/<caption[\s>]/i.test(el)) return false;
       return true;
     })
-    .map(el => ({
+    .map((el) => ({
       id: `table-caption`,
-      severity: 'minor' as Severity,
-      rule: 'table-caption',
-      wcag: '1.3.1',
-      description: '<table> has no <caption> or aria-label to describe its purpose.',
+      severity: "minor" as Severity,
+      rule: "table-caption",
+      wcag: "1.3.1",
+      description:
+        "<table> has no <caption> or aria-label to describe its purpose.",
       element: trunc(el),
       fix: 'Add a <caption> as the first child of the table, or add aria-label="table description".',
     }));
@@ -475,14 +512,14 @@ function checkTableCaption(html: string): CheckResult {
 
 // 17. table-th-scope — <th> without scope attribute
 function checkTableThScope(html: string): CheckResult {
-  return getOpenTags(html, 'th')
-    .filter(tag => !hasAttr(tag, 'scope') && !hasAttr(tag, 'id'))
-    .map(tag => ({
+  return getOpenTags(html, "th")
+    .filter((tag) => !hasAttr(tag, "scope") && !hasAttr(tag, "id"))
+    .map((tag) => ({
       id: `table-th-scope`,
-      severity: 'moderate' as Severity,
-      rule: 'table-th-scope',
-      wcag: '1.3.1',
-      description: '<th> element is missing a scope attribute.',
+      severity: "moderate" as Severity,
+      rule: "table-th-scope",
+      wcag: "1.3.1",
+      description: "<th> element is missing a scope attribute.",
       element: trunc(tag),
       fix: 'Add scope="col" or scope="row" to each <th> to define header associations.',
     }));
@@ -492,49 +529,62 @@ function checkTableThScope(html: string): CheckResult {
 function checkSkipLink(html: string): CheckResult {
   // Look within first 2000 chars after <body> for a skip link
   const bodyStart = html.search(/<body[\s>]/i);
-  const searchArea = html.slice(bodyStart !== -1 ? bodyStart : 0, (bodyStart !== -1 ? bodyStart : 0) + 2000);
+  const searchArea = html.slice(
+    bodyStart !== -1 ? bodyStart : 0,
+    (bodyStart !== -1 ? bodyStart : 0) + 2000,
+  );
   if (/href\s*=\s*["']#[^"']+["'][^>]*>[^<]*skip/i.test(searchArea)) return [];
   if (/class\s*=\s*["'][^"']*skip[^"']*["']/i.test(searchArea)) return [];
-  return [{
-    id: `skip-link`,
-    severity: 'moderate',
-    rule: 'skip-link',
-    wcag: '2.4.1',
-    description: 'No skip-navigation link found near the start of the page.',
-    element: '<body> (start)',
-    fix: 'Add a "Skip to main content" link as the first focusable element: <a href="#main-content" class="skip-link">Skip to main content</a>.',
-  }];
+  return [
+    {
+      id: `skip-link`,
+      severity: "moderate",
+      rule: "skip-link",
+      wcag: "2.4.1",
+      description: "No skip-navigation link found near the start of the page.",
+      element: "<body> (start)",
+      fix: 'Add a "Skip to main content" link as the first focusable element: <a href="#main-content" class="skip-link">Skip to main content</a>.',
+    },
+  ];
 }
 
 // 19. meta-viewport-scale — user-scalable=no or maximum-scale=1
 function checkMetaViewportScale(html: string): CheckResult {
   const issues: CheckResult = [];
-  const viewportTags = allMatches(html, /<meta[^>]*name\s*=\s*["']viewport["'][^>]*>/gi);
+  const viewportTags = allMatches(
+    html,
+    /<meta[^>]*name\s*=\s*["']viewport["'][^>]*>/gi,
+  );
   // Also catch reversed attribute order
-  const viewportTags2 = allMatches(html, /<meta[^>]*content\s*=\s*["'][^"']*(?:user-scalable|maximum-scale)[^"']*["'][^>]*>/gi);
+  const viewportTags2 = allMatches(
+    html,
+    /<meta[^>]*content\s*=\s*["'][^"']*(?:user-scalable|maximum-scale)[^"']*["'][^>]*>/gi,
+  );
   const allViewport = [...new Set([...viewportTags, ...viewportTags2])];
 
   for (const tag of allViewport) {
-    const content = getAttr(tag, 'content') ?? '';
+    const content = getAttr(tag, "content") ?? "";
     if (/user-scalable\s*=\s*no/i.test(content)) {
       issues.push({
         id: `meta-viewport-scale`,
-        severity: 'serious',
-        rule: 'meta-viewport-scale',
-        wcag: '1.4.4',
-        description: 'Viewport meta uses user-scalable=no, preventing users from zooming.',
+        severity: "serious",
+        rule: "meta-viewport-scale",
+        wcag: "1.4.4",
+        description:
+          "Viewport meta uses user-scalable=no, preventing users from zooming.",
         element: trunc(tag),
-        fix: 'Remove user-scalable=no from the viewport meta tag to allow users to zoom.',
+        fix: "Remove user-scalable=no from the viewport meta tag to allow users to zoom.",
       });
     } else if (/maximum-scale\s*=\s*1(?:[^0-9]|$)/i.test(content)) {
       issues.push({
         id: `meta-viewport-scale`,
-        severity: 'serious',
-        rule: 'meta-viewport-scale',
-        wcag: '1.4.4',
-        description: 'Viewport meta uses maximum-scale=1, restricting zoom to 100%.',
+        severity: "serious",
+        rule: "meta-viewport-scale",
+        wcag: "1.4.4",
+        description:
+          "Viewport meta uses maximum-scale=1, restricting zoom to 100%.",
         element: trunc(tag),
-        fix: 'Remove maximum-scale=1 or set it to at least maximum-scale=5 to allow adequate zoom.',
+        fix: "Remove maximum-scale=1 or set it to at least maximum-scale=5 to allow adequate zoom.",
       });
     }
   }
@@ -545,30 +595,34 @@ function checkMetaViewportScale(html: string): CheckResult {
 function checkLandmarkMain(html: string): CheckResult {
   if (/<main[\s>]/i.test(html)) return [];
   if (/role\s*=\s*["']main["']/i.test(html)) return [];
-  return [{
-    id: `landmark-main`,
-    severity: 'moderate',
-    rule: 'landmark-main',
-    wcag: '1.3.6',
-    description: 'Page has no <main> landmark or role="main".',
-    element: '<main> (missing)',
-    fix: 'Wrap the primary page content in a <main> element to define the main landmark.',
-  }];
+  return [
+    {
+      id: `landmark-main`,
+      severity: "moderate",
+      rule: "landmark-main",
+      wcag: "1.3.6",
+      description: 'Page has no <main> landmark or role="main".',
+      element: "<main> (missing)",
+      fix: "Wrap the primary page content in a <main> element to define the main landmark.",
+    },
+  ];
 }
 
 // 21. landmark-nav — no <nav> or role="navigation"
 function checkLandmarkNav(html: string): CheckResult {
   if (/<nav[\s>]/i.test(html)) return [];
   if (/role\s*=\s*["']navigation["']/i.test(html)) return [];
-  return [{
-    id: `landmark-nav`,
-    severity: 'minor',
-    rule: 'landmark-nav',
-    wcag: '1.3.6',
-    description: 'Page has no <nav> landmark or role="navigation".',
-    element: '<nav> (missing)',
-    fix: 'Wrap navigation links in a <nav> element (or use role="navigation" on a suitable container).',
-  }];
+  return [
+    {
+      id: `landmark-nav`,
+      severity: "minor",
+      rule: "landmark-nav",
+      wcag: "1.3.6",
+      description: 'Page has no <nav> landmark or role="navigation".',
+      element: "<nav> (missing)",
+      fix: 'Wrap navigation links in a <nav> element (or use role="navigation" on a suitable container).',
+    },
+  ];
 }
 
 // 22. form-required-aria — required attribute without aria-required="true"
@@ -578,15 +632,16 @@ function checkFormRequiredAria(html: string): CheckResult {
   let m: RegExpExecArray | null;
   while ((m = re.exec(html)) !== null) {
     const tag = m[0];
-    if (!hasAttr(tag, 'required')) continue;
-    const ariaRequired = (getAttr(tag, 'aria-required') ?? '').toLowerCase();
-    if (ariaRequired === 'true') continue;
+    if (!hasAttr(tag, "required")) continue;
+    const ariaRequired = (getAttr(tag, "aria-required") ?? "").toLowerCase();
+    if (ariaRequired === "true") continue;
     issues.push({
       id: `form-required-aria`,
-      severity: 'minor',
-      rule: 'form-required-aria',
-      wcag: '4.1.2',
-      description: 'Form field uses required but is missing aria-required="true" for broader AT support.',
+      severity: "minor",
+      rule: "form-required-aria",
+      wcag: "4.1.2",
+      description:
+        'Form field uses required but is missing aria-required="true" for broader AT support.',
       element: trunc(tag),
       fix: 'Add aria-required="true" alongside the required attribute for maximum assistive technology compatibility.',
     });
@@ -599,13 +654,13 @@ function checkEmptyHeading(html: string): CheckResult {
   const issues: CheckResult = [];
   for (let level = 1; level <= 6; level++) {
     getElements(html, `h${level}`)
-      .filter(el => innerText(el).length === 0)
-      .forEach(el => {
+      .filter((el) => innerText(el).length === 0)
+      .forEach((el) => {
         issues.push({
           id: `empty-heading`,
-          severity: 'serious',
-          rule: 'empty-heading',
-          wcag: '2.4.6',
+          severity: "serious",
+          rule: "empty-heading",
+          wcag: "2.4.6",
           description: `<h${level}> element has no text content.`,
           element: trunc(el),
           fix: `Add descriptive text to the <h${level}> element or remove it if it serves no purpose.`,
@@ -617,19 +672,20 @@ function checkEmptyHeading(html: string): CheckResult {
 
 // 24. link-new-tab-warn — target="_blank" without rel containing noopener
 function checkLinkNewTabWarn(html: string): CheckResult {
-  return getElements(html, 'a')
-    .filter(el => {
+  return getElements(html, "a")
+    .filter((el) => {
       const openTag = /^<a[^>]*>/i.exec(el)?.[0] ?? el;
-      if ((getAttr(openTag, 'target') ?? '') !== '_blank') return false;
-      const rel = (getAttr(openTag, 'rel') ?? '').toLowerCase();
-      return !rel.includes('noopener') && !rel.includes('noreferrer');
+      if ((getAttr(openTag, "target") ?? "") !== "_blank") return false;
+      const rel = (getAttr(openTag, "rel") ?? "").toLowerCase();
+      return !rel.includes("noopener") && !rel.includes("noreferrer");
     })
-    .map(el => ({
+    .map((el) => ({
       id: `link-new-tab-warn`,
-      severity: 'minor' as Severity,
-      rule: 'link-new-tab-warn',
-      wcag: '3.2.5',
-      description: 'Link opens in a new tab (target="_blank") without rel="noopener noreferrer", and may not warn users.',
+      severity: "minor" as Severity,
+      rule: "link-new-tab-warn",
+      wcag: "3.2.5",
+      description:
+        'Link opens in a new tab (target="_blank") without rel="noopener noreferrer", and may not warn users.',
       element: trunc(el),
       fix: 'Add rel="noopener noreferrer" and consider adding a visual/ARIA indicator that the link opens in a new tab.',
     }));
@@ -643,9 +699,16 @@ function checkColorContrastInline(html: string): CheckResult {
 
   // Map of CSS color names to hex for simple comparison
   const colorNames: Record<string, string> = {
-    white: '#ffffff', black: '#000000', red: '#ff0000', green: '#008000',
-    blue: '#0000ff', yellow: '#ffff00', gray: '#808080', grey: '#808080',
-    silver: '#c0c0c0', transparent: 'transparent',
+    white: "#ffffff",
+    black: "#000000",
+    red: "#ff0000",
+    green: "#008000",
+    blue: "#0000ff",
+    yellow: "#ffff00",
+    gray: "#808080",
+    grey: "#808080",
+    silver: "#c0c0c0",
+    transparent: "transparent",
   };
 
   function normalizeColor(val: string): string {
@@ -663,19 +726,22 @@ function checkColorContrastInline(html: string): CheckResult {
     const bg = normalizeColor(bgMatch[1]);
 
     // Flag if obviously same colour
-    if (fg === bg && fg !== 'transparent') {
+    if (fg === bg && fg !== "transparent") {
       // Find tag for context
-      const tagStart = html.lastIndexOf('<', m.index);
-      const tagEnd = html.indexOf('>', m.index);
-      const tag = tagStart !== -1 && tagEnd !== -1 ? html.slice(tagStart, tagEnd + 1) : m[0];
+      const tagStart = html.lastIndexOf("<", m.index);
+      const tagEnd = html.indexOf(">", m.index);
+      const tag =
+        tagStart !== -1 && tagEnd !== -1
+          ? html.slice(tagStart, tagEnd + 1)
+          : m[0];
       issues.push({
         id: `color-contrast-inline`,
-        severity: 'moderate',
-        rule: 'color-contrast-inline',
-        wcag: '1.4.3',
+        severity: "moderate",
+        rule: "color-contrast-inline",
+        wcag: "1.4.3",
         description: `Inline style sets color and background to the same value ("${fg}"), making text invisible.`,
         element: trunc(tag),
-        fix: 'Ensure sufficient contrast between foreground and background colors (minimum ratio 4.5:1 for normal text).',
+        fix: "Ensure sufficient contrast between foreground and background colors (minimum ratio 4.5:1 for normal text).",
       });
     }
   }
@@ -689,31 +755,31 @@ function checkColorContrastInline(html: string): CheckResult {
 type CheckFn = (html: string) => CheckResult;
 
 const ALL_CHECKS: Array<{ name: string; fn: CheckFn }> = [
-  { name: 'img-alt',              fn: checkImgAlt },
-  { name: 'img-alt-empty',        fn: checkImgAltEmpty },
-  { name: 'input-label',          fn: checkInputLabel },
-  { name: 'button-name',          fn: checkButtonName },
-  { name: 'link-name',            fn: checkLinkName },
-  { name: 'lang-missing',         fn: checkLangMissing },
-  { name: 'page-title',           fn: checkPageTitle },
-  { name: 'heading-order',        fn: checkHeadingOrder },
-  { name: 'heading-h1-missing',   fn: checkHeadingH1Missing },
-  { name: 'heading-h1-multiple',  fn: checkHeadingH1Multiple },
-  { name: 'focus-visible',        fn: checkFocusVisible },
-  { name: 'tabindex-positive',    fn: checkTabindexPositive },
-  { name: 'autofocus',            fn: checkAutofocus },
-  { name: 'select-label',         fn: checkSelectLabel },
-  { name: 'textarea-label',       fn: checkTextareaLabel },
-  { name: 'table-caption',        fn: checkTableCaption },
-  { name: 'table-th-scope',       fn: checkTableThScope },
-  { name: 'skip-link',            fn: checkSkipLink },
-  { name: 'meta-viewport-scale',  fn: checkMetaViewportScale },
-  { name: 'landmark-main',        fn: checkLandmarkMain },
-  { name: 'landmark-nav',         fn: checkLandmarkNav },
-  { name: 'form-required-aria',   fn: checkFormRequiredAria },
-  { name: 'empty-heading',        fn: checkEmptyHeading },
-  { name: 'link-new-tab-warn',    fn: checkLinkNewTabWarn },
-  { name: 'color-contrast-inline', fn: checkColorContrastInline },
+  { name: "img-alt", fn: checkImgAlt },
+  { name: "img-alt-empty", fn: checkImgAltEmpty },
+  { name: "input-label", fn: checkInputLabel },
+  { name: "button-name", fn: checkButtonName },
+  { name: "link-name", fn: checkLinkName },
+  { name: "lang-missing", fn: checkLangMissing },
+  { name: "page-title", fn: checkPageTitle },
+  { name: "heading-order", fn: checkHeadingOrder },
+  { name: "heading-h1-missing", fn: checkHeadingH1Missing },
+  { name: "heading-h1-multiple", fn: checkHeadingH1Multiple },
+  { name: "focus-visible", fn: checkFocusVisible },
+  { name: "tabindex-positive", fn: checkTabindexPositive },
+  { name: "autofocus", fn: checkAutofocus },
+  { name: "select-label", fn: checkSelectLabel },
+  { name: "textarea-label", fn: checkTextareaLabel },
+  { name: "table-caption", fn: checkTableCaption },
+  { name: "table-th-scope", fn: checkTableThScope },
+  { name: "skip-link", fn: checkSkipLink },
+  { name: "meta-viewport-scale", fn: checkMetaViewportScale },
+  { name: "landmark-main", fn: checkLandmarkMain },
+  { name: "landmark-nav", fn: checkLandmarkNav },
+  { name: "form-required-aria", fn: checkFormRequiredAria },
+  { name: "empty-heading", fn: checkEmptyHeading },
+  { name: "link-new-tab-warn", fn: checkLinkNewTabWarn },
+  { name: "color-contrast-inline", fn: checkColorContrastInline },
 ];
 
 // ---------------------------------------------------------------------------
@@ -736,11 +802,11 @@ function computeScore(issues: A11yIssue[]): number {
 }
 
 function computeGrade(score: number): string {
-  if (score >= 90) return 'A';
-  if (score >= 75) return 'B';
-  if (score >= 60) return 'C';
-  if (score >= 45) return 'D';
-  return 'F';
+  if (score >= 90) return "A";
+  if (score >= 75) return "B";
+  if (score >= 60) return "C";
+  if (score >= 45) return "D";
+  return "F";
 }
 
 // ---------------------------------------------------------------------------
@@ -754,7 +820,7 @@ function computeGrade(score: number): string {
  * @returns Structured audit result with issues, score, grade, and pass/fail info.
  */
 export function auditA11y(html: string): A11yAuditResult {
-  if (typeof html !== 'string') html = '';
+  if (typeof html !== "string") html = "";
 
   const allIssues: A11yIssue[] = [];
   const passedChecks: string[] = [];
@@ -786,26 +852,29 @@ export function auditA11y(html: string): A11yAuditResult {
   }
 
   const issueCounts = {
-    critical: allIssues.filter(i => i.severity === 'critical').length,
-    serious:  allIssues.filter(i => i.severity === 'serious').length,
-    moderate: allIssues.filter(i => i.severity === 'moderate').length,
-    minor:    allIssues.filter(i => i.severity === 'minor').length,
-    total:    allIssues.length,
+    critical: allIssues.filter((i) => i.severity === "critical").length,
+    serious: allIssues.filter((i) => i.severity === "serious").length,
+    moderate: allIssues.filter((i) => i.severity === "moderate").length,
+    minor: allIssues.filter((i) => i.severity === "minor").length,
+    total: allIssues.length,
   };
 
   const score = computeScore(allIssues);
   const grade = computeGrade(score);
 
   const summaryParts: string[] = [];
-  if (issueCounts.critical > 0) summaryParts.push(`${issueCounts.critical} critical`);
-  if (issueCounts.serious  > 0) summaryParts.push(`${issueCounts.serious} serious`);
-  if (issueCounts.moderate > 0) summaryParts.push(`${issueCounts.moderate} moderate`);
-  if (issueCounts.minor    > 0) summaryParts.push(`${issueCounts.minor} minor`);
+  if (issueCounts.critical > 0)
+    summaryParts.push(`${issueCounts.critical} critical`);
+  if (issueCounts.serious > 0)
+    summaryParts.push(`${issueCounts.serious} serious`);
+  if (issueCounts.moderate > 0)
+    summaryParts.push(`${issueCounts.moderate} moderate`);
+  if (issueCounts.minor > 0) summaryParts.push(`${issueCounts.minor} minor`);
 
   const summary =
     allIssues.length === 0
       ? `No accessibility issues found. Score: ${score}/100 (${grade}).`
-      : `Found ${allIssues.length} issue${allIssues.length === 1 ? '' : 's'} (${summaryParts.join(', ')}). Score: ${score}/100 (${grade}).`;
+      : `Found ${allIssues.length} issue${allIssues.length === 1 ? "" : "s"} (${summaryParts.join(", ")}). Score: ${score}/100 (${grade}).`;
 
   return {
     score,

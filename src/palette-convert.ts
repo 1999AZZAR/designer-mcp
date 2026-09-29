@@ -43,7 +43,10 @@ function toScss(data: PaletteData): string {
 }
 
 function toFigma(data: PaletteData): string {
-  const tokens: Record<string, Record<string, { value: string; type: string }>> = {};
+  const tokens: Record<
+    string,
+    Record<string, { value: string; type: string }>
+  > = {};
   for (const p of data.palettes) {
     const name = slug(p.name);
     tokens[name] = {};
@@ -90,7 +93,7 @@ function toJsonTokens(data: PaletteData): string {
   const palettes = data.palettes.map((p) => ({
     name: p.name,
     colors: Object.fromEntries(
-      p.colors.map((c, i) => [`color-${i + 1}`, { value: c, type: "color" }])
+      p.colors.map((c, i) => [`color-${i + 1}`, { value: c, type: "color" }]),
     ),
     tags: p.tags ?? [],
     likes: p.likes ?? 0,
@@ -99,10 +102,16 @@ function toJsonTokens(data: PaletteData): string {
 }
 
 function slug(s: string, sep = "-"): string {
-  return s.toLowerCase().replace(/[\s_]+/g, sep).replace(/[^a-z0-9\-]/g, "");
+  return s
+    .toLowerCase()
+    .replace(/[\s_]+/g, sep)
+    .replace(/[^a-z0-9\-]/g, "");
 }
 
-export function convertPalette(data: PaletteData, target: ConvertTarget): string {
+export function convertPalette(
+  data: PaletteData,
+  target: ConvertTarget,
+): string {
   switch (target) {
     case "css":
       return toCss(data);

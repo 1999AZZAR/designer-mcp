@@ -30,7 +30,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   ant: {
     label: "Ant Design",
-    use_for: "Admin panels, dashboards, CMS, internal tools, workflow-heavy products",
+    use_for:
+      "Admin panels, dashboards, CMS, internal tools, workflow-heavy products",
     rules: [
       "Apply Natural, Certain, Meaningful, and Growing as operating checks.",
       "Use familiar enterprise patterns: forms, tables, tags, drawers, modals, inline validation.",
@@ -70,7 +71,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   polaris: {
     label: "Shopify Polaris",
-    use_for: "Merchant tools, commerce operations, inventory and order management",
+    use_for:
+      "Merchant tools, commerce operations, inventory and order management",
     rules: [
       "Optimize for merchant productivity and reassuring task flow.",
       "Use clean cards, resource lists, tables, and direct helper/error copy.",
@@ -80,7 +82,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   material: {
     label: "Material You",
-    use_for: "Adaptive modern apps, expressive product UI, Android-aligned products",
+    use_for:
+      "Adaptive modern apps, expressive product UI, Android-aligned products",
     rules: [
       "Use tonal surfaces, adaptive hierarchy, and rounded geometry.",
       "Prefer material-style app bars, cards, chips, tabs, FABs, and sheets.",
@@ -90,7 +93,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   minimal: {
     label: "Minimalism",
-    use_for: "Editorial sites, portfolios, clean product pages, content-first SaaS",
+    use_for:
+      "Editorial sites, portfolios, clean product pages, content-first SaaS",
     rules: [
       "Let typography and whitespace carry hierarchy.",
       "Remove decorative structure that does not improve comprehension.",
@@ -160,7 +164,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   "swiss-archival": {
     label: "Swiss-Archival Design",
-    use_for: "Digital archives, museum sites, academic platforms, heritage brands",
+    use_for:
+      "Digital archives, museum sites, academic platforms, heritage brands",
     rules: [
       "Follow the geometry ruleset: seed, superformula paths, layers, orbits, captions.",
       "Use the dual-font system: display + body with strict hierarchy.",
@@ -171,7 +176,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   "m3-pastel": {
     label: "M3 Pastel",
-    use_for: "Soft modern SaaS, creative dashboards, gentler material-style products",
+    use_for:
+      "Soft modern SaaS, creative dashboards, gentler material-style products",
     rules: [
       "Keep Material-style structure but soften it with pastel tonal surfaces.",
       "Use large rounded geometry and controlled surface layering.",
@@ -181,7 +187,8 @@ export const STYLES: Record<string, StyleDef> = {
   },
   "neo-m3": {
     label: "Neo-M3",
-    use_for: "Editorial tech products, bold SaaS, structured brand-forward product UI",
+    use_for:
+      "Editorial tech products, bold SaaS, structured brand-forward product UI",
     rules: [
       "Mix strong product structure with bolder editorial energy.",
       "Use bold borders, strong geometry, and controlled hard-shadow accents.",
@@ -272,7 +279,8 @@ export const HYBRIDS: Record<string, HybridDef> = {
   },
   "polaris+swiss-archival": {
     label: "Polaris + Swiss-Archival",
-    use_for: "Heritage brands, artisan marketplaces, curated commerce with provenance",
+    use_for:
+      "Heritage brands, artisan marketplaces, curated commerce with provenance",
     structure: "polaris",
     brand: "swiss-archival",
     rules: [
@@ -294,7 +302,8 @@ export const HYBRIDS: Record<string, HybridDef> = {
   },
   "ant+glass": {
     label: "Ant + Glass",
-    use_for: "Enterprise products with atmospheric landing/dashboard highlights",
+    use_for:
+      "Enterprise products with atmospheric landing/dashboard highlights",
     structure: "ant",
     brand: "glass",
     rules: [
@@ -431,26 +440,50 @@ export function buildSingle(
   style: string,
   palette: string,
   archetype?: string,
-  tailwind = false
+  tailwind = false,
 ): string {
   const s = STYLES[style];
-  if (!s) throw new Error(`Style '${style}' not found. Available: ${Object.keys(STYLES).join(", ")}`);
+  if (!s)
+    throw new Error(
+      `Style '${style}' not found. Available: ${Object.keys(STYLES).join(", ")}`,
+    );
 
   const sections: string[] = [BASE_RULES.trim()];
-  sections.push(formatSection(`Selected System: ${s.label}`, [`Use for: ${s.use_for}`, ...s.rules]));
-  sections.push(formatSection(`Palette: ${palette.toUpperCase()}`, PALETTES[palette]));
+  sections.push(
+    formatSection(`Selected System: ${s.label}`, [
+      `Use for: ${s.use_for}`,
+      ...s.rules,
+    ]),
+  );
+  sections.push(
+    formatSection(`Palette: ${palette.toUpperCase()}`, PALETTES[palette]),
+  );
 
   if (archetype && ARCHETYPES[archetype]) {
-    sections.push(formatSection(`Archetype: ${ARCHETYPES[archetype].label}`, ARCHETYPES[archetype].rules));
+    sections.push(
+      formatSection(
+        `Archetype: ${ARCHETYPES[archetype].label}`,
+        ARCHETYPES[archetype].rules,
+      ),
+    );
   }
 
   for (const key of ["icons", "accessibility", "motion", "tokens"] as const) {
-    sections.push(formatSection(CROSS_CUTTING[key].label, CROSS_CUTTING[key].rules));
+    sections.push(
+      formatSection(CROSS_CUTTING[key].label, CROSS_CUTTING[key].rules),
+    );
   }
 
   if (tailwind) {
-    sections.push(formatSection(CROSS_CUTTING.responsive.label, CROSS_CUTTING.responsive.rules));
-    sections.push(formatSection(CROSS_CUTTING.tailwind.label, CROSS_CUTTING.tailwind.rules));
+    sections.push(
+      formatSection(
+        CROSS_CUTTING.responsive.label,
+        CROSS_CUTTING.responsive.rules,
+      ),
+    );
+    sections.push(
+      formatSection(CROSS_CUTTING.tailwind.label, CROSS_CUTTING.tailwind.rules),
+    );
   }
 
   return sections.join("\n\n") + "\n";
@@ -460,25 +493,56 @@ export function buildHybrid(
   primary: string,
   secondary: string,
   palette: string,
-  archetype?: string
+  archetype?: string,
 ): string {
   const key = `${primary}+${secondary}`;
   const h = HYBRIDS[key];
-  if (!h) throw new Error(`No hybrid pattern for '${key}'. Available: ${Object.keys(HYBRIDS).join(", ")}`);
+  if (!h)
+    throw new Error(
+      `No hybrid pattern for '${key}'. Available: ${Object.keys(HYBRIDS).join(", ")}`,
+    );
 
   const sections: string[] = [BASE_RULES.trim()];
-  sections.push(formatSection(`Hybrid: ${h.label}`, [`Use for: ${h.use_for}`, ...h.rules]));
-  sections.push(formatSection(`Structure Owner: ${STYLES[primary].label}`, [`Use for: ${STYLES[primary].use_for}`, ...STYLES[primary].rules]));
-  sections.push(formatSection(`Brand Owner: ${STYLES[secondary].label}`, STYLES[secondary].rules));
-  sections.push(formatSection(`Palette: ${palette.toUpperCase()}`, PALETTES[palette]));
+  sections.push(
+    formatSection(`Hybrid: ${h.label}`, [`Use for: ${h.use_for}`, ...h.rules]),
+  );
+  sections.push(
+    formatSection(`Structure Owner: ${STYLES[primary].label}`, [
+      `Use for: ${STYLES[primary].use_for}`,
+      ...STYLES[primary].rules,
+    ]),
+  );
+  sections.push(
+    formatSection(
+      `Brand Owner: ${STYLES[secondary].label}`,
+      STYLES[secondary].rules,
+    ),
+  );
+  sections.push(
+    formatSection(`Palette: ${palette.toUpperCase()}`, PALETTES[palette]),
+  );
 
   if (archetype && ARCHETYPES[archetype]) {
-    sections.push(formatSection(`Archetype: ${ARCHETYPES[archetype].label}`, ARCHETYPES[archetype].rules));
+    sections.push(
+      formatSection(
+        `Archetype: ${ARCHETYPES[archetype].label}`,
+        ARCHETYPES[archetype].rules,
+      ),
+    );
   }
 
-  sections.push(formatSection(CROSS_CUTTING.icons.label, CROSS_CUTTING.icons.rules));
-  sections.push(formatSection(CROSS_CUTTING.accessibility.label, CROSS_CUTTING.accessibility.rules));
-  sections.push(formatSection(CROSS_CUTTING.motion.label, CROSS_CUTTING.motion.rules));
+  sections.push(
+    formatSection(CROSS_CUTTING.icons.label, CROSS_CUTTING.icons.rules),
+  );
+  sections.push(
+    formatSection(
+      CROSS_CUTTING.accessibility.label,
+      CROSS_CUTTING.accessibility.rules,
+    ),
+  );
+  sections.push(
+    formatSection(CROSS_CUTTING.motion.label, CROSS_CUTTING.motion.rules),
+  );
 
   return sections.join("\n\n") + "\n";
 }

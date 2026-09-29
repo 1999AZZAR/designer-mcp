@@ -6,9 +6,12 @@ function tailwindFontFamily(style: string): string {
     fluent: "font-family: 'Segoe UI', system-ui, -apple-system, sans-serif",
     ant: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     carbon: "font-family: 'IBM Plex Sans', system-ui, sans-serif",
-    atlassian: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    "apple-hig": "font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
-    polaris: "font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif",
+    atlassian:
+      "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "apple-hig":
+      "font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+    polaris:
+      "font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif",
     material: "font-family: 'Roboto', system-ui, sans-serif",
     minimal: "font-family: 'Inter', system-ui, sans-serif",
     glass: "font-family: 'Inter', system-ui, sans-serif",
@@ -17,7 +20,8 @@ function tailwindFontFamily(style: string): string {
     claymorphism: "font-family: 'Nunito', system-ui, sans-serif",
     skeuomorphism: "font-family: Georgia, 'Times New Roman', serif",
     swiss: "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif",
-    "swiss-archival": "font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif",
+    "swiss-archival":
+      "font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif",
     "m3-pastel": "font-family: 'Google Sans', 'Roboto', system-ui, sans-serif",
     "neo-m3": "font-family: 'Space Grotesk', system-ui, sans-serif",
   };
@@ -37,11 +41,16 @@ function dashboardTemplate(style: string, palette: string): string {
   const primaryColor = config.theme.extend.colors.primary;
   const secondaryColor = config.theme.extend.colors.secondary;
 
-  const cardClass = style === "neo-brutalism" ? "bg-white neo-shadow border-2 border-black rounded-none"
-    : style === "neumorphism" ? "neu-surface rounded-2xl p-6"
-    : style === "claymorphism" ? "bg-white clay-card rounded-3xl p-6"
-    : style === "glass" ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6"
-    : "bg-white rounded-xl shadow-sm border border-slate-200 p-6";
+  const cardClass =
+    style === "neo-brutalism"
+      ? "bg-white neo-shadow border-2 border-black rounded-none"
+      : style === "neumorphism"
+        ? "neu-surface rounded-2xl p-6"
+        : style === "claymorphism"
+          ? "bg-white clay-card rounded-3xl p-6"
+          : style === "glass"
+            ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6"
+            : "bg-white rounded-xl shadow-sm border border-slate-200 p-6";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -51,47 +60,47 @@ function dashboardTemplate(style: string, palette: string): string {
   <title>Dashboard</title>
   ${shell}
 </head>
-<body class="${style === 'glass' ? 'bg-transparent text-white' : 'bg-slate-50 text-slate-900'} min-h-screen">
+<body class="${style === "glass" ? "bg-transparent text-white" : "bg-slate-50 text-slate-900"} min-h-screen">
   <div class="flex min-h-screen">
     <!-- Sidebar -->
-    <aside class="w-64 ${style === 'glass' ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200'} border-r p-4 hidden lg:block">
-      <div class="font-bold text-lg mb-8 ${style === 'glass' ? 'text-white' : 'text-slate-900'}">Dashboard</div>
+    <aside class="w-64 ${style === "glass" ? "bg-white/5 border-white/10" : "bg-white border-slate-200"} border-r p-4 hidden lg:block">
+      <div class="font-bold text-lg mb-8 ${style === "glass" ? "text-white" : "text-slate-900"}">Dashboard</div>
       <nav class="space-y-1">
         <a href="#" class="block px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium">Overview</a>
-        <a href="#" class="block px-3 py-2 rounded-lg ${style === 'glass' ? 'text-white/60 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-100'}">Analytics</a>
-        <a href="#" class="block px-3 py-2 rounded-lg ${style === 'glass' ? 'text-white/60 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-100'}">Customers</a>
-        <a href="#" class="block px-3 py-2 rounded-lg ${style === 'glass' ? 'text-white/60 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-100'}">Products</a>
-        <a href="#" class="block px-3 py-2 rounded-lg ${style === 'glass' ? 'text-white/60 hover:bg-white/5 hover:text-white' : 'text-slate-600 hover:bg-slate-100'}">Settings</a>
+        <a href="#" class="block px-3 py-2 rounded-lg ${style === "glass" ? "text-white/60 hover:bg-white/5 hover:text-white" : "text-slate-600 hover:bg-slate-100"}">Analytics</a>
+        <a href="#" class="block px-3 py-2 rounded-lg ${style === "glass" ? "text-white/60 hover:bg-white/5 hover:text-white" : "text-slate-600 hover:bg-slate-100"}">Customers</a>
+        <a href="#" class="block px-3 py-2 rounded-lg ${style === "glass" ? "text-white/60 hover:bg-white/5 hover:text-white" : "text-slate-600 hover:bg-slate-100"}">Products</a>
+        <a href="#" class="block px-3 py-2 rounded-lg ${style === "glass" ? "text-white/60 hover:bg-white/5 hover:text-white" : "text-slate-600 hover:bg-slate-100"}">Settings</a>
       </nav>
     </aside>
 
     <!-- Main -->
     <main class="flex-1 p-6 lg:p-8">
       <header class="mb-8" data-anime-hero>
-        <h1 class="text-2xl font-bold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">Overview</h1>
-        <p class="${style === 'glass' ? 'text-white/60' : 'text-slate-500'} mt-1">Welcome back. Here's what's happening.</p>
+        <h1 class="text-2xl font-bold ${style === "glass" ? "text-white" : "text-slate-900"}">Overview</h1>
+        <p class="${style === "glass" ? "text-white/60" : "text-slate-500"} mt-1">Welcome back. Here's what's happening.</p>
       </header>
 
       <!-- KPI Strip -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="${cardClass}" data-anime-card>
-          <p class="text-sm ${style === 'glass' ? 'text-white/60' : 'text-slate-500'} mb-1">Revenue</p>
-          <p class="text-2xl font-bold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">$48,352</p>
+          <p class="text-sm ${style === "glass" ? "text-white/60" : "text-slate-500"} mb-1">Revenue</p>
+          <p class="text-2xl font-bold ${style === "glass" ? "text-white" : "text-slate-900"}">$48,352</p>
           <p class="text-xs text-emerald-500 mt-1">+12.5% from last month</p>
         </div>
         <div class="${cardClass}" data-anime-card>
-          <p class="text-sm ${style === 'glass' ? 'text-white/60' : 'text-slate-500'} mb-1">Users</p>
-          <p class="text-2xl font-bold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">2,420</p>
+          <p class="text-sm ${style === "glass" ? "text-white/60" : "text-slate-500"} mb-1">Users</p>
+          <p class="text-2xl font-bold ${style === "glass" ? "text-white" : "text-slate-900"}">2,420</p>
           <p class="text-xs text-emerald-500 mt-1">+8.2% from last month</p>
         </div>
         <div class="${cardClass}" data-anime-card>
-          <p class="text-sm ${style === 'glass' ? 'text-white/60' : 'text-slate-500'} mb-1">Orders</p>
-          <p class="text-2xl font-bold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">1,210</p>
+          <p class="text-sm ${style === "glass" ? "text-white/60" : "text-slate-500"} mb-1">Orders</p>
+          <p class="text-2xl font-bold ${style === "glass" ? "text-white" : "text-slate-900"}">1,210</p>
           <p class="text-xs text-rose-500 mt-1">-3.1% from last month</p>
         </div>
         <div class="${cardClass}" data-anime-card>
-          <p class="text-sm ${style === 'glass' ? 'text-white/60' : 'text-slate-500'} mb-1">Conversion</p>
-          <p class="text-2xl font-bold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">3.24%</p>
+          <p class="text-sm ${style === "glass" ? "text-white/60" : "text-slate-500"} mb-1">Conversion</p>
+          <p class="text-2xl font-bold ${style === "glass" ? "text-white" : "text-slate-900"}">3.24%</p>
           <p class="text-xs text-emerald-500 mt-1">+0.4% from last month</p>
         </div>
       </div>
@@ -100,44 +109,44 @@ function dashboardTemplate(style: string, palette: string): string {
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div class="lg:col-span-2 ${cardClass}">
           <div class="flex items-center justify-between mb-4">
-            <h2 class="font-semibold ${style === 'glass' ? 'text-white' : 'text-slate-900'}">Analytics Overview</h2>
-            <div class="text-xs ${style === 'glass' ? 'text-white/40' : 'text-slate-400'}">Real-time updates</div>
+            <h2 class="font-semibold ${style === "glass" ? "text-white" : "text-slate-900"}">Analytics Overview</h2>
+            <div class="text-xs ${style === "glass" ? "text-white/40" : "text-slate-400"}">Real-time updates</div>
           </div>
           <div id="analytics-chart" class="w-full h-64"></div>
         </div>
         <div class="${cardClass}">
-          <h2 class="font-semibold ${style === 'glass' ? 'text-white' : 'text-slate-900'} mb-4">Quick Actions</h2>
+          <h2 class="font-semibold ${style === "glass" ? "text-white" : "text-slate-900"} mb-4">Quick Actions</h2>
           <div class="space-y-2">
             <button class="w-full px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">New Order</button>
-            <button class="w-full px-4 py-2 ${style === 'glass' ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'} rounded-lg text-sm font-medium transition-colors">View Reports</button>
-            <button class="w-full px-4 py-2 ${style === 'glass' ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'} rounded-lg text-sm font-medium transition-colors">Manage Users</button>
+            <button class="w-full px-4 py-2 ${style === "glass" ? "bg-white/10 text-white hover:bg-white/20" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} rounded-lg text-sm font-medium transition-colors">View Reports</button>
+            <button class="w-full px-4 py-2 ${style === "glass" ? "bg-white/10 text-white hover:bg-white/20" : "bg-slate-100 text-slate-700 hover:bg-slate-200"} rounded-lg text-sm font-medium transition-colors">Manage Users</button>
           </div>
         </div>
       </div>
 
       <!-- Recent Activity -->
       <div class="${cardClass}">
-        <h2 class="font-semibold ${style === 'glass' ? 'text-white' : 'text-slate-900'} mb-4">Recent Activity</h2>
+        <h2 class="font-semibold ${style === "glass" ? "text-white" : "text-slate-900"} mb-4">Recent Activity</h2>
         <div class="space-y-3">
-          <div class="flex items-center gap-3 p-3 rounded-lg ${style === 'glass' ? 'bg-white/5' : 'bg-slate-50'}">
+          <div class="flex items-center gap-3 p-3 rounded-lg ${style === "glass" ? "bg-white/5" : "bg-slate-50"}">
             <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-sm font-medium">JD</div>
             <div class="flex-1">
-              <p class="text-sm font-medium ${style === 'glass' ? 'text-white' : 'text-slate-900'}">New order #1234</p>
-              <p class="text-xs ${style === 'glass' ? 'text-white/40' : 'text-slate-500'}">2 minutes ago</p>
+              <p class="text-sm font-medium ${style === "glass" ? "text-white" : "text-slate-900"}">New order #1234</p>
+              <p class="text-xs ${style === "glass" ? "text-white/40" : "text-slate-500"}">2 minutes ago</p>
             </div>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-lg ${style === 'glass' ? 'bg-white/5' : 'bg-slate-50'}">
+          <div class="flex items-center gap-3 p-3 rounded-lg ${style === "glass" ? "bg-white/5" : "bg-slate-50"}">
             <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 text-sm font-medium">MK</div>
             <div class="flex-1">
-              <p class="text-sm font-medium ${style === 'glass' ? 'text-white' : 'text-slate-900'}">Payment received</p>
-              <p class="text-xs ${style === 'glass' ? 'text-white/40' : 'text-slate-500'}">15 minutes ago</p>
+              <p class="text-sm font-medium ${style === "glass" ? "text-white" : "text-slate-900"}">Payment received</p>
+              <p class="text-xs ${style === "glass" ? "text-white/40" : "text-slate-500"}">15 minutes ago</p>
             </div>
           </div>
-          <div class="flex items-center gap-3 p-3 rounded-lg ${style === 'glass' ? 'bg-white/5' : 'bg-slate-50'}">
+          <div class="flex items-center gap-3 p-3 rounded-lg ${style === "glass" ? "bg-white/5" : "bg-slate-50"}">
             <div class="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 text-sm font-medium">AL</div>
             <div class="flex-1">
-              <p class="text-sm font-medium ${style === 'glass' ? 'text-white' : 'text-slate-900'}">New user registered</p>
-              <p class="text-xs ${style === 'glass' ? 'text-white/40' : 'text-slate-500'}">1 hour ago</p>
+              <p class="text-sm font-medium ${style === "glass" ? "text-white" : "text-slate-900"}">New user registered</p>
+              <p class="text-xs ${style === "glass" ? "text-white/40" : "text-slate-500"}">1 hour ago</p>
             </div>
           </div>
         </div>
@@ -205,10 +214,14 @@ function dashboardTemplate(style: string, palette: string): string {
 
 function marketingHeroTemplate(style: string, palette: string): string {
   const shell = shellStyle(style, palette);
-  const cardClass = style === "neo-brutalism" ? "bg-white neo-shadow border-2 border-black rounded-none"
-    : style === "glass" ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
-    : style === "neumorphism" ? "neu-surface rounded-2xl"
-    : "bg-white rounded-xl shadow-sm border border-slate-200";
+  const cardClass =
+    style === "neo-brutalism"
+      ? "bg-white neo-shadow border-2 border-black rounded-none"
+      : style === "glass"
+        ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
+        : style === "neumorphism"
+          ? "neu-surface rounded-2xl"
+          : "bg-white rounded-xl shadow-sm border border-slate-200";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -290,11 +303,12 @@ function marketingHeroTemplate(style: string, palette: string): string {
 
 function settingsTemplate(style: string, palette: string): string {
   const shell = shellStyle(style, palette);
-  const inputClass = style === "neo-brutalism"
-    ? "w-full px-3 py-2 border-2 border-black rounded-none text-sm bg-white"
-    : style === "glass"
-    ? "w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-slate-900 placeholder-slate-400"
-    : "w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none";
+  const inputClass =
+    style === "neo-brutalism"
+      ? "w-full px-3 py-2 border-2 border-black rounded-none text-sm bg-white"
+      : style === "glass"
+        ? "w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-slate-900 placeholder-slate-400"
+        : "w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -375,8 +389,10 @@ function settingsTemplate(style: string, palette: string): string {
 
 function tableDetailTemplate(style: string, palette: string): string {
   const shell = shellStyle(style, palette);
-  const cellClass = style === "neo-brutalism" ? "px-4 py-3 text-sm border-b-2 border-black"
-    : "px-4 py-3 text-sm border-b border-slate-100";
+  const cellClass =
+    style === "neo-brutalism"
+      ? "px-4 py-3 text-sm border-b-2 border-black"
+      : "px-4 py-3 text-sm border-b border-slate-100";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -529,7 +545,7 @@ function editorialLandingTemplate(style: string, palette: string): string {
 export function generateTemplate(
   style: string,
   palette: string,
-  archetype: string
+  archetype: string,
 ): string {
   switch (archetype) {
     case "dashboard":

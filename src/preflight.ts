@@ -56,7 +56,9 @@ export function scanProject(projectPath?: string): PreFlightResult {
   if (hasPkg) {
     try {
       pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   const deps: Record<string, string> = {
@@ -73,7 +75,10 @@ export function scanProject(projectPath?: string): PreFlightResult {
     result.framework = "Astro";
   } else if (depNames.includes("vue") || depNames.includes("@vue/cli")) {
     result.framework = "Vue";
-  } else if (depNames.includes("svelte") || depNames.includes("@sveltejs/kit")) {
+  } else if (
+    depNames.includes("svelte") ||
+    depNames.includes("@sveltejs/kit")
+  ) {
     result.framework = "Svelte/SvelteKit";
   } else if (depNames.includes("@remix-run/react")) {
     result.framework = "Remix";
@@ -84,8 +89,12 @@ export function scanProject(projectPath?: string): PreFlightResult {
 
   // Font stack detection
   const fontLibs = [
-    "next/font", "@fontsource", "expo-google-fonts", "geist",
-    "typeface-", "fontsource-",
+    "next/font",
+    "@fontsource",
+    "expo-google-fonts",
+    "geist",
+    "typeface-",
+    "fontsource-",
   ].filter((l) => depNames.some((d) => d.includes(l)));
   if (fontLibs.length > 0) {
     result.fontStack.detected = true;
@@ -102,17 +111,25 @@ export function scanProject(projectPath?: string): PreFlightResult {
     try {
       const files = require("fs").readdirSync(dir);
       for (const f of files) {
-        if (!f.endsWith(".html") && !f.endsWith(".tsx") && !f.endsWith(".jsx")) continue;
+        if (!f.endsWith(".html") && !f.endsWith(".tsx") && !f.endsWith(".jsx"))
+          continue;
         const content = readFileSync(join(dir, f), "utf8");
-        const gfMatch = content.match(/fonts\.googleapis\.com\/css2?\?family=([^"']+)/);
+        const gfMatch = content.match(
+          /fonts\.googleapis\.com\/css2?\?family=([^"']+)/,
+        );
         if (gfMatch) {
           result.fontStack.detected = true;
-          const families = gfMatch[1].split("&")[0].split("|").map((s) => s.replace(/:[^:]*$/, ""));
+          const families = gfMatch[1]
+            .split("&")[0]
+            .split("|")
+            .map((s) => s.replace(/:[^:]*$/, ""));
           result.fontStack.fonts.push(...families);
           result.fontStack.sources.push(`${dir}/${f}`);
         }
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   // Palette detection
@@ -120,11 +137,17 @@ export function scanProject(projectPath?: string): PreFlightResult {
   for (const dir of [root, join(root, "src"), join(root, "app")]) {
     if (!existsSync(dir)) continue;
     try {
-      const entries = require("fs").readdirSync(dir, { recursive: true }) as string[];
+      const entries = require("fs").readdirSync(dir, {
+        recursive: true,
+      }) as string[];
       cssFiles.push(
-        ...entries.filter((e: string) => e.endsWith(".css")).map((e: string) => join(dir, e))
+        ...entries
+          .filter((e: string) => e.endsWith(".css"))
+          .map((e: string) => join(dir, e)),
       );
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   for (const cssPath of cssFiles) {
@@ -143,13 +166,20 @@ export function scanProject(projectPath?: string): PreFlightResult {
         result.palette.detected = true;
         result.palette.tokens.push(...hexVars.map((c) => c.trim()));
         result.palette.source = cssPath;
-        result.palette.format = result.palette.format === "css-custom" ? "css-custom" : "css-custom";
+        result.palette.format =
+          result.palette.format === "css-custom" ? "css-custom" : "css-custom";
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   // Tailwind config
-  const twConfigFiles = ["tailwind.config.js", "tailwind.config.ts", "tailwind.config.mjs"];
+  const twConfigFiles = [
+    "tailwind.config.js",
+    "tailwind.config.ts",
+    "tailwind.config.mjs",
+  ];
   for (const tw of twConfigFiles) {
     const twPath = join(root, tw);
     if (existsSync(twPath)) {
@@ -176,15 +206,23 @@ export function scanProject(projectPath?: string): PreFlightResult {
   }
 
   if (result.palette.detected) {
-    result.findings.push(`Palette: ${result.palette.format} tokens (${result.palette.source})`);
+    result.findings.push(
+      `Palette: ${result.palette.format} tokens (${result.palette.source})`,
+    );
   } else {
     result.findings.push("Palette: none detected");
   }
 
   // Microinteraction stance
   const motionLibs = [
-    "framer-motion", "gsap", "motion", "lenis", "lottie-react",
-    "@react-spring/web", "@react-spring/three", "auto-animate",
+    "framer-motion",
+    "gsap",
+    "motion",
+    "lenis",
+    "lottie-react",
+    "@react-spring/web",
+    "@react-spring/three",
+    "auto-animate",
   ];
   for (const ml of motionLibs) {
     if (depNames.includes(ml)) {
@@ -200,7 +238,10 @@ export function scanProject(projectPath?: string): PreFlightResult {
   }
 
   // Spacing scale
-  const twConfigPath = [join(root, "tailwind.config.js"), join(root, "tailwind.config.ts")].find(existsSync);
+  const twConfigPath = [
+    join(root, "tailwind.config.js"),
+    join(root, "tailwind.config.ts"),
+  ].find(existsSync);
   if (twConfigPath) {
     const content = readFileSync(twConfigPath, "utf8");
     if (content.includes("spacing")) {
@@ -213,7 +254,8 @@ export function scanProject(projectPath?: string): PreFlightResult {
   }
 
   // design.md
-  result.hasDesignMd = existsSync(join(root, "design.md")) || existsSync(join(root, "DESIGN.md"));
+  result.hasDesignMd =
+    existsSync(join(root, "design.md")) || existsSync(join(root, "DESIGN.md"));
   if (result.hasDesignMd) {
     result.findings.push("design.md detected — system-managed project");
   }
@@ -222,7 +264,8 @@ export function scanProject(projectPath?: string): PreFlightResult {
   if (result.fontStack.detected) result.preserved.push("font stack");
   if (result.palette.detected) result.preserved.push("palette/tokens");
   if (result.framework) result.preserved.push("framework structure");
-  if (result.motionStance.motionOn) result.preserved.push("motion library stance");
+  if (result.motionStance.motionOn)
+    result.preserved.push("motion library stance");
 
   result.introduced.push("macrostructure & section rhythm");
   result.introduced.push("microinteraction discipline");

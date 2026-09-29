@@ -1,6 +1,10 @@
 import { generateTailwindConfig } from "./tailwind-config.js";
 import { generateTemplate } from "./templates.js";
-import { getComponent, COMPONENT_TYPES, type ComponentType } from "./components.js";
+import {
+  getComponent,
+  COMPONENT_TYPES,
+  type ComponentType,
+} from "./components.js";
 
 export interface ExportFile {
   path: string;
@@ -20,7 +24,7 @@ export function exportProject(
   style: string,
   palette: string,
   archetype: string,
-  projectName = "my-project"
+  projectName = "my-project",
 ): ExportProjectResult {
   const { code: tailwindConfig } = generateTailwindConfig(style, palette);
   const templateHtml = generateTemplate(style, palette, archetype);
@@ -30,25 +34,29 @@ export function exportProject(
     content: getComponent(type, style),
   }));
 
-  const indexHtml = templateHtml.replace(
-    '<script src="https://cdn.tailwindcss.com"></script>',
-    `<link rel="stylesheet" href="dist/output.css">`
-  ).replace(
-    /<script>\n[\s\S]*?<\/script>/,
-    ""
-  );
+  const indexHtml = templateHtml
+    .replace(
+      '<script src="https://cdn.tailwindcss.com"></script>',
+      `<link rel="stylesheet" href="dist/output.css">`,
+    )
+    .replace(/<script>\n[\s\S]*?<\/script>/, "");
 
-  const packageJson = JSON.stringify({
-    name: projectName,
-    version: "1.0.0",
-    scripts: {
-      dev: "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-      build: "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+  const packageJson = JSON.stringify(
+    {
+      name: projectName,
+      version: "1.0.0",
+      scripts: {
+        dev: "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+        build:
+          "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+      },
+      devDependencies: {
+        tailwindcss: "^3.4.0",
+      },
     },
-    devDependencies: {
-      tailwindcss: "^3.4.0",
-    },
-  }, null, 2);
+    null,
+    2,
+  );
 
   const inputCss = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n`;
 

@@ -9,66 +9,71 @@
 
 // ─── CDN ────────────────────────────────────────────────────────────────────
 
-export const ANIME_CDN =
-  `<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>`;
+export const ANIME_CDN = `<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>`;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type MotionCategory =
-  | "entrance"      // page/section load animations
-  | "micro"         // button / chip / toggle micro-interactions
-  | "stagger"       // list / grid stagger reveals
-  | "scroll"        // scroll-triggered (IntersectionObserver + anime)
-  | "loader"        // spinner / skeleton loader
-  | "transition"    // page / route transitions
-  | "counter"       // animated number counter
-  | "typewriter";   // text typewriter effect
+  | "entrance" // page/section load animations
+  | "micro" // button / chip / toggle micro-interactions
+  | "stagger" // list / grid stagger reveals
+  | "scroll" // scroll-triggered (IntersectionObserver + anime)
+  | "loader" // spinner / skeleton loader
+  | "transition" // page / route transitions
+  | "counter" // animated number counter
+  | "typewriter"; // text typewriter effect
 
 export const MOTION_CATEGORIES: MotionCategory[] = [
-  "entrance", "micro", "stagger", "scroll",
-  "loader", "transition", "counter", "typewriter",
+  "entrance",
+  "micro",
+  "stagger",
+  "scroll",
+  "loader",
+  "transition",
+  "counter",
+  "typewriter",
 ];
 
 // ─── Easing map per design style ─────────────────────────────────────────────
 
 const STYLE_EASING: Record<string, string> = {
-  "glass":          "easeOutQuart",
-  "neo-brutalism":  "easeInOutExpo",
-  "claymorphism":   "spring(1, 80, 10, 0)",
-  "neumorphism":    "easeOutSine",
-  "material":       "cubicBezier(0.4, 0, 0.2, 1)",
-  "ant":            "easeOutCubic",
-  "carbon":         "cubicBezier(0.2, 0, 0.38, 0.9)",
-  "fluent":         "easeOutCubic",
-  "atlassian":      "easeOutCubic",
-  "apple-hig":      "spring(1, 100, 18, 0)",
-  "polaris":        "easeOutQuad",
-  "minimal":        "easeOutExpo",
-  "swiss":          "linear",
+  glass: "easeOutQuart",
+  "neo-brutalism": "easeInOutExpo",
+  claymorphism: "spring(1, 80, 10, 0)",
+  neumorphism: "easeOutSine",
+  material: "cubicBezier(0.4, 0, 0.2, 1)",
+  ant: "easeOutCubic",
+  carbon: "cubicBezier(0.2, 0, 0.38, 0.9)",
+  fluent: "easeOutCubic",
+  atlassian: "easeOutCubic",
+  "apple-hig": "spring(1, 100, 18, 0)",
+  polaris: "easeOutQuad",
+  minimal: "easeOutExpo",
+  swiss: "linear",
   "swiss-archival": "linear",
-  "skeuomorphism":  "easeOutBounce",
-  "m3-pastel":      "spring(1, 80, 12, 0)",
-  "neo-m3":         "spring(1, 70, 10, 0)",
+  skeuomorphism: "easeOutBounce",
+  "m3-pastel": "spring(1, 80, 12, 0)",
+  "neo-m3": "spring(1, 70, 10, 0)",
 };
 
 const STYLE_DURATION: Record<string, number> = {
-  "glass":          700,
-  "neo-brutalism":  400,
-  "claymorphism":   600,
-  "neumorphism":    500,
-  "material":       300,
-  "ant":            250,
-  "carbon":         240,
-  "fluent":         300,
-  "atlassian":      250,
-  "apple-hig":      550,
-  "polaris":        250,
-  "minimal":        500,
-  "swiss":          200,
+  glass: 700,
+  "neo-brutalism": 400,
+  claymorphism: 600,
+  neumorphism: 500,
+  material: 300,
+  ant: 250,
+  carbon: 240,
+  fluent: 300,
+  atlassian: 250,
+  "apple-hig": 550,
+  polaris: 250,
+  minimal: 500,
+  swiss: 200,
   "swiss-archival": 200,
-  "skeuomorphism":  600,
-  "m3-pastel":      450,
-  "neo-m3":         400,
+  skeuomorphism: 600,
+  "m3-pastel": 450,
+  "neo-m3": 400,
 };
 
 function easing(style: string): string {
@@ -83,7 +88,7 @@ function duration(style: string): number {
 
 function entranceSnippet(style: string): string {
   const ease = easing(style);
-  const dur  = duration(style);
+  const dur = duration(style);
   const delay = style === "neo-brutalism" ? 0 : 60;
 
   return `<!-- anime.js v3 — Entrance Animation (${style}) -->
@@ -119,10 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function microSnippet(style: string): string {
   const ease = easing(style);
-  const dur  = Math.round(duration(style) * 0.5);
+  const dur = Math.round(duration(style) * 0.5);
 
-  const scale = style === "claymorphism" || style === "m3-pastel" ? "1.06" : "1.03";
-  const push   = style === "neo-brutalism" ? "translateY(2px) translateX(2px)" : "scale(0.97)";
+  const scale =
+    style === "claymorphism" || style === "m3-pastel" ? "1.06" : "1.03";
+  const push =
+    style === "neo-brutalism"
+      ? "translateY(2px) translateX(2px)"
+      : "scale(0.97)";
 
   return `<!-- anime.js v3 — Micro-Interactions (${style}) -->
 <script>
@@ -162,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function staggerSnippet(style: string): string {
   const ease = easing(style);
-  const dur  = duration(style);
+  const dur = duration(style);
 
   return `<!-- anime.js v3 — Stagger List/Grid Reveal (${style}) -->
 <script>
@@ -195,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function scrollSnippet(style: string): string {
   const ease = easing(style);
-  const dur  = duration(style);
+  const dur = duration(style);
 
   return `<!-- anime.js v3 — Scroll-Triggered Reveal (${style}) -->
 <script>
@@ -258,7 +267,7 @@ function loaderSnippet(style: string): string {
   }
 </style>
 <div class="anime-spinner" id="animeSpinner" role="status" aria-label="Loading">
-  ${[0,1,2,3,4,5,6,7].map(i => `<div class="anime-spinner-dot" style="transform: rotate(${i * 45}deg) translateX(-14px)"></div>`).join("\n  ")}
+  ${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<div class="anime-spinner-dot" style="transform: rotate(${i * 45}deg) translateX(-14px)"></div>`).join("\n  ")}
 </div>
 <script>
 (function() {
@@ -279,7 +288,7 @@ function loaderSnippet(style: string): string {
 
 function transitionSnippet(style: string): string {
   const ease = easing(style);
-  const dur  = duration(style);
+  const dur = duration(style);
 
   return `<!-- anime.js v3 — Page / Route Transition (${style}) -->
 <style>
@@ -412,13 +421,20 @@ export interface MotionSnippetResult {
 }
 
 const USAGE_HINTS: Record<MotionCategory, string> = {
-  entrance:   "Add data-anime-hero to your hero section, data-anime-card to cards. Drop this script before </body>.",
-  micro:      "Add data-anime-btn to interactive buttons, data-anime-card to hoverable cards.",
-  stagger:    "Wrap list items in <ul data-anime-list>, grid items in <div data-anime-grid>.",
-  scroll:     "Add data-anime-reveal to any section. Optional: data-anime-reveal-child on inner elements.",
-  loader:     "Paste the spinner HTML/CSS/script where the loading indicator should appear.",
-  transition: "Paste once in your base layout. Works automatically for all internal <a> links.",
-  counter:    "Add data-anime-counter='48352' (target value) to any <span>. Optional: data-anime-prefix, data-anime-suffix, data-anime-decimals.",
+  entrance:
+    "Add data-anime-hero to your hero section, data-anime-card to cards. Drop this script before </body>.",
+  micro:
+    "Add data-anime-btn to interactive buttons, data-anime-card to hoverable cards.",
+  stagger:
+    "Wrap list items in <ul data-anime-list>, grid items in <div data-anime-grid>.",
+  scroll:
+    "Add data-anime-reveal to any section. Optional: data-anime-reveal-child on inner elements.",
+  loader:
+    "Paste the spinner HTML/CSS/script where the loading indicator should appear.",
+  transition:
+    "Paste once in your base layout. Works automatically for all internal <a> links.",
+  counter:
+    "Add data-anime-counter='48352' (target value) to any <span>. Optional: data-anime-prefix, data-anime-suffix, data-anime-decimals.",
   typewriter: "Add data-anime-type to any heading or paragraph element.",
 };
 
@@ -427,16 +443,16 @@ const USAGE_HINTS: Record<MotionCategory, string> = {
  */
 export function generateMotionSnippet(
   category: MotionCategory,
-  style: string
+  style: string,
 ): MotionSnippetResult {
   const snippetMap: Record<MotionCategory, (style: string) => string> = {
-    entrance:   entranceSnippet,
-    micro:      microSnippet,
-    stagger:    staggerSnippet,
-    scroll:     scrollSnippet,
-    loader:     loaderSnippet,
+    entrance: entranceSnippet,
+    micro: microSnippet,
+    stagger: staggerSnippet,
+    scroll: scrollSnippet,
+    loader: loaderSnippet,
     transition: transitionSnippet,
-    counter:    counterSnippet,
+    counter: counterSnippet,
     typewriter: typewriterSnippet,
   };
 
@@ -464,7 +480,7 @@ export function generateMotionSnippet(
  */
 export function buildAnimeShell(style: string): string {
   const ease = easing(style);
-  const dur  = duration(style);
+  const dur = duration(style);
 
   return `${ANIME_CDN}
 <script>

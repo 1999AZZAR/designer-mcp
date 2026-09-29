@@ -3,17 +3,19 @@
 ## React Integration (`motion/react`)
 
 ### Basic Spring Animations
+
 ```tsx
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 
 <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
-/>
+/>;
 ```
 
 ### Micro-interactions
+
 ```tsx
 <motion.button
   whileHover={{ scale: 1.02 }}
@@ -25,6 +27,7 @@ import { motion } from "motion/react"
 ```
 
 ### Staggered Reveal
+
 ```tsx
 const container = {
   hidden: { opacity: 0 },
@@ -46,6 +49,7 @@ const item = {
 ```
 
 ### Scroll Animations
+
 ```tsx
 <motion.div
   initial={{ opacity: 0, y: 50 }}
@@ -55,17 +59,19 @@ const item = {
 ```
 
 ## Vanilla JS (`motion`)
+
 For non-React projects, import from `"motion"`.
 
 ```javascript
-import { animate, stagger } from "motion"
+import { animate, stagger } from "motion";
 
-animate(".box", 
-  { y: [20, 0], opacity: [0, 1] }, 
-  { 
-    delay: stagger(0.1), 
-    type: "spring", 
-    bounce: 0.25 
-  }
-)
+animate(
+  ".box",
+  { y: [20, 0], opacity: [0, 1] },
+  {
+    delay: stagger(0.1),
+    type: "spring",
+    bounce: 0.25,
+  },
+);
 ```

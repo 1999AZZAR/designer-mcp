@@ -1,18 +1,26 @@
+# Byte-stable trees. These are excluded from every reformatting hook, with a
+# reason, rather than exempted wholesale — anything we actually maintain is
+# linted normally:
+#   examples/    showcase/demo artifacts, kept byte-stable so the published
+#                demo matches what was designed
+#   skills/video/ canonical upstream HyperFrames v0.8.77 packages and upstream
+#                workflow docs — reference material, not ours to reformat
+#   skills/logo-design/assets/library/  generated indexes (catalog.json and
+#                classifications.json are rebuilt by scripts/build_catalog.py)
+#                plus third-party reference marks
+#
+# The list is repeated per hook below because pre-commit has no shared
+# exclude; keep the three in sync.
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
-        # Generated library data: rewriting it by hand would diverge from
-        # scripts/build_catalog.py, and the SVGs are third-party reference marks.
-        exclude: ^skills/logo-design/assets/library/
+        exclude: ^(examples/|skills/video/|skills/logo-design/assets/library/)
       - id: end-of-file-fixer
-        exclude: ^skills/logo-design/assets/library/
+        exclude: ^(examples/|skills/video/|skills/logo-design/assets/library/)
       - id: check-yaml
-      # The logo-design skill ships two generated library indexes (catalog.json,
-      # classifications.json) that are well over 500 KB. They are reproducible
-      # from the SVG sources with scripts/build_catalog.py, so they are exempt
-      # here rather than LFS-tracked or deleted.
       - id: check-added-large-files
         args: [--maxkb=500]
         exclude: ^skills/logo-design/assets/library/(catalog|classifications)\.json$
@@ -23,15 +31,13 @@ repos:
     hooks:
       - id: prettier
         name: prettier
-        description: Format JS/TS/CSS/HTML/JSON/Markdown. Run as a system command
-          because pre-commit's nodeenv installer is incompatible with npm >= 11
-          for non-root users (see scripts/prettier-hook.sh).
+        description: Format JS/TS/CSS/HTML/JSON/Markdown. Runs as a system
+          command because pre-commit's nodeenv installer is incompatible with
+          npm >= 11 for non-root users — see scripts/prettier-hook.sh.
         entry: scripts/prettier-hook.sh
         language: system
         types_or: [javascript, jsx, ts, tsx, css, less, html, json, markdown]
-        # Generated library data: pretty-printing a 900 KB JSON on every commit
-        # buys nothing and would fight scripts/build_catalog.py's output.
-        exclude: ^skills/logo-design/assets/library/
+        exclude: ^(examples/|skills/video/|skills/logo-design/assets/library/)
 
   - repo: local
     hooks:

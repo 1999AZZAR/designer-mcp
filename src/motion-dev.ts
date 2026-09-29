@@ -13,27 +13,30 @@ export type MotionFramework = "html" | "react" | "vue";
 
 // For Motion.dev, we provide explicit objects for transition
 const STYLE_TRANSITION: Record<string, string> = {
-  "glass":          `{ ease: [0.16, 1, 0.3, 1], duration: 0.7 }`, // easeOutQuart
-  "neo-brutalism":  `{ ease: [0.87, 0, 0.13, 1], duration: 0.4 }`, // easeInOutExpo
-  "claymorphism":   `{ type: "spring", bounce: 0.4, duration: 0.6 }`,
-  "neumorphism":    `{ ease: [0.39, 0.575, 0.565, 1], duration: 0.5 }`, // easeOutSine
-  "material":       `{ ease: [0.4, 0, 0.2, 1], duration: 0.3 }`,
-  "ant":            `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.25 }`, // easeOutCubic
-  "carbon":         `{ ease: [0.2, 0, 0.38, 0.9], duration: 0.24 }`,
-  "fluent":         `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.3 }`,
-  "atlassian":      `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.25 }`,
-  "apple-hig":      `{ type: "spring", bounce: 0.2, duration: 0.55 }`,
-  "polaris":        `{ ease: [0.25, 0.46, 0.45, 0.94], duration: 0.25 }`, // easeOutQuad
-  "minimal":        `{ ease: [0.19, 1, 0.22, 1], duration: 0.5 }`, // easeOutExpo
-  "swiss":          `{ ease: "linear", duration: 0.2 }`,
+  glass: `{ ease: [0.16, 1, 0.3, 1], duration: 0.7 }`, // easeOutQuart
+  "neo-brutalism": `{ ease: [0.87, 0, 0.13, 1], duration: 0.4 }`, // easeInOutExpo
+  claymorphism: `{ type: "spring", bounce: 0.4, duration: 0.6 }`,
+  neumorphism: `{ ease: [0.39, 0.575, 0.565, 1], duration: 0.5 }`, // easeOutSine
+  material: `{ ease: [0.4, 0, 0.2, 1], duration: 0.3 }`,
+  ant: `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.25 }`, // easeOutCubic
+  carbon: `{ ease: [0.2, 0, 0.38, 0.9], duration: 0.24 }`,
+  fluent: `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.3 }`,
+  atlassian: `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.25 }`,
+  "apple-hig": `{ type: "spring", bounce: 0.2, duration: 0.55 }`,
+  polaris: `{ ease: [0.25, 0.46, 0.45, 0.94], duration: 0.25 }`, // easeOutQuad
+  minimal: `{ ease: [0.19, 1, 0.22, 1], duration: 0.5 }`, // easeOutExpo
+  swiss: `{ ease: "linear", duration: 0.2 }`,
   "swiss-archival": `{ ease: "linear", duration: 0.2 }`,
-  "skeuomorphism":  `{ type: "spring", bounce: 0.5, duration: 0.6 }`,
-  "m3-pastel":      `{ type: "spring", bounce: 0.3, duration: 0.45 }`,
-  "neo-m3":         `{ type: "spring", bounce: 0.25, duration: 0.4 }`,
+  skeuomorphism: `{ type: "spring", bounce: 0.5, duration: 0.6 }`,
+  "m3-pastel": `{ type: "spring", bounce: 0.3, duration: 0.45 }`,
+  "neo-m3": `{ type: "spring", bounce: 0.25, duration: 0.4 }`,
 };
 
 function getTransition(style: string): string {
-  return STYLE_TRANSITION[style] ?? `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.35 }`;
+  return (
+    STYLE_TRANSITION[style] ??
+    `{ ease: [0.215, 0.61, 0.355, 1], duration: 0.35 }`
+  );
 }
 
 // ─── Snippet generators ───────────────────────────────────────────────────────
@@ -73,9 +76,9 @@ export function EntranceHero({ children }) {
   return `<!-- Motion.dev Vanilla — Entrance Animation (${style}) -->
 <script type="module">
   import { animate, stagger } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
-  
+
   // Hero stagger
-  animate("[data-motion-hero] > *", 
+  animate("[data-motion-hero] > *",
     { opacity: [0, 1], y: [${yOffset}, 0] },
     { delay: stagger(0.1), ...${trans} }
   );
@@ -90,7 +93,8 @@ export function EntranceHero({ children }) {
 
 function microSnippet(style: string, framework: MotionFramework): string {
   const trans = getTransition(style);
-  const scaleHover = style === "claymorphism" || style === "m3-pastel" ? 1.06 : 1.03;
+  const scaleHover =
+    style === "claymorphism" || style === "m3-pastel" ? 1.06 : 1.03;
   const pushTap = style === "neo-brutalism" ? "y: 2, x: 2" : "scale: 0.97";
 
   if (framework === "react") {
@@ -181,7 +185,7 @@ export function StaggerList({ items }) {
 <script type="module">
   import { animate, stagger } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
 
-  animate("[data-motion-list] > *", 
+  animate("[data-motion-list] > *",
     { opacity: [0, 1], x: [${xOffset}, 0] },
     { delay: stagger(0.08), ...${trans} }
   );
@@ -254,8 +258,8 @@ export function Loader() {
 </div>
 <script type="module">
   import { animate, stagger } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
-  
-  animate("[data-motion-spinner] .motion-spinner-dot", 
+
+  animate("[data-motion-spinner] .motion-spinner-dot",
     { scale: [1, 0.5, 1], opacity: [1, 0.3, 1] },
     { repeat: Infinity, duration: 1, delay: stagger(0.15) }
   );
@@ -320,7 +324,7 @@ import { useEffect, useRef } from "react";
 
 export function Counter({ target, prefix = "", suffix = "" }) {
   const ref = useRef(null);
-  
+
   useEffect(() => {
     const controls = animate(0, target, {
       duration: 1.5,
@@ -331,7 +335,7 @@ export function Counter({ target, prefix = "", suffix = "" }) {
     });
     return () => controls.stop();
   }, [target, prefix, suffix]);
-  
+
   return <span ref={ref}>{prefix}0{suffix}</span>;
 }`;
   }
@@ -344,7 +348,7 @@ export function Counter({ target, prefix = "", suffix = "" }) {
     const target = parseFloat(el.getAttribute("data-motion-counter") || "0");
     const prefix = el.getAttribute("data-motion-prefix") || "";
     const suffix = el.getAttribute("data-motion-suffix") || "";
-    
+
     animate(0, target, {
       duration: 1.5,
       ease: "easeOut",
@@ -408,34 +412,44 @@ export function Typewriter({ text }) {
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 const USAGE_HINTS: Record<MotionCategory, string> = {
-  entrance:   "For React: Wrap your page content in the EntranceHero component. For Vanilla: Add data-motion-hero to your hero and drop the script.",
-  micro:      "For React: Replace generic buttons with <MotionButton>. For Vanilla: Add data-motion-btn to buttons.",
-  stagger:    "For React: Use the <StaggerList> component. For Vanilla: Wrap list items in [data-motion-list].",
-  scroll:     "For React: Wrap content to reveal in <ScrollReveal>. For Vanilla: Add data-motion-reveal to elements.",
-  loader:     "Render the <Loader> component or paste the HTML/CSS/JS snippet.",
-  transition: "For React: Use <AnimatePresence mode='wait'> in your router layout. For Vanilla: Add the script to intercept links.",
-  counter:    "For React: <Counter target={48352} />. For Vanilla: <span data-motion-counter='48352'></span>.",
-  typewriter: "For React: <Typewriter text='Hello' />. For Vanilla: <h1 data-motion-type>Hello</h1>.",
+  entrance:
+    "For React: Wrap your page content in the EntranceHero component. For Vanilla: Add data-motion-hero to your hero and drop the script.",
+  micro:
+    "For React: Replace generic buttons with <MotionButton>. For Vanilla: Add data-motion-btn to buttons.",
+  stagger:
+    "For React: Use the <StaggerList> component. For Vanilla: Wrap list items in [data-motion-list].",
+  scroll:
+    "For React: Wrap content to reveal in <ScrollReveal>. For Vanilla: Add data-motion-reveal to elements.",
+  loader: "Render the <Loader> component or paste the HTML/CSS/JS snippet.",
+  transition:
+    "For React: Use <AnimatePresence mode='wait'> in your router layout. For Vanilla: Add the script to intercept links.",
+  counter:
+    "For React: <Counter target={48352} />. For Vanilla: <span data-motion-counter='48352'></span>.",
+  typewriter:
+    "For React: <Typewriter text='Hello' />. For Vanilla: <h1 data-motion-type>Hello</h1>.",
 };
 
 export function generateMotionDevSnippet(
   category: MotionCategory,
   style: string,
-  framework: MotionFramework
+  framework: MotionFramework,
 ): MotionSnippetResult {
-  const snippetMap: Record<MotionCategory, (s: string, f: MotionFramework) => string> = {
-    entrance:   entranceSnippet,
-    micro:      microSnippet,
-    stagger:    staggerSnippet,
-    scroll:     scrollSnippet,
-    loader:     loaderSnippet,
+  const snippetMap: Record<
+    MotionCategory,
+    (s: string, f: MotionFramework) => string
+  > = {
+    entrance: entranceSnippet,
+    micro: microSnippet,
+    stagger: staggerSnippet,
+    scroll: scrollSnippet,
+    loader: loaderSnippet,
     transition: transitionSnippet,
-    counter:    counterSnippet,
+    counter: counterSnippet,
     typewriter: typewriterSnippet,
   };
 
   const snippet = snippetMap[category](style, framework);
-  
+
   return {
     category,
     style,
@@ -444,6 +458,7 @@ export function generateMotionDevSnippet(
     cdn: "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm",
     snippet,
     usage_hint: USAGE_HINTS[category],
-    reduced_motion_note: "Motion.dev automatically respects prefers-reduced-motion for layout animations, but explicit `animate()` calls should consider manual checks if necessary. React components <motion.div> handles it under the hood.",
+    reduced_motion_note:
+      "Motion.dev automatically respects prefers-reduced-motion for layout animations, but explicit `animate()` calls should consider manual checks if necessary. React components <motion.div> handles it under the hood.",
   };
 }

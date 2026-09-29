@@ -10,7 +10,11 @@
 // Types
 // ---------------------------------------------------------------------------
 
-export type CSSOutputFormat = "vanilla" | "css-modules" | "scss" | "css-variables-only";
+export type CSSOutputFormat =
+  | "vanilla"
+  | "css-modules"
+  | "scss"
+  | "css-variables-only";
 
 export interface CSSOutputFile {
   filename: string;
@@ -73,71 +77,95 @@ function getPaletteTokens(palette: string, style: string): PaletteTokens {
   switch (palette) {
     case "pastel":
       return {
-        paper:       "oklch(96% 0.02 85)",
-        paperAlt:    "oklch(93% 0.025 85)",
-        surface:     "oklch(98% 0.01 85)",
-        primary:     "oklch(60% 0.15 250)",
-        primaryFg:   "oklch(99% 0.005 0)",
-        secondary:   "oklch(65% 0.12 160)",
+        paper: "oklch(96% 0.02 85)",
+        paperAlt: "oklch(93% 0.025 85)",
+        surface: "oklch(98% 0.01 85)",
+        primary: "oklch(60% 0.15 250)",
+        primaryFg: "oklch(99% 0.005 0)",
+        secondary: "oklch(65% 0.12 160)",
         secondaryFg: "oklch(99% 0.005 0)",
-        accent:      "oklch(70% 0.14 330)",
-        text:        "oklch(22% 0.02 250)",
-        textMuted:   "oklch(50% 0.04 250)",
-        border:      isNeoBrut ? "oklch(10% 0 0)" : "oklch(80% 0.03 250)",
-        focus:       "oklch(55% 0.20 250)",
-        ...(isGlass ? { backdropFilter: "blur(12px) saturate(1.6)", glassBg: "oklch(96% 0.02 85 / 0.55)" } : {}),
+        accent: "oklch(70% 0.14 330)",
+        text: "oklch(22% 0.02 250)",
+        textMuted: "oklch(50% 0.04 250)",
+        border: isNeoBrut ? "oklch(10% 0 0)" : "oklch(80% 0.03 250)",
+        focus: "oklch(55% 0.20 250)",
+        ...(isGlass
+          ? {
+              backdropFilter: "blur(12px) saturate(1.6)",
+              glassBg: "oklch(96% 0.02 85 / 0.55)",
+            }
+          : {}),
       };
 
     case "dark":
       return {
-        paper:       "oklch(10% 0.02 240)",
-        paperAlt:    "oklch(14% 0.025 240)",
-        surface:     "oklch(17% 0.02 240)",
-        primary:     "oklch(55% 0.25 250)",
-        primaryFg:   "oklch(98% 0.005 0)",
-        secondary:   "oklch(50% 0.20 160)",
+        paper: "oklch(10% 0.02 240)",
+        paperAlt: "oklch(14% 0.025 240)",
+        surface: "oklch(17% 0.02 240)",
+        primary: "oklch(55% 0.25 250)",
+        primaryFg: "oklch(98% 0.005 0)",
+        secondary: "oklch(50% 0.20 160)",
         secondaryFg: "oklch(98% 0.005 0)",
-        accent:      "oklch(62% 0.22 50)",
-        text:        "oklch(92% 0.01 250)",
-        textMuted:   "oklch(65% 0.04 250)",
-        border:      isNeoBrut ? "oklch(95% 0 0)" : "oklch(28% 0.04 240)",
-        focus:       "oklch(60% 0.28 250)",
-        ...(isGlass ? { backdropFilter: "blur(16px) saturate(1.8)", glassBg: "oklch(14% 0.025 240 / 0.60)" } : {}),
+        accent: "oklch(62% 0.22 50)",
+        text: "oklch(92% 0.01 250)",
+        textMuted: "oklch(65% 0.04 250)",
+        border: isNeoBrut ? "oklch(95% 0 0)" : "oklch(28% 0.04 240)",
+        focus: "oklch(60% 0.28 250)",
+        ...(isGlass
+          ? {
+              backdropFilter: "blur(16px) saturate(1.8)",
+              glassBg: "oklch(14% 0.025 240 / 0.60)",
+            }
+          : {}),
       };
 
     case "vibrant":
       return {
-        paper:       "oklch(98% 0.01 85)",
-        paperAlt:    "oklch(95% 0.015 85)",
-        surface:     "oklch(99% 0.005 85)",
-        primary:     "oklch(50% 0.35 250)",
-        primaryFg:   "oklch(99% 0.005 0)",
-        secondary:   "oklch(52% 0.30 160)",
+        paper: "oklch(98% 0.01 85)",
+        paperAlt: "oklch(95% 0.015 85)",
+        surface: "oklch(99% 0.005 85)",
+        primary: "oklch(50% 0.35 250)",
+        primaryFg: "oklch(99% 0.005 0)",
+        secondary: "oklch(52% 0.30 160)",
         secondaryFg: "oklch(99% 0.005 0)",
-        accent:      "oklch(55% 0.38 30)",
-        text:        "oklch(12% 0.01 250)",
-        textMuted:   "oklch(40% 0.04 250)",
-        border:      isNeoBrut ? "oklch(5% 0 0)" : "oklch(82% 0.04 250)",
-        focus:       "oklch(45% 0.40 250)",
-        ...(isGlass ? { backdropFilter: "blur(10px) saturate(2.0)", glassBg: "oklch(98% 0.01 85 / 0.50)" } : {}),
+        accent: "oklch(55% 0.38 30)",
+        text: "oklch(12% 0.01 250)",
+        textMuted: "oklch(40% 0.04 250)",
+        border: isNeoBrut ? "oklch(5% 0 0)" : "oklch(82% 0.04 250)",
+        focus: "oklch(45% 0.40 250)",
+        ...(isGlass
+          ? {
+              backdropFilter: "blur(10px) saturate(2.0)",
+              glassBg: "oklch(98% 0.01 85 / 0.50)",
+            }
+          : {}),
       };
 
     case "mono":
     default:
       return {
-        paper:       "oklch(97% 0.005 0)",
-        paperAlt:    "oklch(93% 0.005 0)",
-        surface:     "oklch(99% 0.002 0)",
-        primary:     "oklch(20% 0.005 0)",
-        primaryFg:   "oklch(99% 0.002 0)",
-        secondary:   "oklch(40% 0.005 0)",
+        paper: "oklch(97% 0.005 0)",
+        paperAlt: "oklch(93% 0.005 0)",
+        surface: "oklch(99% 0.002 0)",
+        primary: "oklch(20% 0.005 0)",
+        primaryFg: "oklch(99% 0.002 0)",
+        secondary: "oklch(40% 0.005 0)",
         secondaryFg: "oklch(99% 0.002 0)",
-        accent:      "oklch(30% 0.005 0)",
-        text:        "oklch(12% 0.005 0)",
-        textMuted:   "oklch(50% 0.005 0)",
-        border:      isNeu ? "transparent" : isNeoBrut ? "oklch(5% 0 0)" : "oklch(80% 0.005 0)",
-        focus:       "oklch(15% 0.005 0)",
-        ...(isGlass ? { backdropFilter: "blur(8px) saturate(1.2)", glassBg: "oklch(97% 0.005 0 / 0.55)" } : {}),
+        accent: "oklch(30% 0.005 0)",
+        text: "oklch(12% 0.005 0)",
+        textMuted: "oklch(50% 0.005 0)",
+        border: isNeu
+          ? "transparent"
+          : isNeoBrut
+            ? "oklch(5% 0 0)"
+            : "oklch(80% 0.005 0)",
+        focus: "oklch(15% 0.005 0)",
+        ...(isGlass
+          ? {
+              backdropFilter: "blur(8px) saturate(1.2)",
+              glassBg: "oklch(97% 0.005 0 / 0.55)",
+            }
+          : {}),
       };
   }
 }
@@ -150,63 +178,188 @@ function getStyleTokens(style: string): StyleTokens {
   const zero = "0px";
 
   const radiusMap: Record<string, [string, string, string, string]> = {
-    fluent:          ["4px", "6px", "8px", "12px"],
-    ant:             ["4px", "6px", "8px", "12px"],
-    carbon:          [zero, zero, zero, zero],
-    atlassian:       ["4px", "6px", "8px", "12px"],
-    "apple-hig":     ["8px", "12px", "16px", "20px"],
-    polaris:         ["4px", "6px", "8px", "12px"],
-    material:        ["8px", "12px", "16px", "28px"],
-    minimal:         ["4px", "6px", "8px", "12px"],
-    glass:           ["8px", "12px", "16px", "24px"],
-    neumorphism:     ["12px", "16px", "24px", "32px"],
+    fluent: ["4px", "6px", "8px", "12px"],
+    ant: ["4px", "6px", "8px", "12px"],
+    carbon: [zero, zero, zero, zero],
+    atlassian: ["4px", "6px", "8px", "12px"],
+    "apple-hig": ["8px", "12px", "16px", "20px"],
+    polaris: ["4px", "6px", "8px", "12px"],
+    material: ["8px", "12px", "16px", "28px"],
+    minimal: ["4px", "6px", "8px", "12px"],
+    glass: ["8px", "12px", "16px", "24px"],
+    neumorphism: ["12px", "16px", "24px", "32px"],
     "neo-brutalism": [zero, zero, zero, zero],
-    claymorphism:    ["16px", "24px", "32px", "40px"],
-    skeuomorphism:   ["4px", "6px", "8px", "12px"],
-    swiss:           [zero, zero, zero, zero],
-    "swiss-archival":["2px", "4px", "6px", "8px"],
-    "m3-pastel":     ["12px", "16px", "24px", "28px"],
-    "neo-m3":        [zero, "4px", "8px", "16px"],
+    claymorphism: ["16px", "24px", "32px", "40px"],
+    skeuomorphism: ["4px", "6px", "8px", "12px"],
+    swiss: [zero, zero, zero, zero],
+    "swiss-archival": ["2px", "4px", "6px", "8px"],
+    "m3-pastel": ["12px", "16px", "24px", "28px"],
+    "neo-m3": [zero, "4px", "8px", "16px"],
   };
 
   const shadowMap: Record<string, [string, string, string, string]> = {
-    fluent:          ["0 1px 2px rgba(0,0,0,0.06)", "0 2px 4px rgba(0,0,0,0.08)", "0 4px 12px rgba(0,0,0,0.12)", "0 8px 24px rgba(0,0,0,0.16)"],
-    ant:             ["0 1px 2px rgba(0,0,0,0.05)", "0 3px 6px rgba(0,0,0,0.08)", "0 6px 16px rgba(0,0,0,0.10)", "0 12px 40px rgba(0,0,0,0.12)"],
-    carbon:          ["0 1px 0 rgba(0,0,0,0.16)", "0 2px 0 rgba(0,0,0,0.16)", "0 4px 0 rgba(0,0,0,0.16)", "0 8px 0 rgba(0,0,0,0.16)"],
-    atlassian:       ["0 1px 2px rgba(0,0,0,0.06)", "0 2px 8px rgba(0,0,0,0.10)", "0 4px 16px rgba(0,0,0,0.14)", "0 8px 32px rgba(0,0,0,0.18)"],
-    "apple-hig":     ["0 1px 3px rgba(0,0,0,0.08)", "0 2px 8px rgba(0,0,0,0.10)", "0 4px 16px rgba(0,0,0,0.12)", "0 8px 32px rgba(0,0,0,0.14)"],
-    polaris:         ["0 1px 2px rgba(0,0,0,0.05)", "0 3px 6px rgba(0,0,0,0.08)", "0 6px 16px rgba(0,0,0,0.10)", "0 12px 40px rgba(0,0,0,0.12)"],
-    material:        ["0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24)", "0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23)", "0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23)", "0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22)"],
-    minimal:         ["0 1px 3px rgba(0,0,0,0.04)", "0 2px 8px rgba(0,0,0,0.06)", "0 4px 16px rgba(0,0,0,0.08)", "0 8px 32px rgba(0,0,0,0.10)"],
-    glass:           ["0 1px 3px rgba(0,0,0,0.10)", "0 4px 12px rgba(0,0,0,0.15)", "0 8px 24px rgba(0,0,0,0.20)", "0 16px 48px rgba(0,0,0,0.25)"],
-    neumorphism:     ["4px 4px 8px rgba(0,0,0,0.15),-4px -4px 8px rgba(255,255,255,0.7)", "6px 6px 12px rgba(0,0,0,0.15),-6px -6px 12px rgba(255,255,255,0.7)", "8px 8px 16px rgba(0,0,0,0.15),-8px -8px 16px rgba(255,255,255,0.7)", "12px 12px 24px rgba(0,0,0,0.15),-12px -12px 24px rgba(255,255,255,0.7)"],
-    "neo-brutalism": ["2px 2px 0px rgba(0,0,0,1)", "4px 4px 0px rgba(0,0,0,1)", "6px 6px 0px rgba(0,0,0,1)", "8px 8px 0px rgba(0,0,0,1)"],
-    claymorphism:    ["2px 2px 4px rgba(0,0,0,0.08),inset 0 -2px 4px rgba(0,0,0,0.04)", "4px 4px 8px rgba(0,0,0,0.10),inset 0 -4px 8px rgba(0,0,0,0.06)", "6px 6px 12px rgba(0,0,0,0.12),inset 0 -6px 12px rgba(0,0,0,0.08)", "8px 8px 16px rgba(0,0,0,0.14),inset 0 -8px 16px rgba(0,0,0,0.10)"],
-    skeuomorphism:   ["0 1px 2px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.4)", "0 2px 6px rgba(0,0,0,0.20),inset 0 1px 0 rgba(255,255,255,0.4)", "0 4px 12px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.4)", "0 8px 24px rgba(0,0,0,0.30),inset 0 1px 0 rgba(255,255,255,0.4)"],
-    swiss:           ["none", "none", "none", "none"],
-    "swiss-archival":["none", "0 1px 0 rgba(0,0,0,0.12)", "0 2px 0 rgba(0,0,0,0.12)", "0 4px 0 rgba(0,0,0,0.12)"],
-    "m3-pastel":     ["0 1px 3px rgba(0,0,0,0.10)", "0 2px 8px rgba(0,0,0,0.12)", "0 4px 16px rgba(0,0,0,0.14)", "0 8px 32px rgba(0,0,0,0.18)"],
-    "neo-m3":        ["0 1px 3px rgba(0,0,0,0.12)", "0 2px 8px rgba(0,0,0,0.16),4px 4px 0px rgba(0,0,0,0.08)", "0 4px 16px rgba(0,0,0,0.20),6px 6px 0px rgba(0,0,0,0.10)", "0 8px 32px rgba(0,0,0,0.24),8px 8px 0px rgba(0,0,0,0.12)"],
+    fluent: [
+      "0 1px 2px rgba(0,0,0,0.06)",
+      "0 2px 4px rgba(0,0,0,0.08)",
+      "0 4px 12px rgba(0,0,0,0.12)",
+      "0 8px 24px rgba(0,0,0,0.16)",
+    ],
+    ant: [
+      "0 1px 2px rgba(0,0,0,0.05)",
+      "0 3px 6px rgba(0,0,0,0.08)",
+      "0 6px 16px rgba(0,0,0,0.10)",
+      "0 12px 40px rgba(0,0,0,0.12)",
+    ],
+    carbon: [
+      "0 1px 0 rgba(0,0,0,0.16)",
+      "0 2px 0 rgba(0,0,0,0.16)",
+      "0 4px 0 rgba(0,0,0,0.16)",
+      "0 8px 0 rgba(0,0,0,0.16)",
+    ],
+    atlassian: [
+      "0 1px 2px rgba(0,0,0,0.06)",
+      "0 2px 8px rgba(0,0,0,0.10)",
+      "0 4px 16px rgba(0,0,0,0.14)",
+      "0 8px 32px rgba(0,0,0,0.18)",
+    ],
+    "apple-hig": [
+      "0 1px 3px rgba(0,0,0,0.08)",
+      "0 2px 8px rgba(0,0,0,0.10)",
+      "0 4px 16px rgba(0,0,0,0.12)",
+      "0 8px 32px rgba(0,0,0,0.14)",
+    ],
+    polaris: [
+      "0 1px 2px rgba(0,0,0,0.05)",
+      "0 3px 6px rgba(0,0,0,0.08)",
+      "0 6px 16px rgba(0,0,0,0.10)",
+      "0 12px 40px rgba(0,0,0,0.12)",
+    ],
+    material: [
+      "0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24)",
+      "0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23)",
+      "0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23)",
+      "0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22)",
+    ],
+    minimal: [
+      "0 1px 3px rgba(0,0,0,0.04)",
+      "0 2px 8px rgba(0,0,0,0.06)",
+      "0 4px 16px rgba(0,0,0,0.08)",
+      "0 8px 32px rgba(0,0,0,0.10)",
+    ],
+    glass: [
+      "0 1px 3px rgba(0,0,0,0.10)",
+      "0 4px 12px rgba(0,0,0,0.15)",
+      "0 8px 24px rgba(0,0,0,0.20)",
+      "0 16px 48px rgba(0,0,0,0.25)",
+    ],
+    neumorphism: [
+      "4px 4px 8px rgba(0,0,0,0.15),-4px -4px 8px rgba(255,255,255,0.7)",
+      "6px 6px 12px rgba(0,0,0,0.15),-6px -6px 12px rgba(255,255,255,0.7)",
+      "8px 8px 16px rgba(0,0,0,0.15),-8px -8px 16px rgba(255,255,255,0.7)",
+      "12px 12px 24px rgba(0,0,0,0.15),-12px -12px 24px rgba(255,255,255,0.7)",
+    ],
+    "neo-brutalism": [
+      "2px 2px 0px rgba(0,0,0,1)",
+      "4px 4px 0px rgba(0,0,0,1)",
+      "6px 6px 0px rgba(0,0,0,1)",
+      "8px 8px 0px rgba(0,0,0,1)",
+    ],
+    claymorphism: [
+      "2px 2px 4px rgba(0,0,0,0.08),inset 0 -2px 4px rgba(0,0,0,0.04)",
+      "4px 4px 8px rgba(0,0,0,0.10),inset 0 -4px 8px rgba(0,0,0,0.06)",
+      "6px 6px 12px rgba(0,0,0,0.12),inset 0 -6px 12px rgba(0,0,0,0.08)",
+      "8px 8px 16px rgba(0,0,0,0.14),inset 0 -8px 16px rgba(0,0,0,0.10)",
+    ],
+    skeuomorphism: [
+      "0 1px 2px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.4)",
+      "0 2px 6px rgba(0,0,0,0.20),inset 0 1px 0 rgba(255,255,255,0.4)",
+      "0 4px 12px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.4)",
+      "0 8px 24px rgba(0,0,0,0.30),inset 0 1px 0 rgba(255,255,255,0.4)",
+    ],
+    swiss: ["none", "none", "none", "none"],
+    "swiss-archival": [
+      "none",
+      "0 1px 0 rgba(0,0,0,0.12)",
+      "0 2px 0 rgba(0,0,0,0.12)",
+      "0 4px 0 rgba(0,0,0,0.12)",
+    ],
+    "m3-pastel": [
+      "0 1px 3px rgba(0,0,0,0.10)",
+      "0 2px 8px rgba(0,0,0,0.12)",
+      "0 4px 16px rgba(0,0,0,0.14)",
+      "0 8px 32px rgba(0,0,0,0.18)",
+    ],
+    "neo-m3": [
+      "0 1px 3px rgba(0,0,0,0.12)",
+      "0 2px 8px rgba(0,0,0,0.16),4px 4px 0px rgba(0,0,0,0.08)",
+      "0 4px 16px rgba(0,0,0,0.20),6px 6px 0px rgba(0,0,0,0.10)",
+      "0 8px 32px rgba(0,0,0,0.24),8px 8px 0px rgba(0,0,0,0.12)",
+    ],
   };
 
   const fontMap: Record<string, [string, string]> = {
-    fluent:          ['"Segoe UI", system-ui, -apple-system, sans-serif', 'monospace'],
-    ant:             ['-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', '"SFMono-Regular", Consolas, monospace'],
-    carbon:          ['"IBM Plex Sans", system-ui, sans-serif', '"IBM Plex Mono", monospace'],
-    atlassian:       ['-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 'monospace'],
-    "apple-hig":     ['"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif', '"SF Mono", monospace'],
-    polaris:         ['-apple-system, BlinkMacSystemFont, "Inter", sans-serif', 'monospace'],
-    material:        ['"Roboto", "Google Sans", system-ui, sans-serif', '"Roboto Mono", monospace'],
-    minimal:         ['"Inter", "SF Pro Display", system-ui, sans-serif', '"JetBrains Mono", monospace'],
-    glass:           ['"Inter", "SF Pro Display", system-ui, sans-serif', '"JetBrains Mono", monospace'],
-    neumorphism:     ['"Inter", "SF Pro Display", system-ui, sans-serif', '"JetBrains Mono", monospace'],
-    "neo-brutalism": ['"Space Grotesk", "Inter", system-ui, sans-serif', '"JetBrains Mono", monospace'],
-    claymorphism:    ['"Nunito", "Inter", system-ui, sans-serif', '"JetBrains Mono", monospace'],
-    skeuomorphism:   ['"Georgia", "Times New Roman", serif', 'monospace'],
-    swiss:           ['"Helvetica Neue", "Helvetica", "Arial", sans-serif', '"Courier New", monospace'],
-    "swiss-archival":['"IBM Plex Sans", "Helvetica Neue", sans-serif', '"IBM Plex Mono", monospace'],
-    "m3-pastel":     ['"Google Sans", "Roboto", system-ui, sans-serif', '"Roboto Mono", monospace'],
-    "neo-m3":        ['"Space Grotesk", "Inter", system-ui, sans-serif', '"JetBrains Mono", monospace'],
+    fluent: ['"Segoe UI", system-ui, -apple-system, sans-serif', "monospace"],
+    ant: [
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      '"SFMono-Regular", Consolas, monospace',
+    ],
+    carbon: [
+      '"IBM Plex Sans", system-ui, sans-serif',
+      '"IBM Plex Mono", monospace',
+    ],
+    atlassian: [
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      "monospace",
+    ],
+    "apple-hig": [
+      '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
+      '"SF Mono", monospace',
+    ],
+    polaris: [
+      '-apple-system, BlinkMacSystemFont, "Inter", sans-serif',
+      "monospace",
+    ],
+    material: [
+      '"Roboto", "Google Sans", system-ui, sans-serif',
+      '"Roboto Mono", monospace',
+    ],
+    minimal: [
+      '"Inter", "SF Pro Display", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
+    glass: [
+      '"Inter", "SF Pro Display", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
+    neumorphism: [
+      '"Inter", "SF Pro Display", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
+    "neo-brutalism": [
+      '"Space Grotesk", "Inter", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
+    claymorphism: [
+      '"Nunito", "Inter", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
+    skeuomorphism: ['"Georgia", "Times New Roman", serif', "monospace"],
+    swiss: [
+      '"Helvetica Neue", "Helvetica", "Arial", sans-serif',
+      '"Courier New", monospace',
+    ],
+    "swiss-archival": [
+      '"IBM Plex Sans", "Helvetica Neue", sans-serif',
+      '"IBM Plex Mono", monospace',
+    ],
+    "m3-pastel": [
+      '"Google Sans", "Roboto", system-ui, sans-serif',
+      '"Roboto Mono", monospace',
+    ],
+    "neo-m3": [
+      '"Space Grotesk", "Inter", system-ui, sans-serif',
+      '"JetBrains Mono", monospace',
+    ],
   };
 
   const r = radiusMap[style] ?? radiusMap["minimal"]!;
@@ -232,7 +385,11 @@ function getStyleTokens(style: string): StyleTokens {
 // Shared root vars block
 // ---------------------------------------------------------------------------
 
-function buildRootVars(p: PaletteTokens, st: StyleTokens, style: string): string {
+function buildRootVars(
+  p: PaletteTokens,
+  st: StyleTokens,
+  style: string,
+): string {
   const isGlass = style === "glass";
   const glassPart = isGlass
     ? `\n  /* Glass tokens */\n  --glass-bg: ${p.glassBg ?? "transparent"};\n  --glass-filter: ${p.backdropFilter ?? "none"};`
@@ -342,16 +499,28 @@ function buildDarkOverrideVars(palette: string): string {
 
   const darkMap: Record<string, string[]> = {
     pastel: [
-      "oklch(12% 0.02 250)", "oklch(16% 0.025 250)", "oklch(19% 0.02 250)",
-      "oklch(88% 0.01 250)", "oklch(62% 0.04 250)", "oklch(30% 0.04 250)",
+      "oklch(12% 0.02 250)",
+      "oklch(16% 0.025 250)",
+      "oklch(19% 0.02 250)",
+      "oklch(88% 0.01 250)",
+      "oklch(62% 0.04 250)",
+      "oklch(30% 0.04 250)",
     ],
     vibrant: [
-      "oklch(8% 0.01 250)", "oklch(12% 0.015 250)", "oklch(15% 0.01 250)",
-      "oklch(90% 0.01 250)", "oklch(60% 0.04 250)", "oklch(25% 0.04 250)",
+      "oklch(8% 0.01 250)",
+      "oklch(12% 0.015 250)",
+      "oklch(15% 0.01 250)",
+      "oklch(90% 0.01 250)",
+      "oklch(60% 0.04 250)",
+      "oklch(25% 0.04 250)",
     ],
     mono: [
-      "oklch(8% 0.003 0)", "oklch(12% 0.003 0)", "oklch(15% 0.003 0)",
-      "oklch(90% 0.003 0)", "oklch(60% 0.003 0)", "oklch(25% 0.003 0)",
+      "oklch(8% 0.003 0)",
+      "oklch(12% 0.003 0)",
+      "oklch(15% 0.003 0)",
+      "oklch(90% 0.003 0)",
+      "oklch(60% 0.003 0)",
+      "oklch(25% 0.003 0)",
     ],
   };
 
@@ -368,8 +537,14 @@ function buildDarkOverrideVars(palette: string): string {
 // Format: vanilla
 // ---------------------------------------------------------------------------
 
-function buildVanillaTokensCSS(p: PaletteTokens, st: StyleTokens, style: string, palette: string): string {
-  const label = style.charAt(0).toUpperCase() + style.slice(1).replace(/-/g, " ");
+function buildVanillaTokensCSS(
+  p: PaletteTokens,
+  st: StyleTokens,
+  style: string,
+  palette: string,
+): string {
+  const label =
+    style.charAt(0).toUpperCase() + style.slice(1).replace(/-/g, " ");
   return `/**
  * tokens.css — Design tokens for ${label} x ${palette}
  * Generated by the-designer · vanilla format
@@ -388,8 +563,8 @@ function buildVanillaBaseCSS(style: string): string {
   const btnBorderRule = isNeoBrut
     ? "  border: var(--border-width) solid var(--color-text);\n  box-shadow: var(--shadow-md);"
     : isNeu
-    ? "  box-shadow: var(--shadow-md);\n  border: none;"
-    : "  border: var(--border);";
+      ? "  box-shadow: var(--shadow-md);\n  border: none;"
+      : "  border: var(--border);";
 
   return `/**
  * base.css — Base styles and utility component classes
@@ -585,8 +760,8 @@ function buildButtonModuleCSS(style: string): string {
   const baseExtras = isNeoBrut
     ? "  border: 2px solid var(--color-text);\n  box-shadow: var(--shadow-md);"
     : isNeu
-    ? "  box-shadow: var(--shadow-md);\n  border: none;"
-    : "  border: var(--border-width) solid var(--color-border);";
+      ? "  box-shadow: var(--shadow-md);\n  border: none;"
+      : "  border: var(--border-width) solid var(--color-border);";
 
   return `/**
  * Button.module.css — CSS Module for Button component (8 states)
@@ -743,7 +918,12 @@ function buildInputModuleCSS(): string {
 // Format: scss
 // ---------------------------------------------------------------------------
 
-function buildScssTokens(p: PaletteTokens, st: StyleTokens, palette: string, style: string): string {
+function buildScssTokens(
+  p: PaletteTokens,
+  st: StyleTokens,
+  palette: string,
+  style: string,
+): string {
   const isGlass = style === "glass";
   const glassPart = isGlass
     ? `\n// Glass tokens\n$glass-bg:     ${p.glassBg ?? "transparent"};\n$glass-filter: "${p.backdropFilter ?? "none"}";`
@@ -1066,11 +1246,20 @@ ${btnBorder}
 // Format: css-variables-only
 // ---------------------------------------------------------------------------
 
-function buildCSSVariablesOnly(p: PaletteTokens, st: StyleTokens, style: string, palette: string): string {
-  const label = style.charAt(0).toUpperCase() + style.slice(1).replace(/-/g, " ");
+function buildCSSVariablesOnly(
+  p: PaletteTokens,
+  st: StyleTokens,
+  style: string,
+  palette: string,
+): string {
+  const label =
+    style.charAt(0).toUpperCase() + style.slice(1).replace(/-/g, " ");
   const rootVars = buildRootVars(p, st, style);
   const darkOverride = buildDarkOverrideVars(palette);
-  const indentedDark = darkOverride.split("\n").map((l) => "  " + l).join("\n");
+  const indentedDark = darkOverride
+    .split("\n")
+    .map((l) => "  " + l)
+    .join("\n");
 
   return `/**
  * tokens.css — CSS custom properties only
@@ -1108,7 +1297,11 @@ ${indentedDark}
 // Usage strings
 // ---------------------------------------------------------------------------
 
-function buildUsage(format: CSSOutputFormat, style: string, palette: string): string {
+function buildUsage(
+  format: CSSOutputFormat,
+  style: string,
+  palette: string,
+): string {
   switch (format) {
     case "vanilla":
       return `## Usage — Vanilla CSS (${style} x ${palette})
@@ -1275,33 +1468,45 @@ export function generateCSSOutput(
   switch (format) {
     case "vanilla":
       files = [
-        { filename: "tokens.css",      content: buildVanillaTokensCSS(p, st, style, palette) },
-        { filename: "base.css",        content: buildVanillaBaseCSS(style) },
-        { filename: "components.css",  content: buildVanillaComponentsCSS() },
+        {
+          filename: "tokens.css",
+          content: buildVanillaTokensCSS(p, st, style, palette),
+        },
+        { filename: "base.css", content: buildVanillaBaseCSS(style) },
+        { filename: "components.css", content: buildVanillaComponentsCSS() },
       ];
       break;
 
     case "css-modules":
       files = [
-        { filename: "tokens.css",          content: buildVanillaTokensCSS(p, st, style, palette) },
-        { filename: "Button.module.css",   content: buildButtonModuleCSS(style) },
-        { filename: "Card.module.css",     content: buildCardModuleCSS() },
-        { filename: "Input.module.css",    content: buildInputModuleCSS() },
+        {
+          filename: "tokens.css",
+          content: buildVanillaTokensCSS(p, st, style, palette),
+        },
+        { filename: "Button.module.css", content: buildButtonModuleCSS(style) },
+        { filename: "Card.module.css", content: buildCardModuleCSS() },
+        { filename: "Input.module.css", content: buildInputModuleCSS() },
       ];
       break;
 
     case "scss":
       files = [
-        { filename: "_tokens.scss",     content: buildScssTokens(p, st, palette, style) },
-        { filename: "_mixins.scss",     content: buildScssMixins() },
-        { filename: "main.scss",        content: buildScssMain() },
+        {
+          filename: "_tokens.scss",
+          content: buildScssTokens(p, st, palette, style),
+        },
+        { filename: "_mixins.scss", content: buildScssMixins() },
+        { filename: "main.scss", content: buildScssMain() },
         { filename: "_components.scss", content: buildScssComponents(style) },
       ];
       break;
 
     case "css-variables-only":
       files = [
-        { filename: "tokens.css", content: buildCSSVariablesOnly(p, st, style, palette) },
+        {
+          filename: "tokens.css",
+          content: buildCSSVariablesOnly(p, st, style, palette),
+        },
       ];
       break;
 
@@ -1311,5 +1516,11 @@ export function generateCSSOutput(
     }
   }
 
-  return { format, style, palette, files, usage: buildUsage(format, style, palette) };
+  return {
+    format,
+    style,
+    palette,
+    files,
+    usage: buildUsage(format, style, palette),
+  };
 }

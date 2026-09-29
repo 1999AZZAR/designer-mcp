@@ -2,10 +2,14 @@ import { variantClasses } from "./components.js";
 
 export function mapComponent(style: string): string {
   const v = variantClasses(style);
-  const cardBg = style === "glass" ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
-    : style === "neo-brutalism" ? "bg-white border-2 border-black neo-shadow rounded-none"
-    : style === "neumorphism" ? "neu-surface rounded-2xl"
-    : "bg-white rounded-xl shadow-sm border border-slate-200";
+  const cardBg =
+    style === "glass"
+      ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
+      : style === "neo-brutalism"
+        ? "bg-white border-2 border-black neo-shadow rounded-none"
+        : style === "neumorphism"
+          ? "neu-surface rounded-2xl"
+          : "bg-white rounded-xl shadow-sm border border-slate-200";
 
   return `<!-- Map Component (Powered by Leaflet/OpenStreetMap) -->
 <div class="${cardBg} p-2 w-full h-96 relative flex flex-col z-0">

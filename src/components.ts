@@ -1,64 +1,112 @@
 import { mapComponent } from "./map-component.js";
 
 export type ComponentType =
-  | "button" | "card" | "navbar" | "hero" | "form-input"
-  | "badge" | "modal" | "sidebar" | "table" | "footer" | "chart" | "map";
+  | "button"
+  | "card"
+  | "navbar"
+  | "hero"
+  | "form-input"
+  | "badge"
+  | "modal"
+  | "sidebar"
+  | "table"
+  | "footer"
+  | "chart"
+  | "map";
 
-export type OutputFramework = 'html' | 'react' | 'vue';
-export const OUTPUT_FRAMEWORKS: OutputFramework[] = ['html', 'react', 'vue'];
+export type OutputFramework = "html" | "react" | "vue";
+export const OUTPUT_FRAMEWORKS: OutputFramework[] = ["html", "react", "vue"];
 
 export const COMPONENT_TYPES: ComponentType[] = [
-  "button", "card", "navbar", "hero", "form-input",
-  "badge", "modal", "sidebar", "table", "footer", "chart", "map",
+  "button",
+  "card",
+  "navbar",
+  "hero",
+  "form-input",
+  "badge",
+  "modal",
+  "sidebar",
+  "table",
+  "footer",
+  "chart",
+  "map",
 ];
 
 export function variantClasses(style: string): Record<string, string> {
   const base: Record<string, Record<string, string>> = {
     "neo-brutalism": {
-      btnPrimary: "bg-primary text-white px-4 py-2 font-semibold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all",
-      btnSecondary: "bg-white text-slate-900 px-4 py-2 font-semibold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all",
-      btnOutline: "bg-transparent text-slate-900 px-4 py-2 font-semibold border-2 border-black hover:bg-slate-100 transition-colors",
-      btnGhost: "bg-transparent text-slate-900 px-4 py-2 font-semibold hover:bg-slate-100 transition-colors",
+      btnPrimary:
+        "bg-primary text-white px-4 py-2 font-semibold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all",
+      btnSecondary:
+        "bg-white text-slate-900 px-4 py-2 font-semibold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all",
+      btnOutline:
+        "bg-transparent text-slate-900 px-4 py-2 font-semibold border-2 border-black hover:bg-slate-100 transition-colors",
+      btnGhost:
+        "bg-transparent text-slate-900 px-4 py-2 font-semibold hover:bg-slate-100 transition-colors",
       card: "bg-white border-2 border-black neo-shadow p-6",
-      input: "w-full px-3 py-2 border-2 border-black rounded-none text-sm bg-white focus:ring-2 focus:ring-primary focus:border-primary outline-none",
+      input:
+        "w-full px-3 py-2 border-2 border-black rounded-none text-sm bg-white focus:ring-2 focus:ring-primary focus:border-primary outline-none",
       badge: "px-2 py-1 text-xs font-bold border border-black",
     },
     glass: {
-      btnPrimary: "bg-white/20 backdrop-blur-md text-white px-4 py-2 font-medium border border-white/30 rounded-lg hover:bg-white/30 transition-all",
-      btnSecondary: "bg-white/10 backdrop-blur-md text-white px-4 py-2 font-medium border border-white/20 rounded-lg hover:bg-white/20 transition-all",
-      btnOutline: "bg-transparent text-white px-4 py-2 font-medium border border-white/30 rounded-lg hover:bg-white/10 transition-all",
-      btnGhost: "bg-transparent text-white/80 px-4 py-2 font-medium hover:text-white hover:bg-white/10 transition-all",
+      btnPrimary:
+        "bg-white/20 backdrop-blur-md text-white px-4 py-2 font-medium border border-white/30 rounded-lg hover:bg-white/30 transition-all",
+      btnSecondary:
+        "bg-white/10 backdrop-blur-md text-white px-4 py-2 font-medium border border-white/20 rounded-lg hover:bg-white/20 transition-all",
+      btnOutline:
+        "bg-transparent text-white px-4 py-2 font-medium border border-white/30 rounded-lg hover:bg-white/10 transition-all",
+      btnGhost:
+        "bg-transparent text-white/80 px-4 py-2 font-medium hover:text-white hover:bg-white/10 transition-all",
       card: "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6",
-      input: "w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-white/30 outline-none",
-      badge: "px-2 py-1 text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full",
+      input:
+        "w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:ring-2 focus:ring-white/30 outline-none",
+      badge:
+        "px-2 py-1 text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full",
     },
     neumorphism: {
-      btnPrimary: "bg-primary text-white px-4 py-2 font-medium rounded-xl shadow-[4px_4px_8px_rgba(0,0,0,0.15),-4px_-4px_8px_rgba(255,255,255,0.7)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.15),-2px_-2px_4px_rgba(255,255,255,0.7)] transition-shadow",
-      btnSecondary: "bg-slate-200 text-slate-700 px-4 py-2 font-medium rounded-xl shadow-[4px_4px_8px_rgba(0,0,0,0.15),-4px_-4px_8px_rgba(255,255,255,0.7)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.15),-2px_-2px_4px_rgba(255,255,255,0.7)] transition-shadow",
-      btnOutline: "bg-transparent text-slate-600 px-4 py-2 font-medium rounded-xl shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.7)]",
-      btnGhost: "bg-transparent text-slate-600 px-4 py-2 font-medium hover:bg-slate-100 transition-colors",
+      btnPrimary:
+        "bg-primary text-white px-4 py-2 font-medium rounded-xl shadow-[4px_4px_8px_rgba(0,0,0,0.15),-4px_-4px_8px_rgba(255,255,255,0.7)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.15),-2px_-2px_4px_rgba(255,255,255,0.7)] transition-shadow",
+      btnSecondary:
+        "bg-slate-200 text-slate-700 px-4 py-2 font-medium rounded-xl shadow-[4px_4px_8px_rgba(0,0,0,0.15),-4px_-4px_8px_rgba(255,255,255,0.7)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.15),-2px_-2px_4px_rgba(255,255,255,0.7)] transition-shadow",
+      btnOutline:
+        "bg-transparent text-slate-600 px-4 py-2 font-medium rounded-xl shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.7)]",
+      btnGhost:
+        "bg-transparent text-slate-600 px-4 py-2 font-medium hover:bg-slate-100 transition-colors",
       card: "neu-surface rounded-2xl p-6",
-      input: "w-full px-3 py-2 bg-slate-100 rounded-xl text-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.7)] focus:ring-2 focus:ring-primary outline-none",
-      badge: "px-2 py-1 text-xs font-medium rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.7)]",
+      input:
+        "w-full px-3 py-2 bg-slate-100 rounded-xl text-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.7)] focus:ring-2 focus:ring-primary outline-none",
+      badge:
+        "px-2 py-1 text-xs font-medium rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.7)]",
     },
     claymorphism: {
-      btnPrimary: "bg-primary text-white px-4 py-2 font-semibold rounded-2xl shadow-[4px_4px_8px_rgba(0,0,0,0.10),inset_0_-4px_8px_rgba(0,0,0,0.06)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.10),inset_0,-2px,4px,rgba(0,0,0,0.06)] transition-shadow",
-      btnSecondary: "bg-white text-slate-700 px-4 py-2 font-semibold rounded-2xl shadow-[4px_4px_8px_rgba(0,0,0,0.10),inset_0,-4px,8px,rgba(0,0,0,0.06)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.10),inset_0,-2px,4px,rgba(0,0,0,0.06)] transition-shadow",
-      btnOutline: "bg-transparent text-slate-600 px-4 py-2 font-semibold rounded-2xl border-2 border-slate-200",
-      btnGhost: "bg-transparent text-slate-600 px-4 py-2 font-semibold rounded-xl hover:bg-slate-100 transition-colors",
+      btnPrimary:
+        "bg-primary text-white px-4 py-2 font-semibold rounded-2xl shadow-[4px_4px_8px_rgba(0,0,0,0.10),inset_0_-4px_8px_rgba(0,0,0,0.06)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.10),inset_0,-2px,4px,rgba(0,0,0,0.06)] transition-shadow",
+      btnSecondary:
+        "bg-white text-slate-700 px-4 py-2 font-semibold rounded-2xl shadow-[4px_4px_8px_rgba(0,0,0,0.10),inset_0,-4px,8px,rgba(0,0,0,0.06)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.10),inset_0,-2px,4px,rgba(0,0,0,0.06)] transition-shadow",
+      btnOutline:
+        "bg-transparent text-slate-600 px-4 py-2 font-semibold rounded-2xl border-2 border-slate-200",
+      btnGhost:
+        "bg-transparent text-slate-600 px-4 py-2 font-semibold rounded-xl hover:bg-slate-100 transition-colors",
       card: "bg-white clay-card rounded-3xl p-6",
-      input: "w-full px-3 py-2 bg-slate-50 rounded-2xl text-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.06),inset_-2px,-2px,4px,rgba(255,255,255,0.8)] focus:ring-2 focus:ring-primary outline-none",
-      badge: "px-2 py-1 text-xs font-semibold rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.08)]",
+      input:
+        "w-full px-3 py-2 bg-slate-50 rounded-2xl text-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.06),inset_-2px,-2px,4px,rgba(255,255,255,0.8)] focus:ring-2 focus:ring-primary outline-none",
+      badge:
+        "px-2 py-1 text-xs font-semibold rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.08)]",
     },
   };
 
   const defaults: Record<string, string> = {
-    btnPrimary: "bg-primary text-white px-4 py-2 font-medium rounded-lg hover:opacity-90 transition-opacity",
-    btnSecondary: "bg-slate-100 text-slate-700 px-4 py-2 font-medium rounded-lg hover:bg-slate-200 transition-colors",
-    btnOutline: "bg-transparent text-slate-700 px-4 py-2 font-medium rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors",
-    btnGhost: "bg-transparent text-slate-600 px-4 py-2 font-medium rounded-lg hover:bg-slate-100 transition-colors",
+    btnPrimary:
+      "bg-primary text-white px-4 py-2 font-medium rounded-lg hover:opacity-90 transition-opacity",
+    btnSecondary:
+      "bg-slate-100 text-slate-700 px-4 py-2 font-medium rounded-lg hover:bg-slate-200 transition-colors",
+    btnOutline:
+      "bg-transparent text-slate-700 px-4 py-2 font-medium rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors",
+    btnGhost:
+      "bg-transparent text-slate-600 px-4 py-2 font-medium rounded-lg hover:bg-slate-100 transition-colors",
     card: "bg-white rounded-xl shadow-sm border border-slate-200 p-6",
-    input: "w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none",
+    input:
+      "w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none",
     badge: "px-2 py-1 text-xs font-medium rounded-full",
   };
 
@@ -89,9 +137,18 @@ function cardComponent(style: string): string {
 
 function navbarComponent(style: string): string {
   const v = variantClasses(style);
-  const bg = style === "glass" ? "bg-black/20 backdrop-blur-xl border-b border-white/10" : "bg-white border-b border-slate-200";
-  const logo = style === "glass" ? "text-white font-bold text-xl" : "font-bold text-xl text-slate-900";
-  const link = style === "glass" ? "text-white/70 hover:text-white text-sm" : "text-slate-600 hover:text-slate-900 text-sm";
+  const bg =
+    style === "glass"
+      ? "bg-black/20 backdrop-blur-xl border-b border-white/10"
+      : "bg-white border-b border-slate-200";
+  const logo =
+    style === "glass"
+      ? "text-white font-bold text-xl"
+      : "font-bold text-xl text-slate-900";
+  const link =
+    style === "glass"
+      ? "text-white/70 hover:text-white text-sm"
+      : "text-slate-600 hover:text-slate-900 text-sm";
 
   return `<!-- Navbar Component -->
 <nav class="px-6 py-4 ${bg}">
@@ -147,9 +204,20 @@ function formInputComponent(style: string): string {
 
 function badgeComponent(style: string): string {
   const v = variantClasses(style);
-  const colors = style === "glass"
-    ? { success: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30", warning: "bg-amber-500/20 text-amber-300 border-amber-500/30", error: "bg-red-500/20 text-red-300 border-red-500/30", info: "bg-blue-500/20 text-blue-300 border-blue-500/30" }
-    : { success: "bg-emerald-50 text-emerald-700", warning: "bg-amber-50 text-amber-700", error: "bg-red-50 text-red-700", info: "bg-blue-50 text-blue-700" };
+  const colors =
+    style === "glass"
+      ? {
+          success: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+          warning: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+          error: "bg-red-500/20 text-red-300 border-red-500/30",
+          info: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+        }
+      : {
+          success: "bg-emerald-50 text-emerald-700",
+          warning: "bg-amber-50 text-amber-700",
+          error: "bg-red-50 text-red-700",
+          info: "bg-blue-50 text-blue-700",
+        };
 
   return `<!-- Badge Component -->
 <div class="flex flex-wrap gap-2">
@@ -162,12 +230,14 @@ function badgeComponent(style: string): string {
 
 function modalComponent(style: string): string {
   const v = variantClasses(style);
-  const overlay = style === "glass" ? "bg-black/60 backdrop-blur-sm" : "bg-black/50";
-  const panel = style === "glass"
-    ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"
-    : style === "neo-brutalism"
-    ? "bg-white border-2 border-black neo-shadow rounded-none p-6"
-    : "bg-white rounded-xl shadow-xl p-6";
+  const overlay =
+    style === "glass" ? "bg-black/60 backdrop-blur-sm" : "bg-black/50";
+  const panel =
+    style === "glass"
+      ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"
+      : style === "neo-brutalism"
+        ? "bg-white border-2 border-black neo-shadow rounded-none p-6"
+        : "bg-white rounded-xl shadow-xl p-6";
 
   return `<!-- Modal Component -->
 <div class="fixed inset-0 ${overlay} flex items-center justify-center p-4">
@@ -184,13 +254,20 @@ function modalComponent(style: string): string {
 
 function sidebarComponent(style: string): string {
   const v = variantClasses(style);
-  const bg = style === "glass" ? "bg-white/5 backdrop-blur-xl border-r border-white/10" : "bg-white border-r border-slate-200";
-  const link = style === "glass" ? "text-white/60 hover:text-white hover:bg-white/10" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50";
-  const active = style === "glass" ? "text-white bg-white/15" : "text-primary bg-primary/10";
+  const bg =
+    style === "glass"
+      ? "bg-white/5 backdrop-blur-xl border-r border-white/10"
+      : "bg-white border-r border-slate-200";
+  const link =
+    style === "glass"
+      ? "text-white/60 hover:text-white hover:bg-white/10"
+      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50";
+  const active =
+    style === "glass" ? "text-white bg-white/15" : "text-primary bg-primary/10";
 
   return `<!-- Sidebar Component -->
 <aside class="w-64 ${bg} p-4 h-screen">
-  <div class="${style === 'glass' ? 'text-white' : 'text-slate-900'} font-bold text-lg mb-6">Menu</div>
+  <div class="${style === "glass" ? "text-white" : "text-slate-900"} font-bold text-lg mb-6">Menu</div>
   <nav class="space-y-1">
     <a href="#" class="block px-3 py-2 rounded-lg ${active} font-medium text-sm">Dashboard</a>
     <a href="#" class="block px-3 py-2 rounded-lg ${link} text-sm">Analytics</a>
@@ -203,11 +280,14 @@ function sidebarComponent(style: string): string {
 
 function tableComponent(style: string): string {
   const headerBg = style === "glass" ? "bg-white/5" : "bg-slate-50";
-  const border = style === "neo-brutalism" ? "border-b-2 border-black" : "border-b border-slate-100";
+  const border =
+    style === "neo-brutalism"
+      ? "border-b-2 border-black"
+      : "border-b border-slate-100";
   const cellPad = "px-4 py-3 text-sm";
 
   return `<!-- Table Component -->
-<div class="${style === 'glass' ? 'bg-white/10 backdrop-blur-xl border border-white/20' : 'bg-white border border-slate-200'} rounded-xl overflow-hidden">
+<div class="${style === "glass" ? "bg-white/10 backdrop-blur-xl border border-white/20" : "bg-white border border-slate-200"} rounded-xl overflow-hidden">
   <table class="w-full">
     <thead>
       <tr class="${headerBg} ${border}">
@@ -242,10 +322,16 @@ function tableComponent(style: string): string {
 }
 
 function footerComponent(style: string): string {
-  const bg = style === "glass" ? "bg-black/30 backdrop-blur-xl border-t border-white/10" : "bg-slate-900";
+  const bg =
+    style === "glass"
+      ? "bg-black/30 backdrop-blur-xl border-t border-white/10"
+      : "bg-slate-900";
   const text = style === "glass" ? "text-white/40" : "text-slate-400";
   const heading = style === "glass" ? "text-white" : "text-white";
-  const link = style === "glass" ? "text-white/50 hover:text-white" : "text-slate-400 hover:text-white";
+  const link =
+    style === "glass"
+      ? "text-white/50 hover:text-white"
+      : "text-slate-400 hover:text-white";
 
   return `<!-- Footer Component -->
 <footer class="${bg} py-12 px-6">
@@ -267,7 +353,7 @@ function footerComponent(style: string): string {
       <ul class="space-y-2"><li><a href="#" class="${link} text-sm">Privacy</a></li><li><a href="#" class="${link} text-sm">Terms</a></li><li><a href="#" class="${link} text-sm">Security</a></li></ul>
     </div>
   </div>
-  <div class="max-w-6xl mx-auto mt-8 pt-8 border-t ${style === 'glass' ? 'border-white/10' : 'border-slate-800'} text-center ${text} text-sm">
+  <div class="max-w-6xl mx-auto mt-8 pt-8 border-t ${style === "glass" ? "border-white/10" : "border-slate-800"} text-center ${text} text-sm">
     &copy; 2025 Brand. All rights reserved.
   </div>
 </footer>`;
@@ -275,10 +361,14 @@ function footerComponent(style: string): string {
 
 function chartComponent(style: string): string {
   const v = variantClasses(style);
-  const cardBg = style === "glass" ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
-    : style === "neo-brutalism" ? "bg-white border-2 border-black neo-shadow rounded-none"
-    : style === "neumorphism" ? "neu-surface rounded-2xl"
-    : "bg-white rounded-xl shadow-sm border border-slate-200";
+  const cardBg =
+    style === "glass"
+      ? "bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl"
+      : style === "neo-brutalism"
+        ? "bg-white border-2 border-black neo-shadow rounded-none"
+        : style === "neumorphism"
+          ? "neu-surface rounded-2xl"
+          : "bg-white rounded-xl shadow-sm border border-slate-200";
 
   return `<!-- Chart Component (Powered by ApexCharts) -->
 <div class="${cardBg} p-6 max-w-xl w-full">
@@ -299,7 +389,7 @@ function chartComponent(style: string): string {
     const isDark = ${style === "glass" ? "true" : "false"};
     let primaryColor = '#3b82f6';
     let secondaryColor = '#10b981';
-    
+
     if (window.tailwind && window.tailwind.config && window.tailwind.config.theme) {
       const extendColors = window.tailwind.config.theme.extend && window.tailwind.config.theme.extend.colors;
       if (extendColors) {
@@ -378,18 +468,20 @@ function chartComponent(style: string): string {
  * - Convert HTML comments to JSX expression comments
  */
 export function htmlToJSX(html: string): string {
-  return html
-    // Attribute renames (order matters — longest/most-specific first)
-    .replace(/\bautocomplete=/g, 'autoComplete=')
-    .replace(/\bmaxlength=/g, 'maxLength=')
-    .replace(/\btabindex=/g, 'tabIndex=')
-    .replace(/\bclass=/g, 'className=')
-    .replace(/\bfor=/g, 'htmlFor=')
-    .replace(/\breadonly\b/g, 'readOnly')
-    // Self-close void elements that are not already self-closed
-    .replace(/<(input|img|br|hr|meta|link)(\b[^>]*?)(?<!\/)>/g, '<$1$2 />')
-    // HTML comments → JSX expression comments
-    .replace(/<!--(.*?)-->/gs, '{/* $1*/}');
+  return (
+    html
+      // Attribute renames (order matters — longest/most-specific first)
+      .replace(/\bautocomplete=/g, "autoComplete=")
+      .replace(/\bmaxlength=/g, "maxLength=")
+      .replace(/\btabindex=/g, "tabIndex=")
+      .replace(/\bclass=/g, "className=")
+      .replace(/\bfor=/g, "htmlFor=")
+      .replace(/\breadonly\b/g, "readOnly")
+      // Self-close void elements that are not already self-closed
+      .replace(/<(input|img|br|hr|meta|link)(\b[^>]*?)(?<!\/)>/g, "<$1$2 />")
+      // HTML comments → JSX expression comments
+      .replace(/<!--(.*?)-->/gs, "{/* $1*/}")
+  );
 }
 
 /** Capitalise first character of a string. */
@@ -526,34 +618,45 @@ const VUE_PROP_DEFS: Record<string, { props: string; defaults: string }> = {
  * Wrap JSX markup in a full React functional component with typed props.
  * Injects motion.dev if applicable.
  */
-export function wrapReact(componentName: string, jsx: string, style?: string): string {
-  const propsBody = REACT_PROP_INTERFACES[componentName] ??
-    `  className?: string;`;
+export function wrapReact(
+  componentName: string,
+  jsx: string,
+  style?: string,
+): string {
+  const propsBody =
+    REACT_PROP_INTERFACES[componentName] ?? `  className?: string;`;
 
   // Inject motion.dev physics if style is provided
   let finalJsx = jsx;
   let imports = `import React from 'react';\nimport { motion } from 'motion/react';`;
-  
+
   if (style) {
-    const scaleHover = style === "claymorphism" || style === "m3-pastel" ? 1.06 : 1.03;
+    const scaleHover =
+      style === "claymorphism" || style === "m3-pastel" ? 1.06 : 1.03;
     const pushTap = style === "neo-brutalism" ? "y: 2, x: 2" : "scale: 0.97";
-    
+
     // Replace <button with <motion.button
-    finalJsx = finalJsx.replace(/<button\b/g, `<motion.button whileHover={{ scale: ${scaleHover} }} whileTap={{ ${pushTap} }}`);
+    finalJsx = finalJsx.replace(
+      /<button\b/g,
+      `<motion.button whileHover={{ scale: ${scaleHover} }} whileTap={{ ${pushTap} }}`,
+    );
     finalJsx = finalJsx.replace(/<\/button>/g, `</motion.button>`);
-    
+
     // For Card, replace the outer div with motion.div
     if (componentName === "Card") {
-      finalJsx = finalJsx.replace(/<div\b/, `<motion.div whileHover={{ y: -4 }}`);
+      finalJsx = finalJsx.replace(
+        /<div\b/,
+        `<motion.div whileHover={{ y: -4 }}`,
+      );
       finalJsx = finalJsx.replace(/<\/div>$/, `</motion.div>`);
     }
   }
 
   // Indent every line of the JSX by 6 spaces (inside the return fragment)
   const indentedJsx = finalJsx
-    .split('\n')
+    .split("\n")
     .map((line) => `      ${line}`)
-    .join('\n');
+    .join("\n");
 
   return `${imports}
 
@@ -576,13 +679,17 @@ export default ${componentName};
 /**
  * Wrap HTML markup in a Vue 3 SFC with typed props and Tailwind style note.
  */
-export function wrapVue(componentName: string, html: string, style?: string): string {
+export function wrapVue(
+  componentName: string,
+  html: string,
+  style?: string,
+): string {
   const vueDef = VUE_PROP_DEFS[componentName] ?? {
     props: `  className?: string;`,
     defaults: `className: ''`,
   };
 
-  // For Vue, we could inject @vueuse/motion or vanilla motion. 
+  // For Vue, we could inject @vueuse/motion or vanilla motion.
   // We'll leave the HTML mostly as is but you could add v-motion directives here.
 
   return `<template>
@@ -611,35 +718,57 @@ const props = withDefaults(defineProps<Props>(), {
 export function getComponent(
   type: ComponentType,
   style: string,
-  framework: OutputFramework = 'html'
+  framework: OutputFramework = "html",
 ): string {
   let html: string;
   switch (type) {
-    case "button":     html = buttonComponent(style);    break;
-    case "card":       html = cardComponent(style);      break;
-    case "navbar":     html = navbarComponent(style);    break;
-    case "hero":       html = heroComponent(style);      break;
-    case "form-input": html = formInputComponent(style); break;
-    case "badge":      html = badgeComponent(style);     break;
-    case "modal":      html = modalComponent(style);     break;
-    case "sidebar":    html = sidebarComponent(style);   break;
-    case "table":      html = tableComponent(style);     break;
-    case "footer":     html = footerComponent(style);    break;
-    case "chart":      html = chartComponent(style);     break;
-    case "map":        html = mapComponent(style);       break;
-    default:           html = `<!-- Unknown component: ${type} -->`;
+    case "button":
+      html = buttonComponent(style);
+      break;
+    case "card":
+      html = cardComponent(style);
+      break;
+    case "navbar":
+      html = navbarComponent(style);
+      break;
+    case "hero":
+      html = heroComponent(style);
+      break;
+    case "form-input":
+      html = formInputComponent(style);
+      break;
+    case "badge":
+      html = badgeComponent(style);
+      break;
+    case "modal":
+      html = modalComponent(style);
+      break;
+    case "sidebar":
+      html = sidebarComponent(style);
+      break;
+    case "table":
+      html = tableComponent(style);
+      break;
+    case "footer":
+      html = footerComponent(style);
+      break;
+    case "chart":
+      html = chartComponent(style);
+      break;
+    case "map":
+      html = mapComponent(style);
+      break;
+    default:
+      html = `<!-- Unknown component: ${type} -->`;
   }
 
-  if (framework === 'html') return html;
+  if (framework === "html") return html;
 
   // Derive a PascalCase component name from the type (e.g. "form-input" → "FormInput")
-  const name = type
-    .split('-')
-    .map(capitalize)
-    .join('');
+  const name = type.split("-").map(capitalize).join("");
 
-  if (framework === 'react') return wrapReact(name, htmlToJSX(html), style);
-  if (framework === 'vue')   return wrapVue(name, html, style);
+  if (framework === "react") return wrapReact(name, htmlToJSX(html), style);
+  if (framework === "vue") return wrapVue(name, html, style);
 
   return html;
 }
