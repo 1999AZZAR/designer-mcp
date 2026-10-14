@@ -13,7 +13,7 @@
     "deploy-demo": "gh-pages -d examples/ellis-ui"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.13.3"
+    "@modelcontextprotocol/sdk": "^1.31.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
