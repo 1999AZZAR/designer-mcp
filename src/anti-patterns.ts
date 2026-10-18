@@ -249,14 +249,28 @@ const ALL_GATES: SlopGate[] = [
     description:
       "Page uses a distinctive display face + refined body face (not single font unless intentional)?",
     check: (c) => {
-      const singleFont = /font-family:\s*var\(--font-[^)]+\)/g;
-      const matches = c.match(singleFont);
+      /* Count every way a page can name a face, not only the `var(--font-*)`
+         token form. A design whose only declaration is
+         `font-family: system-ui` has no pairing, and the old detail branch
+         reported "Font pairing found" for exactly that case — `matches` was
+         null, so `matches && …` was falsy and the positive wording won while
+         `pass` said false. A failure that lied about why. */
+      const tokenised = c.match(/font-family:\s*var\(--font-[^)]+\)/g)?.length ?? 0;
+      const declared = [...c.matchAll(/font-family:\s*([^;"'}]+)/g)].map((m) =>
+        m[1].trim(),
+      );
+      const distinct = new Set(
+        declared.map((d) => d.split(",")[0].trim().toLowerCase()),
+      ).size;
+      const families = Math.max(tokenised, distinct);
+      const pass = families >= 2;
       return {
-        pass: (matches?.length ?? 0) >= 2,
-        detail:
-          matches && matches.length < 2
-            ? "Only one font family used — add a display/body pairing"
-            : "Font pairing found",
+        pass,
+        detail: pass
+          ? `Font pairing found (${families} families)`
+          : families === 0
+            ? "No font-family declared — set a display face and a body face"
+            : `Only one font family used (${declared[0] ?? "unknown"}) — add a display/body pairing`,
       };
     },
   },
