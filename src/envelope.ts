@@ -98,6 +98,15 @@ export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
   logo_concept_sheet: ["process:exec", "file:write"],
   logo_preview_sheet: ["process:exec", "file:write"],
   logo_presentation_board: ["process:exec", "file:write"],
+  stitch_get: ["process:exec"],
+  stitch_find: ["process:exec"],
+  stitch_create: ["process:exec", "file:write"],
+  stitch_edit: ["process:exec", "file:write"],
+  stitch_delete: ["process:exec"],
+  stitch_generate: ["process:exec", "file:write"],
+  stitch_url: ["process:exec"],
+  stitch_sync_design_system: ["file:write"],
+  stitch_screen_audit: [],
 };
 
 export function isEnvelopeEnabled(): boolean {

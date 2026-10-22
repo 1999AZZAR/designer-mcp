@@ -1,3 +1,14 @@
+import {
+  stitchGet,
+  stitchFind,
+  stitchCreate,
+  stitchEdit,
+  stitchDelete,
+  stitchGenerate,
+  stitchUrl,
+  stitchSyncDesignSystem,
+  stitchScreenAudit,
+} from "./stitch.js";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -886,6 +897,290 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["category", "style"],
       },
     },
+    // === Stitch Canvas & Workflow Integration ===
+    {
+      name: "stitch_get",
+      description:
+        "Fetches one Stitch resource by id (project, screen, design-system, status). Mirrors 'stitch get <resource> <id>'. Returns { resource, item, availableActions? }.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            enum: [
+              "projects",
+              "project",
+              "screens",
+              "screen",
+              "design-systems",
+              "design-system",
+              "status",
+            ],
+            description: "Resource type to fetch",
+          },
+          id: {
+            type: "string",
+            description: "ID of the resource to fetch (omit for status)",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          workspace: {
+            type: "string",
+            description: "Workspace ID override",
+          },
+        },
+        required: ["resource"],
+      },
+    },
+    {
+      name: "stitch_find",
+      description:
+        "Lists Stitch resources of a given type (projects, screens, design-systems). Mirrors 'stitch find <resource>'. Returns items list, count, and pagination info.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            enum: [
+              "projects",
+              "project",
+              "screens",
+              "screen",
+              "design-systems",
+              "design-system",
+            ],
+            description: "Resource type to list",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          workspace: {
+            type: "string",
+            description: "Workspace ID override",
+          },
+          limit: {
+            type: "integer",
+            description: "Maximum number of items to return",
+          },
+          filter: {
+            type: "string",
+            description: "AIP-160 filter expression",
+          },
+          criteria: {
+            type: "object",
+            description: "Resource-specific filter criteria",
+          },
+        },
+        required: ["resource"],
+      },
+    },
+    {
+      name: "stitch_create",
+      description:
+        "Creates one Stitch resource (project, screen, design-system). Mirrors 'stitch create <resource>'. Returns created resource metadata.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            enum: ["project", "screen", "design-system"],
+            description: "Resource type to create",
+          },
+          body: {
+            type: "object",
+            description:
+              "Resource payload. Required: project={title}, screen={prompt}, design-system={designSystem={displayName, theme}}.",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          workspace: {
+            type: "string",
+            description: "Workspace ID override",
+          },
+          dryRun: {
+            type: "boolean",
+            description: "Validate payload and preview without making API calls",
+          },
+        },
+        required: ["resource", "body"],
+      },
+    },
+    {
+      name: "stitch_edit",
+      description:
+        "Updates mutable fields on a Stitch resource. Mirrors 'stitch edit <resource> <id>'.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            description: "Resource type to edit",
+          },
+          id: {
+            type: "string",
+            description: "Resource ID to edit",
+          },
+          body: {
+            type: "object",
+            description: "Fields to update",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          workspace: {
+            type: "string",
+            description: "Workspace ID override",
+          },
+        },
+        required: ["resource", "id", "body"],
+      },
+    },
+    {
+      name: "stitch_delete",
+      description:
+        "Deletes a Stitch resource by ID. Mirrors 'stitch delete <resource> <id>'.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            description: "Resource type to delete",
+          },
+          id: {
+            type: "string",
+            description: "Resource ID to delete",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          workspace: {
+            type: "string",
+            description: "Workspace ID override",
+          },
+        },
+        required: ["resource", "id"],
+      },
+    },
+    {
+      name: "stitch_generate",
+      description:
+        "Triggers a backend generative creation job for Stitch screens or variants. Mirrors 'stitch generate <resource>'.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            enum: ["screens", "screen", "variants", "variant"],
+            description: "Resource type to generate",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+          prompt: {
+            type: "string",
+            description: "Text prompt for screen or variant generation",
+          },
+          aspects: {
+            type: "array",
+            items: { type: "string" },
+            description: "Target aspects for variants (LAYOUT, COLOR_SCHEME, TEXT_FONT)",
+          },
+          count: {
+            type: "integer",
+            description: "Number of variants to generate (1-5)",
+          },
+          creativeRange: {
+            type: "string",
+            description: "Creative range: REFINE, EXPLORE, or REIMAGINE",
+          },
+          device: {
+            type: "string",
+            description: "Device type: MOBILE, DESKTOP, TABLET, or AGNOSTIC",
+          },
+          dryRun: {
+            type: "boolean",
+            description: "Validate arguments and preview without starting job",
+          },
+        },
+        required: ["resource"],
+      },
+    },
+    {
+      name: "stitch_url",
+      description:
+        "Prints the canonical Stitch Canvas web URL for a project or screen. Mirrors 'stitch url <resource> <id>'.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          resource: {
+            type: "string",
+            enum: ["project", "screen"],
+            description: "Target resource type",
+          },
+          id: {
+            type: "string",
+            description: "Project or screen ID",
+          },
+          project: {
+            type: "string",
+            description: "Stitch Canvas project ID",
+          },
+        },
+        required: ["resource"],
+      },
+    },
+    {
+      name: "stitch_sync_design_system",
+      description:
+        "Export the current or chosen OKLCH theme and design rules into a Stitch-compliant DESIGN.md and .stitch/design-system.json for automated visual canvas synchronization.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          themeName: {
+            type: "string",
+            description: "Theme name (e.g. 'Obsidian Kinetic', 'Manifesto', 'Studio')",
+          },
+          style: {
+            type: "string",
+            description: "Design style (e.g. 'awwwards', 'minimal', 'glass')",
+          },
+          targetDir: {
+            type: "string",
+            description: "Target repository directory (defaults to current working directory)",
+          },
+        },
+      },
+    },
+    {
+      name: "stitch_screen_audit",
+      description:
+        "Run a unified audit on a Stitch-captured HTML screen or file. Executes 25-check WCAG 2.1 static analysis, 35+ gate anti-slop checks, and 6-axis craft critique.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          screenHtml: {
+            type: "string",
+            description: "Full HTML content of the captured screen",
+          },
+          filePath: {
+            type: "string",
+            description: "Path to a captured HTML file (e.g. .stitch/captured-dom.html)",
+          },
+          genre: {
+            type: "string",
+            description: "Design genre for scoped anti-slop checks (default: avant-garde)",
+          },
+        },
+      },
+    },
   ],
 }));
 
@@ -1435,6 +1730,52 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, JSON.stringify(run, null, 2));
       }
 
+      // === Stitch Canvas & Workflow Integration ===
+
+      case "stitch_get": {
+        const result = await stitchGet(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_find": {
+        const result = await stitchFind(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_create": {
+        const result = await stitchCreate(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_edit": {
+        const result = await stitchEdit(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_delete": {
+        const result = await stitchDelete(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_generate": {
+        const result = await stitchGenerate(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_url": {
+        const result = await stitchUrl(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_sync_design_system": {
+        const result = stitchSyncDesignSystem(args as any);
+        return textResult(name, result);
+      }
+
+      case "stitch_screen_audit": {
+        const result = stitchScreenAudit(args as any);
+        return textResult(name, result);
+      }
       default:
         throw new Error(`Unknown tool: ${name}`);
     }

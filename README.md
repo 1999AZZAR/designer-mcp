@@ -7,7 +7,7 @@
 
 A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `designer-mcp` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
 
-37 tools across 18 design systems (including Awwwards SOTA / Avant-Garde): **anti-slop quality gates**, **motion.dev & anime.js integration**, **WCAG 2.1 auditing**, **React/Vue component output**, **framework-agnostic CSS**, and **logo & brand-mark design** backed by a 1,432-mark reference library.
+46 tools across 18 design systems (including Awwwards SOTA / Avant-Garde): **anti-slop quality gates**, **motion.dev & anime.js integration**, **WCAG 2.1 auditing**, **React/Vue component output**, **framework-agnostic CSS**, **logo & brand-mark design** backed by a 1,432-mark reference library, and **Stitch Canvas & workflow integration**.
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
@@ -39,6 +39,7 @@ A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for product
 - **SOTA Motion System (motion.dev & anime.js)** — Style-aware animation presets baked into components. `generate_motion_snippet` for on-demand snippets with React `<motion.div>` and vanilla physics support (14 categories including `magnetic`, `text-split`, `smooth-scroll`, `marquee`, `noise-grain`, `clip-path-mask`, all reduced-motion guarded).
 - **Color Palette Hunter** — Live palettes from Color Hunt with format conversion.
 - **Brand Design References** — `brand_fetch_design_md` resolves DESIGN.md from the full 328+ brand getdesign catalog (Stripe, Vercel, Notion, Claude, Tesla, etc.); `brand_list` returns the 62-brand curated subset shipped locally.
+- **Stitch Canvas & Visual Workflow Integration** — 9 Stitch tools superseding the standalone Stitch MCP server: 7 core resource tools (`stitch_get`, `stitch_find`, `stitch_create`, `stitch_edit`, `stitch_delete`, `stitch_generate`, `stitch_url`) plus 2 Phenotype bridge tools: `stitch_sync_design_system` (exports OKLCH tokens to Stitch DESIGN.md & designSystem JSON) and `stitch_screen_audit` (evaluates Stitch-captured screens against WCAG 2.1, 35 anti-slop gates, and 6-axis craft critique).
 - **Logo & Brand-Mark Design** — the in-tree `logo-design` skill plus 8 `logo_*` tools: SVG audit, a searchable 1,432-mark reference library, PNG/favicon rendering, mono/square/app-icon delivery variants, concept sheets, test sheets, and client presentation boards.
 
 ## Tools
@@ -55,6 +56,21 @@ A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for product
 | `generate_rules`           | Generate design rules for style + palette + archetype/hybrid           |
 | `generate_tailwind_config` | Generate ready-to-use tailwind.config.js                               |
 | `get_cross_cutting_rules`  | Get standalone rules (a11y, motion, icons, tokens, responsive)         |
+
+
+### Stitch Canvas & Workflow Integration
+
+| Tool                        | Description                                                                                                                              |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `stitch_get`                | Get a Stitch resource by ID (`project`, `screen`, `design-system`, `status`). Mirrors `stitch get <resource> [id]`                       |
+| `stitch_find`               | List Stitch resources (`projects`, `screens`, `design-systems`) with optional filters, criteria, and pagination                          |
+| `stitch_create`             | Create a new Stitch resource (project, screen prompt, or shared design-system payload). Mirrors `stitch create <resource>`              |
+| `stitch_edit`               | Update mutable fields on a Stitch resource by ID. Mirrors `stitch edit <resource> <id>`                                                  |
+| `stitch_delete`             | Delete a Stitch resource by ID. Mirrors `stitch delete <resource> <id>`                                                                  |
+| `stitch_generate`           | Trigger generative creation jobs for Stitch screens or variants. Mirrors `stitch generate <resource>`                                    |
+| `stitch_url`                | Print the canonical web URL for a Stitch project or screen canvas. Mirrors `stitch url <resource> <id>`                                 |
+| `stitch_sync_design_system` | Export chosen OKLCH tokens and design rules into `.stitch/design-system.json` and a formatted `DESIGN.md` specification                  |
+| `stitch_screen_audit`       | Audit a Stitch-captured HTML screen or file against WCAG 2.1 (0-100 score), 35 anti-slop gates, and 6-axis craft quality critique       |
 
 ### Theme & Token System
 

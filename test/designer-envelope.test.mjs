@@ -61,7 +61,10 @@ const LOGO_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(([t]) =>
   t.startsWith("logo_"),
 );
 const PURE_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(
-  ([t]) => !t.startsWith("logo_"),
+  ([t]) => !t.startsWith("logo_") && !t.startsWith("stitch_"),
+);
+const STITCH_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(([t]) =>
+  t.startsWith("stitch_"),
 );
 t("design tools declare no side effects (pure generation)", () => {
   assert.equal(PURE_TOOLS.length, 29);
@@ -95,4 +98,14 @@ t("run/step ids propagate", () => {
   assert.equal(env.execution.step_id, "s2");
   assert.equal(wrapError("list_options", "e").execution.run_id, "r1");
 });
+
+t("all 9 stitch_* tools declare side-effects correctly", () => {
+  assert.equal(STITCH_TOOLS.length, 9);
+  assert.deepEqual(TOOL_SIDE_EFFECTS["stitch_screen_audit"], []);
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_sync_design_system"].includes("file:write"));
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_create"].includes("process:exec"));
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_create"].includes("file:write"));
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_get"].includes("process:exec"));
+});
+
 console.log(`\n${n} tests passed`);
