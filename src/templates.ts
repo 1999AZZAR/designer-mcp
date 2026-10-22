@@ -24,6 +24,7 @@ function tailwindFontFamily(style: string): string {
       "font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif",
     "m3-pastel": "font-family: 'Google Sans', 'Roboto', system-ui, sans-serif",
     "neo-m3": "font-family: 'Space Grotesk', system-ui, sans-serif",
+    awwwards: "font-family: 'Syne', 'Clash Display', 'PP Neue Montreal', system-ui, sans-serif",
   };
   return map[style] ?? map.minimal;
 }
@@ -32,7 +33,7 @@ function shellStyle(style: string, palette: string): string {
   const { code } = generateTailwindConfig(style, palette);
   const fontLine = tailwindFontFamily(style);
   const animeShell = buildAnimeShell(style);
-  return `<script src="https://cdn.tailwindcss.com"></script>\n<script>\n${code}\n</script>\n<style>\n  body { ${fontLine}; }\n  ${style === "glass" ? "body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }" : ""}\n  ${style === "neo-brutalism" ? ".neo-shadow { box-shadow: 4px 4px 0px rgba(0,0,0,1); }" : ""}\n  ${style === "neumorphism" ? ".neu-surface { background: #e2e8f0; box-shadow: 6px 6px 12px rgba(0,0,0,0.15), -6px -6px 12px rgba(255,255,255,0.7); }" : ""}\n  ${style === "claymorphism" ? ".clay-card { box-shadow: 4px 4px 8px rgba(0,0,0,0.10), inset 0 -4px 8px rgba(0,0,0,0.06); }" : ""}\n</style>\n${animeShell}`;
+  return `<script src="https://cdn.tailwindcss.com"></script>\n<script>\n${code}\n</script>\n<style>\n  body { ${fontLine}; }\n  ${style === "glass" ? "body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }" : ""}\n  ${style === "neo-brutalism" ? ".neo-shadow { box-shadow: 4px 4px 0px rgba(0,0,0,1); }" : ""}\n  ${style === "neumorphism" ? ".neu-surface { background: #e2e8f0; box-shadow: 6px 6px 12px rgba(0,0,0,0.15), -6px -6px 12px rgba(255,255,255,0.7); }" : ""}\n  ${style === "claymorphism" ? ".clay-card { box-shadow: 4px 4px 8px rgba(0,0,0,0.10), inset 0 -4px 8px rgba(0,0,0,0.06); }" : ""}\n  ${style === "awwwards" ? "body { background: #08080a; color: #f4f4f5; } .awwwards-card { background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(24px); } .awwwards-card:hover { border-color: rgba(255,255,255,0.25); }" : ""}\n</style>\n${animeShell}`;
 }
 
 function dashboardTemplate(style: string, palette: string): string {
@@ -465,6 +466,159 @@ function tableDetailTemplate(style: string, palette: string): string {
 </html>`;
 }
 
+
+function awwwardsBentoTemplate(style: string, palette: string): string {
+  const shell = shellStyle(style, palette);
+  return `<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awwwards SOTA Showcase</title>
+  ${shell}
+</head>
+<body class="bg-[#08080a] text-[#f4f4f5] antialiased overflow-x-hidden min-h-screen selection:bg-white selection:text-black">
+  <!-- Ambient Noise Overlay -->
+  <svg style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.035; mix-blend-mode: overlay;" aria-hidden="true">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+  </svg>
+
+  <!-- Ambient Glow Backdrop -->
+  <div class="fixed top-[-20%] left-[20%] w-[600px] h-[600px] rounded-full bg-emerald-500/10 blur-[140px] pointer-events-none -z-10" aria-hidden="true"></div>
+  <div class="fixed bottom-[-10%] right-[10%] w-[500px] h-[500px] rounded-full bg-violet-500/10 blur-[130px] pointer-events-none -z-10" aria-hidden="true"></div>
+
+  <!-- Floating Pill Header -->
+  <header class="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
+    <nav class="flex items-center justify-between gap-8 px-6 py-3 rounded-full border border-white/10 bg-black/40 backdrop-blur-2xl shadow-2xl">
+      <a href="#" class="font-mono text-xs uppercase tracking-widest font-bold text-white flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        EXHIBIT // SOTA
+      </a>
+      <div class="hidden md:flex items-center gap-6 font-mono text-[11px] uppercase tracking-wider text-white/60">
+        <a href="#work" class="hover:text-white transition-colors">Selected Work</a>
+        <a href="#about" class="hover:text-white transition-colors">Philosophy</a>
+        <a href="#archive" class="hover:text-white transition-colors">Index</a>
+      </div>
+      <button class="px-4 py-1.5 rounded-full bg-white text-black font-mono text-[11px] uppercase tracking-wider font-semibold hover:scale-105 active:scale-95 transition-transform" data-anime-magnetic>
+        Initiate
+      </button>
+    </nav>
+  </header>
+
+  <!-- Kinetic Hero Section -->
+  <main class="max-w-7xl mx-auto px-6 pt-40 pb-24">
+    <section class="mb-28" data-anime-hero>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 font-mono text-[11px] text-white/70 uppercase tracking-widest mb-6">
+        <span>Site of the Day</span>
+        <span class="text-white/30">&bull;</span>
+        <span class="text-emerald-400">Award Nominee</span>
+      </div>
+      <h1 class="text-6xl sm:text-7xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.9] mb-8" data-anime-split>
+        Craft Beyond<br /><span class="text-white/40 italic font-serif">Boundaries.</span>
+      </h1>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-6 border-t border-white/10">
+        <p class="max-w-md font-mono text-sm text-white/60 leading-relaxed">
+          Pioneering high-craft digital experiences with kinetic typography, perceptual OKLCH color, and anti-slop interaction mechanics.
+        </p>
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-xs uppercase text-white/40 tracking-widest">Scroll To Explore &darr;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Asymmetrical Bento Matrix -->
+    <section id="work" class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-28">
+      <!-- Bento Card 1: 8-col Hero Showcase -->
+      <article class="md:col-span-8 awwwards-card rounded-3xl p-8 lg:p-12 relative overflow-hidden group" data-anime-card>
+        <div class="flex items-center justify-between mb-16">
+          <span class="font-mono text-xs uppercase tracking-widest text-emerald-400">01 // Kinetic Physics</span>
+          <span class="font-mono text-xs text-white/40">Spring Damping 15</span>
+        </div>
+        <div class="max-w-lg mb-8">
+          <h2 class="text-3xl lg:text-5xl font-black uppercase tracking-tight mb-4">Fluid Interaction Engine</h2>
+          <p class="font-mono text-sm text-white/60 leading-relaxed">
+            Physics-driven motion choreography built with strict prefers-reduced-motion fallback guarantees and Lenis inertia scroll tracking.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2 pt-6">
+          <span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 font-mono text-[10px] uppercase text-white/80">Lenis Scroll</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 font-mono text-[10px] uppercase text-white/80">Magnetic Hover</span>
+          <span class="px-3 py-1 rounded-full border border-white/10 bg-white/5 font-mono text-[10px] uppercase text-white/80">SVG Grain</span>
+        </div>
+      </article>
+
+      <!-- Bento Card 2: 4-col Metric / Counter -->
+      <article class="md:col-span-4 awwwards-card rounded-3xl p-8 lg:p-12 flex flex-col justify-between" data-anime-card>
+        <span class="font-mono text-xs uppercase tracking-widest text-white/40">02 // Perceptual Fidelity</span>
+        <div class="my-8">
+          <div class="text-6xl lg:text-7xl font-mono font-black text-white tracking-tighter" data-anime-counter="99.4" data-anime-decimals="1" data-anime-suffix="%">
+            99.4%
+          </div>
+          <p class="font-mono text-xs uppercase tracking-widest text-white/50 mt-2">WCAG Contrast & Polish</p>
+        </div>
+        <p class="font-mono text-xs text-white/60">
+          Evaluated against 35 anti-slop quality gates and strict typographic hierarchy scaling.
+        </p>
+      </article>
+
+      <!-- Bento Card 3: 5-col Monospace Spec -->
+      <article class="md:col-span-5 awwwards-card rounded-3xl p-8 lg:p-10 flex flex-col justify-between" data-anime-card>
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-violet-400 mb-6 block">03 // Typography Stack</span>
+          <h3 class="text-2xl font-bold uppercase tracking-tight mb-3">Syne + PP Neue Montreal</h3>
+          <p class="font-mono text-xs text-white/60 leading-relaxed">
+            High-contrast display serif and geometric sans pairings tuned for luxury digital portfolios.
+          </p>
+        </div>
+        <pre class="font-mono text-[11px] text-white/40 bg-black/40 p-4 rounded-xl border border-white/5 mt-6 overflow-x-auto"><code>clamp(2.5rem, 8vw, 7rem)
+letter-spacing: -0.04em</code></pre>
+      </article>
+
+      <!-- Bento Card 4: 7-col Interactive Media Preview -->
+      <article class="md:col-span-7 awwwards-card rounded-3xl p-8 lg:p-10 relative overflow-hidden" data-anime-card>
+        <div class="flex items-center justify-between mb-8">
+          <span class="font-mono text-xs uppercase tracking-widest text-white/40">04 // Visual Frame</span>
+          <button class="px-4 py-2 rounded-full border border-white/20 bg-white/5 font-mono text-[10px] uppercase text-white hover:border-white transition-colors" data-anime-magnetic>
+            View Canvas &rarr;
+          </button>
+        </div>
+        <div class="h-44 rounded-2xl bg-gradient-to-tr from-emerald-500/20 via-transparent to-violet-500/20 border border-white/10 flex items-center justify-center relative overflow-hidden" data-anime-clip>
+          <span class="font-mono text-xs uppercase tracking-widest text-white/70">Interactive Canvas Stage</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Infinite Marquee Strip -->
+    <section class="border-y border-white/10 py-6 overflow-hidden select-none mb-24">
+      <div class="flex whitespace-nowrap font-mono text-xs uppercase tracking-widest text-white/60" data-anime-marquee>
+        <div class="flex shrink-0 min-w-full">
+          <span>AWWWARDS SOTA CRAFT &bull; KINETIC TYPOGRAPHY &bull; OKLCH PERCEPTUAL TOKENS &bull; ZERO SLOP ASSURANCE &bull;&nbsp;</span>
+        </div>
+        <div class="flex shrink-0 min-w-full" aria-hidden="true">
+          <span>AWWWARDS SOTA CRAFT &bull; KINETIC TYPOGRAPHY &bull; OKLCH PERCEPTUAL TOKENS &bull; ZERO SLOP ASSURANCE &bull;&nbsp;</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Clean Minimal Footer -->
+  <footer class="border-t border-white/10 py-12 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-white/40">
+      <div>&copy; 2026 HELA PHENOTYPE // SOTA CRAFT. ALL RIGHTS RESERVED.</div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white transition-colors">Manifesto</a>
+        <a href="#" class="hover:text-white transition-colors">Index</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>`;
+}
+
 function editorialLandingTemplate(style: string, palette: string): string {
   const shell = shellStyle(style, palette);
   const isMinimal = style === "minimal" || style === "swiss";
@@ -558,7 +712,11 @@ export function generateTemplate(
       return tableDetailTemplate(style, palette);
     case "editorial-landing":
       return editorialLandingTemplate(style, palette);
+    case "awwwards-bento":
+    case "bento":
+      return awwwardsBentoTemplate(style, palette);
     default:
+      if (style === "awwwards") return awwwardsBentoTemplate(style, palette);
       return marketingHeroTemplate(style, palette);
   }
 }

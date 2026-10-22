@@ -8,7 +8,8 @@ export interface SlopGate {
     | "editorial"
     | "modern-minimal"
     | "atmospheric"
-    | "playful";
+    | "playful"
+    | "avant-garde";
 }
 
 export interface SlopTestResult {
@@ -566,6 +567,36 @@ const ALL_GATES: SlopGate[] = [
       };
     },
   },
+  {
+    id: 57,
+    name: "Awwwards display typography scale",
+    description: "Avant-garde displays must use fluid clamp scale or oversized headline geometry?",
+    scoped: "avant-garde",
+    check: (c) => {
+      const hasScale = /clamp\(|text-[6-9]xl/i.test(c);
+      return {
+        pass: hasScale,
+        detail: hasScale
+          ? "Dramatic display scale detected (clamp/oversized)"
+          : "Missing dramatic typography hierarchy (require clamp or text-6xl+)",
+      };
+    },
+  },
+  {
+    id: 58,
+    name: "No generic corporate CTA in avant-garde",
+    description: "Avant-garde designs must not use unstyled generic corporate blue buttons?",
+    scoped: "avant-garde",
+    check: (c) => {
+      const genericBlue = /(?:bg-blue-600|#0066cc|#1d4ed8)\s+text-white\s+rounded(?:-md|-lg)?/i.test(c);
+      return {
+        pass: !genericBlue,
+        detail: genericBlue
+          ? "Generic corporate blue button detected in avant-garde design"
+          : "High-craft button styling verified",
+      };
+    },
+  },
 ];
 
 function applyGenreOverrides(gates: SlopGate[], genre: string): SlopGate[] {
@@ -637,6 +668,10 @@ export function selfCritique(content: string): QualityScore {
     score.restraint = Math.min(5, score.restraint + 1);
   if (hasInCSS(content, /var\(--/))
     score.philosophy = Math.min(5, score.philosophy + 1);
+  if (hasInCSS(content, /clamp\(/) || hasInCSS(content, /data-anime-split|data-motion-split/))
+    score.hierarchy = Math.min(5, score.hierarchy + 1);
+  if (hasInCSS(content, /data-anime-magnetic|data-motion-magnetic/))
+    score.variety = Math.min(5, score.variety + 1);
 
   const allScores = [
     score.philosophy,

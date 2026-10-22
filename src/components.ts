@@ -12,7 +12,9 @@ export type ComponentType =
   | "table"
   | "footer"
   | "chart"
-  | "map";
+  | "map"
+  | "bento-grid"
+  | "marquee";
 
 export type OutputFramework = "html" | "react" | "vue";
 export const OUTPUT_FRAMEWORKS: OutputFramework[] = ["html", "react", "vue"];
@@ -30,10 +32,28 @@ export const COMPONENT_TYPES: ComponentType[] = [
   "footer",
   "chart",
   "map",
+  "bento-grid",
+  "marquee",
 ];
 
 export function variantClasses(style: string): Record<string, string> {
   const base: Record<string, Record<string, string>> = {
+    awwwards: {
+      btnPrimary:
+        "group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-white px-7 py-3 font-mono text-xs uppercase tracking-widest text-black transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]",
+      btnSecondary:
+        "group relative inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-md px-7 py-3 font-mono text-xs uppercase tracking-widest text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10",
+      btnOutline:
+        "group relative inline-flex items-center justify-center rounded-full border border-white/30 bg-transparent px-7 py-3 font-mono text-xs uppercase tracking-widest text-white transition-all duration-300 hover:border-white",
+      btnGhost:
+        "inline-flex items-center justify-center px-4 py-2 font-mono text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors",
+      card:
+        "group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-8 backdrop-blur-xl transition-all duration-500 hover:border-white/25",
+      input:
+        "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 font-mono text-sm text-white placeholder-white/30 backdrop-blur-md outline-none transition-all focus:border-white/50 focus:bg-white/10",
+      badge:
+        "inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-white/80 backdrop-blur-md",
+    },
     "neo-brutalism": {
       btnPrimary:
         "bg-primary text-white px-4 py-2 font-semibold border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all",
@@ -457,6 +477,59 @@ function chartComponent(style: string): string {
   });
 </script>`;
 }
+
+function bentoGridComponent(style: string): string {
+  const isAwwwards = style === "awwwards";
+  const cardStyle = isAwwwards
+    ? "rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-xl relative overflow-hidden group hover:border-white/25 transition-all duration-500"
+    : "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm";
+  const textPrimary = isAwwwards ? "text-white" : "text-slate-900";
+  const textMuted = isAwwwards ? "text-white/60" : "text-slate-500";
+
+  return `<!-- Bento Grid Component (${style}) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 w-full max-w-6xl mx-auto">
+  <div class="md:col-span-8 ${cardStyle}">
+    <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 block mb-4">01 // Primary Focus</span>
+    <h3 class="text-3xl font-black ${textPrimary} tracking-tight mb-3">Fluid Architecture</h3>
+    <p class="font-mono text-sm ${textMuted} leading-relaxed max-w-xl">
+      Multi-tiered bento grid layout with asymmetric spans and kinetic hover depth.
+    </p>
+  </div>
+  <div class="md:col-span-4 ${cardStyle}">
+    <span class="font-mono text-xs uppercase tracking-widest text-white/40 block mb-4">02 // Metric</span>
+    <div class="text-5xl font-mono font-black ${textPrimary} tracking-tighter mb-2">99.8%</div>
+    <p class="font-mono text-xs ${textMuted}">Reliability Index</p>
+  </div>
+  <div class="md:col-span-4 ${cardStyle}">
+    <span class="font-mono text-xs uppercase tracking-widest text-violet-400 block mb-4">03 // Speed</span>
+    <div class="text-4xl font-mono font-bold ${textPrimary} mb-2">&lt; 16ms</div>
+    <p class="font-mono text-xs ${textMuted}">Frame Budget Target</p>
+  </div>
+  <div class="md:col-span-8 ${cardStyle}">
+    <span class="font-mono text-xs uppercase tracking-widest text-white/40 block mb-4">04 // SOTA Experience</span>
+    <h3 class="text-2xl font-bold ${textPrimary} mb-2">Kinetic Micro-Interactions</h3>
+    <p class="font-mono text-sm ${textMuted}">Magnetic hover cursors, continuous marquee runners, and SVG turbulence noise textures.</p>
+  </div>
+</div>`;
+}
+
+function marqueeComponent(style: string): string {
+  const isAwwwards = style === "awwwards";
+  const bg = isAwwwards ? "bg-black/40 border-white/10 text-white" : "bg-slate-50 border-slate-200 text-slate-800";
+
+  return `<!-- Marquee Component (${style}) -->
+<div class="w-full overflow-hidden border-y ${bg} py-4 select-none">
+  <div class="flex whitespace-nowrap font-mono text-xs uppercase tracking-widest">
+    <div class="flex shrink-0 min-w-full animate-marquee">
+      <span>AWWWARDS SOTA CRAFT &bull; KINETIC INTERACTION &bull; OKLCH TOKENS &bull; ZERO SLOP GUARANTEE &bull;&nbsp;</span>
+    </div>
+    <div class="flex shrink-0 min-w-full animate-marquee" aria-hidden="true">
+      <span>AWWWARDS SOTA CRAFT &bull; KINETIC INTERACTION &bull; OKLCH TOKENS &bull; ZERO SLOP GUARANTEE &bull;&nbsp;</span>
+    </div>
+  </div>
+</div>`;
+}
+
 // ---------------------------------------------------------------------------
 // Framework helpers
 // ---------------------------------------------------------------------------
@@ -612,6 +685,10 @@ const VUE_PROP_DEFS: Record<string, { props: string; defaults: string }> = {
   Footer: { props: `  className?: string;`, defaults: `className: ''` },
   Chart: { props: `  className?: string;`, defaults: `className: ''` },
   Map: { props: `  className?: string;`, defaults: `className: ''` },
+  BentoGrid: { props: `  className?: string;`, defaults: `className: ''` },
+  Marquee: { props: `  className?: string;
+  text?: string;`, defaults: `className: '',
+  text: 'AWWWARDS SOTA CRAFT'` },
 };
 
 /**
@@ -757,6 +834,12 @@ export function getComponent(
       break;
     case "map":
       html = mapComponent(style);
+      break;
+    case "bento-grid":
+      html = bentoGridComponent(style);
+      break;
+    case "marquee":
+      html = marqueeComponent(style);
       break;
     default:
       html = `<!-- Unknown component: ${type} -->`;

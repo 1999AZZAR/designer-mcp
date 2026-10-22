@@ -21,7 +21,13 @@ export type MotionCategory =
   | "loader" // spinner / skeleton loader
   | "transition" // page / route transitions
   | "counter" // animated number counter
-  | "typewriter"; // text typewriter effect
+  | "typewriter" // text typewriter effect
+  | "magnetic" // cursor proximity magnetic physics
+  | "text-split" // kinetic split-text staggered reveals
+  | "smooth-scroll" // Lenis momentum smooth scroll
+  | "marquee" // seamless infinite ticker
+  | "noise-grain" // SVG turbulence film grain overlay
+  | "clip-path-mask"; // cinematic clip-path wipe reveal
 
 export const MOTION_CATEGORIES: MotionCategory[] = [
   "entrance",
@@ -32,6 +38,12 @@ export const MOTION_CATEGORIES: MotionCategory[] = [
   "transition",
   "counter",
   "typewriter",
+  "magnetic",
+  "text-split",
+  "smooth-scroll",
+  "marquee",
+  "noise-grain",
+  "clip-path-mask",
 ];
 
 // ─── Easing map per design style ─────────────────────────────────────────────
@@ -54,6 +66,7 @@ const STYLE_EASING: Record<string, string> = {
   skeuomorphism: "easeOutBounce",
   "m3-pastel": "spring(1, 80, 12, 0)",
   "neo-m3": "spring(1, 70, 10, 0)",
+  awwwards: "cubicBezier(0.16, 1, 0.3, 1)",
 };
 
 const STYLE_DURATION: Record<string, number> = {
@@ -68,6 +81,7 @@ const STYLE_DURATION: Record<string, number> = {
   atlassian: 250,
   "apple-hig": 550,
   polaris: 250,
+  awwwards: 850,
   minimal: 500,
   swiss: 200,
   "swiss-archival": 200,
@@ -407,6 +421,187 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Usage: <h1 data-anime-type>Hello, World</h1> -->`;
 }
 
+
+function magneticSnippet(style: string): string {
+  const ease = easing(style);
+  return `<!-- anime.js v3 — Magnetic Cursor Interaction (${style}) -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+
+  document.querySelectorAll("[data-anime-magnetic]").forEach((el) => {
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
+
+      anime({
+        targets: el,
+        translateX: x,
+        translateY: y,
+        duration: 350,
+        easing: "${ease}",
+      });
+    });
+
+    el.addEventListener("mouseleave", () => {
+      anime({
+        targets: el,
+        translateX: 0,
+        translateY: 0,
+        duration: 700,
+        easing: "spring(1, 80, 10, 0)",
+      });
+    });
+  });
+});
+</script>
+<!-- Usage: <button class="btn" data-anime-magnetic>Magnetic CTA</button> -->`;
+}
+
+function textSplitSnippet(style: string): string {
+  const ease = easing(style);
+  return `<!-- anime.js v3 — Kinetic Split-Text Reveal (${style}) -->
+<style>
+  [data-anime-split] .word-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  [data-anime-split] .char {
+    display: inline-block;
+  }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll("[data-anime-split]").forEach((el) => {
+    const text = el.textContent || "";
+    if (reduced) return;
+
+    el.innerHTML = text
+      .split(" ")
+      .map(
+        (word) =>
+          \`<span class="word-wrap">\${word
+            .split("")
+            .map((char) => \`<span class="char">\${char}</span>\`)
+            .join("")}&nbsp;</span>\`
+      )
+      .join("");
+
+    anime({
+      targets: el.querySelectorAll(".char"),
+      translateY: ["110%", "0%"],
+      opacity: [0, 1],
+      duration: 850,
+      delay: anime.stagger(25, { start: 100 }),
+      easing: "${ease}",
+    });
+  });
+});
+</script>
+<!-- Usage: <h1 data-anime-split>Hyper-Crafted Digital Experience</h1> -->`;
+}
+
+function smoothScrollSnippet(style: string): string {
+  return `<!-- Lenis Smooth Scroll Integration (${style}) -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+});
+</script>`;
+}
+
+function marqueeSnippet(_style: string): string {
+  return `<!-- anime.js v3 — Seamless Infinite Marquee Ticker -->
+<style>
+  .marquee-track {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: flex;
+    flex-shrink: 0;
+    min-width: 100%;
+  }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+
+  const animation = anime({
+    targets: "[data-anime-marquee] .marquee-inner",
+    translateX: ["0%", "-100%"],
+    duration: 18000,
+    easing: "linear",
+    loop: true,
+  });
+
+  const track = document.querySelector("[data-anime-marquee]");
+  if (track) {
+    track.addEventListener("mouseenter", () => animation.pause());
+    track.addEventListener("mouseleave", () => animation.play());
+  }
+});
+</script>
+<!-- Usage:
+<div class="marquee-track" data-anime-marquee>
+  <div class="marquee-inner"><span>CONTENT 1 &middot; CONTENT 2 &middot;</span></div>
+  <div class="marquee-inner" aria-hidden="true"><span>CONTENT 1 &middot; CONTENT 2 &middot;</span></div>
+</div> -->`;
+}
+
+function noiseGrainSnippet(_style: string): string {
+  return `<!-- SVG Noise / Film Grain Shader Overlay -->
+<svg style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; mix-blend-mode: overlay;">
+  <filter id="noiseFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+</svg>`;
+}
+
+function clipPathMaskSnippet(style: string): string {
+  const ease = easing(style);
+  return `<!-- anime.js v3 — Cinematic Clip-Path Wipe Reveal (${style}) -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+
+  document.querySelectorAll("[data-anime-clip]").forEach((el) => {
+    anime({
+      targets: el,
+      clipPath: ["polygon(0 100%, 100% 100%, 100% 100%, 0 100%)", "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)"],
+      duration: 1100,
+      easing: "${ease}",
+    });
+  });
+});
+</script>
+<!-- Usage: <div class="hero-image" data-anime-clip><img src="..." alt="" /></div> -->`;
+}
+
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 export interface MotionSnippetResult {
@@ -436,6 +631,12 @@ const USAGE_HINTS: Record<MotionCategory, string> = {
   counter:
     "Add data-anime-counter='48352' (target value) to any <span>. Optional: data-anime-prefix, data-anime-suffix, data-anime-decimals.",
   typewriter: "Add data-anime-type to any heading or paragraph element.",
+  magnetic: "Add data-anime-magnetic to any CTA button or badge for cursor-following attraction.",
+  "text-split": "Add data-anime-split to display headings for kinetic character/word reveals.",
+  "smooth-scroll": "Drop the script in your page layout to enable Lenis momentum scrolling.",
+  marquee: "Wrap ticker text in .marquee-track[data-anime-marquee] with duplicate .marquee-inner spans.",
+  "noise-grain": "Paste the fixed SVG noise overlay into your HTML root.",
+  "clip-path-mask": "Add data-anime-clip to hero images or cards for cinematic polygon unmasking.",
 };
 
 /**
@@ -454,6 +655,12 @@ export function generateMotionSnippet(
     transition: transitionSnippet,
     counter: counterSnippet,
     typewriter: typewriterSnippet,
+    magnetic: magneticSnippet,
+    "text-split": textSplitSnippet,
+    "smooth-scroll": smoothScrollSnippet,
+    marquee: marqueeSnippet,
+    "noise-grain": noiseGrainSnippet,
+    "clip-path-mask": clipPathMaskSnippet,
   };
 
   const snippet = snippetMap[category](style);

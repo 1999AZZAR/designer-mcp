@@ -1,6 +1,6 @@
 export interface TokenTheme {
   name: string;
-  genre: "editorial" | "modern-minimal" | "atmospheric" | "playful";
+  genre: "editorial" | "modern-minimal" | "atmospheric" | "playful" | "avant-garde";
   paper: { l: number; c: number; h: number };
   accent: { l: number; c: number; h: number };
   paperBand: "light" | "mid" | "dark";
@@ -214,6 +214,42 @@ const THEMES: TokenTheme[] = [
     fontBody: "'Nunito', system-ui, sans-serif",
     fontMono: "'JetBrains Mono', monospace",
   },
+  {
+    name: "Obsidian Kinetic",
+    genre: "avant-garde",
+    paper: { l: 10, c: 2, h: 260 },
+    accent: { l: 75, c: 45, h: 145 },
+    paperBand: "dark",
+    displayStyle: "display-serif",
+    accentHue: "chromatic-other",
+    fontDisplay: "'Syne', 'Clash Display', system-ui, sans-serif",
+    fontBody: "'PP Neue Montreal', 'Inter', system-ui, sans-serif",
+    fontMono: "'JetBrains Mono', monospace",
+  },
+  {
+    name: "Tokyo Neo-Brutal",
+    genre: "avant-garde",
+    paper: { l: 8, c: 1, h: 0 },
+    accent: { l: 70, c: 50, h: 330 },
+    paperBand: "dark",
+    displayStyle: "display-heavy",
+    accentHue: "warm",
+    fontDisplay: "'Clash Display', 'Space Grotesk', system-ui, sans-serif",
+    fontBody: "'JetBrains Mono', monospace",
+    fontMono: "'JetBrains Mono', monospace",
+  },
+  {
+    name: "Atelier Craft",
+    genre: "avant-garde",
+    paper: { l: 95, c: 3, h: 75 },
+    accent: { l: 45, c: 38, h: 35 },
+    paperBand: "light",
+    displayStyle: "high-contrast-serif",
+    accentHue: "warm",
+    fontDisplay: "'Editorial New', 'Instrument Serif', Georgia, serif",
+    fontBody: "'Inter', system-ui, sans-serif",
+    fontMono: "'Fira Code', monospace",
+  },
 ];
 
 function oklchStr(l: number, c: number, h: number): string {
@@ -243,11 +279,12 @@ export function listThemes(genre?: string): TokenTheme[] {
 }
 
 export function listGenres(): string[] {
-  return ["editorial", "modern-minimal", "atmospheric", "playful"];
+  return ["editorial", "modern-minimal", "atmospheric", "playful", "avant-garde"];
 }
 
 export function detectGenre(brief: string): string {
   const lower = brief.toLowerCase();
+  if (/awwwards|award|sota|avant-garde|hyper.?craft|creative agency|interactive experience|luxury editorial|portfolio/.test(lower)) return "avant-garde";
   if (
     /ai tool|generative|music|video|voice|late.?night|dark mode|atmospheric|immersive/.test(
       lower,

@@ -30,6 +30,7 @@ const STYLE_TRANSITION: Record<string, string> = {
   skeuomorphism: `{ type: "spring", bounce: 0.5, duration: 0.6 }`,
   "m3-pastel": `{ type: "spring", bounce: 0.3, duration: 0.45 }`,
   "neo-m3": `{ type: "spring", bounce: 0.25, duration: 0.4 }`,
+  awwwards: `{ ease: [0.16, 1, 0.3, 1], duration: 0.85 }`,
 };
 
 function getTransition(style: string): string {
@@ -409,6 +410,243 @@ export function Typewriter({ text }) {
 <!-- Usage: <h1 data-motion-type>Hello, World</h1> -->`;
 }
 
+
+function magneticSnippet(style: string, framework: MotionFramework): string {
+  const trans = getTransition(style);
+  if (framework === "react") {
+    return `// Motion.dev React — Magnetic Hover Component (${style})
+import { motion, useMotionValue, useSpring } from "motion/react";
+import { useRef } from "react";
+
+export function Magnetic({ children }) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    x.set((clientX - (left + width / 2)) * 0.35);
+    y.set((clientY - (top + height / 2)) * 0.35);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </motion.div>
+  );
+}`;
+  }
+
+  return `<!-- Motion.dev Vanilla — Magnetic Hover Element (${style}) -->
+<script type="module">
+  import { animate } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
+
+  document.querySelectorAll("[data-motion-magnetic]").forEach(el => {
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
+      animate(el, { x, y }, ${trans});
+    });
+
+    el.addEventListener("mouseleave", () => {
+      animate(el, { x: 0, y: 0 }, { type: "spring", stiffness: 200, damping: 12 });
+    });
+  });
+</script>
+<!-- Usage: <button data-motion-magnetic>Magnetic Action</button> -->`;
+}
+
+function textSplitSnippet(style: string, framework: MotionFramework): string {
+  const trans = getTransition(style);
+  if (framework === "react") {
+    return `// Motion.dev React — Kinetic Split-Text Stagger (${style})
+import { motion } from "motion/react";
+
+export function SplitTextReveal({ text }) {
+  const words = text.split(" ");
+  return (
+    <motion.h1
+      className="overflow-hidden flex flex-wrap gap-x-2"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+    >
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden">
+          <motion.span
+            className="inline-block"
+            variants={{
+              hidden: { y: "110%", opacity: 0 },
+              show: { y: "0%", opacity: 1, transition: ${trans} }
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </motion.h1>
+  );
+}`;
+  }
+
+  return `<!-- Motion.dev Vanilla — Kinetic Split-Text Stagger (${style}) -->
+<style>
+  [data-motion-split] .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; }
+  [data-motion-split] .char { display: inline-block; }
+</style>
+<script type="module">
+  import { animate, stagger, inView } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
+
+  document.querySelectorAll("[data-motion-split]").forEach(el => {
+    const text = el.textContent || "";
+    el.innerHTML = text.split(" ").map(w =>
+      \`<span class="word-wrap">\${w.split("").map(c => \`<span class="char">\${c}</span>\`).join("")}&nbsp;</span>\`
+    ).join("");
+
+    inView(el, () => {
+      animate(el.querySelectorAll(".char"), { y: ["100%", "0%"], opacity: [0, 1] }, {
+        delay: stagger(0.02, { start: 0.1 }),
+        ...${trans}
+      });
+    }, { once: true });
+  });
+</script>
+<!-- Usage: <h1 data-motion-split>Hyper-Crafted Web</h1> -->`;
+}
+
+function smoothScrollSnippet(_style: string, framework: MotionFramework): string {
+  if (framework === "react") {
+    return `// React Lenis Smooth Momentum Scroll
+import { ReactLenis } from "lenis/react";
+
+export function SmoothLayout({ children }) {
+  return (
+    <ReactLenis root options={{ lerp: 0.08, duration: 1.2, smoothWheel: true }}>
+      {children}
+    </ReactLenis>
+  );
+}`;
+  }
+
+  return `<!-- Vanilla Lenis Smooth Momentum Scroll -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+  const lenis = new Lenis({ lerp: 0.08, duration: 1.2, smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+</script>`;
+}
+
+function marqueeSnippet(_style: string, framework: MotionFramework): string {
+  if (framework === "react") {
+    return `// Motion.dev React — Continuous Marquee Ticker
+import { motion } from "motion/react";
+
+export function Marquee({ text }) {
+  return (
+    <div className="flex overflow-hidden whitespace-nowrap select-none">
+      <motion.div
+        className="flex shrink-0 min-w-full"
+        animate={{ x: ["0%", "-100%"] }}
+        transition={{ repeat: Infinity, ease: "linear", duration: 15 }}
+      >
+        <span className="text-4xl font-bold uppercase mr-8">{text}</span>
+      </motion.div>
+      <motion.div
+        className="flex shrink-0 min-w-full"
+        animate={{ x: ["0%", "-100%"] }}
+        transition={{ repeat: Infinity, ease: "linear", duration: 15 }}
+      >
+        <span className="text-4xl font-bold uppercase mr-8">{text}</span>
+      </motion.div>
+    </div>
+  );
+}`;
+  }
+
+  return `<!-- Motion.dev Vanilla — Continuous Marquee Ticker -->
+<style>
+  .motion-marquee { display: flex; overflow: hidden; user-select: none; white-space: nowrap; }
+  .motion-marquee-track { display: flex; shrink: 0; min-width: 100%; }
+</style>
+<div class="motion-marquee" data-motion-marquee>
+  <div class="motion-marquee-track"><span>MARQUEE &middot; SOTA CRAFT &middot;&nbsp;</span></div>
+  <div class="motion-marquee-track" aria-hidden="true"><span>MARQUEE &middot; SOTA CRAFT &middot;&nbsp;</span></div>
+</div>
+<script type="module">
+  import { animate } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
+
+  animate("[data-motion-marquee] .motion-marquee-track", { x: ["0%", "-100%"] }, {
+    repeat: Infinity,
+    ease: "linear",
+    duration: 15
+  });
+</script>`;
+}
+
+function noiseGrainSnippet(_style: string, _framework: MotionFramework): string {
+  return `<!-- SVG Noise / Film Grain Shader Overlay -->
+<svg style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; mix-blend-mode: overlay;">
+  <filter id="noiseFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+</svg>`;
+}
+
+function clipPathMaskSnippet(style: string, framework: MotionFramework): string {
+  const trans = getTransition(style);
+  if (framework === "react") {
+    return `// Motion.dev React — Cinematic Clip-Path Wipe (${style})
+import { motion } from "motion/react";
+
+export function ClipPathReveal({ children }) {
+  return (
+    <motion.div
+      initial={{ clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" }}
+      whileInView={{ clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)" }}
+      viewport={{ once: true }}
+      transition={${trans}}
+    >
+      {children}
+    </motion.div>
+  );
+}`;
+  }
+
+  return `<!-- Motion.dev Vanilla — Cinematic Clip-Path Wipe (${style}) -->
+<script type="module">
+  import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
+
+  document.querySelectorAll("[data-motion-clip]").forEach(el => {
+    inView(el, () => {
+      animate(el, {
+        clipPath: [
+          "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+          "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)"
+        ]
+      }, ${trans});
+    }, { once: true });
+  });
+</script>
+<!-- Usage: <div data-motion-clip><img src="..." alt="" /></div> -->`;
+}
+
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 const USAGE_HINTS: Record<MotionCategory, string> = {
@@ -427,6 +665,18 @@ const USAGE_HINTS: Record<MotionCategory, string> = {
     "For React: <Counter target={48352} />. For Vanilla: <span data-motion-counter='48352'></span>.",
   typewriter:
     "For React: <Typewriter text='Hello' />. For Vanilla: <h1 data-motion-type>Hello</h1>.",
+  magnetic:
+    "For React: Wrap targets with <Magnetic>. For Vanilla: Add data-motion-magnetic to elements.",
+  "text-split":
+    "For React: <SplitTextReveal text='Headline' />. For Vanilla: Add data-motion-split.",
+  "smooth-scroll":
+    "For React: Wrap root with <SmoothLayout>. For Vanilla: Drop the script in HTML.",
+  marquee:
+    "For React: <Marquee text='Running ticker' />. For Vanilla: Add .motion-marquee[data-motion-marquee].",
+  "noise-grain":
+    "Drop the fixed SVG filter overlay into your HTML root.",
+  "clip-path-mask":
+    "For React: Wrap with <ClipPathReveal>. For Vanilla: Add data-motion-clip to element.",
 };
 
 export function generateMotionDevSnippet(
@@ -446,6 +696,12 @@ export function generateMotionDevSnippet(
     transition: transitionSnippet,
     counter: counterSnippet,
     typewriter: typewriterSnippet,
+    magnetic: magneticSnippet,
+    "text-split": textSplitSnippet,
+    "smooth-scroll": smoothScrollSnippet,
+    marquee: marqueeSnippet,
+    "noise-grain": noiseGrainSnippet,
+    "clip-path-mask": clipPathMaskSnippet,
   };
 
   const snippet = snippetMap[category](style, framework);

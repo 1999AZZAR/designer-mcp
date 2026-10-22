@@ -196,6 +196,19 @@ export const STYLES: Record<string, StyleDef> = {
       "Do not let expressive surfaces break overall layout discipline.",
     ],
   },
+  awwwards: {
+    label: "Awwwards SOTA / Avant-Garde",
+    use_for:
+      "Award-winning digital experiences, creative studios, luxury editorial, hyper-crafted portfolios, interactive launches",
+    rules: [
+      "Use fluid clamp typography: extreme display-to-body scale delta (>= 3.5x) with negative tracking on display headings.",
+      "Pair high-character display typefaces (Syne, Clash Display, Editorial New, PP Neue Montreal) with disciplined monospace or grotesque body.",
+      "Break static symmetrical containers: use asymmetric bento grids, oversized numbering, overlapping depth layers, and full-bleed viewport anchors.",
+      "Integrate tactile physics: magnetic cursor-follow bounds, inertia scroll hooks, word-stagger kinetic reveals, and subtle SVG grain/noise textures.",
+      "Eliminate generic SaaS cliches: no default corporate blues, sterile equal-height 3-card columns, or unstyled stock form elements.",
+      "Always provide @media (prefers-reduced-motion: reduce) fallbacks for all kinetic choreography.",
+    ],
+  },
 };
 
 export const PALETTES: Record<string, string[]> = {
@@ -218,6 +231,21 @@ export const PALETTES: Record<string, string[]> = {
     "Use one hue family across multiple tones and values.",
     "Let spacing, typography, and contrast carry structure.",
     "Use accent shifts carefully to avoid flatness.",
+  ],
+  "obsidian-noir": [
+    "Use deep atmospheric obsidian surfaces (oklch(0.12 0.02 260)) with subtle luminescent borders (white/10).",
+    "Pair with stark monochrome typography and controlled neon/phosphor accent pops.",
+    "Use layered surface opacity shifts and radial glow backdrops instead of generic box-shadows.",
+  ],
+  "copper-cyber": [
+    "Use dark industrial charcoal and graphite canvases.",
+    "Accent with rich metallic bronze, copper, and warm ember gradients.",
+    "Contrast technical monospace details with luxury warm metallic tones.",
+  ],
+  "acid-avant": [
+    "Use stark monochrome black-and-white foundation.",
+    "Puncture the layout with high-voltage electric acid-lime or fluorescent violet focal points.",
+    "Use sharp geometric contrast with raw technical typography.",
   ],
 };
 

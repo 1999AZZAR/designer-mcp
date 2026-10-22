@@ -7,7 +7,7 @@
 
 A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for production-grade UI design. Unlike standard code-retrieval MCPs, `designer-mcp` codifies subjective design principles—perceptual color math (OKLCH), motion physics, typographic scaling, and accessibility—into executable algorithms with strict anti-slop quality gates.
 
-37 tools across 17 design systems: **anti-slop quality gates**, **motion.dev & anime.js integration**, **WCAG 2.1 auditing**, **React/Vue component output**, **framework-agnostic CSS**, and **logo & brand-mark design** backed by a 1,432-mark reference library.
+37 tools across 18 design systems (including Awwwards SOTA / Avant-Garde): **anti-slop quality gates**, **motion.dev & anime.js integration**, **WCAG 2.1 auditing**, **React/Vue component output**, **framework-agnostic CSS**, and **logo & brand-mark design** backed by a 1,432-mark reference library.
 
 ![Blotcat at the design pipeline: scan → evaluate → rules → tokens, 17 systems](assets/blotcat-pipeline.jpg)
 
@@ -30,13 +30,13 @@ A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for product
 ## Features
 
 - **Anti-Slop Quality Gates** — 35-gate slop test + 6-axis self-critique (P-H-E-S-R-V). Rejects anything < 3.
-- **OKLCH Token System** — 16 curated themes with auto dark-mode derivation (`full_css` field ships both `:root` and `@media (prefers-color-scheme: dark)` + `[data-theme="dark"]` overrides).
-- **Design Rules Generator** — 17 design systems + 4 palettes + 5 archetypes + hybrid combos.
+- **OKLCH Token System** — 19 curated themes across 5 genres (including `avant-garde`: Obsidian Kinetic, Tokyo Neo-Brutal, Atelier Craft) with auto dark-mode derivation (`full_css` field ships both `:root` and `@media (prefers-color-scheme: dark)` + `[data-theme="dark"]` overrides).
+- **Design Rules Generator** — 18 design systems (including `awwwards`) + 7 palettes (including `obsidian-noir`, `copper-cyber`, `acid-avant`) + 6 archetypes (including `awwwards-bento`) + hybrid combos.
 - **Pre-Flight Scan** — Detect existing project context: framework, font stack, palette tokens, motion libraries.
 - **Framework-Native Components** — Every component (`button`, `card`, `navbar`, `hero`, etc.) outputs HTML/Tailwind, React TSX (typed FC with prop interface), or Vue 3 SFC (script setup) via the `framework` param.
 - **CSS Output Engine** — Generate vanilla CSS, CSS Modules (Button/Card/Input with all 8 states), SCSS (variables + mixins + BEM), or a single `tokens.css` with auto dark-mode overrides.
 - **WCAG 2.1 Accessibility Audit** — 25-check static auditor: alt text, unlabeled inputs, empty buttons/links, heading order, focus-visible removal, skip links, landmark regions, viewport scale lock, and more. Returns 0-100 score + A–F grade + actionable fixes.
-- **SOTA Motion System (motion.dev & anime.js)** — Style-aware animation presets baked into components. `generate_motion_snippet` for on-demand snippets with React `<motion.div>` and vanilla physics support (8 categories, all reduced-motion guarded).
+- **SOTA Motion System (motion.dev & anime.js)** — Style-aware animation presets baked into components. `generate_motion_snippet` for on-demand snippets with React `<motion.div>` and vanilla physics support (14 categories including `magnetic`, `text-split`, `smooth-scroll`, `marquee`, `noise-grain`, `clip-path-mask`, all reduced-motion guarded).
 - **Color Palette Hunter** — Live palettes from Color Hunt with format conversion.
 - **Brand Design References** — `brand_fetch_design_md` resolves DESIGN.md from the full 328+ brand getdesign catalog (Stripe, Vercel, Notion, Claude, Tesla, etc.); `brand_list` returns the 62-brand curated subset shipped locally.
 - **Logo & Brand-Mark Design** — the in-tree `logo-design` skill plus 8 `logo_*` tools: SVG audit, a searchable 1,432-mark reference library, PNG/favicon rendering, mono/square/app-icon delivery variants, concept sheets, test sheets, and client presentation boards.
@@ -49,8 +49,8 @@ A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for product
 
 | Tool                       | Description                                                            |
 | -------------------------- | ---------------------------------------------------------------------- |
-| `evaluate_style`           | Score 17 design systems against product context                        |
-| `detect_genre`             | Classify brief into editorial / modern-minimal / atmospheric / playful |
+| `evaluate_style`           | Score 18 design systems against product context                        |
+| `detect_genre`             | Classify brief into editorial / modern-minimal / atmospheric / playful / avant-garde |
 | `pre_flight_scan`          | Scan existing project for framework, fonts, palette, motion libs       |
 | `generate_rules`           | Generate design rules for style + palette + archetype/hybrid           |
 | `generate_tailwind_config` | Generate ready-to-use tailwind.config.js                               |
@@ -61,7 +61,7 @@ A **Design-Theory-as-a-Service** Model Context Protocol (MCP) server for product
 | Tool                  | Description                                                                                                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `generate_tokens`     | Generate complete OKLCH token system. Returns `css` (light `:root`), **`full_css`** (light + dark `@media` + `[data-theme="dark"]` overrides), `dark_css`, `dark_tokens` |
-| `list_themes`         | List all 16 themes with OKLCH values, fonts, axis metadata                                                                                                               |
+| `list_themes`         | List all 19 themes with OKLCH values, fonts, axis metadata                                                                                                               |
 | `build_custom_tokens` | Build custom OKLCH token system from paper/accent/font values — also emits dark mode derivation                                                                          |
 
 ### Quality Gates

@@ -60,6 +60,10 @@ const STYLE_FONTS: Record<string, { sans: string[]; mono?: string[] }> = {
     sans: ['"Space Grotesk"', '"Inter"', "system-ui", "sans-serif"],
     mono: ['"JetBrains Mono"', "monospace"],
   },
+  awwwards: {
+    sans: ['"Syne"', '"Clash Display"', '"PP Neue Montreal"', "system-ui", "sans-serif"],
+    mono: ['"JetBrains Mono"', '"Fira Code"', "monospace"],
+  },
 };
 
 const STYLE_RADIUS: Record<string, Record<string, string>> = {
@@ -80,6 +84,7 @@ const STYLE_RADIUS: Record<string, Record<string, string>> = {
   "swiss-archival": { sm: "2px", md: "4px", lg: "6px", xl: "8px" },
   "m3-pastel": { sm: "12px", md: "16px", lg: "24px", xl: "28px" },
   "neo-m3": { sm: "0px", md: "4px", lg: "8px", xl: "16px" },
+  awwwards: { sm: "8px", md: "16px", lg: "24px", xl: "32px" },
 };
 
 const STYLE_SHADOWS: Record<string, Record<string, string>> = {
@@ -149,10 +154,58 @@ const STYLE_SHADOWS: Record<string, Record<string, string>> = {
     lg: "0 4px 16px rgba(0,0,0,0.20), 6px 6px 0px rgba(0,0,0,0.10)",
     xl: "0 8px 32px rgba(0,0,0,0.24), 8px 8px 0px rgba(0,0,0,0.12)",
   },
+  awwwards: {
+    sm: "0 0 15px rgba(255,255,255,0.05)",
+    md: "0 8px 30px rgba(0,0,0,0.5)",
+    lg: "0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(255,255,255,0.05)",
+    xl: "0 30px 80px rgba(0,0,0,0.8), 0 0 60px rgba(255,255,255,0.08)",
+  },
 };
 
 function generateColorRamp(paletteType: string): Record<string, string> {
   switch (paletteType) {
+    case "obsidian-noir":
+      return {
+        50: "#fafafa",
+        100: "#f4f4f5",
+        200: "#e4e4e7",
+        300: "#d4d4d8",
+        400: "#a1a1aa",
+        500: "#71717a",
+        600: "#52525b",
+        700: "#3f3f46",
+        800: "#27272a",
+        900: "#18181b",
+        950: "#09090b",
+      };
+    case "copper-cyber":
+      return {
+        50: "#fff7ed",
+        100: "#ffedd5",
+        200: "#fed7aa",
+        300: "#fdba74",
+        400: "#fb923c",
+        500: "#f97316",
+        600: "#ea580c",
+        700: "#c2410c",
+        800: "#9a3412",
+        900: "#7c2d12",
+        950: "#431407",
+      };
+    case "acid-avant":
+      return {
+        50: "#f7fee7",
+        100: "#ecfccb",
+        200: "#d9f99d",
+        300: "#bef264",
+        400: "#a3e635",
+        500: "#84cc16",
+        600: "#65a30d",
+        700: "#4d7c0f",
+        800: "#3f6212",
+        900: "#365314",
+        950: "#1a2e05",
+      };
     case "dark":
       return {
         50: "#f8fafc",
