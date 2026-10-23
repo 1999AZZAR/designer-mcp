@@ -51,7 +51,13 @@ import {
   type SlopTestResult,
   type QualityScore,
 } from "./anti-patterns.js";
-import { textResult, errorResult, resolveWithinRoot } from "./envelope.js";
+import {
+  appendWarning,
+  textResult,
+  errorResult,
+  resolveWithinRoot,
+} from "./envelope.js";
+import { normalizeToolCall } from "./tool-aliases.js";
 import {
   generateTokens,
   buildCustomTokens,
@@ -78,7 +84,6 @@ import { generateCSSOutput, type CSSOutputFormat } from "./css-output.js";
 import {
   logoSkillAvailable,
   logoSkillRoot,
-  logoToolSchemas,
   auditLogo,
   searchLogoLibrary,
   renderLogo,
@@ -374,15 +379,21 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "palette_fetch",
-      description: "Fetch live color palettes from Color Hunt.",
+      name: "palette",
+      description:
+        "Fetch live palettes from Color Hunt, convert palette JSON into CSS/Tailwind/SCSS/Figma/Android/Swift, or generate light/dark/high-contrast/muted/vivid variants. Select action: fetch, convert, or variants.",
       inputSchema: {
         type: "object",
         properties: {
+          action: {
+            type: "string",
+            enum: ["fetch", "convert", "variants"],
+            description: "Palette operation",
+          },
           mode: {
             type: "string",
             enum: ["trending", "popular", "random", "theme", "query"],
-            description: "Fetch mode",
+            description: "Fetch mode (required for fetch)",
           },
           theme: {
             type: "string",
@@ -399,30 +410,24 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           format: {
             type: "string",
             enum: ["json", "css", "tailwind"],
-            description: "Output format (default json)",
+            description: "Fetch output format (default json)",
           },
-        },
-        required: ["mode"],
-      },
-    },
-    {
-      name: "palette_convert",
-      description:
-        "Convert palette JSON from palette_fetch into CSS, Tailwind, SCSS, Figma tokens, Android XML, or Swift.",
-      inputSchema: {
-        type: "object",
-        properties: {
           palettes: {
             type: "array",
-            description: "Palette array from palette_fetch JSON output",
+            description: "Palette array required for convert",
           },
           target: {
             type: "string",
             enum: ["css", "tailwind", "scss", "figma", "android", "swift"],
-            description: "Output format",
+            description: "Conversion target (required for convert)",
+          },
+          colors: {
+            type: "array",
+            items: { type: "string" },
+            description: 'Hex colors required for variants, e.g. ["#3b82f6"]',
           },
         },
-        required: ["palettes", "target"],
+        required: ["action"],
       },
     },
     {
@@ -442,23 +447,70 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "generate_tailwind_config",
+      name: "design_tokens",
       description:
-        "Generate a ready-to-use tailwind.config.js for a design style + palette combination. Returns the full config object and module.exports code string.",
+        "Generate design tokens. Select action: theme (named theme or genre), custom (OKLCH paper/accent + fonts), css (vanilla/CSS Modules/SCSS/variables-only), or tailwind (complete tailwind.config.js).",
       inputSchema: {
         type: "object",
         properties: {
+          action: {
+            type: "string",
+            enum: ["theme", "custom", "css", "tailwind"],
+            description: "Token generation mode",
+          },
+          theme_name: {
+            type: "string",
+            description:
+              "Named theme for theme action: Specimen|Atelier|Newsprint|Studio|Manifesto|Brutal|Terminal|Midnight|Bloom|Aurora|Cobalt|Coral|Hum|Garden|Sport|Carnival",
+          },
+          genre: {
+            type: "string",
+            enum: ["editorial", "modern-minimal", "atmospheric", "playful"],
+            description: "Genre for theme action (ignored if theme_name is set)",
+          },
+          last_theme: {
+            type: "string",
+            description: "Previous theme name for diversification",
+          },
+          last_accent: {
+            type: "string",
+            description: "Previous accent hue for diversification",
+          },
+          paper_l: { type: "number", description: "Custom paper lightness (0-100)" },
+          paper_c: { type: "number", description: "Custom paper chroma (0-50)" },
+          paper_h: { type: "number", description: "Custom paper hue (0-360)" },
+          accent_l: { type: "number", description: "Custom accent lightness (0-100)" },
+          accent_c: { type: "number", description: "Custom accent chroma (0-50)" },
+          accent_h: { type: "number", description: "Custom accent hue (0-360)" },
+          font_display: {
+            type: "string",
+            description: "Display font stack for custom action",
+          },
+          font_body: {
+            type: "string",
+            description: "Body font stack for custom action",
+          },
+          font_mono: {
+            type: "string",
+            description: "Optional mono font stack for custom action",
+          },
           style: {
             type: "string",
             description:
-              "Design system: ant|carbon|fluent|atlassian|apple-hig|polaris|material|minimal|glass|neumorphism|neo-brutalism|claymorphism|skeuomorphism|swiss|swiss-archival|m3-pastel|neo-m3",
+              "Design system slug for css/tailwind actions (e.g. glass, minimal, material)",
           },
           palette: {
             type: "string",
-            description: "Color palette: pastel|dark|vibrant|mono",
+            enum: ["pastel", "dark", "vibrant", "mono"],
+            description: "Color palette for css/tailwind actions",
+          },
+          format: {
+            type: "string",
+            enum: ["vanilla", "css-modules", "scss", "css-variables-only"],
+            description: "Output format for css action",
           },
         },
-        required: ["style", "palette"],
+        required: ["action"],
       },
     },
     {
@@ -526,41 +578,37 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "audit_accessibility",
+      name: "design_audit",
       description:
-        "Run a 25-check WCAG 2.1 accessibility audit on HTML content. Covers: missing alt text, unlabeled inputs/selects/textareas, empty buttons/links, missing lang/title, heading order violations, focus-visible removal, positive tabindex, skip links, viewport scale lock, landmark regions, and more. Returns a 0-100 score, A-F grade, per-severity issue counts, actionable fix instructions per issue, and a list of passed checks.",
+        "Audit design work. Select action: accessibility (25-check WCAG 2.1), slop (35-gate anti-pattern check), critique (6-axis quality score), or preflight (scan an existing project's design tokens and stack).",
       inputSchema: {
         type: "object",
         properties: {
-          html: { type: "string", description: "Full HTML string to audit" },
-        },
-        required: ["html"],
-      },
-    },
-    {
-      name: "generate_css_output",
-      description:
-        "Generate framework-agnostic CSS output from a design style and palette. Supports vanilla CSS (tokens.css + base.css + components.css), CSS Modules (Button/Card/Input .module.css with all 8 states), SCSS (variables + mixins + BEM components), and css-variables-only (tokens with auto dark mode @media and [data-theme='dark']). Returns an array of named files ready to save to disk.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          style: {
+          action: {
             type: "string",
-            description:
-              "Design system slug (e.g. glass, neo-brutalism, minimal, material)",
+            enum: ["accessibility", "slop", "critique", "preflight"],
+            description: "Audit mode",
           },
-          palette: {
+          html: {
             type: "string",
-            enum: ["pastel", "dark", "vibrant", "mono"],
-            description: "Color palette",
+            description: "Full HTML required for accessibility",
           },
-          format: {
+          content: {
             type: "string",
-            enum: ["vanilla", "css-modules", "scss", "css-variables-only"],
-            description: "Output format",
+            description: "HTML/CSS required for slop and critique",
+          },
+          genre: {
+            type: "string",
+            enum: ["editorial", "modern-minimal", "atmospheric", "playful"],
+            default: "editorial",
+            description: "Genre for scoped slop gates",
+          },
+          project_path: {
+            type: "string",
+            description: "Project root for preflight (defaults to MCP root)",
           },
         },
-        required: ["style", "palette", "format"],
+        required: ["action"],
       },
     },
     {
@@ -584,23 +632,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           },
         },
         required: ["category"],
-      },
-    },
-    {
-      name: "generate_palette_variants",
-      description:
-        "Generate light, dark, high-contrast, muted, and vivid variants from a set of hex colors. Useful for theming and responsive color systems.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          colors: {
-            type: "array",
-            items: { type: "string" },
-            description:
-              'Array of hex color strings, e.g. ["#3b82f6", "#8b5cf6"]',
-          },
-        },
-        required: ["colors"],
       },
     },
     {
@@ -670,83 +701,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "pre_flight_scan",
-      description:
-        "Scan an existing project directory and detect framework, font stack, palette tokens, motion libraries, and spacing scale before designing. Returns structured pre-flight findings with preservation/introduction recommendations.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          project_path: {
-            type: "string",
-            description:
-              "Absolute path to the project root. Defaults to MCP root if omitted.",
-          },
-        },
-      },
-    },
-    {
-      name: "anti_pattern_check",
-      description:
-        "Run a 35-gate quality checklist (slop test) against HTML/CSS content. Detects common AI design tells: italic headers, em-in-heading, dummy section tags, fabricated metrics, fake chrome, specimen fall-through, hanging headers, generic CTA, glass on white, missing a11y, and more. Specify genre to scope genre-specific gates.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          content: {
-            type: "string",
-            description: "HTML or CSS content to check",
-          },
-          genre: {
-            type: "string",
-            enum: ["editorial", "modern-minimal", "atmospheric", "playful"],
-            default: "editorial",
-            description: "Genre for scoped gate application",
-          },
-        },
-        required: ["content"],
-      },
-    },
-    {
-      name: "self_critique",
-      description:
-        "Score output on 6 quality axes (Philosophy, Hierarchy, Execution, Specificity, Restraint, Variety) before shipping. Returns 1-5 per axis and a summary score. Anything < 3 triggers a revision pass.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          content: { type: "string", description: "HTML/CSS content to score" },
-        },
-        required: ["content"],
-      },
-    },
-    {
-      name: "generate_tokens",
-      description:
-        "Generate a complete design token system (tokens.css) based on a named theme or genre. Returns CSS custom properties for colors (OKLCH), fonts, spacing, text sizes, easings, durations, and radii. Can also output a Tailwind v4 @theme block.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          theme_name: {
-            type: "string",
-            description:
-              "Named theme: Specimen|Atelier|Newsprint|Studio|Manifesto|Brutal|Terminal|Midnight|Bloom|Aurora|Cobalt|Coral|Hum|Garden|Sport|Carnival",
-          },
-          genre: {
-            type: "string",
-            enum: ["editorial", "modern-minimal", "atmospheric", "playful"],
-            description:
-              "Genre to pick a theme from (ignored if theme_name provided)",
-          },
-          last_theme: {
-            type: "string",
-            description: "Previous theme name for diversification",
-          },
-          last_accent: {
-            type: "string",
-            description: "Previous accent hue for diversification",
-          },
-        },
-      },
-    },
-    {
       name: "list_themes",
       description:
         "List all available named themes, optionally filtered by genre. Each theme includes paper/accent OKLCH values, font pairing, and axis metadata for diversification.",
@@ -793,45 +747,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "build_custom_tokens",
-      description:
-        "Build a custom OKLCH token system from scratch with paper color, accent color, and font pairing. Use when a brief signals creative-intent (brand color, multi-vibe aesthetic, explicit custom request). Returns tokens.css + Tailwind v4 @theme block.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          paper_l: { type: "number", description: "Paper lightness (0-100)" },
-          paper_c: { type: "number", description: "Paper chroma (0-50)" },
-          paper_h: { type: "number", description: "Paper hue (0-360)" },
-          accent_l: { type: "number", description: "Accent lightness (0-100)" },
-          accent_c: { type: "number", description: "Accent chroma (0-50)" },
-          accent_h: { type: "number", description: "Accent hue (0-360)" },
-          font_display: {
-            type: "string",
-            description:
-              "Display font stack, e.g. 'Instrument Serif', Georgia, serif",
-          },
-          font_body: {
-            type: "string",
-            description: "Body font stack, e.g. 'Inter', system-ui, sans-serif",
-          },
-          font_mono: {
-            type: "string",
-            description: "Optional mono font stack (default: JetBrains Mono)",
-          },
-        },
-        required: [
-          "paper_l",
-          "paper_c",
-          "paper_h",
-          "accent_l",
-          "accent_c",
-          "accent_h",
-          "font_display",
-          "font_body",
-        ],
-      },
-    },
-    {
       name: "list_ellis_ui_designs",
       description:
         "List all 24 bespoke Ellis UI component design templates with their specific aesthetic focus.",
@@ -853,7 +768,131 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["design_name"],
       },
     },
-    ...logoToolSchemas(),
+    {
+      name: "logo_workflow",
+      description:
+        "Logo-design workflow. Select action: audit, search, renderers, render, export_variants, concept_sheet, preview_sheet, or presentation_board. Search queries the 1,400+ mark library; render/export/board actions write files.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          action: {
+            type: "string",
+            enum: [
+              "audit",
+              "search",
+              "renderers",
+              "render",
+              "export_variants",
+              "concept_sheet",
+              "preview_sheet",
+              "presentation_board",
+            ],
+            description: "Logo workflow step",
+          },
+          files: {
+            type: "array",
+            items: { type: "string" },
+            description: "SVG file paths for audit, render, concept, or preview",
+          },
+          bg: { type: "string", description: "Background colour for audit/render" },
+          type: { type: "string", description: "Search mark type" },
+          symbolType: { type: "string", description: "Search symbol type" },
+          technique: { type: "string", description: "Search technique" },
+          geometry: { type: "string", description: "Search geometry" },
+          industry: { type: "string", description: "Search industry" },
+          subject: { type: "string", description: "Search visual subject" },
+          query: { type: "string", description: "Free-text library query" },
+          mood: { type: "string", description: "Search mood adjective" },
+          color: { type: "string", description: "Search colour family" },
+          primaryColor: { type: "string", description: "Dominant colour family" },
+          aspect: { type: "string", description: "Search aspect ratio" },
+          variant: { type: "string", description: "main|icon" },
+          typeStyle: { type: "string", description: "Search type style" },
+          case: { type: "string", description: "Search letter case" },
+          minColors: { type: "number", description: "Minimum distinct colours" },
+          maxColors: { type: "number", description: "Maximum distinct colours" },
+          noGradient: { type: "boolean", description: "Exclude gradients" },
+          exemplary: { type: "boolean", description: "Only teaching examples" },
+          limit: { type: "number", description: "Max search results (default 25)" },
+          format: {
+            type: "string",
+            enum: ["table", "paths", "json"],
+            description: "Search output shape",
+          },
+          summary: { type: "boolean", description: "Aggregate library view" },
+          listValues: { type: "boolean", description: "Print filter values" },
+          out: { type: "string", description: "Output PNG/HTML path" },
+          outDir: { type: "string", description: "Output directory" },
+          size: { type: "number", description: "Square PNG size" },
+          width: { type: "number", description: "PNG width" },
+          height: { type: "number", description: "PNG height" },
+          padding: { type: "number", description: "Padding fraction (0-0.4)" },
+          backend: { type: "string", description: "Renderer backend" },
+          ico: { type: "string", description: "Favicon .ico output path" },
+          icoSizes: {
+            type: "array",
+            items: { type: "number" },
+            description: "ICO sizes, e.g. [16,32,48]",
+          },
+          master: { type: "string", description: "Master SVG for export_variants" },
+          name: { type: "string", description: "Brand/output base name" },
+          title: { type: "string", description: "Accessible output title" },
+          mono: {
+            type: "array",
+            items: { type: "string" },
+            description: "Extra one-colour hex variants",
+          },
+          iconBg: { type: "string", description: "App-icon tile colour" },
+          iconFg: { type: "string", description: "Mark colour on app-icon tile" },
+          iconScale: { type: "number", description: "Mark size on app-icon tile" },
+          opticalOffset: { type: "number", description: "Vertical square-output nudge" },
+          faviconSource: { type: "string", description: "Simplified favicon SVG" },
+          keepWhite: { type: "boolean", description: "Keep pure white in mono variants" },
+          only: {
+            type: "array",
+            items: { type: "string" },
+            description: "Variant subset: black, white, mono, square, favicon, app-icon",
+          },
+          png: {
+            type: "array",
+            items: { type: "number" },
+            description: "PNG sizes for export variants",
+          },
+          webIcons: { type: "boolean", description: "Emit favicon/web icon set" },
+          lockups: {
+            type: "array",
+            items: { type: "string" },
+            description: "Lockup SVG per concept",
+          },
+          names: {
+            type: "array",
+            items: { type: "string" },
+            description: "Concept labels",
+          },
+          notes: {
+            type: "array",
+            items: { type: "string" },
+            description: "One-line concept ideas",
+          },
+          subtitle: { type: "string", description: "Sheet subtitle" },
+          recommend: { type: "number", description: "1-based recommended concept" },
+          greyscale: { type: "boolean", description: "Render concepts in greyscale" },
+          brandColor: { type: "string", description: "Preview brand colour" },
+          refs: {
+            type: "array",
+            items: { type: "string" },
+            description: "Reference SVGs for shelf test",
+          },
+          refsIndustry: { type: "string", description: "Shelf reference industry" },
+          refsCount: { type: "number", description: "Shelf reference count" },
+          compareOnly: { type: "boolean", description: "Preview side-by-side only" },
+          spec: { type: "string", description: "Presentation spec JSON path" },
+          pngDir: { type: "string", description: "Presentation slide PNG directory" },
+          listMockups: { type: "boolean", description: "List presentation mockups" },
+        },
+        required: ["action"],
+      },
+    },
 
     {
       name: "generate_motion_snippet",
@@ -899,12 +938,17 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     // === Stitch Canvas & Workflow Integration ===
     {
-      name: "stitch_get",
+      name: "stitch_resource",
       description:
-        "Fetches one Stitch resource by id (project, screen, design-system, status). Mirrors 'stitch get <resource> <id>'. Returns { resource, item, availableActions? }.",
+        "Read, edit, or delete one Stitch resource, or print its canonical canvas URL. Select action: get, edit, delete, or url.",
       inputSchema: {
         type: "object",
         properties: {
+          action: {
+            type: "string",
+            enum: ["get", "edit", "delete", "url"],
+            description: "Stitch resource operation",
+          },
           resource: {
             type: "string",
             enum: [
@@ -916,11 +960,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
               "design-system",
               "status",
             ],
-            description: "Resource type to fetch",
+            description: "Resource type (get/edit/delete; url uses project|screen)",
           },
           id: {
             type: "string",
-            description: "ID of the resource to fetch (omit for status)",
+            description: "Resource ID (omit only for status)",
           },
           project: {
             type: "string",
@@ -930,8 +974,12 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
             type: "string",
             description: "Workspace ID override",
           },
+          body: {
+            type: "object",
+            description: "Fields to update for edit",
+          },
         },
-        required: ["resource"],
+        required: ["action"],
       },
     },
     {
@@ -1011,64 +1059,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       },
     },
     {
-      name: "stitch_edit",
-      description:
-        "Updates mutable fields on a Stitch resource. Mirrors 'stitch edit <resource> <id>'.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          resource: {
-            type: "string",
-            description: "Resource type to edit",
-          },
-          id: {
-            type: "string",
-            description: "Resource ID to edit",
-          },
-          body: {
-            type: "object",
-            description: "Fields to update",
-          },
-          project: {
-            type: "string",
-            description: "Stitch Canvas project ID",
-          },
-          workspace: {
-            type: "string",
-            description: "Workspace ID override",
-          },
-        },
-        required: ["resource", "id", "body"],
-      },
-    },
-    {
-      name: "stitch_delete",
-      description:
-        "Deletes a Stitch resource by ID. Mirrors 'stitch delete <resource> <id>'.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          resource: {
-            type: "string",
-            description: "Resource type to delete",
-          },
-          id: {
-            type: "string",
-            description: "Resource ID to delete",
-          },
-          project: {
-            type: "string",
-            description: "Stitch Canvas project ID",
-          },
-          workspace: {
-            type: "string",
-            description: "Workspace ID override",
-          },
-        },
-        required: ["resource", "id"],
-      },
-    },
-    {
       name: "stitch_generate",
       description:
         "Triggers a backend generative creation job for Stitch screens or variants. Mirrors 'stitch generate <resource>'.",
@@ -1108,30 +1098,6 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           dryRun: {
             type: "boolean",
             description: "Validate arguments and preview without starting job",
-          },
-        },
-        required: ["resource"],
-      },
-    },
-    {
-      name: "stitch_url",
-      description:
-        "Prints the canonical Stitch Canvas web URL for a project or screen. Mirrors 'stitch url <resource> <id>'.",
-      inputSchema: {
-        type: "object",
-        properties: {
-          resource: {
-            type: "string",
-            enum: ["project", "screen"],
-            description: "Target resource type",
-          },
-          id: {
-            type: "string",
-            description: "Project or screen ID",
-          },
-          project: {
-            type: "string",
-            description: "Stitch Canvas project ID",
           },
         },
         required: ["resource"],
@@ -1185,10 +1151,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
 }));
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name, arguments: args } = request.params;
+  const normalized = normalizeToolCall(
+    request.params.name,
+    request.params.arguments as Record<string, unknown> | undefined,
+  );
+  const { name, args, deprecated } = normalized;
 
   try {
-    switch (name) {
+    const result = await (async () => {
+      switch (name) {
       case "generate_rules": {
         const { style, palette, archetype, hybrid, tailwind } = args as {
           style: string;
@@ -1328,40 +1299,60 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, content);
       }
 
-      case "palette_fetch": {
-        const {
-          mode,
-          theme,
-          query,
-          limit = 5,
-          format = "json",
-        } = args as {
-          mode: string;
-          theme?: string;
-          query?: string;
-          limit?: number;
-          format?: string;
-        };
-        const paletteMode =
-          mode === "theme" ? "theme" : mode === "query" ? "query" : mode;
-        const data = await fetchPalettes(paletteMode, { theme, query, limit });
-        let output: string;
-        if (format === "json") {
-          output = JSON.stringify(data, null, 2);
-        } else {
-          output = convertPalette(data, format as ConvertTarget);
+      case "palette": {
+        const { action } = args as { action: string };
+        if (action === "fetch") {
+          const {
+            mode,
+            theme,
+            query,
+            limit = 5,
+            format = "json",
+          } = args as {
+            mode: string;
+            theme?: string;
+            query?: string;
+            limit?: number;
+            format?: string;
+          };
+          const paletteMode =
+            mode === "theme" ? "theme" : mode === "query" ? "query" : mode;
+          const data = await fetchPalettes(paletteMode, {
+            theme,
+            query,
+            limit,
+          });
+          let output: string;
+          if (format === "json") {
+            output = JSON.stringify(data, null, 2);
+          } else {
+            output = convertPalette(data, format as ConvertTarget);
+          }
+          return textResult(name, output);
         }
-        return textResult(name, output);
-      }
-
-      case "palette_convert": {
-        const { palettes, target } = args as {
-          palettes: unknown[];
-          target: string;
-        };
-        const data = { palettes } as import("./palette.js").PaletteData;
-        const output = convertPalette(data, target as ConvertTarget);
-        return textResult(name, output);
+        if (action === "convert") {
+          const { palettes, target } = args as {
+            palettes: unknown[];
+            target: string;
+          };
+          if (!Array.isArray(palettes) || !target) {
+            throw new Error(
+              'palette convert requires "palettes" (array) and "target"',
+            );
+          }
+          const data = { palettes } as import("./palette.js").PaletteData;
+          const output = convertPalette(data, target as ConvertTarget);
+          return textResult(name, output);
+        }
+        if (action === "variants") {
+          const { colors } = args as { colors: string[] };
+          if (!Array.isArray(colors) || colors.length === 0) {
+            throw new Error('palette variants requires a non-empty "colors" array');
+          }
+          const variants = generatePaletteVariants(colors);
+          return textResult(name, JSON.stringify(variants, null, 2));
+        }
+        throw new Error(`Unsupported palette action: ${action}`);
       }
 
       case "brand_fetch_design_md": {
@@ -1438,14 +1429,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, JSON.stringify(result, null, 2));
       }
 
-      case "generate_palette_variants": {
-        const { colors } = args as { colors: string[] };
-        if (!Array.isArray(colors) || colors.length === 0)
-          throw new Error("colors must be a non-empty array of hex strings");
-        const variants = generatePaletteVariants(colors);
-        return textResult(name, JSON.stringify(variants, null, 2));
-      }
-
       case "get_cross_cutting_rules": {
         const { category } = args as { category: string };
         if (!(category in CROSS_CUTTING))
@@ -1483,36 +1466,38 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, output);
       }
 
-      case "audit_accessibility": {
-        const { html } = args as { html: string };
-        if (!html || typeof html !== "string")
-          throw new Error("html is required and must be a string");
-        const result = auditA11y(html);
-        return textResult(name, JSON.stringify(result, null, 2));
-      }
-
-      case "generate_css_output": {
-        const CSS_FORMATS: CSSOutputFormat[] = [
-          "vanilla",
-          "css-modules",
-          "scss",
-          "css-variables-only",
-        ];
-        const { style, palette, format } = args as {
-          style: string;
-          palette: string;
-          format: string;
-        };
-        if (!CSS_FORMATS.includes(format as CSSOutputFormat))
-          throw new Error(
-            `Unknown format: ${format}. Available: ${CSS_FORMATS.join(", ")}`,
-          );
-        const result = generateCSSOutput(
-          style,
-          palette,
-          format as CSSOutputFormat,
-        );
-        return textResult(name, JSON.stringify(result, null, 2));
+      case "design_audit": {
+        const { action } = args as { action: string };
+        if (action === "accessibility") {
+          const { html } = args as { html: string };
+          if (!html || typeof html !== "string")
+            throw new Error("design_audit accessibility requires \"html\"");
+          const result = auditA11y(html);
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "slop") {
+          const { content, genre = "editorial" } = args as {
+            content: string;
+            genre?: string;
+          };
+          if (!content || typeof content !== "string")
+            throw new Error("design_audit slop requires \"content\"");
+          const result = runSlopTest(content, genre);
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "critique") {
+          const { content } = args as { content: string };
+          if (!content || typeof content !== "string")
+            throw new Error("design_audit critique requires \"content\"");
+          const result = selfCritique(content);
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "preflight") {
+          const { project_path } = args as { project_path?: string };
+          const result = scanProject(project_path);
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        throw new Error(`Unsupported design_audit action: ${action}`);
       }
 
       case "generate_template": {
@@ -1537,18 +1522,110 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, html);
       }
 
-      case "generate_tailwind_config": {
-        const { style, palette } = args as { style: string; palette: string };
-        if (!(style in STYLES))
-          throw new Error(
-            `Unknown style: ${style}. Available: ${Object.keys(STYLES).join(", ")}`,
+      case "design_tokens": {
+        const { action } = args as { action: string };
+        if (action === "theme") {
+          const { theme_name, genre, last_theme, last_accent } = args as {
+            theme_name?: string;
+            genre?: string;
+            last_theme?: string;
+            last_accent?: string;
+          };
+          const result = generateTokens(
+            theme_name,
+            genre,
+            last_theme,
+            last_accent,
           );
-        if (!(palette in PALETTES))
-          throw new Error(
-            `Unknown palette: ${palette}. Available: ${Object.keys(PALETTES).join(", ")}`,
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "custom") {
+          const {
+            paper_l,
+            paper_c,
+            paper_h,
+            accent_l,
+            accent_c,
+            accent_h,
+            font_display,
+            font_body,
+            font_mono,
+          } = args as {
+            paper_l: number;
+            paper_c: number;
+            paper_h: number;
+            accent_l: number;
+            accent_c: number;
+            accent_h: number;
+            font_display: string;
+            font_body: string;
+            font_mono?: string;
+          };
+          const required = [
+            paper_l,
+            paper_c,
+            paper_h,
+            accent_l,
+            accent_c,
+            accent_h,
+            font_display,
+            font_body,
+          ];
+          if (required.some((v) => v === undefined || v === null)) {
+            throw new Error(
+              "design_tokens custom requires paper/accent OKLCH values and fonts",
+            );
+          }
+          const result = buildCustomTokens(
+            { l: paper_l, c: paper_c, h: paper_h },
+            { l: accent_l, c: accent_c, h: accent_h },
+            font_display,
+            font_body,
+            font_mono,
           );
-        const result = generateTailwindConfig(style, palette);
-        return textResult(name, result.code);
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "css") {
+          const CSS_FORMATS: CSSOutputFormat[] = [
+            "vanilla",
+            "css-modules",
+            "scss",
+            "css-variables-only",
+          ];
+          const { style, palette, format } = args as {
+            style: string;
+            palette: string;
+            format: string;
+          };
+          if (!CSS_FORMATS.includes(format as CSSOutputFormat)) {
+            throw new Error(
+              `Unknown format: ${format}. Available: ${CSS_FORMATS.join(", ")}`,
+            );
+          }
+          const result = generateCSSOutput(
+            style,
+            palette,
+            format as CSSOutputFormat,
+          );
+          return textResult(name, JSON.stringify(result, null, 2));
+        }
+        if (action === "tailwind") {
+          const { style, palette } = args as {
+            style: string;
+            palette: string;
+          };
+          if (!(style in STYLES))
+            throw new Error(
+              `Unknown style: ${style}. Available: ${Object.keys(STYLES).join(", ")}`,
+            );
+          if (!(palette in PALETTES))
+            throw new Error(
+              `Unknown palette: ${palette}. Available: ${Object.keys(PALETTES).join(", ")}`,
+            );
+          const result = generateTailwindConfig(style, palette);
+          return textResult(name, result.code);
+        }
+        throw new Error(`Unsupported design_tokens action: ${action}`);
       }
 
       case "brand_list": {
@@ -1560,43 +1637,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       // === New tools ===
-
-      case "pre_flight_scan": {
-        const { project_path } = args as { project_path?: string };
-        const result = scanProject(project_path);
-        return textResult(name, JSON.stringify(result, null, 2));
-      }
-
-      case "anti_pattern_check": {
-        const { content, genre = "editorial" } = args as {
-          content: string;
-          genre?: string;
-        };
-        const result = runSlopTest(content, genre);
-        return textResult(name, JSON.stringify(result, null, 2));
-      }
-
-      case "self_critique": {
-        const { content } = args as { content: string };
-        const result = selfCritique(content);
-        return textResult(name, JSON.stringify(result, null, 2));
-      }
-
-      case "generate_tokens": {
-        const { theme_name, genre, last_theme, last_accent } = args as {
-          theme_name?: string;
-          genre?: string;
-          last_theme?: string;
-          last_accent?: string;
-        };
-        const result = generateTokens(
-          theme_name,
-          genre,
-          last_theme,
-          last_accent,
-        );
-        return textResult(name, JSON.stringify(result, null, 2));
-      }
 
       case "list_themes": {
         const { genre } = args as { genre?: string };
@@ -1617,38 +1657,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { kind } = args as { kind: string };
         const html = generate8StateWrapperHtml(kind as ComponentKind);
         return textResult(name, html);
-      }
-
-      case "build_custom_tokens": {
-        const {
-          paper_l,
-          paper_c,
-          paper_h,
-          accent_l,
-          accent_c,
-          accent_h,
-          font_display,
-          font_body,
-          font_mono,
-        } = args as {
-          paper_l: number;
-          paper_c: number;
-          paper_h: number;
-          accent_l: number;
-          accent_c: number;
-          accent_h: number;
-          font_display: string;
-          font_body: string;
-          font_mono?: string;
-        };
-        const result = buildCustomTokens(
-          { l: paper_l, c: paper_c, h: paper_h },
-          { l: accent_l, c: accent_c, h: accent_h },
-          font_display,
-          font_body,
-          font_mono,
-        );
-        return textResult(name, JSON.stringify(result, null, 2));
       }
 
       case "generate_motion_snippet": {
@@ -1681,60 +1689,78 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, JSON.stringify(result, null, 2));
       }
 
-      // === logo-design skill wrappers ===
+      // === logo-design skill workflow ===
 
-      case "logo_audit": {
-        const { files, bg } = args as { files: string[]; bg?: string };
-        return textResult(
-          name,
-          JSON.stringify(auditLogo({ files, bg }), null, 2),
-        );
-      }
-
-      case "logo_search_library": {
-        const run: LogoRunResult = searchLogoLibrary(
-          args as Parameters<typeof searchLogoLibrary>[0],
-        );
-        return textResult(name, run.stdout);
-      }
-
-      case "logo_renderers": {
-        const run = availableRenderers();
-        return textResult(name, run.stdout);
-      }
-
-      case "logo_render": {
-        const run = renderLogo(args as unknown as LogoRenderInput);
-        return textResult(name, JSON.stringify(run, null, 2));
-      }
-
-      case "logo_export_variants": {
-        const run = exportLogoVariants(args as unknown as LogoExportInput);
-        return textResult(name, JSON.stringify(run, null, 2));
-      }
-
-      case "logo_concept_sheet": {
-        const run = buildConceptSheet(args as unknown as LogoConceptSheetInput);
-        return textResult(name, JSON.stringify(run, null, 2));
-      }
-
-      case "logo_preview_sheet": {
-        const run = buildPreviewSheet(args as unknown as LogoPreviewSheetInput);
-        return textResult(name, JSON.stringify(run, null, 2));
-      }
-
-      case "logo_presentation_board": {
-        const run = buildPresentationBoard(
-          args as Parameters<typeof buildPresentationBoard>[0],
-        );
-        return textResult(name, JSON.stringify(run, null, 2));
+      case "logo_workflow": {
+        const { action } = args as { action: string };
+        if (action === "audit") {
+          const { files, bg } = args as { files: string[]; bg?: string };
+          return textResult(
+            name,
+            JSON.stringify(auditLogo({ files, bg }), null, 2),
+          );
+        }
+        if (action === "search") {
+          const run: LogoRunResult = searchLogoLibrary(
+            args as Parameters<typeof searchLogoLibrary>[0],
+          );
+          return textResult(name, run.stdout);
+        }
+        if (action === "renderers") {
+          const run = availableRenderers();
+          return textResult(name, run.stdout);
+        }
+        if (action === "render") {
+          const run = renderLogo(args as unknown as LogoRenderInput);
+          return textResult(name, JSON.stringify(run, null, 2));
+        }
+        if (action === "export_variants") {
+          const run = exportLogoVariants(args as unknown as LogoExportInput);
+          return textResult(name, JSON.stringify(run, null, 2));
+        }
+        if (action === "concept_sheet") {
+          const run = buildConceptSheet(
+            args as unknown as LogoConceptSheetInput,
+          );
+          return textResult(name, JSON.stringify(run, null, 2));
+        }
+        if (action === "preview_sheet") {
+          const run = buildPreviewSheet(
+            args as unknown as LogoPreviewSheetInput,
+          );
+          return textResult(name, JSON.stringify(run, null, 2));
+        }
+        if (action === "presentation_board") {
+          const run = buildPresentationBoard(
+            args as Parameters<typeof buildPresentationBoard>[0],
+          );
+          return textResult(name, JSON.stringify(run, null, 2));
+        }
+        throw new Error(`Unsupported logo_workflow action: ${action}`);
       }
 
       // === Stitch Canvas & Workflow Integration ===
 
-      case "stitch_get": {
-        const result = await stitchGet(args as any);
-        return textResult(name, result);
+
+      case "stitch_resource": {
+        const { action } = args as { action: string };
+        if (action === "get") {
+          const result = await stitchGet(args as any);
+          return textResult(name, result);
+        }
+        if (action === "edit") {
+          const result = await stitchEdit(args as any);
+          return textResult(name, result);
+        }
+        if (action === "delete") {
+          const result = await stitchDelete(args as any);
+          return textResult(name, result);
+        }
+        if (action === "url") {
+          const result = await stitchUrl(args as any);
+          return textResult(name, result);
+        }
+        throw new Error(`Unsupported stitch_resource action: ${action}`);
       }
 
       case "stitch_find": {
@@ -1747,25 +1773,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         return textResult(name, result);
       }
 
-      case "stitch_edit": {
-        const result = await stitchEdit(args as any);
-        return textResult(name, result);
-      }
 
-      case "stitch_delete": {
-        const result = await stitchDelete(args as any);
-        return textResult(name, result);
-      }
 
       case "stitch_generate": {
         const result = await stitchGenerate(args as any);
         return textResult(name, result);
       }
 
-      case "stitch_url": {
-        const result = await stitchUrl(args as any);
-        return textResult(name, result);
-      }
 
       case "stitch_sync_design_system": {
         const result = stitchSyncDesignSystem(args as any);
@@ -1778,10 +1792,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
       default:
         throw new Error(`Unknown tool: ${name}`);
-    }
+      }
+    })();
+    return appendWarning(result, deprecated);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    return errorResult(name, message);
+    return appendWarning(errorResult(name, message), deprecated);
   }
 });
 

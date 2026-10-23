@@ -56,9 +56,10 @@ export const SERVER_NAME = "the-designer";
 
 /**
  * Design tools are pure generation / read-only lookups and declare no side
- * effects. The `logo_*` wrappers are the exception: they shell out to the
- * logo-design skill's Python scripts, which write SVG/PNG/HTML output files,
- * so those declare `file:write` and `process:exec` explicitly.
+ * effects. `logo_workflow` and `stitch_resource` are the exceptions: they shell
+ * out to the logo-design skill or the Stitch CLI, which can write SVG/PNG/HTML
+ * output files, so both declare `file:write` and `process:exec` explicitly.
+ * `stitch_find` is read-only but still spawns the CLI.
  */
 export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
   generate_rules: [],
@@ -67,44 +68,26 @@ export const TOOL_SIDE_EFFECTS: Record<string, string[]> = {
   list_ellis_ui_designs: [],
   get_ellis_ui_template: [],
   get_reference: [],
-  palette_fetch: [],
-  palette_convert: [],
+  palette: [],
   brand_fetch_design_md: [],
   evaluate_style: [],
   list_installed_skills: [],
   export_project: [],
-  generate_palette_variants: [],
   get_cross_cutting_rules: [],
   get_component: [],
-  audit_accessibility: [],
-  generate_css_output: [],
+  design_audit: [],
   generate_template: [],
-  generate_tailwind_config: [],
   brand_list: [],
-  pre_flight_scan: [],
-  anti_pattern_check: [],
-  self_critique: [],
-  generate_tokens: [],
+  design_tokens: [],
   list_themes: [],
   detect_genre: [],
   generate_8state_component: [],
-  build_custom_tokens: [],
   generate_motion_snippet: [],
-  logo_audit: ["process:exec"],
-  logo_search_library: ["process:exec"],
-  logo_renderers: ["process:exec"],
-  logo_render: ["process:exec", "file:write"],
-  logo_export_variants: ["process:exec", "file:write"],
-  logo_concept_sheet: ["process:exec", "file:write"],
-  logo_preview_sheet: ["process:exec", "file:write"],
-  logo_presentation_board: ["process:exec", "file:write"],
-  stitch_get: ["process:exec"],
+  logo_workflow: ["process:exec", "file:write"],
+  stitch_resource: ["process:exec", "file:write"],
   stitch_find: ["process:exec"],
   stitch_create: ["process:exec", "file:write"],
-  stitch_edit: ["process:exec", "file:write"],
-  stitch_delete: ["process:exec"],
   stitch_generate: ["process:exec", "file:write"],
-  stitch_url: ["process:exec"],
   stitch_sync_design_system: ["file:write"],
   stitch_screen_audit: [],
 };
@@ -271,4 +254,38 @@ export function errorResult(toolName: string, message: string) {
     ...textBlock(JSON.stringify(wrapError(toolName, message), null, 2)),
     isError: true,
   };
+}
+
+
+interface TextToolResult {
+  content: Array<{ type: string; text: string }>;
+  isError?: boolean;
+}
+
+export function appendWarning<T extends TextToolResult>(
+  response: T,
+  warning?: string,
+): T {
+  if (!warning) return response;
+  if (isEnvelopeEnabled()) {
+    try {
+      const envelope = JSON.parse(response.content[0]?.text ?? "{}");
+      if (Array.isArray(envelope.warnings)) {
+        envelope.warnings.push(warning);
+        return {
+          ...response,
+          content: [{ type: "text", text: JSON.stringify(envelope, null, 2) }],
+        } as T;
+      }
+    } catch {
+      // Fall through to a visible warning block.
+    }
+  }
+  return {
+    ...response,
+    content: [
+      ...response.content,
+      { type: "text", text: `Warning: ${warning}` },
+    ],
+  } as T;
 }

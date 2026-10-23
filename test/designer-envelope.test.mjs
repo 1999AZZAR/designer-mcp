@@ -7,6 +7,7 @@ import {
   wrapError,
   textResult,
   errorResult,
+  appendWarning,
 } from "../src/envelope.ts";
 
 const KEYS = [
@@ -67,28 +68,15 @@ const STITCH_TOOLS = Object.entries(TOOL_SIDE_EFFECTS).filter(([t]) =>
   t.startsWith("stitch_"),
 );
 t("design tools declare no side effects (pure generation)", () => {
-  assert.equal(PURE_TOOLS.length, 29);
+  assert.equal(PURE_TOOLS.length, 21);
   for (const [tool, se] of PURE_TOOLS) assert.deepEqual(se, [], tool);
 });
-t("all 8 logo_* wrappers declare process:exec", () => {
-  assert.equal(LOGO_TOOLS.length, 8);
-  for (const [tool, se] of LOGO_TOOLS)
-    assert.ok(se.includes("process:exec"), tool);
-});
-t("logo_* tools that write deliverables declare file:write", () => {
-  const writers = [
-    "logo_render",
-    "logo_export_variants",
-    "logo_concept_sheet",
-    "logo_preview_sheet",
-    "logo_presentation_board",
-  ];
-  for (const tool of writers) {
-    assert.ok(TOOL_SIDE_EFFECTS[tool].includes("file:write"), tool);
-  }
-  for (const tool of ["logo_audit", "logo_search_library", "logo_renderers"]) {
-    assert.equal(TOOL_SIDE_EFFECTS[tool].includes("file:write"), false, tool);
-  }
+t("logo_workflow declares process:exec and file:write", () => {
+  assert.equal(LOGO_TOOLS.length, 1);
+  assert.deepEqual(TOOL_SIDE_EFFECTS["logo_workflow"], [
+    "process:exec",
+    "file:write",
+  ]);
 });
 t("run/step ids propagate", () => {
   process.env["HELA_RUN_ID"] = "r1";
@@ -99,13 +87,31 @@ t("run/step ids propagate", () => {
   assert.equal(wrapError("list_options", "e").execution.run_id, "r1");
 });
 
-t("all 9 stitch_* tools declare side-effects correctly", () => {
-  assert.equal(STITCH_TOOLS.length, 9);
+t("all 6 stitch_* tools declare side-effects correctly", () => {
+  assert.equal(STITCH_TOOLS.length, 6);
   assert.deepEqual(TOOL_SIDE_EFFECTS["stitch_screen_audit"], []);
   assert.ok(TOOL_SIDE_EFFECTS["stitch_sync_design_system"].includes("file:write"));
   assert.ok(TOOL_SIDE_EFFECTS["stitch_create"].includes("process:exec"));
   assert.ok(TOOL_SIDE_EFFECTS["stitch_create"].includes("file:write"));
-  assert.ok(TOOL_SIDE_EFFECTS["stitch_get"].includes("process:exec"));
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_resource"].includes("process:exec"));
+  assert.ok(TOOL_SIDE_EFFECTS["stitch_resource"].includes("file:write"));
+});
+t("raw-mode appendWarning preserves payload and appends a warning block", () => {
+  process.env["HELA_ENVELOPE"] = "false";
+  const r = appendWarning(textResult("palette", "DATA"), "legacy alias");
+  assert.equal(r.content[0].text, "DATA");
+  assert.equal(r.content[1].text, "Warning: legacy alias");
+});
+t("envelope-mode appendWarning populates warnings[]", () => {
+  process.env["HELA_ENVELOPE"] = "true";
+  const r = appendWarning(textResult("palette", "DATA"), "legacy alias");
+  const env = JSON.parse(r.content[0].text);
+  assert.deepEqual(env.warnings, ["legacy alias"]);
+});
+t("appendWarning is a no-op without a warning", () => {
+  process.env["HELA_ENVELOPE"] = "false";
+  const r = textResult("palette", "DATA");
+  assert.equal(appendWarning(r).content.length, 1);
 });
 
 console.log(`\n${n} tests passed`);
