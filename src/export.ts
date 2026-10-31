@@ -44,7 +44,7 @@ export function exportProject(
   const packageJson = JSON.stringify(
     {
       name: projectName,
-      version: "1.0.0",
+      version: "3.0.0",
       scripts: {
         dev: "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
         build:

@@ -304,7 +304,7 @@ function runCommand(cmd: string, args: string[], cwd?: string): string {
 }
 
 const server = new Server(
-  { name: "the-designer", version: "2.0.0" },
+  { name: "the-designer", version: "3.0.0" },
   { capabilities: { tools: {} } },
 );
 
