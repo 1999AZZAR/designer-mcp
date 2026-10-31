@@ -1,6 +1,6 @@
 # The Designer MCP
 
-> **Part of the [HeLa MCP Ecosystem](https://github.com/1999AZZAR/hela-mcp-ecosystem)** — This server is **HeLa Phenotype (`hela-phenotype`)** — the _Design_ component of the HeLa cellular architecture. See the [ecosystem docs](https://github.com/1999AZZAR/hela-mcp-ecosystem) for profiles, workflows, and multi-client setup.
+> **Part of the [HeLa MCP Ecosystem](https://github.com/Hela-Ecosystem/hela-mcp-ecosystem)** — This server is **HeLa Phenotype (`hela-phenotype`)** — the _Design_ component of the HeLa cellular architecture. See the [ecosystem docs](https://github.com/Hela-Ecosystem/hela-mcp-ecosystem) for profiles, workflows, and multi-client setup.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
@@ -182,7 +182,7 @@ All snippets respect `prefers-reduced-motion` — animations are skipped entirel
 
 ## Examples
 
-**[🔥 Live Demo: Ellis UI Collection](https://1999AZZAR.github.io/designer-mcp/)**
+**[🔥 Live Demo: Ellis UI Collection](https://Hela-Ecosystem.github.io/designer-mcp/)**
 
 **Ellis UI (`examples/ellis-ui`)**
 A comprehensive, anti-slop component library demonstrating the extreme versatility of `designer-mcp`'s ruleset. The project takes a single romantic letter and renders it across **24 radically different, strictly enforced aesthetic systems** (e.g., Swiss Archival, Vintage Airmail, Brutalist, UNIX Phosphor, 8-Bit Game Boy).
@@ -192,7 +192,7 @@ Each design acts as a fully standalone, reusable UI kit utilizing zero JS depend
 ## Installation
 
 ```bash
-git clone https://github.com/1999AZZAR/designer-mcp.git
+git clone https://github.com/Hela-Ecosystem/designer-mcp.git
 cd designer-mcp
 npm install
 npm run build
